@@ -95,3 +95,4 @@ select, input { background: var(--surface); color: var(--text); border: 1px soli
 .checkin { margin-top: 22px; }
 .unlogged-row th, .unlogged-row td { font-size: 12px; color: var(--text-muted); border-bottom: 1px solid var(--rule); }
 .unlogged-row td.gap { color: var(--warn); font-weight: 600; }
+.chg { margin-left: 2px; font-weight: 700; }

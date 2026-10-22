@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import cases from "../docs/test-cases.json";
-import { clusteredDays, DAY_MS, finalRatings, ratingFromCount, scoreAllWindows, scoreWindow, summarize, unloggedDays, WINDOW_MS, type Observation } from "../src/scoring/engine";
+import { clusteredDays, DAY_MS, finalRatings, meaningfulChanges, ratingFromCount, scoreAllWindows, scoreWindow, summarize, unloggedDays, WINDOW_MS, type Observation } from "../src/scoring/engine";
 import { ITEMS } from "../src/scoring/items";
 
 const windowStart = Date.parse(cases.windowStart);
@@ -109,5 +109,35 @@ describe("unlogged days (spec section 7)", () => {
 
   it("ignores activity outside the window", () => {
     expect(unloggedDays([at(-1), at(14)], windowStart, afterWindow).unlogged).toBe(14);
+  });
+});
+
+describe("meaningful change between periods (spec section 6)", () => {
+  it("a single 1-point move is not marked: it is inside rater agreement", () => {
+    expect(meaningfulChanges([4, 3])).toEqual([null, null]);
+    expect(meaningfulChanges([4, 5, 5])).toEqual([null, null, null]);
+  });
+
+  it("a move of 2 or more points is marked at once", () => {
+    expect(meaningfulChanges([5, 3])).toEqual([null, "down"]);
+    expect(meaningfulChanges([2, 6])).toEqual([null, "up"]);
+  });
+
+  it("1 point in the same direction across two consecutive periods is marked on the second", () => {
+    expect(meaningfulChanges([5, 4, 3])).toEqual([null, null, "down"]);
+    expect(meaningfulChanges([2, 3, 4, 5])).toEqual([null, null, "up", "up"]);
+  });
+
+  it("1 point down then 1 point up is noise, not a change", () => {
+    expect(meaningfulChanges([4, 3, 4])).toEqual([null, null, null]);
+  });
+
+  it("the two 1-point moves must be in consecutive periods", () => {
+    expect(meaningfulChanges([5, 4, 4, 3])).toEqual([null, null, null, null]);
+  });
+
+  it("never marks a move to or from code 8 or 9", () => {
+    expect(meaningfulChanges([2, 8, 2])).toEqual([null, null, null]);
+    expect(meaningfulChanges([9, 5, 4])).toEqual([null, null, null]);
   });
 });

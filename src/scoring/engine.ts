@@ -29,6 +29,9 @@ export const RATING_LABELS: Record<number, string> = {
   9: "Not applicable",
 };
 
+/** Ratings that enter sums: 1-7 only. Codes 8 and 9 are reported apart (manual p.5). */
+const isScale = (r: number) => r >= 1 && r <= 7;
+
 /** Count-to-rating table (spec section 2). count = logs in one 14-day window. */
 export function ratingFromCount(count: number): number {
   if (count <= 0) return 1;
@@ -110,6 +113,27 @@ export function unloggedDays(times: number[], windowStart: number, now: number):
   return { unlogged: elapsed - covered.size, elapsed };
 }
 
+export type Change = "up" | "down" | null;
+
+/**
+ * Which periods show a meaningful change for one behavior (spec section 6).
+ * `series` is the item's final rating in each finished period, oldest first.
+ * A period is marked when the rating moved 2+ points from the period before, or
+ * moved 1 point in the same direction as the period before also moved.
+ * A 1-point move on its own is inside the manual's rater tolerance (p.7), so it is not marked.
+ * Codes 8 and 9 are not on the scale, so a period next to one is never marked.
+ */
+export function meaningfulChanges(series: number[]): Change[] {
+  const step = (k: number) => (k >= 1 && isScale(series[k]) && isScale(series[k - 1]) ? series[k] - series[k - 1] : 0);
+  return series.map((_, k) => {
+    const d = step(k);
+    if (d === 0) return null;
+    const prev = step(k - 1);
+    const marked = Math.abs(d) >= 2 || Math.sign(prev) === Math.sign(d);
+    return marked ? (d > 0 ? "up" : "down") : null;
+  });
+}
+
 // ---------- Day-14 review (spec section 5) ----------
 
 /** What the caregiver chose for one item at review: a 1-7 rating, or code 8 / 9. */
@@ -122,8 +146,6 @@ export function finalRatings(score: WindowScore, review: Record<number, ReviewCh
   return out;
 }
 
-/** Ratings that enter sums: 1-7 only. Codes 8 and 9 are reported apart (manual p.5). */
-const isScale = (r: number) => r >= 1 && r <= 7;
 
 export interface Summary {
   total: number; // sum of 1-7 ratings across items (secondary figure)

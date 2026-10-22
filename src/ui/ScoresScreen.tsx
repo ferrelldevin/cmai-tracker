@@ -4,7 +4,7 @@
 
 import { useState } from "react";
 import { Bar, BarChart, CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
-import { RATING_LABELS } from "../scoring/engine";
+import { meaningfulChanges, RATING_LABELS } from "../scoring/engine";
 import { GROUP_LABELS, ITEMS } from "../scoring/items";
 import type { StoredObservation } from "../data/db";
 import type { ScoredWindow } from "./useCmaiData";
@@ -25,6 +25,11 @@ export function ScoresScreen({ windows, observations }: Props) {
   const sel = windows[Math.min(selected, windows.length - 1)];
   const rows = ITEMS.filter((i) => showAll || windows.some((w) => w.finals[i.id] > 1));
   const label = (w: ScoredWindow, i: number) => `P${i + 1}`;
+
+  // Change marks compare finished periods only (they always come first).
+  const finished = windows.filter((w) => !w.score.provisional);
+  const changes = new Map(ITEMS.map((i) => [i.id, meaningfulChanges(finished.map((w) => w.finals[i.id]))]));
+  const changedInSel = ITEMS.filter((i) => changes.get(i.id)?.[selected]);
 
   // Trend lines use finished periods only: a period still in progress has
   // fewer days of logs, so it would always look like an improvement.
@@ -79,6 +84,7 @@ export function ScoresScreen({ windows, observations }: Props) {
       <section className="card">
         <h2>Each behavior, period by period <span className="tag">app-derived</span></h2>
         <p className="muted">1 = never, 7 = several times an hour. Stronger color means more often. This is the view the manual recommends.</p>
+        <p className="muted">↑ or ↓ marks a change worth noticing: 2 or more points from the period before, or 1 point the same way two periods running. A single 1-point move is within how much two raters can differ (manual p.7), so it is not marked.</p>
         <div className="heat-wrap">
           <table className="heat">
             <thead>
@@ -108,9 +114,16 @@ export function ScoresScreen({ windows, observations }: Props) {
                     const r = w.finals[item.id];
                     const s = w.score.items[item.id - 1];
                     const reviewed = item.id in w.review;
+                    const ch = changes.get(item.id)?.[i];
                     return (
-                      <td key={i} className={`r r${r}${w.score.provisional ? " open" : ""}`} title={`${RATING_LABELS[r]} · ${s.count} logged${reviewed ? " · set at review" : ""}${w.score.provisional ? " · period not finished" : ""}`}>
+                      <td key={i} className={`r r${r}${w.score.provisional ? " open" : ""}`} title={`${RATING_LABELS[r]} · ${s.count} logged${reviewed ? " · set at review" : ""}${w.score.provisional ? " · period not finished" : ""}${ch ? ` · changed (${ch === "up" ? "more often" : "less often"})` : ""}`}>
                         {r}
+                        {ch && (
+                          <span className="chg">
+                            <span aria-hidden>{ch === "up" ? "↑" : "↓"}</span>
+                            <span className="sr">{ch === "up" ? "changed, more often" : "changed, less often"}</span>
+                          </span>
+                        )}
                         {reviewed && <span className="dot" aria-label="set at review">•</span>}
                       </td>
                     );
@@ -146,6 +159,13 @@ export function ScoresScreen({ windows, observations }: Props) {
         <h2>Total score <span className="tag">secondary</span><span className="tag">app-derived</span></h2>
         <p className="muted">Sum of all 29 CMAI-based ratings (29 to 203). Shown because the lab asked. The manual (p.5) says a total on its own "is not useful", so read it with the views above.</p>
         <p className="note">Totals often fall over time without any change in treatment, so check which behaviors drove a change before crediting it.</p>
+        {!sel.score.provisional && selected > 0 && (
+          <p className="muted">
+            {changedInSel.length
+              ? `Behaviors that changed in period ${selected + 1}: ${changedInSel.map((i) => `#${i.id} ${i.name} (${changes.get(i.id)![selected] === "up" ? "more often" : "less often"})`).join("; ")}.`
+              : `No behavior changed enough to mark in period ${selected + 1}.`}
+          </p>
+        )}
         <div className="chart">
           <ResponsiveContainer width="100%" height={180}>
             <LineChart data={trend} margin={{ top: 8, right: 16, bottom: 0, left: -16 }}>
