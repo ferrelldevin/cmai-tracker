@@ -4,12 +4,14 @@ Rule version: `cmai-count-rule-2`. Every score the app saves carries this label,
 
 - Rule 2 changes only how rating-7 clusters are found (section 3): they can now cross midnight. The count bands and every other rule are the same as rule 1.
 
-Source of truth: *Instruction Manual for the Cohen-Mansfield Agitation Inventory* (Cohen-Mansfield, 1991). Page numbers below are the manual's printed page numbers.
+Source of truth: *Instruction Manual for the Cohen-Mansfield Agitation Inventory* (Cohen-Mansfield, 1991).
+
+**Page numbers.** Every "p." in this repo is the page number printed at the foot of the manual's page. In the lab's 37-page PDF of the manual these are the same as the PDF page index: the title page is PDF page 1, and every later page prints its own index (checked page by page with `pdftotext`). So p.7 means printed page 7 and PDF page 7. If you use a different copy of the manual, go by the printed number.
 
 ## 1. The problem this spec solves
 
 - The lab asked for an app that records **each time** a behavior happens and **calculates CMAI scores every 14 days**.
-- The CMAI itself is **not a count**. A caregiver looks back over the past 2 weeks and rates how often each behavior typically happened, on a 1 to 7 scale (p.1, p.5).
+- The CMAI itself is **not a count**. A caregiver looks back over the past 2 weeks and rates how often each behavior typically happened, on a 1 to 7 scale (p.2, p.5).
 - So the app must turn counts into ratings. The manual does not say how, so this spec does. Every boundary below is a **proposed default for the lab to confirm** (section 7).
 
 ## 2. Count to rating (one behavior, one 14-day period)
@@ -26,7 +28,7 @@ Source of truth: *Instruction Manual for the Cohen-Mansfield Agitation Inventory
 | 6 | Several times a day | N of 29 or more | 3+ a day on average |
 | 7 | Several times an hour | see section 3 | needs timing, not just a count |
 
-The manual says to "average over the past two weeks" when a behavior is irregular (p.3, p.5). Counting across the whole 14 days does exactly that.
+The manual says to "average over the past two weeks" when a behavior is irregular (p.4, instruction 10; p.5). Counting across the whole 14 days does exactly that.
 
 ## 3. Rating 7: several times an hour
 
@@ -48,8 +50,8 @@ A plain count can't show "several times an hour", so rating 7 uses timing:
 
 When a period ends, the caregiver sees the app's rating for each behavior and can confirm or change it. This keeps the look-back judgment the CMAI was built on, and it is the only place to record:
 
-- **8, would occur if not prevented** (for example, would pace if not restrained) (p.2, p.5).
-- **9, not applicable** (for example, cannot walk, so cannot pace) (p.2).
+- **8, would occur if not prevented** (for example, would pace if not restrained) (p.3, p.5, p.24).
+- **9, not applicable** (for example, cannot walk, so cannot pace) (p.3, p.24).
 
 The app stores both the derived rating and the caregiver's choice, so the lab can see how often caregivers disagree with the counts. Codes 8 and 9 are reported separately and left out of every sum (the manual says to analyze them separately, p.5).
 
@@ -60,7 +62,7 @@ The app stores both the derived rating and the caregiver's choice, so the lab ca
    - Aggressive: one at 4, or two at 3, or three at 2.
    - Physically nonaggressive: one at 5, or two at 4, or three at 3, or four at 2.
    - Verbally agitated: same thresholds as physically nonaggressive.
-3. **Group averages** using the nursing-home factors (p.6):
+3. **Group averages** using the nursing-home factors (p.7):
    - Aggressive: #3, 4, 7, 8, 9, 10, 14, 15, 25.
    - Physically nonaggressive: #1, 2, 16, 22, 26, 29.
    - Verbally agitated: #5, 6, 13, 18, 19.
@@ -82,7 +84,7 @@ The app stores both the derived rating and the caregiver's choice, so the lab ca
 | Fixed or rolling 14-day periods | Fixed |
 | Code 8: separate code, or estimate the unprevented frequency (p.5 allows either) | Separate code |
 | Lead with total, or per-behavior | Per-behavior first, total secondary |
-| Factor set: nursing home (p.6) or community (p.7) | Nursing home |
+| Factor set: nursing home (p.7) or community (p.7 to 8) | Nursing home |
 | Permission to reproduce the CMAI wording in an app (forms say "All rights reserved") | Ask before any real use |
 
 ## 9. How the spec is checked

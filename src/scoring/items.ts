@@ -3,7 +3,7 @@
 // manual's text (the CMAI is (c) Cohen-Mansfield; see NOTICE). For the full
 // definitions, read the manual page in `manualPage` (also p.24-25).
 //
-// group: the nursing-home factor the manual lists for the item (p.6).
+// group: the nursing-home factor the manual lists for the item (p.7).
 //   "aggressive"  = Factor 1, aggressive behavior
 //   "physical"    = Factor 2, physically nonaggressive behavior
 //   "verbal"      = Factor 3, verbally agitated behavior

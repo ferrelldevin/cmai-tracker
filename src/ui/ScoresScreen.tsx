@@ -110,7 +110,7 @@ export function ScoresScreen({ windows, observations }: Props) {
 
       <section className="card">
         <h2>Average rating by behavior group</h2>
-        <p className="muted">Finished periods only. Mean of the 1 to 7 ratings in each group (manual factors, p.6).</p>
+        <p className="muted">Finished periods only. Mean of the 1 to 7 ratings in each group (manual factors, p.7).</p>
         <div className="chart">
           <ResponsiveContainer width="100%" height={240}>
             <LineChart data={trend} margin={{ top: 8, right: 16, bottom: 0, left: -16 }}>

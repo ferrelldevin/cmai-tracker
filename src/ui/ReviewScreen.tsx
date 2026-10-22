@@ -1,6 +1,6 @@
 // Screen 3: the day-14 check. The app shows what it worked out from the logs;
 // the caregiver confirms or corrects each one. This keeps the look-back step the
-// CMAI was validated with, and is the only place to record codes 8 and 9 (manual p.2).
+// CMAI was validated with, and is the only place to record codes 8 and 9 (manual p.3).
 
 import { useState } from "react";
 import { RATING_LABELS } from "../scoring/engine";

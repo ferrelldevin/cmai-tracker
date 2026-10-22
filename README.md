@@ -10,7 +10,7 @@ Built by Devin Ferrell for the Hands-On Lab, Old Dominion University (hands-on i
 
 ## The one design decision that matters
 
-The CMAI isn't a count. It's a caregiver's look-back rating (1 to 7) of how often each behavior happened over the last two weeks (manual p.5). This app counts events, so it converts each 14-day count into a 1 to 7 rating with a written, tested rule. The caregiver then confirms or corrects those ratings at day 14. The full rule and the decisions the lab still needs to make are in [docs/scoring-spec.md](docs/scoring-spec.md).
+The CMAI isn't a count. It's a caregiver's look-back rating (1 to 7) of how often each behavior happened over the last two weeks (manual p.2, p.5). This app counts events, so it converts each 14-day count into a 1 to 7 rating with a written, tested rule. The caregiver then confirms or corrects those ratings at day 14. The full rule and the decisions the lab still needs to make are in [docs/scoring-spec.md](docs/scoring-spec.md).
 
 ## What it does
 

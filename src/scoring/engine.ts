@@ -16,7 +16,7 @@ export interface Observation {
   at: number; // epoch ms
 }
 
-/** Manual p.5 labels for the 1-7 scale, plus the two special codes (p.2). */
+/** Manual p.5 labels for the 1-7 scale, plus the two special codes (p.3). */
 export const RATING_LABELS: Record<number, string> = {
   1: "Never",
   2: "Less than once a week",
