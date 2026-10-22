@@ -32,7 +32,7 @@ export default function App() {
       <header className="top">
         <div className="brand">
           <b>CMAI Tracker</b>
-          <span className="muted">Cohen-Mansfield Agitation Inventory</span>
+          <span className="muted">CMAI-based ratings from event logs</span>
         </div>
         {patients.length > 0 && (
           <label className="patient">

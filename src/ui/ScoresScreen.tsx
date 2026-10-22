@@ -52,6 +52,8 @@ export function ScoresScreen({ windows, observations }: Props) {
         ))}
       </div>
 
+      <p className="muted">Ratings here are CMAI-based (app-derived): worked out from logged events and the day-14 review, not from a CMAI interview.</p>
+
       <section className="card">
         <h2>Agitation status, period {selected + 1}</h2>
         <p className="muted">Manual rules (p.5 to 6). A group is "agitated" when its behaviors reach the manual's frequency thresholds.</p>
@@ -70,7 +72,7 @@ export function ScoresScreen({ windows, observations }: Props) {
       </section>
 
       <section className="card">
-        <h2>Each behavior, period by period</h2>
+        <h2>Each behavior, period by period <span className="tag">app-derived</span></h2>
         <p className="muted">1 = never, 7 = several times an hour. Stronger color means more often. This is the view the manual recommends.</p>
         <div className="heat-wrap">
           <table className="heat">
@@ -128,8 +130,9 @@ export function ScoresScreen({ windows, observations }: Props) {
       </section>
 
       <section className="card">
-        <h2>Total score <span className="tag">secondary</span></h2>
-        <p className="muted">Sum of all 29 ratings (29 to 203). Shown because the lab asked. The manual (p.5) says a total on its own "is not useful", so read it with the views above.</p>
+        <h2>Total score <span className="tag">secondary</span><span className="tag">app-derived</span></h2>
+        <p className="muted">Sum of all 29 CMAI-based ratings (29 to 203). Shown because the lab asked. The manual (p.5) says a total on its own "is not useful", so read it with the views above.</p>
+        <p className="note">Totals often fall over time without any change in treatment, so check which behaviors drove a change before crediting it.</p>
         <div className="chart">
           <ResponsiveContainer width="100%" height={180}>
             <LineChart data={trend} margin={{ top: 8, right: 16, bottom: 0, left: -16 }}>

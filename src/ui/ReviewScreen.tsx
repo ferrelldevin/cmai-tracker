@@ -53,7 +53,7 @@ export function ReviewScreen({ patientId, windows, onChange }: Props) {
         </select>
       </label>
       <p className="hint">
-        Look back over these two weeks. Does each rating match what you saw? Change it if not. Use <b>8</b> if the behavior would have happened but was prevented (for example, restrained), and <b>9</b> if it cannot happen (for example, cannot walk, so cannot pace).
+        The app's ratings are CMAI-based (app-derived): worked out from your logs. Look back over these two weeks. Does each rating match what you saw? Change it if not. Use <b>8</b> if the behavior would have happened but was prevented (for example, restrained), and <b>9</b> if it cannot happen (for example, cannot walk, so cannot pace).
       </p>
       <p className="muted">{reviewedCount} of 29 reviewed{saved ? " · saved" : ""}</p>
       <ul className="review-list">

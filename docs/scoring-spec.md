@@ -57,6 +57,8 @@ The app stores both the derived rating and the caregiver's choice, so the lab ca
 
 ## 6. What the app reports, in order
 
+The app labels every rating it shows **CMAI-based (app-derived)**. They come from event logs, not from the CMAI interview the manual describes (p.2), and are not comparable to a trial's CMAI total until an agreement study shows the two match. The Scores screen also notes that totals often fall without any change in treatment, so a drop should be read through the behaviors that drove it.
+
 1. **Each behavior, period by period.** The manual recommends looking at specific behaviors (p.5; the summary table says the same).
 2. **Agitated / not agitated** for three groups, using the manual's own thresholds (p.5 to 6). "At a frequency of k" is read as "rated k or higher".
    - Aggressive: one at 4, or two at 3, or three at 2.
