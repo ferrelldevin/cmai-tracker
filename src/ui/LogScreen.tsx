@@ -4,7 +4,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { GROUP_LABELS, ITEMS, type FactorGroup } from "../scoring/items";
-import { db, localMidnight, type StoredObservation } from "../data/db";
+import { checkInKey, db, localMidnight, type CheckIn, type StoredObservation } from "../data/db";
 import { timeOfDay } from "./format";
 
 const BEFORE_OPTIONS = ["Personal care or bathing", "Mealtime", "Noise or crowding", "Seemed in pain", "Change in routine", "Visitor or phone call", "Nothing noticed", "Other"];
@@ -13,10 +13,11 @@ const GROUP_ORDER: FactorGroup[] = ["aggressive", "physical", "verbal", "other"]
 interface Props {
   patientId: string;
   observations: StoredObservation[];
+  checkins: CheckIn[];
   onChange: () => void;
 }
 
-export function LogScreen({ patientId, observations, onChange }: Props) {
+export function LogScreen({ patientId, observations, checkins, onChange }: Props) {
   const [openInfo, setOpenInfo] = useState<number | null>(null);
   const [last, setLast] = useState<{ id: number; itemId: number } | null>(null);
   const [details, setDetails] = useState(false);
@@ -25,6 +26,8 @@ export function LogScreen({ patientId, observations, onChange }: Props) {
   const todayStart = localMidnight(Date.now());
   const todayCounts = new Map<number, number>();
   for (const o of observations) if (o.at >= todayStart) todayCounts.set(o.itemId, (todayCounts.get(o.itemId) ?? 0) + 1);
+  const loggedToday = [...todayCounts.values()].reduce((a, b) => a + b, 0);
+  const checkedIn = checkins.some((c) => c.day === todayStart);
 
   useEffect(() => () => window.clearTimeout(timer.current), []);
 
@@ -35,6 +38,14 @@ export function LogScreen({ patientId, observations, onChange }: Props) {
     setDetails(false);
     window.clearTimeout(timer.current);
     timer.current = window.setTimeout(() => setLast(null), 8000);
+    onChange();
+  }
+
+  // One per patient per day. Tapping again takes it back.
+  async function toggleCheckIn() {
+    const key = checkInKey(patientId, todayStart);
+    if (checkedIn) await db.checkins.delete(key);
+    else await db.checkins.put({ key, patientId, day: todayStart, at: Date.now() });
     onChange();
   }
 
@@ -82,6 +93,20 @@ export function LogScreen({ patientId, observations, onChange }: Props) {
           </div>
         </section>
       ))}
+
+      <section className="card checkin">
+        <h2>End of shift</h2>
+        {loggedToday > 0 ? (
+          <p className="muted">{loggedToday} logged today, so today already counts as logged.</p>
+        ) : (
+          <>
+            <p className="muted">Saw none of these behaviors today? Tap this so the app knows today was quiet, not missed. Days with no logs and no check-in show as "unlogged" on Scores.</p>
+            <button className={checkedIn ? "ghost" : ""} aria-pressed={checkedIn} onClick={toggleCheckIn}>
+              {checkedIn ? "✓ Nothing to log today (tap to undo)" : "Nothing to log today"}
+            </button>
+          </>
+        )}
+      </section>
 
       {last && (
         <div className="toast" role="status">

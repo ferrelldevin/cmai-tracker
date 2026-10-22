@@ -15,7 +15,7 @@ const readSaved = () => {
 export default function App() {
   const [patientId, setPatientId] = useState<string | null>(readSaved);
   const [tab, setTab] = useState<Tab>(() => (readSaved() ? "log" : "data"));
-  const { patients, observations, windows, refresh } = useCmaiData(patientId);
+  const { patients, observations, checkins, windows, refresh } = useCmaiData(patientId);
 
   useEffect(() => {
     try { if (patientId) localStorage.setItem("cmai-patient", patientId); } catch { /* private mode */ }
@@ -48,7 +48,7 @@ export default function App() {
         {tab === "data" || !hasPatient ? (
           <DataScreen onPatient={(id) => { setPatientId(id); setTab("log"); }} onChange={refresh} />
         ) : tab === "log" ? (
-          <LogScreen patientId={patientId!} observations={observations} onChange={refresh} />
+          <LogScreen patientId={patientId!} observations={observations} checkins={checkins} onChange={refresh} />
         ) : tab === "scores" ? (
           <ScoresScreen key={patientId} windows={windows} observations={observations} />
         ) : (

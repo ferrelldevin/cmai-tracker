@@ -3,7 +3,7 @@
 // Behaviors cluster in the late afternoon for A, to show the time-of-day chart.
 
 import { DAY_MS } from "../scoring/engine";
-import { db, localMidnight, type StoredObservation } from "./db";
+import { checkInKey, db, localMidnight, type CheckIn, type StoredObservation } from "./db";
 
 // Small seeded random generator so the demo is the same every time.
 function rng(seed: number) {
@@ -37,8 +37,10 @@ export async function loadDemoData(now = Date.now()) {
   const anchor = localMidnight(now) - 42 * DAY_MS;
   const rand = rng(42);
   const observations: StoredObservation[] = [];
+  const checkins: CheckIn[] = [];
   for (const [patientId, plan] of Object.entries(PLANS)) {
     for (let day = 0; day < 42; day++) {
+      const before = observations.length;
       const progress = day / 41;
       for (const [itemId, start, end, peak] of plan) {
         const perDay = start + (end - start) * progress;
@@ -50,15 +52,22 @@ export async function loadDemoData(now = Date.now()) {
           observations.push({ patientId, itemId, at, loggedAt: at + 60_000 });
         }
       }
+      // A quiet day gets an end-of-shift check-in, as a careful caregiver would do.
+      if (observations.length === before) {
+        const dayStart = anchor + day * DAY_MS;
+        checkins.push({ key: checkInKey(patientId, dayStart), patientId, day: dayStart, at: dayStart + 22 * 3_600_000 });
+      }
     }
   }
-  await db.transaction("rw", db.patients, db.observations, db.reviews, async () => {
+  await db.transaction("rw", [db.patients, db.observations, db.reviews, db.checkins], async () => {
     for (const id of Object.keys(PLANS)) {
       await db.observations.where("patientId").equals(id).delete();
       await db.reviews.where("patientId").equals(id).delete();
+      await db.checkins.where("patientId").equals(id).delete();
       await db.patients.put({ id, anchor, demo: true });
     }
     await db.observations.bulkAdd(observations);
+    await db.checkins.bulkPut(checkins);
   });
   return Object.keys(PLANS)[0];
 }

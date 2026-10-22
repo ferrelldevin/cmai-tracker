@@ -29,16 +29,29 @@ export interface Review {
   reviewedAt: number;
 }
 
+/** "Nothing to log today": tells a quiet day apart from a day nobody logged. */
+export interface CheckIn {
+  key: string; // `${patientId}|${day}`, so one per patient per day
+  patientId: string;
+  day: number; // local midnight of the day it covers
+  at: number; // when it was tapped
+}
+
 class CmaiDb extends Dexie {
   patients!: Table<Patient, string>;
   observations!: Table<StoredObservation, number>;
   reviews!: Table<Review, string>;
+  checkins!: Table<CheckIn, string>;
   constructor() {
     super("cmai-tracker");
     this.version(1).stores({
       patients: "id",
       observations: "++id, patientId, [patientId+at]",
       reviews: "key, patientId",
+    });
+    // Version 2 only adds a table. Existing patients, logs and reviews are kept as they are.
+    this.version(2).stores({
+      checkins: "key, patientId",
     });
   }
 }
@@ -53,3 +66,5 @@ export const localMidnight = (t: number) => {
 
 export const reviewKey = (patientId: string, windowStart: number, itemId: number) =>
   `${patientId}|${windowStart}|${itemId}`;
+
+export const checkInKey = (patientId: string, day: number) => `${patientId}|${day}`;

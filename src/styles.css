@@ -92,3 +92,6 @@ select, input { background: var(--surface); color: var(--text); border: 1px soli
 .review-list { list-style: none; padding: 0; margin: 0 0 14px; display: grid; gap: 6px; }
 .review-list li { background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; padding: 10px 12px; display: grid; gap: 6px; }
 .review-list li.changed { border-color: var(--series-2); }
+.checkin { margin-top: 22px; }
+.unlogged-row th, .unlogged-row td { font-size: 12px; color: var(--text-muted); border-bottom: 1px solid var(--rule); }
+.unlogged-row td.gap { color: var(--warn); font-weight: 600; }

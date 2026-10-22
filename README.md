@@ -14,16 +14,16 @@ The CMAI isn't a count. It's a caregiver's look-back rating (1 to 7) of how ofte
 
 ## What it does
 
-- **Log:** 29 buttons, one per CMAI behavior, grouped the way the manual groups them. Each button shows a short description in our own words with the manual page for the full definition, plus a "Does not count" note where the manual excludes things. You can undo a tap, mark the time as approximate, or note what happened just before.
+- **Log:** 29 buttons, one per CMAI behavior, grouped the way the manual groups them. Each button shows a short description in our own words with the manual page for the full definition, plus a "Does not count" note where the manual excludes things. You can undo a tap, mark the time as approximate, or note what happened just before. On a quiet day, "Nothing to log today" records that the day was quiet rather than missed.
 - **Scores:** per-behavior CMAI-based (app-derived) ratings for each period, agitated or not for three behavior groups (manual thresholds), group averages over time, the total (labeled secondary), and when in the day behaviors happen.
 - **Day-14 review:** confirm or change each rating, including codes 8 (prevented) and 9 (not applicable).
-- **Patients & data:** pseudonymous patient codes only, six weeks of demo data, export to JSON and CSV.
+- **Patients & data:** pseudonymous patient codes only, six weeks of demo data, export to JSON and CSV (including check-ins and unlogged days per period).
 
 ## Run it
 
 ```bash
 npm install
-npm test          # 27 tests, including 19 hand-scored cases from docs/test-cases.json
+npm test          # 32 tests, including 19 hand-scored cases from docs/test-cases.json
 npm run dev       # http://localhost:5173
 npm run build     # production build in dist/, with service worker
 npm run preview   # serve the build at http://localhost:4173

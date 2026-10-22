@@ -66,6 +66,11 @@ export function ScoresScreen({ windows, observations }: Props) {
             </div>
           ))}
         </div>
+        {sel.unlogged > 0 && (
+          <p className="note">
+            {sel.unlogged} of {sel.elapsed} days in this period are unlogged: no logs and no "nothing to log today" check-in. Those days count as unknown, not as zero, but ratings may read low.
+          </p>
+        )}
         {sel.summary.specialCodes.length > 0 && (
           <p className="muted">Left out of sums: {sel.summary.specialCodes.map((c) => `#${c.itemId} (${RATING_LABELS[c.code]})`).join(", ")}</p>
         )}
@@ -88,6 +93,14 @@ export function ScoresScreen({ windows, observations }: Props) {
               </tr>
             </thead>
             <tbody>
+              <tr className="unlogged-row">
+                <th scope="row">Unlogged days</th>
+                {windows.map((w, i) => (
+                  <td key={i} className={w.unlogged ? "gap" : ""} title={`${w.unlogged} of ${w.elapsed} finished days with no log and no "nothing to log" check-in`}>
+                    {w.unlogged}
+                  </td>
+                ))}
+              </tr>
               {rows.map((item) => (
                 <tr key={item.id}>
                   <th scope="row">{item.id}. {item.name}</th>

@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import cases from "../docs/test-cases.json";
-import { clusteredDays, DAY_MS, finalRatings, ratingFromCount, scoreAllWindows, scoreWindow, summarize, WINDOW_MS, type Observation } from "../src/scoring/engine";
+import { clusteredDays, DAY_MS, finalRatings, ratingFromCount, scoreAllWindows, scoreWindow, summarize, unloggedDays, WINDOW_MS, type Observation } from "../src/scoring/engine";
 import { ITEMS } from "../src/scoring/items";
 
 const windowStart = Date.parse(cases.windowStart);
@@ -86,5 +86,28 @@ describe("engine behavior", () => {
 
   it("lists every item on the long form exactly once", () => {
     expect(ITEMS.map((i) => i.id)).toEqual(Array.from({ length: 29 }, (_, i) => i + 1));
+  });
+});
+
+describe("unlogged days (spec section 7)", () => {
+  const at = (day: number, h = 12) => windowStart + day * DAY_MS + h * 3_600_000;
+
+  it("a finished window with no logs and no check-ins is 14 unlogged days, not 14 zeros", () => {
+    expect(unloggedDays([], windowStart, afterWindow)).toEqual({ unlogged: 14, elapsed: 14 });
+  });
+
+  it("a log or a check-in each mark a day as logged; several on one day count once", () => {
+    const logs = [at(0, 9), at(0, 15), at(3)];
+    const checkins = [at(1, 22), at(2, 22)];
+    expect(unloggedDays([...logs, ...checkins], windowStart, afterWindow)).toEqual({ unlogged: 10, elapsed: 14 });
+  });
+
+  it("an open window counts only days that have ended, so today is never unlogged", () => {
+    // Now is day 5 at 10:00: days 0-4 have ended.
+    expect(unloggedDays([at(0), at(2)], windowStart, at(5, 10))).toEqual({ unlogged: 3, elapsed: 5 });
+  });
+
+  it("ignores activity outside the window", () => {
+    expect(unloggedDays([at(-1), at(14)], windowStart, afterWindow).unlogged).toBe(14);
   });
 });

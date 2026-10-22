@@ -95,6 +95,21 @@ export function scoreAllWindows(observations: Observation[], anchor: number, now
   return windows;
 }
 
+/**
+ * Days in a window with neither a log nor a "nothing to log today" check-in (spec section 7).
+ * `times` holds every log and check-in time for the patient. Only days that have fully
+ * ended count, so today is never called unlogged while it is still going.
+ */
+export function unloggedDays(times: number[], windowStart: number, now: number): { unlogged: number; elapsed: number } {
+  const elapsed = Math.max(0, Math.min(WINDOW_DAYS, Math.floor((now - windowStart) / DAY_MS)));
+  const covered = new Set<number>();
+  for (const t of times) {
+    const day = Math.floor((t - windowStart) / DAY_MS);
+    if (day >= 0 && day < elapsed) covered.add(day);
+  }
+  return { unlogged: elapsed - covered.size, elapsed };
+}
+
 // ---------- Day-14 review (spec section 5) ----------
 
 /** What the caregiver chose for one item at review: a 1-7 rating, or code 8 / 9. */
