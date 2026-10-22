@@ -47,6 +47,7 @@ select, input { background: var(--surface); color: var(--text); border: 1px soli
 .item-name { font-weight: 600; }
 .item-num { display: inline-block; min-width: 30px; color: var(--text-muted); font-variant-numeric: tabular-nums; }
 .item-def { font-size: 13px; color: var(--text-muted); }
+.ref { white-space: nowrap; font-size: 12px; }
 .today { font-size: 12px; font-weight: 600; color: var(--accent); }
 .info-btn { background: transparent; color: var(--text-muted); border-top: 1px solid var(--rule); border-radius: 0; font-size: 13px; min-height: 36px; padding: 6px 12px; text-align: left; }
 .not-count { margin: 0; padding: 0 12px 12px; font-size: 13px; color: var(--warn); }

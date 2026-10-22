@@ -1,5 +1,6 @@
-// Screen 1: one tap logs a behavior. Definitions sit on the button so the
-// caregiver picks the right item (manual p.12-13). Undo for 5 seconds.
+// Screen 1: one tap logs a behavior. A short description sits on the button so
+// the caregiver picks the right item, with the manual page for the full
+// definition (p.12-13). Undo for 5 seconds.
 
 import { useEffect, useRef, useState } from "react";
 import { GROUP_LABELS, ITEMS, type FactorGroup } from "../scoring/items";
@@ -67,7 +68,7 @@ export function LogScreen({ patientId, observations, onChange }: Props) {
                     {item.name}
                     {item.continuous && <span className="tag">per stretch</span>}
                   </span>
-                  <span className="item-def">{item.counts}</span>
+                  <span className="item-def">{item.counts} <span className="ref">Manual p.{item.manualPage}</span></span>
                   {todayCounts.get(item.id) ? <span className="today">{todayCounts.get(item.id)} today</span> : null}
                 </button>
                 {item.doesNotCount && (

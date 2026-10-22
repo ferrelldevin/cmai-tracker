@@ -1,5 +1,7 @@
-// The 29 behaviors of the CMAI long form (manual p.22), with the expanded
-// definitions from manual p.12-13 and p.24-25.
+// The 29 behaviors of the CMAI long form (manual p.22-23).
+// `counts` and `doesNotCount` are short descriptions in our own words, not the
+// manual's text (the CMAI is (c) Cohen-Mansfield; see NOTICE). For the full
+// definitions, read the manual page in `manualPage` (also p.24-25).
 //
 // group: the nursing-home factor the manual lists for the item (p.6).
 //   "aggressive"  = Factor 1, aggressive behavior
@@ -14,42 +16,43 @@ export type FactorGroup = "aggressive" | "physical" | "verbal" | "other";
 export interface CmaiItem {
   id: number; // 1-29, the number on the long form
   name: string;
-  counts: string; // what to log under this item
-  doesNotCount?: string; // the manual's exclusions
+  counts: string; // what to log under this item, in our own words
+  doesNotCount?: string; // the manual's exclusions, in our own words
+  manualPage: number; // manual page with the full definition
   group: FactorGroup;
   continuous?: boolean;
 }
 
 export const ITEMS: CmaiItem[] = [
-  { id: 1, name: "Pacing, aimless wandering", counts: "Constantly walking back and forth, including in a wheelchair.", doesNotCount: "Normal purposeful walking.", group: "physical", continuous: true },
-  { id: 2, name: "Inappropriate dressing or disrobing", counts: "Too many clothes, clothes put on strangely, undressing in public.", doesNotCount: "Trouble dressing (an ADL issue). If only genitals are exposed, log #28.", group: "physical" },
-  { id: 3, name: "Spitting", counts: "Spitting onto the floor or other people, including at meals.", doesNotCount: "Drooling, or spitting into a tissue, toilet, or outside.", group: "aggressive" },
-  { id: 4, name: "Cursing or verbal aggression", counts: "Swearing, obscenity, unkind speech, verbal anger. Words only.", doesNotCount: "Noises without words (log #12 or #13).", group: "aggressive" },
-  { id: 5, name: "Constant unwarranted request for attention or help", counts: "Unreasonable nagging, pleading, demanding, verbal or not.", group: "verbal" },
-  { id: 6, name: "Repetitive sentences or questions", counts: "Repeating the same sentence or question one right after the other.", doesNotCount: "Complaining (log #18).", group: "verbal" },
-  { id: 7, name: "Hitting (including self)", counts: "Striking or pinching others, banging self or furniture.", group: "aggressive" },
-  { id: 8, name: "Kicking", counts: "Striking forcefully with feet at people or objects.", group: "aggressive" },
-  { id: 9, name: "Grabbing onto people or things", counts: "Snatching, seizing roughly, yanking.", group: "aggressive" },
-  { id: 10, name: "Pushing", counts: "Forcefully thrusting, shoving.", group: "aggressive" },
-  { id: 11, name: "Throwing things", counts: "Hurling, flinging, tipping things off surfaces, dumping food.", group: "other" },
-  { id: 12, name: "Making strange noises", counts: "Crying, weeping, moaning, weird laughter, grinding teeth.", doesNotCount: "Intelligible words.", group: "other" },
-  { id: 13, name: "Screaming", counts: "Shouting, piercing howl, loud shrills.", group: "verbal" },
-  { id: 14, name: "Biting", counts: "Chomping, gnashing, gnawing at people, objects, or self.", group: "aggressive" },
-  { id: 15, name: "Scratching", counts: "Clawing or scraping with fingernails at people, objects, or self.", group: "aggressive" },
-  { id: 16, name: "Trying to get to a different place", counts: "Trying to leave the building, sneaking out, entering locked areas or others' rooms.", group: "physical" },
-  { id: 17, name: "Intentional falling", counts: "Purposely falling to the floor, including from a chair or bed.", group: "other" },
-  { id: 18, name: "Complaining", counts: "Whining, somatic complaints, personal gripes.", group: "verbal" },
-  { id: 19, name: "Negativism", counts: "Bad attitude, doesn't like anything, nothing is right.", doesNotCount: "Open verbal anger (log #4).", group: "verbal" },
-  { id: 20, name: "Eating or drinking inappropriate substances", counts: "Putting non-food items in the mouth and trying to swallow.", group: "other" },
-  { id: 21, name: "Hurting self or other", counts: "Burning, cutting, or touching self or others with harmful objects.", group: "other" },
-  { id: 22, name: "Handling things inappropriately", counts: "Picking up others' things, rummaging in drawers, moving furniture, playing with food.", group: "physical" },
-  { id: 23, name: "Hiding things", counts: "Putting objects out of sight, under or behind something.", group: "other" },
-  { id: 24, name: "Hoarding things", counts: "Stuffing many or odd objects into purse, pockets, or drawers.", doesNotCount: "A normal collection (dolls, stamps).", group: "other" },
-  { id: 25, name: "Tearing things or destroying property", counts: "Shredding, ripping, breaking, stomping on things.", group: "aggressive" },
-  { id: 26, name: "Repetitious mannerisms", counts: "Patting, tapping, rocking, fiddling, picking at self or clothing.", doesNotCount: "Repeated words or sounds.", group: "physical", continuous: true },
-  { id: 27, name: "Verbal sexual advances", counts: "Sexual propositions, innuendo, \"dirty\" talk.", group: "other" },
-  { id: 28, name: "Physical sexual advances or exposing genitals", counts: "Inappropriate sexual touching, exposing genitals when not alone.", group: "other" },
-  { id: 29, name: "General restlessness", counts: "Fidgeting, always moving in seat, getting up and sitting down.", group: "physical", continuous: true },
+  { id: 1, name: "Pacing, aimless wandering", counts: "Walking to and fro with no clear goal. Wheelchair wandering counts too.", doesNotCount: "Walking somewhere with a purpose.", manualPage: 12, group: "physical", continuous: true },
+  { id: 2, name: "Inappropriate dressing or disrobing", counts: "Far more layers than needed, clothes worn in odd ways, or undressing where it is not appropriate.", doesNotCount: "Difficulty getting dressed (a daily-living skill). Exposing only the genitals: log #28.", manualPage: 12, group: "physical" },
+  { id: 3, name: "Spitting", counts: "Spitting on the floor or at people. Mealtimes count too.", doesNotCount: "Drooling the person can't help, or spitting where it is fine (into a tissue or toilet, or outdoors).", manualPage: 12, group: "aggressive" },
+  { id: 4, name: "Cursing or verbal aggression", counts: "Swearing, insults, harsh or hostile words. Must involve words.", doesNotCount: "Sounds without words (log #12 or #13).", manualPage: 12, group: "aggressive" },
+  { id: 5, name: "Constant unwarranted request for attention or help", counts: "Persistent nagging, begging, or demanding beyond what is needed, with or without words.", manualPage: 12, group: "verbal" },
+  { id: 6, name: "Repetitive sentences or questions", counts: "Saying the same thing or asking the same question again and again in a row.", doesNotCount: "Complaints, even if justified (log #18).", manualPage: 12, group: "verbal" },
+  { id: 7, name: "Hitting (including self)", counts: "Striking or pinching someone, or hitting self or furniture.", manualPage: 12, group: "aggressive" },
+  { id: 8, name: "Kicking", counts: "Kicking hard at a person or an object.", manualPage: 12, group: "aggressive" },
+  { id: 9, name: "Grabbing onto people or things", counts: "Grasping hard at a person or object, or jerking it away.", manualPage: 12, group: "aggressive" },
+  { id: 10, name: "Pushing", counts: "Shoving or pressing hard against someone.", manualPage: 12, group: "aggressive" },
+  { id: 11, name: "Throwing things", counts: "Hurling or tossing objects, sweeping things off tables, emptying food out on purpose.", manualPage: 12, group: "other" },
+  { id: 12, name: "Making strange noises", counts: "Moaning, crying, odd laughter, teeth grinding, and other strange sounds.", doesNotCount: "Words that can be understood.", manualPage: 12, group: "other" },
+  { id: 13, name: "Screaming", counts: "Yelling or shrieking loudly.", manualPage: 12, group: "verbal" },
+  { id: 14, name: "Biting", counts: "Biting or gnawing at someone, an object, or oneself.", manualPage: 12, group: "aggressive" },
+  { id: 15, name: "Scratching", counts: "Raking nails across someone, an object, or oneself.", manualPage: 12, group: "aggressive" },
+  { id: 16, name: "Trying to get to a different place", counts: "Trying to leave the building or grounds, slipping out, or getting into locked spaces, offices, or the rooms of other residents.", manualPage: 12, group: "physical" },
+  { id: 17, name: "Intentional falling", counts: "Dropping to the floor on purpose, including from a bed, chair, or wheelchair.", manualPage: 13, group: "other" },
+  { id: 18, name: "Complaining", counts: "Whining or grumbling about self, body aches, others, or surroundings.", manualPage: 13, group: "verbal" },
+  { id: 19, name: "Negativism", counts: "A sour, negative outlook: nothing pleases the person.", doesNotCount: "Angry words aimed at someone (log #4).", manualPage: 13, group: "verbal" },
+  { id: 20, name: "Eating or drinking inappropriate substances", counts: "Attempting to swallow non-food items.", manualPage: 13, group: "other" },
+  { id: 21, name: "Hurting self or other", counts: "Harming self or others with something dangerous, such as burns or cuts.", manualPage: 13, group: "other" },
+  { id: 22, name: "Handling things inappropriately", counts: "Taking belongings that aren't theirs, digging through drawers, shifting furniture, messing with food, smearing feces.", manualPage: 13, group: "physical" },
+  { id: 23, name: "Hiding things", counts: "Tucking objects away where they can't be seen.", manualPage: 13, group: "other" },
+  { id: 24, name: "Hoarding things", counts: "Stashing many items, or odd ones, in a bag, pocket, or drawer; keeping far more of one thing than makes sense.", doesNotCount: "An ordinary hobby collection (dolls, stamps).", manualPage: 13, group: "other" },
+  { id: 25, name: "Tearing things or destroying property", counts: "Ripping, smashing, or trampling objects or property.", manualPage: 13, group: "aggressive" },
+  { id: 26, name: "Repetitious mannerisms", counts: "Repeated movements such as tapping, rocking, rubbing, fiddling with objects, or picking at skin or clothes.", doesNotCount: "Repeated words or sounds.", manualPage: 13, group: "physical", continuous: true },
+  { id: 27, name: "Verbal sexual advances", counts: "Sexual remarks, suggestive talk, or propositions.", manualPage: 13, group: "other" },
+  { id: 28, name: "Physical sexual advances or exposing genitals", counts: "Unwanted sexual touching or kissing, or exposing or rubbing genitals in front of others.", manualPage: 13, group: "other" },
+  { id: 29, name: "General restlessness", counts: "Fidgeting, shifting in the seat, repeatedly standing and sitting again, unable to stay still.", manualPage: 13, group: "physical", continuous: true },
 ];
 
 export const GROUP_LABELS: Record<FactorGroup, string> = {
