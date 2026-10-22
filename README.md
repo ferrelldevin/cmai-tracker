@@ -23,7 +23,7 @@ The CMAI isn't a count. It's a caregiver's look-back rating (1 to 7) of how ofte
 
 ```bash
 npm install
-npm test          # 22 tests, including 17 hand-scored cases from docs/test-cases.json
+npm test          # 27 tests, including 19 hand-scored cases from docs/test-cases.json
 npm run dev       # http://localhost:5173
 npm run build     # production build in dist/, with service worker
 npm run preview   # serve the build at http://localhost:4173

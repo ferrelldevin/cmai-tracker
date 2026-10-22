@@ -1,6 +1,8 @@
 # CMAI scoring spec
 
-Rule version: `cmai-count-rule-1`. Every score the app saves carries this label, so a rule change never silently rewrites old results.
+Rule version: `cmai-count-rule-2`. Every score the app saves carries this label, so a rule change never silently rewrites old results.
+
+- Rule 2 changes only how rating-7 clusters are found (section 3): they can now cross midnight. The count bands and every other rule are the same as rule 1.
 
 Source of truth: *Instruction Manual for the Cohen-Mansfield Agitation Inventory* (Cohen-Mansfield, 1991). Page numbers below are the manual's printed page numbers.
 
@@ -30,7 +32,8 @@ The manual says to "average over the past two weeks" when a behavior is irregula
 
 A plain count can't show "several times an hour", so rating 7 uses timing:
 
-- A **clustered day** is a day with 3 or more logs of the behavior inside any 60-minute span.
+- A **cluster** is 3 or more logs of the behavior inside any 60-minute span (strictly less than 60 minutes from first to third). The 60 minutes slide across all the period's logs, so a burst at 11:40 pm, 11:55 pm and 12:15 am is one cluster.
+- A **clustered day** is a day on which at least one cluster **starts**. A cluster that crosses midnight counts for the day of its **first** log, and only for that day. A day counts once however many clusters start on it.
 - Rating 7 applies when **at least 7 of the 14 days** are clustered days (half the period, matching "average over two weeks").
 - Otherwise the count table in section 2 applies.
 
@@ -74,7 +77,7 @@ The app stores both the derived rating and the caregiver's choice, so the lab ca
 | Decision | Default in this build |
 |---|---|
 | Count-to-rating boundaries (section 2) | As in the table |
-| Rule for rating 7 (section 3) | 3+ logs in 60 minutes on 7+ of 14 days |
+| Rule for rating 7 (section 3) | 3+ logs in 60 minutes on 7+ of 14 days; a cluster crossing midnight counts for the day it starts |
 | Form version | 29-item long form, 1 to 7 scale |
 | Fixed or rolling 14-day periods | Fixed |
 | Code 8: separate code, or estimate the unprevented frequency (p.5 allows either) | Separate code |
@@ -84,5 +87,5 @@ The app stores both the derived rating and the caregiver's choice, so the lab ca
 
 ## 9. How the spec is checked
 
-- `docs/test-cases.json` holds 17 cases a person can score by hand from this page, without reading code.
+- `docs/test-cases.json` holds 19 cases a person can score by hand from this page, without reading code.
 - `tests/engine.test.ts` runs the engine against every case. The expected answers were written by hand, never computed by the engine.

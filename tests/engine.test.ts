@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import cases from "../docs/test-cases.json";
-import { DAY_MS, finalRatings, ratingFromCount, scoreAllWindows, scoreWindow, summarize, WINDOW_MS, type Observation } from "../src/scoring/engine";
+import { clusteredDays, DAY_MS, finalRatings, ratingFromCount, scoreAllWindows, scoreWindow, summarize, WINDOW_MS, type Observation } from "../src/scoring/engine";
 import { ITEMS } from "../src/scoring/items";
 
 const windowStart = Date.parse(cases.windowStart);
@@ -63,6 +63,25 @@ describe("engine behavior", () => {
     const score = scoreWindow(toObservations(1, [{ day: 0, times: ["09:00"] }]), windowStart, afterWindow);
     expect(finalRatings(score)[1]).toBe(2);
     expect(finalRatings(score, { 1: 9 })[1]).toBe(9);
+  });
+
+  it("a cluster that crosses midnight counts once, on the day it starts", () => {
+    const at = (day: number, hhmm: string) => toObservations(13, [{ day, times: [hhmm] }])[0].at;
+    expect(clusteredDays([at(3, "23:50"), at(4, "00:05"), at(4, "00:20")], windowStart)).toBe(1);
+    // Add a second burst wholly inside day 4. If the midnight burst were credited
+    // to day 4, both would land on one day and the answer would be 1.
+    const day4 = toObservations(13, [{ day: 4, times: ["15:00", "15:10", "15:20"] }]).map((o) => o.at);
+    expect(clusteredDays([at(3, "23:50"), at(4, "00:05"), at(4, "00:20"), ...day4], windowStart)).toBe(2);
+  });
+
+  it("finds a midnight cluster whatever order the logs arrive in", () => {
+    const night = toObservations(13, [{ day: 5, times: ["23:40", "23:55"] }, { day: 6, times: ["00:15"] }]).map((o) => o.at);
+    expect(clusteredDays([night[2], night[0], night[1]], windowStart)).toBe(1);
+  });
+
+  it("logs 60+ minutes apart across midnight are not a cluster", () => {
+    const night = toObservations(13, [{ day: 5, times: ["23:30"] }, { day: 6, times: ["00:00", "00:30"] }]).map((o) => o.at);
+    expect(clusteredDays(night, windowStart)).toBe(0);
   });
 
   it("lists every item on the long form exactly once", () => {

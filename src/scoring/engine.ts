@@ -3,7 +3,9 @@
 
 import { ITEMS, type FactorGroup } from "./items";
 
-export const RULE_VERSION = "cmai-count-rule-1";
+// Rule 2 finds rating-7 clusters across midnight (spec section 3). The count bands
+// are unchanged from rule 1.
+export const RULE_VERSION = "cmai-count-rule-2";
 export const DAY_MS = 24 * 60 * 60 * 1000;
 export const WINDOW_DAYS = 14;
 export const WINDOW_MS = WINDOW_DAYS * DAY_MS;
@@ -37,28 +39,19 @@ export function ratingFromCount(count: number): number {
   return 6;
 }
 
-/** True if, on this day's sorted timestamps, 3+ fall inside any 60-minute span. */
-function hasHourCluster(sortedTimes: number[]): boolean {
-  for (let i = 0; i + 2 < sortedTimes.length; i++) {
-    if (sortedTimes[i + 2] - sortedTimes[i] < HOUR_MS) return true;
-  }
-  return false;
-}
-
-/** Number of window days with a cluster of 3+ logs inside 60 minutes (spec section 3). */
+/**
+ * Number of window days that start a cluster of 3+ logs inside 60 minutes (spec section 3).
+ * The 60-minute window slides over all of the item's logs, so a burst that crosses
+ * midnight still counts. Each cluster is credited to the day of its first log, and a
+ * day counts once however many clusters start on it.
+ */
 export function clusteredDays(times: number[], windowStart: number): number {
-  const byDay = new Map<number, number[]>();
-  for (const t of times) {
-    const day = Math.floor((t - windowStart) / DAY_MS);
-    const list = byDay.get(day) ?? [];
-    list.push(t);
-    byDay.set(day, list);
+  const sorted = [...times].sort((a, b) => a - b);
+  const days = new Set<number>();
+  for (let i = 0; i + 2 < sorted.length; i++) {
+    if (sorted[i + 2] - sorted[i] < HOUR_MS) days.add(Math.floor((sorted[i] - windowStart) / DAY_MS));
   }
-  let days = 0;
-  for (const list of byDay.values()) {
-    if (hasHourCluster(list.sort((a, b) => a - b))) days++;
-  }
-  return days;
+  return days.size;
 }
 
 export interface ItemScore {
