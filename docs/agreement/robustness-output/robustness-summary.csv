@@ -1,0 +1,13 @@
+source,mode,rate,item_windows,pct_items_changed,pct_down_1,pct_down_2,pct_down_3plus,pct_beyond_1_point,mean_abs_change,mean_total_drop,pct_windows_agitation_flip,rating7_items,pct_rating7_lost
+demo,uniform,0.1,33,12.4,12.3,0.1,0.0,0.1,0.124,0.68,0.1,0,
+vignettes,uniform,0.1,41,12.4,12.3,0.1,0.0,0.1,0.125,0.43,0.1,1,0.1
+demo,uniform,0.3,33,41.1,40.4,0.7,0.0,0.7,0.418,2.30,14.5,0,
+vignettes,uniform,0.3,41,35.7,33.2,2.5,0.0,2.5,0.382,1.31,5.2,1,70.5
+demo,uniform,0.5,33,76.3,70.8,5.4,0.2,5.6,0.821,4.51,48.5,0,
+vignettes,uniform,0.5,41,69.9,61.0,8.6,0.3,8.8,0.790,2.70,29.4,1,99.9
+demo,busy,0.1,33,12.8,12.7,0.1,0.0,0.1,0.129,0.71,0.0,0,
+vignettes,busy,0.1,41,13.2,13.1,0.1,0.0,0.1,0.133,0.45,0.0,1,0.4
+demo,busy,0.3,33,42.3,41.5,0.8,0.0,0.8,0.431,2.37,15.2,0,
+vignettes,busy,0.3,41,37.1,33.9,3.2,0.0,3.2,0.403,1.38,5.2,1,81.8
+demo,busy,0.5,33,77.6,71.2,6.2,0.2,6.4,0.842,4.63,48.8,0,
+vignettes,busy,0.5,41,71.2,60.9,9.8,0.4,10.2,0.819,2.80,31.0,1,100.0

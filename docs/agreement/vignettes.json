@@ -1,0 +1,2556 @@
+{
+  "about": "Fictional 2-week caregiver vignettes for the CMAI agreement study. Raters must NOT see this file (it has design notes). Each event is one caregiver tap: itemId + UTC timestamp. Window: windowStart inclusive to windowEnd exclusive.",
+  "windowStart": "2026-01-05T00:00:00Z",
+  "windowEnd": "2026-01-19T00:00:00Z",
+  "dayNumbering": "Narratives use Day 1-14 (Day 1 = Monday 2026-01-05). JSON 'day' fields are 0-13.",
+  "vignettes": [
+    {
+      "id": "V01",
+      "name": "Ruth",
+      "setting": "84, moderate Alzheimer's disease, assisted-living memory unit",
+      "ratedItems": [
+        1,
+        6,
+        13,
+        18
+      ],
+      "designNotes": "Low band. #13 is one scream fully explained by the hot water; the expanded form (p.24) says not to include rare behaviors clearly explained by situational factors, so a manual rater may give 1 while the app counts it (2).",
+      "authorPrediction": {
+        "1": 1,
+        "6": 3,
+        "13": 1,
+        "18": 2
+      },
+      "authorPredictionNote": "The author's guess of what a manual-only rater would give. Not an answer key; never shown to raters.",
+      "events": [
+        {
+          "itemId": 6,
+          "at": "2026-01-06T10:15:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-08T07:40:00Z"
+        },
+        {
+          "itemId": 6,
+          "at": "2026-01-10T16:00:00Z"
+        },
+        {
+          "itemId": 18,
+          "at": "2026-01-13T14:00:00Z"
+        },
+        {
+          "itemId": 6,
+          "at": "2026-01-15T10:30:00Z"
+        }
+      ]
+    },
+    {
+      "id": "V02",
+      "name": "Harold",
+      "setting": "79, vascular dementia, nursing home",
+      "ratedItems": [
+        4,
+        9,
+        16,
+        29
+      ],
+      "designNotes": "Irregular weeks: all 9 cursing events in week 2. The manual (p.4 instruction 10, p.5) says to average over two weeks: 4.5 per week = several times a week (4). Tests whether raters average or rate the recent week (which would be 5).",
+      "authorPrediction": {
+        "4": 4,
+        "9": 3,
+        "16": 1,
+        "29": 4
+      },
+      "authorPredictionNote": "The author's guess of what a manual-only rater would give. Not an answer key; never shown to raters.",
+      "events": [
+        {
+          "itemId": 29,
+          "at": "2026-01-05T15:00:00Z"
+        },
+        {
+          "itemId": 9,
+          "at": "2026-01-07T08:15:00Z"
+        },
+        {
+          "itemId": 29,
+          "at": "2026-01-07T15:30:00Z"
+        },
+        {
+          "itemId": 29,
+          "at": "2026-01-09T14:45:00Z"
+        },
+        {
+          "itemId": 29,
+          "at": "2026-01-11T15:10:00Z"
+        },
+        {
+          "itemId": 4,
+          "at": "2026-01-12T18:30:00Z"
+        },
+        {
+          "itemId": 4,
+          "at": "2026-01-13T18:30:00Z"
+        },
+        {
+          "itemId": 9,
+          "at": "2026-01-14T08:20:00Z"
+        },
+        {
+          "itemId": 4,
+          "at": "2026-01-14T11:00:00Z"
+        },
+        {
+          "itemId": 29,
+          "at": "2026-01-14T15:00:00Z"
+        },
+        {
+          "itemId": 4,
+          "at": "2026-01-14T18:30:00Z"
+        },
+        {
+          "itemId": 4,
+          "at": "2026-01-15T18:30:00Z"
+        },
+        {
+          "itemId": 29,
+          "at": "2026-01-16T15:20:00Z"
+        },
+        {
+          "itemId": 4,
+          "at": "2026-01-16T18:30:00Z"
+        },
+        {
+          "itemId": 4,
+          "at": "2026-01-17T11:00:00Z"
+        },
+        {
+          "itemId": 4,
+          "at": "2026-01-17T18:30:00Z"
+        },
+        {
+          "itemId": 4,
+          "at": "2026-01-18T18:30:00Z"
+        }
+      ]
+    },
+    {
+      "id": "V03",
+      "name": "Edith",
+      "setting": "88, dementia with Lewy bodies, nursing home",
+      "ratedItems": [
+        5,
+        12,
+        23,
+        24
+      ],
+      "designNotes": "Near-boundary counts. #5 has N=5 (2.5 per week): the app gives 4, a rater may say 'once or twice a week' (3). #24 has N=13 (every day but one): the app gives 4, a rater may say 'once or twice a day' (5).",
+      "authorPrediction": {
+        "5": 3,
+        "12": 2,
+        "23": 3,
+        "24": 5
+      },
+      "authorPredictionNote": "The author's guess of what a manual-only rater would give. Not an answer key; never shown to raters.",
+      "events": [
+        {
+          "itemId": 5,
+          "at": "2026-01-05T10:00:00Z"
+        },
+        {
+          "itemId": 24,
+          "at": "2026-01-05T19:00:00Z"
+        },
+        {
+          "itemId": 23,
+          "at": "2026-01-06T13:00:00Z"
+        },
+        {
+          "itemId": 24,
+          "at": "2026-01-06T19:00:00Z"
+        },
+        {
+          "itemId": 24,
+          "at": "2026-01-07T19:00:00Z"
+        },
+        {
+          "itemId": 5,
+          "at": "2026-01-08T10:00:00Z"
+        },
+        {
+          "itemId": 24,
+          "at": "2026-01-08T19:00:00Z"
+        },
+        {
+          "itemId": 23,
+          "at": "2026-01-09T13:00:00Z"
+        },
+        {
+          "itemId": 24,
+          "at": "2026-01-09T19:00:00Z"
+        },
+        {
+          "itemId": 24,
+          "at": "2026-01-10T19:00:00Z"
+        },
+        {
+          "itemId": 5,
+          "at": "2026-01-11T10:00:00Z"
+        },
+        {
+          "itemId": 12,
+          "at": "2026-01-12T03:10:00Z"
+        },
+        {
+          "itemId": 24,
+          "at": "2026-01-12T19:00:00Z"
+        },
+        {
+          "itemId": 23,
+          "at": "2026-01-13T13:00:00Z"
+        },
+        {
+          "itemId": 24,
+          "at": "2026-01-13T19:00:00Z"
+        },
+        {
+          "itemId": 5,
+          "at": "2026-01-14T10:00:00Z"
+        },
+        {
+          "itemId": 24,
+          "at": "2026-01-14T19:00:00Z"
+        },
+        {
+          "itemId": 24,
+          "at": "2026-01-15T19:00:00Z"
+        },
+        {
+          "itemId": 23,
+          "at": "2026-01-16T13:00:00Z"
+        },
+        {
+          "itemId": 24,
+          "at": "2026-01-16T19:00:00Z"
+        },
+        {
+          "itemId": 5,
+          "at": "2026-01-17T10:00:00Z"
+        },
+        {
+          "itemId": 24,
+          "at": "2026-01-17T19:00:00Z"
+        },
+        {
+          "itemId": 24,
+          "at": "2026-01-18T19:00:00Z"
+        }
+      ]
+    },
+    {
+      "id": "V04",
+      "name": "Walter",
+      "setting": "76, Alzheimer's disease, nursing home",
+      "ratedItems": [
+        7,
+        18,
+        19,
+        26
+      ],
+      "designNotes": "Clean mid-band case. #26 is a continuous behavior logged as two stretches a day (N=28, top of band 5). #19 at once every other day (N=7).",
+      "authorPrediction": {
+        "7": 3,
+        "18": 5,
+        "19": 4,
+        "26": 5
+      },
+      "authorPredictionNote": "The author's guess of what a manual-only rater would give. Not an answer key; never shown to raters.",
+      "events": [
+        {
+          "itemId": 26,
+          "at": "2026-01-05T10:00:00Z"
+        },
+        {
+          "itemId": 18,
+          "at": "2026-01-05T12:30:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-05T16:00:00Z"
+        },
+        {
+          "itemId": 19,
+          "at": "2026-01-05T17:00:00Z"
+        },
+        {
+          "itemId": 7,
+          "at": "2026-01-06T08:00:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-06T10:00:00Z"
+        },
+        {
+          "itemId": 18,
+          "at": "2026-01-06T12:30:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-06T16:00:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-07T10:00:00Z"
+        },
+        {
+          "itemId": 18,
+          "at": "2026-01-07T12:30:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-07T16:00:00Z"
+        },
+        {
+          "itemId": 19,
+          "at": "2026-01-07T17:00:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-08T10:00:00Z"
+        },
+        {
+          "itemId": 18,
+          "at": "2026-01-08T12:30:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-08T16:00:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-09T10:00:00Z"
+        },
+        {
+          "itemId": 18,
+          "at": "2026-01-09T12:30:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-09T16:00:00Z"
+        },
+        {
+          "itemId": 19,
+          "at": "2026-01-09T17:00:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-10T10:00:00Z"
+        },
+        {
+          "itemId": 18,
+          "at": "2026-01-10T12:30:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-10T16:00:00Z"
+        },
+        {
+          "itemId": 7,
+          "at": "2026-01-11T08:10:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-11T10:00:00Z"
+        },
+        {
+          "itemId": 18,
+          "at": "2026-01-11T12:30:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-11T16:00:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-12T10:00:00Z"
+        },
+        {
+          "itemId": 18,
+          "at": "2026-01-12T12:30:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-12T16:00:00Z"
+        },
+        {
+          "itemId": 19,
+          "at": "2026-01-12T17:00:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-13T10:00:00Z"
+        },
+        {
+          "itemId": 18,
+          "at": "2026-01-13T12:30:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-13T16:00:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-14T10:00:00Z"
+        },
+        {
+          "itemId": 18,
+          "at": "2026-01-14T12:30:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-14T16:00:00Z"
+        },
+        {
+          "itemId": 19,
+          "at": "2026-01-14T17:00:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-15T10:00:00Z"
+        },
+        {
+          "itemId": 18,
+          "at": "2026-01-15T12:30:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-15T16:00:00Z"
+        },
+        {
+          "itemId": 7,
+          "at": "2026-01-16T07:50:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-16T10:00:00Z"
+        },
+        {
+          "itemId": 18,
+          "at": "2026-01-16T12:30:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-16T16:00:00Z"
+        },
+        {
+          "itemId": 19,
+          "at": "2026-01-16T17:00:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-17T10:00:00Z"
+        },
+        {
+          "itemId": 18,
+          "at": "2026-01-17T12:30:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-17T16:00:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-18T10:00:00Z"
+        },
+        {
+          "itemId": 18,
+          "at": "2026-01-18T12:30:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-18T16:00:00Z"
+        },
+        {
+          "itemId": 19,
+          "at": "2026-01-18T17:00:00Z"
+        }
+      ]
+    },
+    {
+      "id": "V05",
+      "name": "Margaret",
+      "setting": "81, Alzheimer's disease, nursing home",
+      "ratedItems": [
+        6,
+        10,
+        13,
+        29
+      ],
+      "designNotes": "Near-boundary count. #6 is 'twice a day' with one extra (N=29): the app crosses into 6, a rater will likely say 'once or twice a day' (5). #13 at 10 nights in 14 (N=10).",
+      "authorPrediction": {
+        "6": 5,
+        "10": 2,
+        "13": 4,
+        "29": 6
+      },
+      "authorPredictionNote": "The author's guess of what a manual-only rater would give. Not an answer key; never shown to raters.",
+      "events": [
+        {
+          "itemId": 6,
+          "at": "2026-01-05T09:00:00Z"
+        },
+        {
+          "itemId": 29,
+          "at": "2026-01-05T10:00:00Z"
+        },
+        {
+          "itemId": 29,
+          "at": "2026-01-05T14:00:00Z"
+        },
+        {
+          "itemId": 6,
+          "at": "2026-01-05T15:00:00Z"
+        },
+        {
+          "itemId": 29,
+          "at": "2026-01-05T19:00:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-05T21:00:00Z"
+        },
+        {
+          "itemId": 6,
+          "at": "2026-01-06T09:00:00Z"
+        },
+        {
+          "itemId": 29,
+          "at": "2026-01-06T10:00:00Z"
+        },
+        {
+          "itemId": 29,
+          "at": "2026-01-06T14:00:00Z"
+        },
+        {
+          "itemId": 6,
+          "at": "2026-01-06T15:00:00Z"
+        },
+        {
+          "itemId": 29,
+          "at": "2026-01-06T19:00:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-06T21:00:00Z"
+        },
+        {
+          "itemId": 6,
+          "at": "2026-01-07T09:00:00Z"
+        },
+        {
+          "itemId": 29,
+          "at": "2026-01-07T10:00:00Z"
+        },
+        {
+          "itemId": 29,
+          "at": "2026-01-07T14:00:00Z"
+        },
+        {
+          "itemId": 6,
+          "at": "2026-01-07T15:00:00Z"
+        },
+        {
+          "itemId": 29,
+          "at": "2026-01-07T19:00:00Z"
+        },
+        {
+          "itemId": 6,
+          "at": "2026-01-08T09:00:00Z"
+        },
+        {
+          "itemId": 29,
+          "at": "2026-01-08T10:00:00Z"
+        },
+        {
+          "itemId": 29,
+          "at": "2026-01-08T14:00:00Z"
+        },
+        {
+          "itemId": 6,
+          "at": "2026-01-08T15:00:00Z"
+        },
+        {
+          "itemId": 29,
+          "at": "2026-01-08T19:00:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-08T21:00:00Z"
+        },
+        {
+          "itemId": 6,
+          "at": "2026-01-09T09:00:00Z"
+        },
+        {
+          "itemId": 29,
+          "at": "2026-01-09T10:00:00Z"
+        },
+        {
+          "itemId": 29,
+          "at": "2026-01-09T14:00:00Z"
+        },
+        {
+          "itemId": 6,
+          "at": "2026-01-09T15:00:00Z"
+        },
+        {
+          "itemId": 29,
+          "at": "2026-01-09T19:00:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-09T21:00:00Z"
+        },
+        {
+          "itemId": 6,
+          "at": "2026-01-10T09:00:00Z"
+        },
+        {
+          "itemId": 29,
+          "at": "2026-01-10T10:00:00Z"
+        },
+        {
+          "itemId": 10,
+          "at": "2026-01-10T12:15:00Z"
+        },
+        {
+          "itemId": 29,
+          "at": "2026-01-10T14:00:00Z"
+        },
+        {
+          "itemId": 6,
+          "at": "2026-01-10T15:00:00Z"
+        },
+        {
+          "itemId": 29,
+          "at": "2026-01-10T19:00:00Z"
+        },
+        {
+          "itemId": 6,
+          "at": "2026-01-11T09:00:00Z"
+        },
+        {
+          "itemId": 29,
+          "at": "2026-01-11T10:00:00Z"
+        },
+        {
+          "itemId": 29,
+          "at": "2026-01-11T14:00:00Z"
+        },
+        {
+          "itemId": 6,
+          "at": "2026-01-11T15:00:00Z"
+        },
+        {
+          "itemId": 29,
+          "at": "2026-01-11T19:00:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-11T21:00:00Z"
+        },
+        {
+          "itemId": 6,
+          "at": "2026-01-12T09:00:00Z"
+        },
+        {
+          "itemId": 29,
+          "at": "2026-01-12T10:00:00Z"
+        },
+        {
+          "itemId": 29,
+          "at": "2026-01-12T14:00:00Z"
+        },
+        {
+          "itemId": 6,
+          "at": "2026-01-12T15:00:00Z"
+        },
+        {
+          "itemId": 29,
+          "at": "2026-01-12T19:00:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-12T21:00:00Z"
+        },
+        {
+          "itemId": 6,
+          "at": "2026-01-13T09:00:00Z"
+        },
+        {
+          "itemId": 29,
+          "at": "2026-01-13T10:00:00Z"
+        },
+        {
+          "itemId": 29,
+          "at": "2026-01-13T14:00:00Z"
+        },
+        {
+          "itemId": 6,
+          "at": "2026-01-13T15:00:00Z"
+        },
+        {
+          "itemId": 29,
+          "at": "2026-01-13T19:00:00Z"
+        },
+        {
+          "itemId": 6,
+          "at": "2026-01-13T20:00:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-13T21:00:00Z"
+        },
+        {
+          "itemId": 6,
+          "at": "2026-01-14T09:00:00Z"
+        },
+        {
+          "itemId": 29,
+          "at": "2026-01-14T10:00:00Z"
+        },
+        {
+          "itemId": 29,
+          "at": "2026-01-14T14:00:00Z"
+        },
+        {
+          "itemId": 6,
+          "at": "2026-01-14T15:00:00Z"
+        },
+        {
+          "itemId": 29,
+          "at": "2026-01-14T19:00:00Z"
+        },
+        {
+          "itemId": 6,
+          "at": "2026-01-15T09:00:00Z"
+        },
+        {
+          "itemId": 29,
+          "at": "2026-01-15T10:00:00Z"
+        },
+        {
+          "itemId": 29,
+          "at": "2026-01-15T14:00:00Z"
+        },
+        {
+          "itemId": 6,
+          "at": "2026-01-15T15:00:00Z"
+        },
+        {
+          "itemId": 29,
+          "at": "2026-01-15T19:00:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-15T21:00:00Z"
+        },
+        {
+          "itemId": 6,
+          "at": "2026-01-16T09:00:00Z"
+        },
+        {
+          "itemId": 29,
+          "at": "2026-01-16T10:00:00Z"
+        },
+        {
+          "itemId": 29,
+          "at": "2026-01-16T14:00:00Z"
+        },
+        {
+          "itemId": 6,
+          "at": "2026-01-16T15:00:00Z"
+        },
+        {
+          "itemId": 29,
+          "at": "2026-01-16T19:00:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-16T21:00:00Z"
+        },
+        {
+          "itemId": 6,
+          "at": "2026-01-17T09:00:00Z"
+        },
+        {
+          "itemId": 29,
+          "at": "2026-01-17T10:00:00Z"
+        },
+        {
+          "itemId": 29,
+          "at": "2026-01-17T14:00:00Z"
+        },
+        {
+          "itemId": 6,
+          "at": "2026-01-17T15:00:00Z"
+        },
+        {
+          "itemId": 29,
+          "at": "2026-01-17T19:00:00Z"
+        },
+        {
+          "itemId": 6,
+          "at": "2026-01-18T09:00:00Z"
+        },
+        {
+          "itemId": 29,
+          "at": "2026-01-18T10:00:00Z"
+        },
+        {
+          "itemId": 29,
+          "at": "2026-01-18T14:00:00Z"
+        },
+        {
+          "itemId": 6,
+          "at": "2026-01-18T15:00:00Z"
+        },
+        {
+          "itemId": 29,
+          "at": "2026-01-18T19:00:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-18T21:00:00Z"
+        }
+      ]
+    },
+    {
+      "id": "V06",
+      "name": "Frank",
+      "setting": "73, early-onset Alzheimer's disease, physically strong, secure dementia unit",
+      "ratedItems": [
+        1,
+        2,
+        11,
+        16
+      ],
+      "designNotes": "Band 6 for two items. #11 repeats the N=5 boundary from V03 in an aggressive-adjacent item.",
+      "authorPrediction": {
+        "1": 6,
+        "2": 3,
+        "11": 3,
+        "16": 6
+      },
+      "authorPredictionNote": "The author's guess of what a manual-only rater would give. Not an answer key; never shown to raters.",
+      "events": [
+        {
+          "itemId": 1,
+          "at": "2026-01-05T08:00:00Z"
+        },
+        {
+          "itemId": 16,
+          "at": "2026-01-05T09:30:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-05T11:00:00Z"
+        },
+        {
+          "itemId": 11,
+          "at": "2026-01-05T12:10:00Z"
+        },
+        {
+          "itemId": 16,
+          "at": "2026-01-05T13:30:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-05T14:00:00Z"
+        },
+        {
+          "itemId": 16,
+          "at": "2026-01-05T17:30:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-05T18:00:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-06T08:00:00Z"
+        },
+        {
+          "itemId": 16,
+          "at": "2026-01-06T09:30:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-06T11:00:00Z"
+        },
+        {
+          "itemId": 16,
+          "at": "2026-01-06T13:30:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-06T14:00:00Z"
+        },
+        {
+          "itemId": 16,
+          "at": "2026-01-06T17:30:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-06T18:00:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-07T08:00:00Z"
+        },
+        {
+          "itemId": 16,
+          "at": "2026-01-07T09:30:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-07T11:00:00Z"
+        },
+        {
+          "itemId": 16,
+          "at": "2026-01-07T13:30:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-07T14:00:00Z"
+        },
+        {
+          "itemId": 16,
+          "at": "2026-01-07T17:30:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-07T18:00:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-08T08:00:00Z"
+        },
+        {
+          "itemId": 16,
+          "at": "2026-01-08T09:30:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-08T11:00:00Z"
+        },
+        {
+          "itemId": 11,
+          "at": "2026-01-08T12:10:00Z"
+        },
+        {
+          "itemId": 16,
+          "at": "2026-01-08T13:30:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-08T14:00:00Z"
+        },
+        {
+          "itemId": 16,
+          "at": "2026-01-08T17:30:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-08T18:00:00Z"
+        },
+        {
+          "itemId": 2,
+          "at": "2026-01-08T21:00:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-09T08:00:00Z"
+        },
+        {
+          "itemId": 16,
+          "at": "2026-01-09T09:30:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-09T11:00:00Z"
+        },
+        {
+          "itemId": 16,
+          "at": "2026-01-09T13:30:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-09T14:00:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-09T18:00:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-10T08:00:00Z"
+        },
+        {
+          "itemId": 16,
+          "at": "2026-01-10T09:30:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-10T11:00:00Z"
+        },
+        {
+          "itemId": 16,
+          "at": "2026-01-10T13:30:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-10T14:00:00Z"
+        },
+        {
+          "itemId": 16,
+          "at": "2026-01-10T17:30:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-10T18:00:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-11T08:00:00Z"
+        },
+        {
+          "itemId": 16,
+          "at": "2026-01-11T09:30:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-11T11:00:00Z"
+        },
+        {
+          "itemId": 11,
+          "at": "2026-01-11T12:10:00Z"
+        },
+        {
+          "itemId": 16,
+          "at": "2026-01-11T13:30:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-11T14:00:00Z"
+        },
+        {
+          "itemId": 16,
+          "at": "2026-01-11T17:30:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-11T18:00:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-12T08:00:00Z"
+        },
+        {
+          "itemId": 16,
+          "at": "2026-01-12T09:30:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-12T11:00:00Z"
+        },
+        {
+          "itemId": 16,
+          "at": "2026-01-12T13:30:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-12T14:00:00Z"
+        },
+        {
+          "itemId": 16,
+          "at": "2026-01-12T17:30:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-12T18:00:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-13T08:00:00Z"
+        },
+        {
+          "itemId": 16,
+          "at": "2026-01-13T09:30:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-13T11:00:00Z"
+        },
+        {
+          "itemId": 16,
+          "at": "2026-01-13T13:30:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-13T14:00:00Z"
+        },
+        {
+          "itemId": 16,
+          "at": "2026-01-13T17:30:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-13T18:00:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-14T08:00:00Z"
+        },
+        {
+          "itemId": 16,
+          "at": "2026-01-14T09:30:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-14T11:00:00Z"
+        },
+        {
+          "itemId": 11,
+          "at": "2026-01-14T12:10:00Z"
+        },
+        {
+          "itemId": 16,
+          "at": "2026-01-14T13:30:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-14T14:00:00Z"
+        },
+        {
+          "itemId": 16,
+          "at": "2026-01-14T17:30:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-14T18:00:00Z"
+        },
+        {
+          "itemId": 2,
+          "at": "2026-01-14T21:15:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-15T08:00:00Z"
+        },
+        {
+          "itemId": 16,
+          "at": "2026-01-15T09:30:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-15T11:00:00Z"
+        },
+        {
+          "itemId": 16,
+          "at": "2026-01-15T13:30:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-15T14:00:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-15T18:00:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-16T08:00:00Z"
+        },
+        {
+          "itemId": 16,
+          "at": "2026-01-16T09:30:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-16T11:00:00Z"
+        },
+        {
+          "itemId": 16,
+          "at": "2026-01-16T13:30:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-16T14:00:00Z"
+        },
+        {
+          "itemId": 16,
+          "at": "2026-01-16T17:30:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-16T18:00:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-17T08:00:00Z"
+        },
+        {
+          "itemId": 16,
+          "at": "2026-01-17T09:30:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-17T11:00:00Z"
+        },
+        {
+          "itemId": 11,
+          "at": "2026-01-17T12:10:00Z"
+        },
+        {
+          "itemId": 16,
+          "at": "2026-01-17T13:30:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-17T14:00:00Z"
+        },
+        {
+          "itemId": 16,
+          "at": "2026-01-17T17:30:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-17T18:00:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-18T08:00:00Z"
+        },
+        {
+          "itemId": 16,
+          "at": "2026-01-18T09:30:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-18T11:00:00Z"
+        },
+        {
+          "itemId": 16,
+          "at": "2026-01-18T13:30:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-18T14:00:00Z"
+        },
+        {
+          "itemId": 16,
+          "at": "2026-01-18T17:30:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-18T18:00:00Z"
+        }
+      ]
+    },
+    {
+      "id": "V07",
+      "name": "Dorothy",
+      "setting": "90, Alzheimer's disease, nursing home",
+      "ratedItems": [
+        6,
+        13,
+        26
+      ],
+      "designNotes": "Clustered-hour case. #6 has 4 rounds inside 20 minutes on 9 of 14 days: the app gives 7. A rater may give 7 (several times an hour) or 6 (several times a day, since it happens in one hour only). #26 has bursts on 6 days, one short of the app's 7-day threshold: the app gives 5 from the count (26), a rater may give 6 or 7.",
+      "authorPrediction": {
+        "6": 7,
+        "13": 5,
+        "26": 6
+      },
+      "authorPredictionNote": "The author's guess of what a manual-only rater would give. Not an answer key; never shown to raters.",
+      "events": [
+        {
+          "itemId": 13,
+          "at": "2026-01-05T11:00:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-05T14:00:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-05T14:10:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-05T14:25:00Z"
+        },
+        {
+          "itemId": 6,
+          "at": "2026-01-05T17:00:00Z"
+        },
+        {
+          "itemId": 6,
+          "at": "2026-01-05T17:05:00Z"
+        },
+        {
+          "itemId": 6,
+          "at": "2026-01-05T17:12:00Z"
+        },
+        {
+          "itemId": 6,
+          "at": "2026-01-05T17:20:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-05T20:00:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-06T11:00:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-06T14:00:00Z"
+        },
+        {
+          "itemId": 6,
+          "at": "2026-01-06T17:00:00Z"
+        },
+        {
+          "itemId": 6,
+          "at": "2026-01-06T17:05:00Z"
+        },
+        {
+          "itemId": 6,
+          "at": "2026-01-06T17:12:00Z"
+        },
+        {
+          "itemId": 6,
+          "at": "2026-01-06T17:20:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-06T20:00:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-07T11:00:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-07T14:00:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-07T14:10:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-07T14:25:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-07T20:00:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-08T11:00:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-08T14:00:00Z"
+        },
+        {
+          "itemId": 6,
+          "at": "2026-01-08T17:00:00Z"
+        },
+        {
+          "itemId": 6,
+          "at": "2026-01-08T17:05:00Z"
+        },
+        {
+          "itemId": 6,
+          "at": "2026-01-08T17:12:00Z"
+        },
+        {
+          "itemId": 6,
+          "at": "2026-01-08T17:20:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-08T20:00:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-09T11:00:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-09T14:00:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-09T14:10:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-09T14:25:00Z"
+        },
+        {
+          "itemId": 6,
+          "at": "2026-01-09T17:00:00Z"
+        },
+        {
+          "itemId": 6,
+          "at": "2026-01-09T17:05:00Z"
+        },
+        {
+          "itemId": 6,
+          "at": "2026-01-09T17:12:00Z"
+        },
+        {
+          "itemId": 6,
+          "at": "2026-01-09T17:20:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-09T20:00:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-10T11:00:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-10T14:00:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-10T20:00:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-11T11:00:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-11T14:00:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-11T14:10:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-11T14:25:00Z"
+        },
+        {
+          "itemId": 6,
+          "at": "2026-01-11T17:00:00Z"
+        },
+        {
+          "itemId": 6,
+          "at": "2026-01-11T17:05:00Z"
+        },
+        {
+          "itemId": 6,
+          "at": "2026-01-11T17:12:00Z"
+        },
+        {
+          "itemId": 6,
+          "at": "2026-01-11T17:20:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-11T20:00:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-12T11:00:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-12T14:00:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-12T20:00:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-13T11:00:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-13T14:00:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-13T14:10:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-13T14:25:00Z"
+        },
+        {
+          "itemId": 6,
+          "at": "2026-01-13T17:00:00Z"
+        },
+        {
+          "itemId": 6,
+          "at": "2026-01-13T17:05:00Z"
+        },
+        {
+          "itemId": 6,
+          "at": "2026-01-13T17:12:00Z"
+        },
+        {
+          "itemId": 6,
+          "at": "2026-01-13T17:20:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-13T20:00:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-14T11:00:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-14T14:00:00Z"
+        },
+        {
+          "itemId": 6,
+          "at": "2026-01-14T17:00:00Z"
+        },
+        {
+          "itemId": 6,
+          "at": "2026-01-14T17:05:00Z"
+        },
+        {
+          "itemId": 6,
+          "at": "2026-01-14T17:12:00Z"
+        },
+        {
+          "itemId": 6,
+          "at": "2026-01-14T17:20:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-14T20:00:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-15T11:00:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-15T14:00:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-15T14:10:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-15T14:25:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-15T20:00:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-16T11:00:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-16T14:00:00Z"
+        },
+        {
+          "itemId": 6,
+          "at": "2026-01-16T17:00:00Z"
+        },
+        {
+          "itemId": 6,
+          "at": "2026-01-16T17:05:00Z"
+        },
+        {
+          "itemId": 6,
+          "at": "2026-01-16T17:12:00Z"
+        },
+        {
+          "itemId": 6,
+          "at": "2026-01-16T17:20:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-16T20:00:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-17T11:00:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-17T14:00:00Z"
+        },
+        {
+          "itemId": 6,
+          "at": "2026-01-17T17:00:00Z"
+        },
+        {
+          "itemId": 6,
+          "at": "2026-01-17T17:05:00Z"
+        },
+        {
+          "itemId": 6,
+          "at": "2026-01-17T17:12:00Z"
+        },
+        {
+          "itemId": 6,
+          "at": "2026-01-17T17:20:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-17T20:00:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-18T11:00:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-18T14:00:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-18T20:00:00Z"
+        }
+      ]
+    },
+    {
+      "id": "V08",
+      "name": "George",
+      "setting": "85, Alzheimer's disease with night waking, nursing home",
+      "ratedItems": [
+        5,
+        8,
+        13
+      ],
+      "designNotes": "Clustered-hour case that crosses midnight. #13 has 3 screams within 35 minutes on 8 nights, which meets the spirit of the rating-7 rule (3+ in 60 min on 7+ days). The engine groups logs by calendar day, so every cluster is split at midnight and no day counts as clustered: the app gives 5 from the count (24).",
+      "authorPrediction": {
+        "5": 6,
+        "8": 2,
+        "13": 7
+      },
+      "authorPredictionNote": "The author's guess of what a manual-only rater would give. Not an answer key; never shown to raters.",
+      "events": [
+        {
+          "itemId": 5,
+          "at": "2026-01-05T09:00:00Z"
+        },
+        {
+          "itemId": 5,
+          "at": "2026-01-05T13:00:00Z"
+        },
+        {
+          "itemId": 5,
+          "at": "2026-01-05T17:00:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-05T23:40:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-05T23:55:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-06T00:15:00Z"
+        },
+        {
+          "itemId": 5,
+          "at": "2026-01-06T09:00:00Z"
+        },
+        {
+          "itemId": 5,
+          "at": "2026-01-06T13:00:00Z"
+        },
+        {
+          "itemId": 5,
+          "at": "2026-01-06T17:00:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-06T23:40:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-06T23:55:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-07T00:15:00Z"
+        },
+        {
+          "itemId": 5,
+          "at": "2026-01-07T09:00:00Z"
+        },
+        {
+          "itemId": 5,
+          "at": "2026-01-07T13:00:00Z"
+        },
+        {
+          "itemId": 5,
+          "at": "2026-01-07T17:00:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-07T23:40:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-07T23:55:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-08T00:15:00Z"
+        },
+        {
+          "itemId": 5,
+          "at": "2026-01-08T09:00:00Z"
+        },
+        {
+          "itemId": 5,
+          "at": "2026-01-08T13:00:00Z"
+        },
+        {
+          "itemId": 5,
+          "at": "2026-01-08T17:00:00Z"
+        },
+        {
+          "itemId": 5,
+          "at": "2026-01-09T09:00:00Z"
+        },
+        {
+          "itemId": 5,
+          "at": "2026-01-09T13:00:00Z"
+        },
+        {
+          "itemId": 5,
+          "at": "2026-01-09T17:00:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-09T23:40:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-09T23:55:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-10T00:15:00Z"
+        },
+        {
+          "itemId": 5,
+          "at": "2026-01-10T09:00:00Z"
+        },
+        {
+          "itemId": 5,
+          "at": "2026-01-10T13:00:00Z"
+        },
+        {
+          "itemId": 5,
+          "at": "2026-01-10T17:00:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-10T23:40:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-10T23:55:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-11T00:15:00Z"
+        },
+        {
+          "itemId": 8,
+          "at": "2026-01-11T07:30:00Z"
+        },
+        {
+          "itemId": 5,
+          "at": "2026-01-11T09:00:00Z"
+        },
+        {
+          "itemId": 5,
+          "at": "2026-01-11T13:00:00Z"
+        },
+        {
+          "itemId": 5,
+          "at": "2026-01-11T17:00:00Z"
+        },
+        {
+          "itemId": 5,
+          "at": "2026-01-12T09:00:00Z"
+        },
+        {
+          "itemId": 5,
+          "at": "2026-01-12T13:00:00Z"
+        },
+        {
+          "itemId": 5,
+          "at": "2026-01-12T17:00:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-12T23:40:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-12T23:55:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-13T00:15:00Z"
+        },
+        {
+          "itemId": 5,
+          "at": "2026-01-13T09:00:00Z"
+        },
+        {
+          "itemId": 5,
+          "at": "2026-01-13T13:00:00Z"
+        },
+        {
+          "itemId": 5,
+          "at": "2026-01-13T17:00:00Z"
+        },
+        {
+          "itemId": 5,
+          "at": "2026-01-14T09:00:00Z"
+        },
+        {
+          "itemId": 5,
+          "at": "2026-01-14T13:00:00Z"
+        },
+        {
+          "itemId": 5,
+          "at": "2026-01-14T17:00:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-14T23:40:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-14T23:55:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-15T00:15:00Z"
+        },
+        {
+          "itemId": 5,
+          "at": "2026-01-15T09:00:00Z"
+        },
+        {
+          "itemId": 5,
+          "at": "2026-01-15T13:00:00Z"
+        },
+        {
+          "itemId": 5,
+          "at": "2026-01-15T17:00:00Z"
+        },
+        {
+          "itemId": 5,
+          "at": "2026-01-16T09:00:00Z"
+        },
+        {
+          "itemId": 5,
+          "at": "2026-01-16T13:00:00Z"
+        },
+        {
+          "itemId": 5,
+          "at": "2026-01-16T17:00:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-16T23:40:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-16T23:55:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-17T00:15:00Z"
+        },
+        {
+          "itemId": 5,
+          "at": "2026-01-17T09:00:00Z"
+        },
+        {
+          "itemId": 5,
+          "at": "2026-01-17T13:00:00Z"
+        },
+        {
+          "itemId": 5,
+          "at": "2026-01-17T17:00:00Z"
+        },
+        {
+          "itemId": 5,
+          "at": "2026-01-18T09:00:00Z"
+        },
+        {
+          "itemId": 5,
+          "at": "2026-01-18T13:00:00Z"
+        },
+        {
+          "itemId": 5,
+          "at": "2026-01-18T17:00:00Z"
+        }
+      ]
+    },
+    {
+      "id": "V09",
+      "name": "Evelyn",
+      "setting": "87, vascular dementia after a stroke, nursing home",
+      "ratedItems": [
+        1,
+        4,
+        6,
+        12,
+        26
+      ],
+      "designNotes": "Codes 8 and 9. #1 pacing is prevented by the lap tray: manual code 8 (p.3, p.5, p.24). #4 and #6 need words and she cannot speak: code 9 (p.3). The engine can only output 1 for an item with no logs; 8 and 9 exist only at the day-14 review (spec section 5).",
+      "authorPrediction": {
+        "1": 8,
+        "4": 9,
+        "6": 9,
+        "12": 4,
+        "26": 5
+      },
+      "authorPredictionNote": "The author's guess of what a manual-only rater would give. Not an answer key; never shown to raters.",
+      "events": [
+        {
+          "itemId": 12,
+          "at": "2026-01-05T03:00:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-05T11:00:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-05T18:00:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-06T11:00:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-06T18:00:00Z"
+        },
+        {
+          "itemId": 12,
+          "at": "2026-01-07T03:00:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-07T11:00:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-07T18:00:00Z"
+        },
+        {
+          "itemId": 12,
+          "at": "2026-01-08T03:00:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-08T11:00:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-08T18:00:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-09T11:00:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-09T18:00:00Z"
+        },
+        {
+          "itemId": 12,
+          "at": "2026-01-10T03:00:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-10T11:00:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-10T18:00:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-11T11:00:00Z"
+        },
+        {
+          "itemId": 12,
+          "at": "2026-01-12T03:00:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-12T11:00:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-13T11:00:00Z"
+        },
+        {
+          "itemId": 12,
+          "at": "2026-01-14T03:00:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-14T11:00:00Z"
+        },
+        {
+          "itemId": 12,
+          "at": "2026-01-15T03:00:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-15T11:00:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-16T11:00:00Z"
+        },
+        {
+          "itemId": 12,
+          "at": "2026-01-17T03:00:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-17T11:00:00Z"
+        },
+        {
+          "itemId": 26,
+          "at": "2026-01-18T11:00:00Z"
+        }
+      ]
+    },
+    {
+      "id": "V10",
+      "name": "Leonard",
+      "setting": "80, mild to moderate Alzheimer's disease, assisted living",
+      "ratedItems": [
+        3,
+        4,
+        18,
+        29
+      ],
+      "designNotes": "Logging error, not a rule question. Spitting into a napkin is excluded from #3 (p.12, p.24), so a manual rater gives 1; the app counts the two mistaken taps (3). Analyze separately from rule cases.",
+      "authorPrediction": {
+        "3": 1,
+        "4": 2,
+        "18": 1,
+        "29": 1
+      },
+      "authorPredictionNote": "The author's guess of what a manual-only rater would give. Not an answer key; never shown to raters.",
+      "events": [
+        {
+          "itemId": 3,
+          "at": "2026-01-09T12:30:00Z"
+        },
+        {
+          "itemId": 4,
+          "at": "2026-01-13T09:00:00Z"
+        },
+        {
+          "itemId": 3,
+          "at": "2026-01-15T12:40:00Z"
+        }
+      ]
+    },
+    {
+      "id": "V11",
+      "name": "Joan",
+      "setting": "83, Alzheimer's disease, nursing home",
+      "ratedItems": [
+        4,
+        7,
+        10,
+        14,
+        15
+      ],
+      "designNotes": "Aggressive factor spread across bands 2-5. #7 at exactly twice a week (N=4).",
+      "authorPrediction": {
+        "4": 5,
+        "7": 3,
+        "10": 4,
+        "14": 2,
+        "15": 3
+      },
+      "authorPredictionNote": "The author's guess of what a manual-only rater would give. Not an answer key; never shown to raters.",
+      "events": [
+        {
+          "itemId": 4,
+          "at": "2026-01-05T08:00:00Z"
+        },
+        {
+          "itemId": 4,
+          "at": "2026-01-05T19:30:00Z"
+        },
+        {
+          "itemId": 10,
+          "at": "2026-01-05T19:30:00Z"
+        },
+        {
+          "itemId": 4,
+          "at": "2026-01-06T08:00:00Z"
+        },
+        {
+          "itemId": 7,
+          "at": "2026-01-06T08:00:00Z"
+        },
+        {
+          "itemId": 4,
+          "at": "2026-01-07T08:00:00Z"
+        },
+        {
+          "itemId": 4,
+          "at": "2026-01-07T19:30:00Z"
+        },
+        {
+          "itemId": 10,
+          "at": "2026-01-07T19:30:00Z"
+        },
+        {
+          "itemId": 4,
+          "at": "2026-01-08T08:00:00Z"
+        },
+        {
+          "itemId": 4,
+          "at": "2026-01-09T08:00:00Z"
+        },
+        {
+          "itemId": 7,
+          "at": "2026-01-09T08:10:00Z"
+        },
+        {
+          "itemId": 15,
+          "at": "2026-01-09T08:12:00Z"
+        },
+        {
+          "itemId": 4,
+          "at": "2026-01-09T19:30:00Z"
+        },
+        {
+          "itemId": 4,
+          "at": "2026-01-10T08:00:00Z"
+        },
+        {
+          "itemId": 10,
+          "at": "2026-01-10T19:30:00Z"
+        },
+        {
+          "itemId": 4,
+          "at": "2026-01-11T08:00:00Z"
+        },
+        {
+          "itemId": 4,
+          "at": "2026-01-11T19:30:00Z"
+        },
+        {
+          "itemId": 4,
+          "at": "2026-01-12T08:00:00Z"
+        },
+        {
+          "itemId": 10,
+          "at": "2026-01-12T19:30:00Z"
+        },
+        {
+          "itemId": 7,
+          "at": "2026-01-13T07:55:00Z"
+        },
+        {
+          "itemId": 14,
+          "at": "2026-01-13T07:58:00Z"
+        },
+        {
+          "itemId": 4,
+          "at": "2026-01-13T08:00:00Z"
+        },
+        {
+          "itemId": 4,
+          "at": "2026-01-13T19:30:00Z"
+        },
+        {
+          "itemId": 4,
+          "at": "2026-01-14T08:00:00Z"
+        },
+        {
+          "itemId": 10,
+          "at": "2026-01-14T19:30:00Z"
+        },
+        {
+          "itemId": 4,
+          "at": "2026-01-15T08:00:00Z"
+        },
+        {
+          "itemId": 4,
+          "at": "2026-01-15T19:30:00Z"
+        },
+        {
+          "itemId": 4,
+          "at": "2026-01-16T08:00:00Z"
+        },
+        {
+          "itemId": 7,
+          "at": "2026-01-16T08:05:00Z"
+        },
+        {
+          "itemId": 15,
+          "at": "2026-01-16T08:07:00Z"
+        },
+        {
+          "itemId": 4,
+          "at": "2026-01-17T08:00:00Z"
+        },
+        {
+          "itemId": 10,
+          "at": "2026-01-17T19:30:00Z"
+        },
+        {
+          "itemId": 4,
+          "at": "2026-01-18T08:00:00Z"
+        }
+      ]
+    },
+    {
+      "id": "V12",
+      "name": "Albert",
+      "setting": "78, Alzheimer's disease, nursing home",
+      "ratedItems": [
+        1,
+        13,
+        20,
+        22
+      ],
+      "designNotes": "Irregular weeks the other way: behavior front-loaded. #13 is 4 a day for one week, none the next (average 2 a day, 5). #22 is 14 events packed into 4 days (average 1 a day, 5); a rater may say 'several times a week' (4) because it happened on only 4 days.",
+      "authorPrediction": {
+        "1": 5,
+        "13": 5,
+        "20": 2,
+        "22": 4
+      },
+      "authorPredictionNote": "The author's guess of what a manual-only rater would give. Not an answer key; never shown to raters.",
+      "events": [
+        {
+          "itemId": 13,
+          "at": "2026-01-05T09:00:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-05T10:00:00Z"
+        },
+        {
+          "itemId": 22,
+          "at": "2026-01-05T10:30:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-05T13:00:00Z"
+        },
+        {
+          "itemId": 22,
+          "at": "2026-01-05T14:30:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-05T15:00:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-05T17:00:00Z"
+        },
+        {
+          "itemId": 22,
+          "at": "2026-01-05T18:30:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-05T19:00:00Z"
+        },
+        {
+          "itemId": 22,
+          "at": "2026-01-05T20:30:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-05T21:00:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-06T09:00:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-06T10:00:00Z"
+        },
+        {
+          "itemId": 22,
+          "at": "2026-01-06T10:30:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-06T13:00:00Z"
+        },
+        {
+          "itemId": 22,
+          "at": "2026-01-06T14:30:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-06T15:00:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-06T17:00:00Z"
+        },
+        {
+          "itemId": 22,
+          "at": "2026-01-06T18:30:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-06T19:00:00Z"
+        },
+        {
+          "itemId": 22,
+          "at": "2026-01-06T20:30:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-06T21:00:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-07T09:00:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-07T10:00:00Z"
+        },
+        {
+          "itemId": 22,
+          "at": "2026-01-07T10:30:00Z"
+        },
+        {
+          "itemId": 20,
+          "at": "2026-01-07T12:00:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-07T13:00:00Z"
+        },
+        {
+          "itemId": 22,
+          "at": "2026-01-07T14:30:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-07T15:00:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-07T17:00:00Z"
+        },
+        {
+          "itemId": 22,
+          "at": "2026-01-07T18:30:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-07T19:00:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-07T21:00:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-08T09:00:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-08T10:00:00Z"
+        },
+        {
+          "itemId": 22,
+          "at": "2026-01-08T10:30:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-08T13:00:00Z"
+        },
+        {
+          "itemId": 22,
+          "at": "2026-01-08T14:30:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-08T15:00:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-08T17:00:00Z"
+        },
+        {
+          "itemId": 22,
+          "at": "2026-01-08T18:30:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-08T19:00:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-08T21:00:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-09T09:00:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-09T10:00:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-09T13:00:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-09T15:00:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-09T17:00:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-09T19:00:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-09T21:00:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-10T09:00:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-10T10:00:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-10T13:00:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-10T15:00:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-10T17:00:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-10T19:00:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-10T21:00:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-11T09:00:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-11T10:00:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-11T13:00:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-11T15:00:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-11T17:00:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-11T19:00:00Z"
+        },
+        {
+          "itemId": 13,
+          "at": "2026-01-11T21:00:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-12T15:00:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-13T15:00:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-14T15:00:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-15T15:00:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-16T15:00:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-17T15:00:00Z"
+        },
+        {
+          "itemId": 1,
+          "at": "2026-01-18T15:00:00Z"
+        }
+      ]
+    }
+  ]
+}
