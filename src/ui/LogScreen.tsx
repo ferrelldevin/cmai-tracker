@@ -1,6 +1,6 @@
 // Screen 1: one tap logs a behavior. A short description sits on the button so
 // the caregiver picks the right item, with the manual page for the full
-// definition (p.12-13). Undo for 5 seconds.
+// definition (p.12-13). Undo for 8 seconds.
 
 import { useEffect, useRef, useState } from "react";
 import { GROUP_LABELS, ITEMS, type FactorGroup } from "../scoring/items";
@@ -73,7 +73,7 @@ export function LogScreen({ patientId, observations, checkins, onChange }: Props
           <div className="item-grid">
             {ITEMS.filter((i) => i.group === g).map((item) => (
               <div key={item.id} className="item-card">
-                <button className="item-btn" onClick={() => log(item.id)} aria-label={`Log ${item.name}`}>
+                <button className="item-btn" onClick={() => log(item.id)}>
                   <span className="item-name">
                     <span className="item-num">{item.id}</span>
                     {item.name}
