@@ -17,7 +17,7 @@ The CMAI isn't a count. It's a caregiver's look-back rating (1 to 7) of how ofte
 - **Log:** 29 buttons, one per CMAI behavior, grouped the way the manual groups them. Each button shows a short description in our own words with the manual page for the full definition, plus an ⓘ button with what does not count where the manual excludes things. Jump chips go straight to a behavior group, and a patient banner on every screen shows who is being logged for. You can undo a tap, set when it happened (5 to 60 minutes ago, or a clock time), mark the time as approximate, or note what happened just before. "Recent logs" lists the last 24 hours so a time can be fixed or a mistaken log deleted, with undo. On a quiet day, "Nothing to log today" records that the day was quiet rather than missed.
 - **Scores:** per-behavior CMAI-based (app-derived) ratings for each period, agitated or not for three behavior groups (manual thresholds), group averages over time, the total (labeled secondary), and when in the day behaviors happen.
 - **Day-14 review:** confirm or change each rating, including codes 8 (prevented) and 9 (not applicable).
-- **Data:** a welcome screen on first run; pseudonymous patient codes only, with delete (confirmed); six weeks of demo data, which can be removed; a backup file (JSON) that can be restored on this or another phone, plus CSVs (including check-ins and unlogged days per period); an install button where the browser supports it; Display settings for light, dark and high contrast; and a short page on how ratings are worked out.
+- **Data:** a hub with patients on top and a row for each of the other jobs, each opening its own page. A welcome screen on first run; pseudonymous patient codes only, with delete (confirmed); six weeks of demo data, which can be removed; a backup file (JSON) that can be restored on this or another phone, plus CSVs (including check-ins and unlogged days per period); an install button where the browser supports it; Display settings for light, dark and high contrast; and a short page on how ratings are worked out.
 
 ## Run it
 
@@ -92,6 +92,9 @@ Each waits on a lab decision or the agreement study (register section F).
 - **MCID reference band:** show a total change next to published meaningful-change values (Liu 2025; Meunier 2024).
 
 ## Design
+
+Every change follows [`docs/process/change-process.md`](docs/process/change-process.md): problem and evidence, shaped options, every state designed, verified in every mode, recorded. Design decisions that change navigation, data or scoring get a note in [`docs/design/notes/`](docs/design/notes/).
+
 
 Visual design follows public health design systems (NHS, USWDS), Apple and Material patterns, and research on older users and patient identification. Light and dark mode switch from the sun/moon button at the top, or under Data, Display, where "Match phone" (the default) follows the phone's Dark Mode. High contrast is there too, and turns on by itself when the phone's Increase Contrast setting is on. Palette, type and the reasons for each are in [`docs/design/design-brief.md`](docs/design/design-brief.md).
 

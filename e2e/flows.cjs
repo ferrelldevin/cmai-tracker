@@ -1,0 +1,110 @@
+// End-to-end flow on the production build: logging, details, recent logs, Data pages, backup and restore, review, offline reload. usage: node e2e/flows.cjs URL OUTDIR
+const { chromium } = require("playwright");
+const fs = require("fs");
+const [URL, OUT] = process.argv.slice(2);
+const ok = (c, m) => { if (!c) throw new Error("FAIL: " + m); console.log("  ok", m); };
+(async () => {
+  const b = await chromium.launch({ executablePath: process.env.CHROME || undefined });
+  const ctx = await b.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, acceptDownloads: true });
+  const p = await ctx.newPage();
+  const errs = []; p.on("pageerror", (e) => errs.push(e.message)); p.on("console", (m) => m.type() === "error" && errs.push(m.text()));
+  await p.goto(URL);
+  await p.getByRole("heading", { name: "Welcome to CMAI Tracker" }).waitFor();
+  ok(true, "first run shows welcome");
+  // add patient via Enter key, lower case
+  await p.getByRole("button", { name: "Add a patient" }).click();
+  ok(await p.evaluate(() => document.activeElement?.getAttribute("aria-label")) === "New patient code", "Add a patient focuses code field");
+  await p.keyboard.type("bad name!"); await p.keyboard.press("Enter");
+  await p.getByRole("alert").filter({ hasText: "Use a code like" }).waitFor(); ok(true, "invalid code shows error");
+  await p.getByLabel("New patient code").fill("p-07"); await p.keyboard.press("Enter");
+  await p.getByRole("heading", { name: /^Log a behavior/ }).waitFor(); ok((await p.locator(".pt-id b").textContent()) === "P-07", "Enter adds P-07 and opens Log with P-07 in the banner");
+  // empty states
+  await p.locator("nav.tabs button", { hasText: "Scores" }).click();
+  await p.getByText("No logs yet for this patient.").waitFor(); ok(true, "Scores empty state");
+  await p.screenshot({ path: `${OUT}/flow-01-scores-empty.png` });
+  await p.locator("nav.tabs button", { hasText: "Review" }).click();
+  await p.getByText("Nothing to review yet.").waitFor(); ok(true, "Review empty state with open date");
+  await p.locator("nav.tabs button", { hasText: "Log" }).click();
+  // log, double tap guard
+  const hit = p.getByRole("button", { name: /^7 Hitting/ });
+  await hit.dblclick();
+  await p.locator(".toast").waitFor();
+  ok((await p.locator("li.item", { hasText: "Hitting" }).locator(".today").textContent()) === "1 today", "double tap logs once");
+  // toast stays while details open; back-date 15 min
+  await p.getByRole("button", { name: "Time or detail" }).click();
+  await p.getByRole("button", { name: "15 min ago" }).click();
+  await p.getByLabel("Time is approximate").check();
+  await p.getByLabel("What happened just before?").selectOption("Mealtime");
+  await p.screenshot({ path: `${OUT}/flow-02-toast-details.png` });
+  await p.waitForTimeout(9000);
+  ok(await p.locator(".toast").isVisible(), "toast stays open past 8 s while details are open");
+  await p.getByRole("button", { name: "Done" }).click();
+  await p.mouse.click(10, 300);
+  await p.waitForTimeout(8600);
+  ok(!(await p.locator(".toast").isVisible()), "toast closes 8 s after leaving it");
+  // recent logs
+  const recent = p.locator(".recent-list li").first();
+  ok((await recent.textContent()).includes("(about)") && (await recent.textContent()).includes("Mealtime"), "recent log shows approx and before");
+  await recent.scrollIntoViewIfNeeded();
+  await p.screenshot({ path: `${OUT}/flow-03-recent.png` });
+  await recent.getByRole("button", { name: /Edit/ }).click();
+  await p.screenshot({ path: `${OUT}/flow-04-recent-edit.png` });
+  await recent.getByRole("button", { name: "Delete" }).click();
+  await p.locator(".toast", { hasText: "Deleted" }).waitFor();
+  ok((await p.locator(".recent-list li").count()) === 0, "delete removes the log");
+  await p.getByRole("button", { name: "Undo" }).click();
+  await p.locator(".recent-list li").first().waitFor();
+  ok((await p.locator(".recent-list li").first().textContent()).includes("Mealtime"), "undo delete brings back the log with its details");
+  // data: demo, export, restore, delete patient
+  await p.locator("nav.tabs button", { hasText: "Data" }).click();
+  await p.getByRole("link", { name: /^Demo data/ }).click();
+  await p.getByRole("button", { name: "Load demo data" }).click();
+  await p.getByRole("heading", { name: /^Log a behavior/ }).waitFor();
+  await p.locator('nav.tabs button[aria-label="Day-14 review, review due"]').waitFor({ timeout: 3000 }); ok(true, "review-due badge");
+  await p.locator("nav.tabs button", { hasText: "Data" }).click();
+  await p.getByRole("link", { name: /^Backup and export/ }).click();
+  const dl = p.waitForEvent("download");
+  await p.getByRole("button", { name: "Download backup" }).click();
+  const file = await dl; const path = `${OUT}/backup.json`; await file.saveAs(path);
+  ok(file.suggestedFilename().startsWith("cmai-backup-"), "backup downloads as " + file.suggestedFilename());
+  await p.getByText(/Last export: today/).waitFor(); ok(true, "last export shown");
+  const dl2 = p.waitForEvent("download"); await p.getByRole("button", { name: "Logs CSV" }).click(); ok((await dl2).suggestedFilename().endsWith(".csv"), "logs CSV downloads");
+  const before = JSON.parse(fs.readFileSync(path, "utf8")).observations.length;
+  await p.getByRole("button", { name: "Data", exact: true }).click();
+  await p.getByRole("link", { name: /Last export today/ }).waitFor(); ok(true, "hub row shows last export");
+  await p.getByRole("button", { name: "Delete P-07" }).click();
+  await p.screenshot({ path: `${OUT}/flow-05-confirm-delete.png` });
+  await p.getByRole("button", { name: "Delete P-07" }).click();
+  await p.getByText("Deleted P-07").waitFor(); ok(true, "patient deleted after confirm");
+  await p.getByRole("link", { name: /^Demo data/ }).click();
+  await p.getByRole("button", { name: "Remove demo data" }).click();
+  await p.getByText("Removed the demo patients and their logs.").waitFor();
+  await p.goBack();
+  await p.getByRole("heading", { name: "Welcome to CMAI Tracker" }).waitFor(); ok(true, "removing everything, then Back, shows the welcome");
+  await p.getByRole("link", { name: /^Backup and export/ }).click();
+  await p.locator('input[type="file"]').setInputFiles(path);
+  await p.getByText(/Restored 3 new patients and \d+ new logs/).waitFor();
+  const msg = await p.locator(".msg").textContent(); ok(msg.includes(`${before} new logs`), "restore brings back all " + before + " logs");
+  await p.locator('input[type="file"]').setInputFiles(path);
+  await p.getByText(/Restored 0 new patients and 0 new logs/).waitFor(); ok(true, "second restore adds nothing");
+  fs.writeFileSync(`${OUT}/bad.json`, "{}");
+  await p.locator('input[type="file"]').setInputFiles(`${OUT}/bad.json`);
+  await p.getByRole("alert").filter({ hasText: "not a CMAI Tracker backup" }).waitFor(); ok(true, "bad file refused with message");
+  await p.locator(".pt-select").selectOption("P-07");
+  await p.locator("nav.tabs button", { hasText: "Log" }).click();
+  ok((await p.locator(".recent-list li").first().textContent()).includes("Mealtime"), "restored P-07 log keeps details");
+  // review
+  await p.locator(".pt-select").selectOption("P-DEMO-A");
+  await p.locator("nav.tabs button", { hasText: "Review" }).click();
+  await p.getByRole("button", { name: /Confirm the other 29/ }).click();
+  await p.getByText("✓ All 29 reviewed").waitFor(); ok(true, "confirm all reviews");
+  await p.locator('nav.tabs button[aria-label="Day-14 review"]').waitFor({ timeout: 3000 }); ok(true, "badge clears after review");
+  await p.screenshot({ path: `${OUT}/flow-06-review-done.png` });
+  // offline reload
+  await p.reload(); await p.waitForTimeout(1500);
+  await ctx.setOffline(true); await p.reload(); await p.getByRole("heading", { name: /^Day-14 review/ }).waitFor({ timeout: 8000 });
+  ok(true, "reload offline works, and stays on Review");
+  await ctx.setOffline(false);
+  ok(errs.length === 0, "no console errors " + JSON.stringify(errs));
+  await b.close();
+})().catch((e) => { console.error(e.message); process.exit(1); });

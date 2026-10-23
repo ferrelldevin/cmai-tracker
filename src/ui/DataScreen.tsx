@@ -1,4 +1,6 @@
-// Screen 4: welcome, patients, demo data, backup and export, install, and about.
+// Screen 4: a hub with the welcome card and patients on top, and a list of rows that each
+// open their own page: backup and export, display, keeping data safe, demo data, and how
+// ratings are worked out (iOS Settings pattern; design note docs/design/notes/001-navigation.md).
 
 import { useEffect, useRef, useState } from "react";
 import { db, localMidnight, type Patient } from "../data/db";
@@ -7,14 +9,19 @@ import { buildExport, download } from "../data/exporter";
 import { deletePatient, removeDemoData, restoreBackup } from "../data/manage";
 import { RATING_LABELS, ratingFromCount, RULE_VERSION, WINDOW_DAYS } from "../scoring/engine";
 import { ago, shortDate } from "./format";
-import { Icon } from "./Icon";
+import { Icon, type IconName } from "./Icon";
 import { PatientAvatar } from "./PatientAvatar";
 import { canInstall, install, isInstalled, onInstallChange } from "./install";
-import { getContrastPref, getThemePref, onDisplayChange, setContrastPref, setThemePref, type ContrastPref, type ThemePref } from "./display";
+import type { DataPage } from "./route";
+import { currentTheme, getContrastPref, getThemePref, onDisplayChange, setContrastPref, setThemePref, type ContrastPref, type ThemePref } from "./display";
 
 interface Props {
   patients: Patient[];
   current: string | null;
+  page: DataPage | null;
+  pageTitle: string;
+  onPage: (page: DataPage) => void;
+  onBack: () => void;
   onPatient: (id: string) => void;
   onChange: () => void;
 }
@@ -39,7 +46,7 @@ function countBands() {
   return bands;
 }
 
-export function DataScreen({ patients, current, onPatient, onChange }: Props) {
+export function DataScreen({ patients, current, page, pageTitle, onPage, onBack, onPatient, onChange }: Props) {
   const [code, setCode] = useState("");
   const [msg, setMsg] = useState<Msg | null>(null);
   const [persisted, setPersisted] = useState<boolean | null>(null);
@@ -136,6 +143,103 @@ export function DataScreen({ patients, current, onPatient, onChange }: Props) {
   }
 
   const installed = isInstalled();
+  const themeLabel = { auto: "Match phone", light: "Light", dark: "Dark" }[getThemePref()];
+  const contrastLabel = getContrastPref() === "high" ? ", high contrast" : "";
+
+  if (page) {
+    return (
+      <div className="data subpage">
+        <div className="page-head">
+          <button className="back-btn ghost small" onClick={onBack}><Icon name="chevron" size={20} className="back-icon" /> Data</button>
+          <p className="screen-title" aria-hidden>{pageTitle}</p>{/* the screen heading is the h1 in App */}
+        </div>
+        {page === "backup" && (
+          <section className="card" aria-label="Backup and export">
+            <p className="muted">
+              The backup holds everything and can be restored on this or another phone. The CSVs open in Excel for the research team: one row per logged behavior, and one row per patient, period and behavior.
+            </p>
+            <p className="muted">Last export: <b>{lastExport ? `${ago(lastExport)} (${shortDate(lastExport)})` : "never"}</b></p>
+            <div className="row wrap">
+              <button onClick={() => exportFile("json")} disabled={firstRun}><Icon name="download" /> Download backup</button>
+              <button className="ghost" onClick={() => exportFile("observations")} disabled={firstRun}>Logs CSV</button>
+              <button className="ghost" onClick={() => exportFile("scores")} disabled={firstRun}>Scores CSV</button>
+            </div>
+            <div className="row wrap restore">
+              <button className="ghost" onClick={() => fileInput.current?.click()}><Icon name="upload" /> Restore from backup</button>
+              <input ref={fileInput} type="file" accept="application/json,.json" hidden onChange={(e) => restore(e.target.files?.[0])} />
+            </div>
+            {msgFor("export")}
+          </section>
+        )}
+        {page === "display" && <DisplaySettings />}
+        {page === "safe" && (
+          <section className="card" aria-label="Keep data safe on this phone">
+            {installed ? (
+              <p className="ok-line">✓ Installed. You are using the Home Screen app.</p>
+            ) : canInstall() ? (
+              <>
+                <p className="muted">Install the app so it opens like any other app and works with no signal.</p>
+                <button onClick={doInstall}>Install app</button>
+              </>
+            ) : (
+              <p className="muted">
+                On iPhone, Safari can clear a website's data if it goes unused for a while. Add this app to your Home Screen (tap Share, then Add to Home Screen) and export a backup regularly.
+              </p>
+            )}
+            <p>Storage protected: <b>{persisted === null ? "unknown" : persisted ? "yes" : "not yet"}</b></p>
+            {!persisted && <button className="ghost" onClick={keepData}>Ask the browser to keep data</button>}
+            {msgFor("safe")}
+          </section>
+        )}
+        {page === "demo" && (
+          <section className="card" aria-label="Demo data">
+            <p className="muted">Two made-up patients with six weeks of logs, so every chart has something to show. Loading again resets them.</p>
+            <div className="row wrap">
+              <button className={hasDemo ? "ghost" : ""} onClick={demo}>{hasDemo ? "Reset demo data" : "Load demo data"}</button>
+              {hasDemo && <button className="ghost danger-text" onClick={clearDemo}>Remove demo data</button>}
+            </div>
+            {msgFor("demo")}
+          </section>
+        )}
+        {page === "about" && (
+          <section className="card" aria-label="How ratings are worked out">
+            <p className="muted">
+              The app counts the logs for each behavior in a {WINDOW_DAYS}-day period and turns the count into a 1 to 7 rating. These are CMAI-based (app-derived) ratings, not a CMAI interview. You can correct any of them at the day-14 review.
+            </p>
+            <table className="bands">
+              <caption className="sr">Logs in 14 days and the rating they give</caption>
+              <thead><tr><th scope="col">Logs in 14 days</th><th scope="col">Rating</th></tr></thead>
+              <tbody>
+                {countBands().map((b) => (
+                  <tr key={b.rating}>
+                    <td>{b.to === null ? `${b.from} or more` : b.from === b.to ? b.from : `${b.from} to ${b.to}`}</td>
+                    <td><b>{b.rating}</b> · {RATING_LABELS[b.rating]}</td>
+                  </tr>
+                ))}
+                <tr><td>3+ within an hour, on 7 or more days</td><td><b>7</b> · {RATING_LABELS[7]}</td></tr>
+              </tbody>
+            </table>
+            <p className="muted">
+              <b>Unlogged days</b> are days with no logs and no "Nothing to log today" tap. They count as unknown, not as zero, so a period with many of them may read low.
+              The day-14 review is also the only place to record <b>8</b> (would happen if not prevented) and <b>9</b> (not applicable).
+            </p>
+            <p className="muted small-print">
+              Version {__APP_VERSION__} · scoring rule {RULE_VERSION} · a prototype for Professor Gupta's Hands-On Lab, not a medical device. Full rules:{" "}
+              <a href="https://github.com/ferrelldevin/cmai-tracker/blob/main/docs/scoring-spec.md" target="_blank" rel="noreferrer">scoring spec</a>.
+            </p>
+          </section>
+        )}
+      </div>
+    );
+  }
+
+  const rows: { page: DataPage; icon: IconName; title: string; status: string; hide?: boolean }[] = [
+    { page: "backup", icon: "download", title: "Backup and export", status: lastExport ? `Last export ${ago(lastExport)}` : "Never exported" },
+    { page: "display", icon: currentTheme() === "dark" ? "moon" : "sun", title: "Display", status: `${themeLabel}${contrastLabel}` },
+    { page: "safe", icon: "lock", title: "Keep data safe", status: installed ? "Installed" : persisted ? "Storage protected" : "Not installed yet" },
+    { page: "demo", icon: "chart", title: "Demo data", status: hasDemo ? "Loaded" : "Not loaded", hide: firstRun },
+    { page: "about", icon: "info", title: "How ratings are worked out", status: `Rule ${RULE_VERSION}` },
+  ];
 
   return (
     <div className="data">
@@ -209,84 +313,22 @@ export function DataScreen({ patients, current, onPatient, onChange }: Props) {
         )}
       </section>
 
-      {!firstRun && (
-        <section className="card" aria-labelledby="demo-h">
-          <h2 id="demo-h">Demo data</h2>
-          <p className="muted">Two made-up patients with six weeks of logs, so every chart has something to show. Loading again resets them.</p>
-          <div className="row wrap">
-            <button className={hasDemo ? "ghost" : ""} onClick={demo}>{hasDemo ? "Reset demo data" : "Load demo data"}</button>
-            {hasDemo && <button className="ghost danger-text" onClick={clearDemo}>Remove demo data</button>}
-          </div>
-          {msgFor("demo")}
-        </section>
-      )}
-
-      <section className="card" aria-labelledby="export-h">
-        <h2 id="export-h">Backup and export</h2>
-        <p className="muted">
-          The backup holds everything and can be restored on this or another phone. The CSVs open in Excel for the research team: one row per logged behavior, and one row per patient, period and behavior.
-        </p>
-        <p className="muted">Last export: <b>{lastExport ? `${ago(lastExport)} (${shortDate(lastExport)})` : "never"}</b></p>
-        <div className="row wrap">
-          <button onClick={() => exportFile("json")} disabled={firstRun}><Icon name="download" /> Download backup</button>
-          <button className="ghost" onClick={() => exportFile("observations")} disabled={firstRun}>Logs CSV</button>
-          <button className="ghost" onClick={() => exportFile("scores")} disabled={firstRun}>Scores CSV</button>
-        </div>
-        <div className="row wrap restore">
-          <button className="ghost" onClick={() => fileInput.current?.click()}><Icon name="upload" /> Restore from backup</button>
-          <input ref={fileInput} type="file" accept="application/json,.json" hidden onChange={(e) => restore(e.target.files?.[0])} />
-        </div>
-        {msgFor("export")}
-      </section>
-
-      <section className="card" aria-labelledby="safe-h">
-        <h2 id="safe-h">Keep data safe on this phone</h2>
-        {installed ? (
-          <p className="ok-line">✓ Installed. You are using the Home Screen app.</p>
-        ) : canInstall() ? (
-          <>
-            <p className="muted">Install the app so it opens like any other app and works with no signal.</p>
-            <button onClick={doInstall}>Install app</button>
-          </>
-        ) : (
-          <p className="muted">
-            On iPhone, Safari can clear a website's data if it goes unused for a while. Add this app to your Home Screen (tap Share, then Add to Home Screen) and export a backup regularly.
-          </p>
-        )}
-        <p>Storage protected: <b>{persisted === null ? "unknown" : persisted ? "yes" : "not yet"}</b></p>
-        {!persisted && <button className="ghost" onClick={keepData}>Ask the browser to keep data</button>}
-        {msgFor("safe")}
-      </section>
-
-      <DisplaySettings />
-
-      <section className="card" aria-labelledby="about-h">
-        <h2 id="about-h">How ratings are worked out</h2>
-        <p className="muted">
-          The app counts the logs for each behavior in a {WINDOW_DAYS}-day period and turns the count into a 1 to 7 rating. These are CMAI-based (app-derived) ratings, not a CMAI interview. You can correct any of them at the day-14 review.
-        </p>
-        <table className="bands">
-          <caption className="sr">Logs in 14 days and the rating they give</caption>
-          <thead><tr><th scope="col">Logs in 14 days</th><th scope="col">Rating</th></tr></thead>
-          <tbody>
-            {countBands().map((b) => (
-              <tr key={b.rating}>
-                <td>{b.to === null ? `${b.from} or more` : b.from === b.to ? b.from : `${b.from} to ${b.to}`}</td>
-                <td><b>{b.rating}</b> · {RATING_LABELS[b.rating]}</td>
-              </tr>
-            ))}
-            <tr><td>3+ within an hour, on 7 or more days</td><td><b>7</b> · {RATING_LABELS[7]}</td></tr>
-          </tbody>
-        </table>
-        <p className="muted">
-          <b>Unlogged days</b> are days with no logs and no "Nothing to log today" tap. They count as unknown, not as zero, so a period with many of them may read low.
-          The day-14 review is also the only place to record <b>8</b> (would happen if not prevented) and <b>9</b> (not applicable).
-        </p>
-        <p className="muted small-print">
-          Version {__APP_VERSION__} · scoring rule {RULE_VERSION} · a prototype for Professor Gupta's Hands-On Lab, not a medical device. Full rules:{" "}
-          <a href="https://github.com/ferrelldevin/cmai-tracker/blob/main/docs/scoring-spec.md" target="_blank" rel="noreferrer">scoring spec</a>.
-        </p>
-      </section>
+      <nav className="card menu" aria-label="More">
+        <ul>
+          {rows.filter((r) => !r.hide).map((r) => (
+            <li key={r.page}>
+              <a className="menu-row" href={`#/data/${r.page}`} onClick={(e) => { e.preventDefault(); onPage(r.page); }}>
+                <span className="menu-icon" aria-hidden><Icon name={r.icon} size={20} /></span>
+                <span className="menu-text">
+                  <span className="menu-title">{r.title}</span>
+                  <span className="menu-status">{r.status}</span>
+                </span>
+                <Icon name="chevron" size={20} className="menu-chevron" />
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
     </div>
   );
 }
@@ -325,8 +367,7 @@ function DisplaySettings() {
   // The header button changes the theme too; keep these radios in step with it.
   useEffect(() => onDisplayChange(() => { setTheme(getThemePref()); setContrast(getContrastPref()); }), []);
   return (
-    <section className="card" aria-labelledby="display-h">
-      <h2 id="display-h">Display</h2>
+    <section className="card" aria-label="Display">
       <p className="muted">"Match phone" follows the phone's own Dark Mode and Increase Contrast settings. Dark is easier on the eyes on night shifts. High contrast uses black or white text, darker colors and thicker outlines, for bright light or low vision.</p>
       <Choice name="theme" legend="Appearance" choices={THEME_CHOICES} value={theme} onChoose={setThemePref} />
       <Choice name="contrast" legend="Contrast" choices={CONTRAST_CHOICES} value={contrast} onChoose={setContrastPref} />

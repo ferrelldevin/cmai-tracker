@@ -48,7 +48,7 @@
 }
 
 * { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; scroll-padding-top: 140px; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: calc(var(--pin-h, 0px) + 64px); }
 body { margin: 0; background: var(--bg); color: var(--text); font-size: var(--fs-md); line-height: 1.5; -webkit-font-smoothing: antialiased; }
 h1, h2, h3 { line-height: 1.25; }
 p { margin: 0 0 var(--s3); }
@@ -78,7 +78,9 @@ input[type="checkbox"] { width: 22px; height: 22px; min-height: 0; accent-color:
 
 /* Shell */
 .app { max-width: 760px; margin: 0 auto; padding: 0 var(--s4) calc(96px + env(safe-area-inset-bottom)); }
-.top { position: sticky; top: 0; z-index: 3; background: var(--bg); padding: calc(var(--s3) + env(safe-area-inset-top)) 0 var(--s3); display: grid; gap: var(--s3); }
+/* The brand row scrolls away; only the patient banner (and a screen's section bar) stay pinned. */
+.top { padding: calc(var(--s3) + env(safe-area-inset-top)) 0 var(--s2); }
+.pin { position: sticky; top: 0; z-index: 3; background: var(--bg); padding: calc(var(--s2) + env(safe-area-inset-top)) 0 var(--s2); }
 .brand { display: flex; align-items: center; gap: var(--s2); font-size: var(--fs-md); }
 .brand img { border-radius: 7px; }
 .theme-btn { margin-left: auto; width: 44px; min-height: 44px; padding: 0; border-radius: 50%; }
@@ -125,13 +127,40 @@ input[type="checkbox"] { width: 22px; height: 22px; min-height: 0; accent-color:
 @media (hover: hover) { .chip:hover { background: var(--hover); } }
 .chip.on { background: var(--accent); border-color: var(--accent); color: var(--accent-text); }
 
+/* Section bar: pinned under the banner on long screens (src/ui/SectionNav.tsx). */
+.section-nav { position: sticky; top: var(--pin-h, 0px); z-index: 2; display: flex; gap: var(--s2); overflow-x: auto; scrollbar-width: none; background: var(--bg); margin: 0 calc(-1 * var(--s4)); padding: var(--s2) var(--s4); border-bottom: 1px solid var(--rule); }
+.section-nav::-webkit-scrollbar { display: none; }
+/* Faded edges say "there is more this way" when the chips overflow. */
+.section-nav, .period-chips { -webkit-mask-image: linear-gradient(to right, transparent 0, #000 var(--s4), #000 calc(100% - var(--s4)), transparent 100%); mask-image: linear-gradient(to right, transparent 0, #000 var(--s4), #000 calc(100% - var(--s4)), transparent 100%); }
+.section-nav .chip { flex: none; min-height: 40px; padding: 4px 14px; gap: 6px; }
+.chip-detail { font-size: var(--fs-xs); font-weight: 600; color: var(--text-muted); font-variant-numeric: tabular-nums; }
+.chip.on .chip-detail { color: inherit; opacity: 0.9; }
+.group-title:focus, .card h2:focus { outline: none; }
+[data-contrast="high"] .section-nav { border-bottom: 2px solid var(--rule-strong); }
+
+/* Data hub: a list of rows that open their own page (iOS Settings pattern). */
+.menu { padding: 0; overflow: hidden; }
+.menu ul { list-style: none; margin: 0; padding: 0; }
+.menu li + li { border-top: 1px solid var(--rule); }
+.menu-row { display: flex; align-items: center; gap: var(--s3); min-height: 64px; padding: var(--s3) var(--s4); color: var(--text); text-decoration: none; }
+@media (hover: hover) { .menu-row:hover { background: var(--hover); } }
+.menu-row:active { background: var(--press); }
+.menu-row:focus-visible { outline-offset: -3px; box-shadow: inset 0 0 0 5px var(--focus-edge); border-radius: 0; }
+.menu-icon { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 10px; background: var(--accent-soft); color: var(--accent-ink); flex: none; }
+.menu-text { display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0; }
+.menu-title { font-weight: 700; }
+.menu-status { font-size: var(--fs-sm); color: var(--text-muted); }
+.menu-chevron { transform: rotate(-90deg); color: var(--text-muted); }
+[data-contrast="high"] .menu li + li { border-top-color: var(--rule-strong); }
+.page-head { display: flex; flex-direction: column; align-items: flex-start; gap: var(--s2); margin-top: var(--s2); }
+.back-btn { padding-left: 8px; }
+.back-icon { transform: rotate(90deg); }
+
 /* Log */
 .log-head { display: flex; justify-content: space-between; align-items: baseline; gap: var(--s2); flex-wrap: wrap; margin-top: var(--s2); }
 .screen-title { font-size: var(--fs-xl); font-weight: 700; margin: 0; }
 .today-count { margin: 0; color: var(--text-muted); font-size: var(--fs-sm); }
 .today-count b { color: var(--accent-ink); font-size: var(--fs-md); }
-.jump { display: flex; gap: var(--s2); overflow-x: auto; padding: 2px 2px var(--s2); margin: 0 -2px; scrollbar-width: none; }
-.group { scroll-margin-top: 150px; }
 .group-title { font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin: var(--s5) var(--s1) var(--s2); }
 .item-list { list-style: none; margin: 0; padding: 0; background: var(--surface); border: 1px solid var(--rule); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-1); }
 .item + .item { border-top: 1px solid var(--rule); }
@@ -246,8 +275,6 @@ input[type="checkbox"] { width: 22px; height: 22px; min-height: 0; accent-color:
 
 @media (min-width: 700px) {
   .card { padding: var(--s5); }
-  .top { grid-template-columns: auto 1fr; align-items: center; }
-  .pt-banner { justify-self: end; min-width: 320px; }
 }
 .no-transitions *, .no-transitions *::before, .no-transitions *::after { transition: none !important; }
 @media (prefers-reduced-motion: reduce) {

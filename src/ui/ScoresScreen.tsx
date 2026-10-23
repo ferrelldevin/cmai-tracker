@@ -10,6 +10,15 @@ import type { StoredObservation } from "../data/db";
 import type { ScoredWindow } from "./useCmaiData";
 import { shortDate, windowLabel } from "./format";
 import { Icon } from "./Icon";
+import { SectionNav, type Section } from "./SectionNav";
+
+const sections: Section[] = [
+  { id: "sc-status", label: "Status" },
+  { id: "sc-behaviors", label: "Behaviors" },
+  { id: "sc-groups", label: "Groups" },
+  { id: "sc-total", label: "Total" },
+  { id: "sc-time", label: "Time of day" },
+];
 
 const SERIES = { aggressive: "var(--series-1)", physical: "var(--series-2)", verbal: "var(--series-3)" } as const;
 // A line pattern per group as well as a color, so the lines stay apart without color vision.
@@ -77,8 +86,9 @@ export function ScoresScreen({ windows, observations, onLog }: Props) {
       </div>
 
       <p className="muted">Ratings here are CMAI-based (app-derived): worked out from logged events and the day-14 review, not from a CMAI interview.</p>
+      <SectionNav label="Jump to a chart" sections={sections} />
 
-      <section className="card">
+      <section className="card" id="sc-status">
         <h2>Agitation status, period {selected + 1}</h2>
         <p className="muted">Manual rules (p.5 to 6). A group is "agitated" when its behaviors reach the manual's frequency thresholds.</p>
         <div className="status-row">
@@ -100,7 +110,7 @@ export function ScoresScreen({ windows, observations, onLog }: Props) {
         )}
       </section>
 
-      <section className="card">
+      <section className="card" id="sc-behaviors">
         <h2>Each behavior, period by period <span className="tag">app-derived</span></h2>
         <p className="muted">1 = never, 7 = several times an hour. Stronger color means more often. This is the view the manual recommends.</p>
         <p className="muted">↑ or ↓ marks a change worth noticing: 2 or more points from the period before, or 1 point the same way two periods running. A single 1-point move is within how much two raters can differ (manual p.7), so it is not marked.</p>
@@ -155,7 +165,7 @@ export function ScoresScreen({ windows, observations, onLog }: Props) {
         <button className="ghost" onClick={() => setShowAll(!showAll)}>{showAll ? "Hide behaviors never seen" : "Show all 29 behaviors"}</button>
       </section>
 
-      <section className="card">
+      <section className="card" id="sc-groups">
         <h2>Average rating by behavior group</h2>
         <p className="muted">Finished periods only. Mean of the 1 to 7 ratings in each group (manual factors, p.7).</p>
         <div className="chart">
@@ -174,7 +184,7 @@ export function ScoresScreen({ windows, observations, onLog }: Props) {
         </div>
       </section>
 
-      <section className="card">
+      <section className="card" id="sc-total">
         <h2>Total score <span className="tag">secondary</span><span className="tag">app-derived</span></h2>
         <p className="muted">Sum of all 29 CMAI-based ratings (29 to 203). Shown because the lab asked. The manual (p.5) says a total on its own "is not useful", so read it with the views above.</p>
         <p className="note">Totals often fall over time without any change in treatment, so check which behaviors drove a change before crediting it.</p>
@@ -198,7 +208,7 @@ export function ScoresScreen({ windows, observations, onLog }: Props) {
         </div>
       </section>
 
-      <section className="card">
+      <section className="card" id="sc-time">
         <h2>Time of day, period {selected + 1}</h2>
         <p className="muted">When behaviors were logged. A late-day peak can point to a trigger worth changing before reaching for medication.</p>
         <div className="chart">

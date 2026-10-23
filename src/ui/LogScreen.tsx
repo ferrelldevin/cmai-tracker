@@ -9,9 +9,16 @@ import { DAY_MS } from "../scoring/engine";
 import { checkInKey, db, localMidnight, type CheckIn, type StoredObservation } from "../data/db";
 import { dayAndTime, timeOfDay } from "./format";
 import { Icon } from "./Icon";
+import { SectionNav, type Section } from "./SectionNav";
 
 const BEFORE_OPTIONS = ["Personal care or bathing", "Mealtime", "Noise or crowding", "Seemed in pain", "Change in routine", "Visitor or phone call", "Nothing noticed", "Other"];
 const GROUP_ORDER: FactorGroup[] = ["aggressive", "physical", "verbal", "other"];
+
+// The pinned bar: each behavior group, then recent logs (where mistakes get fixed).
+const sections: Section[] = [
+  ...GROUP_ORDER.map((g) => ({ id: `group-${g}`, label: GROUP_LABELS[g].split(/[ ,]/)[0] })),
+  { id: "recent", label: "Recent logs" },
+];
 const EARLIER = [0, 5, 15, 30, 60]; // minutes ago
 const TOAST_MS = 8000;
 const RECENT_SHOWN = 8;
@@ -123,13 +130,7 @@ export function LogScreen({ patientId, observations, checkins, onChange }: Props
         <p className="today-count">{loggedToday ? <><b>{loggedToday}</b> logged today</> : "Nothing logged yet today"}</p>
       </div>
       <p className="hint">Tap a behavior the moment you see it. One tap is one event. For pacing, restlessness and mannerisms, one tap is one stretch of it.</p>
-      <nav className="jump" aria-label="Jump to a group">
-        {GROUP_ORDER.map((g) => (
-          <a key={g} href={`#group-${g}`} className="chip" onClick={(e) => { e.preventDefault(); document.getElementById(`group-${g}`)?.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" }); }}>
-            {GROUP_LABELS[g].split(/[ ,]/)[0]}
-          </a>
-        ))}
-      </nav>
+      <SectionNav label="Jump to a group" sections={sections} />
       {GROUP_ORDER.map((g) => (
         <section key={g} id={`group-${g}`} className="group" aria-labelledby={`group-${g}-h`}>
           <h2 className="group-title" id={`group-${g}-h`}>{GROUP_LABELS[g]}</h2>
@@ -166,7 +167,7 @@ export function LogScreen({ patientId, observations, checkins, onChange }: Props
         </section>
       ))}
 
-      <section className="card recent" aria-labelledby="recent-h">
+      <section className="card recent" id="recent" aria-labelledby="recent-h">
         <h2 id="recent-h">Recent logs</h2>
         {recent.length === 0 ? (
           <p className="muted">Logs from the last 24 hours show here, so you can fix a time or remove a mistake.</p>

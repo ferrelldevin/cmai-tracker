@@ -4,10 +4,15 @@
 
 import { useState } from "react";
 import { RATING_LABELS } from "../scoring/engine";
-import { ITEMS } from "../scoring/items";
+import { GROUP_LABELS, ITEMS, type FactorGroup } from "../scoring/items";
 import { db, reviewKey } from "../data/db";
 import type { ScoredWindow } from "./useCmaiData";
 import { shortDate, windowLabel } from "./format";
+import { SectionNav } from "./SectionNav";
+
+// Same grouping and order as the Log screen, so items are where people expect them.
+const GROUP_ORDER: FactorGroup[] = ["aggressive", "physical", "verbal", "other"];
+const short = (g: FactorGroup) => GROUP_LABELS[g].split(/[ ,]/)[0];
 
 interface Props {
   patientId: string;
@@ -51,6 +56,12 @@ export function ReviewScreen({ patientId, windows, onChange }: Props) {
   }
 
   const reviewedCount = Object.keys(review).length;
+  // Each chip shows how far the group is, so the bar doubles as a to-do list.
+  const sections = GROUP_ORDER.map((g) => {
+    const items = ITEMS.filter((i) => i.group === g);
+    const done = items.filter((i) => i.id in review).length;
+    return { id: `rv-${g}`, label: short(g), detail: `${done}/${items.length}`, ariaLabel: `${GROUP_LABELS[g]}, ${done} of ${items.length} reviewed` };
+  });
 
   return (
     <div className="review">
@@ -67,27 +78,33 @@ export function ReviewScreen({ patientId, windows, onChange }: Props) {
         <span>{reviewedCount === 29 ? "✓ All 29 reviewed" : `${reviewedCount} of 29 reviewed`}{saved ? " · saved" : ""}</span>
         <progress max={29} value={reviewedCount} aria-hidden />
       </div>
-      <ul className="review-list">
-        {ITEMS.map((item) => {
-          const s = score.items[item.id - 1];
-          const chosen = review[item.id];
-          const changed = chosen !== undefined && chosen !== s.rating;
-          return (
-            <li key={item.id} className={changed ? "changed" : ""}>
-              <div>
-                <b>{item.id}. {item.name}</b>
-                <span className="muted"> · logged {s.count}× · app says {s.rating} ({RATING_LABELS[s.rating]})</span>
-              </div>
-              <select aria-label={`Rating for ${item.name}`} value={chosen ?? ""} onChange={(e) => choose(item.id, e.target.value)}>
-                <option value="">Not reviewed (use {s.rating})</option>
-                {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((r) => (
-                  <option key={r} value={r}>{r} · {RATING_LABELS[r]}{r === s.rating ? " (matches app)" : ""}</option>
-                ))}
-              </select>
-            </li>
-          );
-        })}
-      </ul>
+      <SectionNav label="Jump to a group" sections={sections} />
+      {GROUP_ORDER.map((g) => (
+        <section key={g} id={`rv-${g}`} className="group" aria-labelledby={`rv-${g}-h`}>
+          <h2 className="group-title" id={`rv-${g}-h`}>{GROUP_LABELS[g]}</h2>
+          <ul className="review-list">
+            {ITEMS.filter((item) => item.group === g).map((item) => {
+              const s = score.items[item.id - 1];
+              const chosen = review[item.id];
+              const changed = chosen !== undefined && chosen !== s.rating;
+              return (
+                <li key={item.id} className={changed ? "changed" : ""}>
+                  <div>
+                    <b>{item.id}. {item.name}</b>
+                    <span className="muted"> · logged {s.count}× · app says {s.rating} ({RATING_LABELS[s.rating]})</span>
+                  </div>
+                  <select aria-label={`Rating for ${item.name}`} value={chosen ?? ""} onChange={(e) => choose(item.id, e.target.value)}>
+                    <option value="">Not reviewed (use {s.rating})</option>
+                    {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((r) => (
+                      <option key={r} value={r}>{r} · {RATING_LABELS[r]}{r === s.rating ? " (matches app)" : ""}</option>
+                    ))}
+                  </select>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
+      ))}
       {reviewedCount < 29 && <button onClick={confirmAll}>Confirm the other {29 - reviewedCount} as the app rated them</button>}
     </div>
   );
