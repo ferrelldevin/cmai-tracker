@@ -7,7 +7,7 @@
     "wcag21aa",
     "wcag22aa"
   ],
-  "runAt": "2026-10-23T19:36:14.756Z",
+  "runAt": "2026-10-23T20:07:32.078Z",
   "schemes": {
     "light": [
       {
@@ -30,7 +30,7 @@
               },
               {
                 "target": [
-                  ".welcome > p:nth-child(3)"
+                  "p:nth-child(3)"
                 ],
                 "why": [
                   "Element's background color could not be determined due to a background gradient"
@@ -38,7 +38,7 @@
               },
               {
                 "target": [
-                  "li:nth-child(1)"
+                  "ol > li:nth-child(1)"
                 ],
                 "why": [
                   "Element's background color could not be determined due to a background gradient"
@@ -54,7 +54,7 @@
               },
               {
                 "target": [
-                  "li:nth-child(2)"
+                  "ol > li:nth-child(2)"
                 ],
                 "why": [
                   "Element's background color could not be determined due to a background gradient"
@@ -70,7 +70,7 @@
               },
               {
                 "target": [
-                  "li:nth-child(3)"
+                  "ol > li:nth-child(3)"
                 ],
                 "why": [
                   "Element's background color could not be determined due to a background gradient"
@@ -98,13 +98,13 @@
       },
       {
         "screen": "Log",
-        "url": "http://localhost:4173/",
+        "url": "http://localhost:4173/#/log",
         "violations": [],
         "incomplete": []
       },
       {
         "screen": "Log (after a tap: toast with details, exclusion open)",
-        "url": "http://localhost:4173/",
+        "url": "http://localhost:4173/#/log",
         "violations": [],
         "incomplete": [
           {
@@ -134,13 +134,13 @@
       },
       {
         "screen": "Log (checked in: nothing to log today)",
-        "url": "http://localhost:4173/",
+        "url": "http://localhost:4173/#/log",
         "violations": [],
         "incomplete": []
       },
       {
         "screen": "Log (editing a recent log)",
-        "url": "http://localhost:4173/",
+        "url": "http://localhost:4173/#/log",
         "violations": [],
         "incomplete": [
           {
@@ -170,7 +170,7 @@
       },
       {
         "screen": "Scores",
-        "url": "http://localhost:4173/",
+        "url": "http://localhost:4173/#/scores",
         "violations": [],
         "incomplete": [
           {
@@ -448,7 +448,7 @@
       },
       {
         "screen": "Scores (all 29 behaviors)",
-        "url": "http://localhost:4173/",
+        "url": "http://localhost:4173/#/scores",
         "violations": [],
         "incomplete": [
           {
@@ -726,19 +726,49 @@
       },
       {
         "screen": "Day-14 review",
-        "url": "http://localhost:4173/",
+        "url": "http://localhost:4173/#/review",
         "violations": [],
         "incomplete": []
       },
       {
         "screen": "Patients & data (with patients)",
-        "url": "http://localhost:4173/",
+        "url": "http://localhost:4173/#/data",
         "violations": [],
         "incomplete": []
       },
       {
         "screen": "Patients & data (confirm delete)",
-        "url": "http://localhost:4173/",
+        "url": "http://localhost:4173/#/data",
+        "violations": [],
+        "incomplete": []
+      },
+      {
+        "screen": "Data: Backup and export",
+        "url": "http://localhost:4173/#/data/backup",
+        "violations": [],
+        "incomplete": []
+      },
+      {
+        "screen": "Data: Display",
+        "url": "http://localhost:4173/#/data/display",
+        "violations": [],
+        "incomplete": []
+      },
+      {
+        "screen": "Data: Keep data safe",
+        "url": "http://localhost:4173/#/data/safe",
+        "violations": [],
+        "incomplete": []
+      },
+      {
+        "screen": "Data: Demo data",
+        "url": "http://localhost:4173/#/data/demo",
+        "violations": [],
+        "incomplete": []
+      },
+      {
+        "screen": "Data: How ratings are worked out",
+        "url": "http://localhost:4173/#/data/about",
         "violations": [],
         "incomplete": []
       }
@@ -764,7 +794,7 @@
               },
               {
                 "target": [
-                  ".welcome > p:nth-child(3)"
+                  "p:nth-child(3)"
                 ],
                 "why": [
                   "Element's background color could not be determined due to a background gradient"
@@ -772,7 +802,7 @@
               },
               {
                 "target": [
-                  "li:nth-child(1)"
+                  "ol > li:nth-child(1)"
                 ],
                 "why": [
                   "Element's background color could not be determined due to a background gradient"
@@ -788,7 +818,7 @@
               },
               {
                 "target": [
-                  "li:nth-child(2)"
+                  "ol > li:nth-child(2)"
                 ],
                 "why": [
                   "Element's background color could not be determined due to a background gradient"
@@ -804,7 +834,7 @@
               },
               {
                 "target": [
-                  "li:nth-child(3)"
+                  "ol > li:nth-child(3)"
                 ],
                 "why": [
                   "Element's background color could not be determined due to a background gradient"
@@ -832,13 +862,13 @@
       },
       {
         "screen": "Log",
-        "url": "http://localhost:4173/",
+        "url": "http://localhost:4173/#/log",
         "violations": [],
         "incomplete": []
       },
       {
         "screen": "Log (after a tap: toast with details, exclusion open)",
-        "url": "http://localhost:4173/",
+        "url": "http://localhost:4173/#/log",
         "violations": [],
         "incomplete": [
           {
@@ -868,13 +898,13 @@
       },
       {
         "screen": "Log (checked in: nothing to log today)",
-        "url": "http://localhost:4173/",
+        "url": "http://localhost:4173/#/log",
         "violations": [],
         "incomplete": []
       },
       {
         "screen": "Log (editing a recent log)",
-        "url": "http://localhost:4173/",
+        "url": "http://localhost:4173/#/log",
         "violations": [],
         "incomplete": [
           {
@@ -904,7 +934,7 @@
       },
       {
         "screen": "Scores",
-        "url": "http://localhost:4173/",
+        "url": "http://localhost:4173/#/scores",
         "violations": [],
         "incomplete": [
           {
@@ -1182,7 +1212,7 @@
       },
       {
         "screen": "Scores (all 29 behaviors)",
-        "url": "http://localhost:4173/",
+        "url": "http://localhost:4173/#/scores",
         "violations": [],
         "incomplete": [
           {
@@ -1460,19 +1490,49 @@
       },
       {
         "screen": "Day-14 review",
-        "url": "http://localhost:4173/",
+        "url": "http://localhost:4173/#/review",
         "violations": [],
         "incomplete": []
       },
       {
         "screen": "Patients & data (with patients)",
-        "url": "http://localhost:4173/",
+        "url": "http://localhost:4173/#/data",
         "violations": [],
         "incomplete": []
       },
       {
         "screen": "Patients & data (confirm delete)",
-        "url": "http://localhost:4173/",
+        "url": "http://localhost:4173/#/data",
+        "violations": [],
+        "incomplete": []
+      },
+      {
+        "screen": "Data: Backup and export",
+        "url": "http://localhost:4173/#/data/backup",
+        "violations": [],
+        "incomplete": []
+      },
+      {
+        "screen": "Data: Display",
+        "url": "http://localhost:4173/#/data/display",
+        "violations": [],
+        "incomplete": []
+      },
+      {
+        "screen": "Data: Keep data safe",
+        "url": "http://localhost:4173/#/data/safe",
+        "violations": [],
+        "incomplete": []
+      },
+      {
+        "screen": "Data: Demo data",
+        "url": "http://localhost:4173/#/data/demo",
+        "violations": [],
+        "incomplete": []
+      },
+      {
+        "screen": "Data: How ratings are worked out",
+        "url": "http://localhost:4173/#/data/about",
         "violations": [],
         "incomplete": []
       }
@@ -1486,13 +1546,13 @@
       },
       {
         "screen": "Log",
-        "url": "http://localhost:4173/",
+        "url": "http://localhost:4173/#/log",
         "violations": [],
         "incomplete": []
       },
       {
         "screen": "Log (after a tap: toast with details, exclusion open)",
-        "url": "http://localhost:4173/",
+        "url": "http://localhost:4173/#/log",
         "violations": [],
         "incomplete": [
           {
@@ -1522,13 +1582,13 @@
       },
       {
         "screen": "Log (checked in: nothing to log today)",
-        "url": "http://localhost:4173/",
+        "url": "http://localhost:4173/#/log",
         "violations": [],
         "incomplete": []
       },
       {
         "screen": "Log (editing a recent log)",
-        "url": "http://localhost:4173/",
+        "url": "http://localhost:4173/#/log",
         "violations": [],
         "incomplete": [
           {
@@ -1558,7 +1618,7 @@
       },
       {
         "screen": "Scores",
-        "url": "http://localhost:4173/",
+        "url": "http://localhost:4173/#/scores",
         "violations": [],
         "incomplete": [
           {
@@ -1836,7 +1896,7 @@
       },
       {
         "screen": "Scores (all 29 behaviors)",
-        "url": "http://localhost:4173/",
+        "url": "http://localhost:4173/#/scores",
         "violations": [],
         "incomplete": [
           {
@@ -2114,19 +2174,49 @@
       },
       {
         "screen": "Day-14 review",
-        "url": "http://localhost:4173/",
+        "url": "http://localhost:4173/#/review",
         "violations": [],
         "incomplete": []
       },
       {
         "screen": "Patients & data (with patients)",
-        "url": "http://localhost:4173/",
+        "url": "http://localhost:4173/#/data",
         "violations": [],
         "incomplete": []
       },
       {
         "screen": "Patients & data (confirm delete)",
-        "url": "http://localhost:4173/",
+        "url": "http://localhost:4173/#/data",
+        "violations": [],
+        "incomplete": []
+      },
+      {
+        "screen": "Data: Backup and export",
+        "url": "http://localhost:4173/#/data/backup",
+        "violations": [],
+        "incomplete": []
+      },
+      {
+        "screen": "Data: Display",
+        "url": "http://localhost:4173/#/data/display",
+        "violations": [],
+        "incomplete": []
+      },
+      {
+        "screen": "Data: Keep data safe",
+        "url": "http://localhost:4173/#/data/safe",
+        "violations": [],
+        "incomplete": []
+      },
+      {
+        "screen": "Data: Demo data",
+        "url": "http://localhost:4173/#/data/demo",
+        "violations": [],
+        "incomplete": []
+      },
+      {
+        "screen": "Data: How ratings are worked out",
+        "url": "http://localhost:4173/#/data/about",
         "violations": [],
         "incomplete": []
       }
@@ -2140,13 +2230,13 @@
       },
       {
         "screen": "Log",
-        "url": "http://localhost:4173/",
+        "url": "http://localhost:4173/#/log",
         "violations": [],
         "incomplete": []
       },
       {
         "screen": "Log (after a tap: toast with details, exclusion open)",
-        "url": "http://localhost:4173/",
+        "url": "http://localhost:4173/#/log",
         "violations": [],
         "incomplete": [
           {
@@ -2176,13 +2266,13 @@
       },
       {
         "screen": "Log (checked in: nothing to log today)",
-        "url": "http://localhost:4173/",
+        "url": "http://localhost:4173/#/log",
         "violations": [],
         "incomplete": []
       },
       {
         "screen": "Log (editing a recent log)",
-        "url": "http://localhost:4173/",
+        "url": "http://localhost:4173/#/log",
         "violations": [],
         "incomplete": [
           {
@@ -2212,7 +2302,7 @@
       },
       {
         "screen": "Scores",
-        "url": "http://localhost:4173/",
+        "url": "http://localhost:4173/#/scores",
         "violations": [],
         "incomplete": [
           {
@@ -2490,7 +2580,7 @@
       },
       {
         "screen": "Scores (all 29 behaviors)",
-        "url": "http://localhost:4173/",
+        "url": "http://localhost:4173/#/scores",
         "violations": [],
         "incomplete": [
           {
@@ -2768,19 +2858,49 @@
       },
       {
         "screen": "Day-14 review",
-        "url": "http://localhost:4173/",
+        "url": "http://localhost:4173/#/review",
         "violations": [],
         "incomplete": []
       },
       {
         "screen": "Patients & data (with patients)",
-        "url": "http://localhost:4173/",
+        "url": "http://localhost:4173/#/data",
         "violations": [],
         "incomplete": []
       },
       {
         "screen": "Patients & data (confirm delete)",
-        "url": "http://localhost:4173/",
+        "url": "http://localhost:4173/#/data",
+        "violations": [],
+        "incomplete": []
+      },
+      {
+        "screen": "Data: Backup and export",
+        "url": "http://localhost:4173/#/data/backup",
+        "violations": [],
+        "incomplete": []
+      },
+      {
+        "screen": "Data: Display",
+        "url": "http://localhost:4173/#/data/display",
+        "violations": [],
+        "incomplete": []
+      },
+      {
+        "screen": "Data: Keep data safe",
+        "url": "http://localhost:4173/#/data/safe",
+        "violations": [],
+        "incomplete": []
+      },
+      {
+        "screen": "Data: Demo data",
+        "url": "http://localhost:4173/#/data/demo",
+        "violations": [],
+        "incomplete": []
+      },
+      {
+        "screen": "Data: How ratings are worked out",
+        "url": "http://localhost:4173/#/data/about",
         "violations": [],
         "incomplete": []
       }

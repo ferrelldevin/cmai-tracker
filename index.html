@@ -3,12 +3,28 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta name="theme-color" content="#f6f5f1" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#0e1417" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#f6f5f1" />
+    <meta name="color-scheme" content="light dark" />
     <meta name="description" content="Log agitated behaviors and see 14-day CMAI scores." />
     <link rel="icon" href="/icon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <title>CMAI Tracker</title>
+    <script>
+      // Set the theme before the first paint so the app never flashes the wrong one.
+      // Mirrors applyDisplay() in src/ui/display.ts; keep the two in step.
+      (function () {
+        var t = null, c = null;
+        try { t = localStorage.getItem("cmai-theme"); c = localStorage.getItem("cmai-contrast"); } catch (e) {}
+        var mq = function (q) { return !!(window.matchMedia && window.matchMedia(q).matches); };
+        var theme = t === "light" || t === "dark" ? t : mq("(prefers-color-scheme: dark)") ? "dark" : "light";
+        var high = c === "high" || (c !== "standard" && mq("(prefers-contrast: more)"));
+        var root = document.documentElement;
+        root.setAttribute("data-theme", theme);
+        if (high) root.setAttribute("data-contrast", "high");
+        var bar = high ? (theme === "dark" ? "#000000" : "#ffffff") : theme === "dark" ? "#0e1417" : "#f6f5f1";
+        document.querySelector('meta[name="theme-color"]').setAttribute("content", bar);
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

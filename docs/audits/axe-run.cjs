@@ -52,6 +52,12 @@ async function scan(page, name, results) {
     await scan(page, "Patients & data (with patients)", results);
     await page.getByRole("button", { name: "Delete P-DEMO-B" }).click();
     await scan(page, "Patients & data (confirm delete)", results);
+    await page.getByRole("button", { name: "Cancel" }).click();
+    for (const row of ["Backup and export", "Display", "Keep data safe", "Demo data", "How ratings are worked out"]) {
+      await page.getByRole("link", { name: new RegExp(`^${row}`) }).click();
+      await scan(page, `Data: ${row}`, results);
+      await page.getByRole("button", { name: "Data", exact: true }).click();
+    }
     all.schemes[scheme] = results;
     await ctx.close();
   }

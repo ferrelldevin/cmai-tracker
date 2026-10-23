@@ -6,8 +6,8 @@ import { ScoresScreen } from "./ui/ScoresScreen";
 import { Icon, type IconName } from "./ui/Icon";
 import { PatientAvatar } from "./ui/PatientAvatar";
 import { useCmaiData } from "./ui/useCmaiData";
-
-type Tab = "log" | "scores" | "review" | "data";
+import { currentTheme, onDisplayChange, toggleTheme } from "./ui/display";
+import { useRoute, type DataPage, type Tab } from "./ui/route";
 
 const TABS: { id: Tab; label: string; title: string; icon: IconName }[] = [
   { id: "log", label: "Log", title: "Log a behavior", icon: "plus" },
@@ -16,15 +16,26 @@ const TABS: { id: Tab; label: string; title: string; icon: IconName }[] = [
   { id: "data", label: "Data", title: "Patients and data", icon: "data" },
 ];
 
+const PAGE_TITLES: Record<DataPage, string> = {
+  backup: "Backup and export",
+  display: "Display",
+  safe: "Keep data safe",
+  demo: "Demo data",
+  about: "How ratings are worked out",
+};
+
 const readSaved = () => {
   try { return localStorage.getItem("cmai-patient"); } catch { return null; }
 };
 
 export default function App() {
   const [patientId, setPatientId] = useState<string | null>(readSaved);
-  const [tab, setTab] = useState<Tab>(() => (readSaved() ? "log" : "data"));
+  const { route, go, back } = useRoute(() => ({ tab: readSaved() ? "log" : "data", page: null }));
+  const tab = route.tab;
+  const setTab = (t: Tab) => go({ tab: t, page: null });
   const { patients, observations, checkins, windows, refresh, loaded, everLoaded, error } = useCmaiData(patientId);
   const mainRef = useRef<HTMLElement>(null);
+  const pinRef = useRef<HTMLDivElement>(null);
   const firstRender = useRef(true);
 
   useEffect(() => {
@@ -42,9 +53,28 @@ export default function App() {
     if (firstRender.current) { firstRender.current = false; return; }
     window.scrollTo({ top: 0 });
     mainRef.current?.focus({ preventScroll: true });
-  }, [tab]);
+  }, [tab, route.page]);
 
   const hasPatient = !!patientId && patients.some((p) => p.id === patientId);
+
+  // The section bars pin just under the patient banner, so they need its height.
+  useEffect(() => {
+    const el = pinRef.current;
+    const set = () => document.documentElement.style.setProperty("--pin-h", `${el ? el.offsetHeight : 0}px`);
+    set();
+    if (!el || typeof ResizeObserver === "undefined") return;
+    const ro = new ResizeObserver(set);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [hasPatient]);
+
+  function onTab(id: Tab) {
+    if (id !== tab) return setTab(id);
+    // Tapping the tab you are on: leave a Data page, or go back to the top (iOS convention).
+    if (route.page) return back();
+    window.scrollTo({ top: 0, behavior: window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+  }
+
   const shown: Tab = hasPatient ? tab : "data";
   const current = patients.find((p) => p.id === patientId);
 
@@ -60,8 +90,12 @@ export default function App() {
         <div className="brand">
           <img src="icon.svg" alt="" width="28" height="28" />
           <b>CMAI Tracker</b>
+          <ThemeButton />
         </div>
-        {hasPatient && current && (
+      </header>
+
+      {hasPatient && current && (
+        <div className="pin" ref={pinRef}>
           <div className="pt-banner">
             <PatientAvatar id={current.id} />
             <div className="pt-id">
@@ -79,8 +113,8 @@ export default function App() {
               </>
             )}
           </div>
-        )}
-      </header>
+        </div>
+      )}
 
       {error && (
         <div className="banner" role="alert">
@@ -90,11 +124,20 @@ export default function App() {
       )}
 
       <main ref={mainRef} tabIndex={-1} aria-busy={!everLoaded}>
-        <h1 className="sr">{TABS.find((t) => t.id === shown)!.title}{current ? `, ${current.id}` : ""}</h1>
+        <h1 className="sr">{shown === "data" && route.page ? PAGE_TITLES[route.page] : TABS.find((t) => t.id === shown)!.title}{current ? `, ${current.id}` : ""}</h1>
         {!everLoaded ? (
           <div className="loading" role="status"><span className="spinner" aria-hidden /> Loading…</div>
         ) : shown === "data" ? (
-          <DataScreen patients={patients} current={hasPatient ? patientId : null} onPatient={(id) => { setPatientId(id); setTab("log"); }} onChange={refresh} />
+          <DataScreen
+            patients={patients}
+            current={hasPatient ? patientId : null}
+            page={route.page}
+            pageTitle={route.page ? PAGE_TITLES[route.page] : ""}
+            onPage={(page) => go({ tab: "data", page })}
+            onBack={back}
+            onPatient={(id) => { setPatientId(id); setTab("log"); }}
+            onChange={refresh}
+          />
         ) : shown === "log" ? (
           <LogScreen patientId={patientId!} observations={observations} checkins={checkins} onChange={refresh} />
         ) : shown === "scores" ? (
@@ -112,7 +155,7 @@ export default function App() {
               className={shown === id ? "on" : ""}
               aria-current={shown === id ? "page" : undefined}
               aria-label={id === "review" && reviewDue ? `${title}, review due` : title}
-              onClick={() => setTab(id)}
+              onClick={() => onTab(id)}
               disabled={id !== "data" && !hasPatient}
             >
               <span className="tab-icon" aria-hidden>
@@ -125,5 +168,17 @@ export default function App() {
         </div>
       </nav>
     </div>
+  );
+}
+
+// Quick light/dark switch in the header. The full choice, including "Match phone", is on the Data screen.
+function ThemeButton() {
+  const [theme, setTheme] = useState(currentTheme);
+  useEffect(() => onDisplayChange(() => setTheme(currentTheme())), []);
+  const next = theme === "dark" ? "light" : "dark";
+  return (
+    <button className="theme-btn ghost" onClick={toggleTheme} aria-label={`Switch to ${next} mode`} title={`Switch to ${next} mode`}>
+      <Icon name={theme === "dark" ? "sun" : "moon"} size={20} />
+    </button>
   );
 }
