@@ -10,7 +10,7 @@ import { ago, shortDate } from "./format";
 import { Icon } from "./Icon";
 import { PatientAvatar } from "./PatientAvatar";
 import { canInstall, install, isInstalled, onInstallChange } from "./install";
-import { getContrastPref, setContrastPref, type ContrastPref } from "./contrast";
+import { getContrastPref, getThemePref, onDisplayChange, setContrastPref, setThemePref, type ContrastPref, type ThemePref } from "./display";
 
 interface Props {
   patients: Patient[];
@@ -291,31 +291,45 @@ export function DataScreen({ patients, current, onPatient, onChange }: Props) {
   );
 }
 
+const THEME_CHOICES: { value: ThemePref; label: string }[] = [
+  { value: "auto", label: "Match phone" },
+  { value: "light", label: "Light" },
+  { value: "dark", label: "Dark" },
+];
+
 const CONTRAST_CHOICES: { value: ContrastPref; label: string }[] = [
   { value: "auto", label: "Match phone" },
   { value: "standard", label: "Standard" },
   { value: "high", label: "High" },
 ];
 
-function DisplaySettings() {
-  const [contrast, setContrast] = useState(getContrastPref);
-  const choose = (pref: ContrastPref) => {
-    setContrast(pref);
-    setContrastPref(pref);
-  };
+function Choice<T extends string>({ name, legend, choices, value, onChoose }: { name: string; legend: string; choices: { value: T; label: string }[]; value: T; onChoose: (v: T) => void }) {
   return (
-    <section className="card" aria-labelledby="display-h">
-      <h2 id="display-h">Display</h2>
-      <p className="muted">High contrast uses black text, darker colors and thicker outlines, for bright light or low vision. "Match phone" turns it on when the phone's Increase Contrast setting is on.</p>
-      <fieldset className="segmented">
-        <legend>Contrast</legend>
-        {CONTRAST_CHOICES.map((c) => (
+    <fieldset className="setting">
+      <legend>{legend}</legend>
+      <div className="segmented">
+        {choices.map((c) => (
           <label key={c.value}>
-            <input type="radio" name="contrast" value={c.value} checked={contrast === c.value} onChange={() => choose(c.value)} />
+            <input type="radio" name={name} value={c.value} checked={value === c.value} onChange={() => onChoose(c.value)} />
             {c.label}
           </label>
         ))}
-      </fieldset>
+      </div>
+    </fieldset>
+  );
+}
+
+function DisplaySettings() {
+  const [theme, setTheme] = useState(getThemePref);
+  const [contrast, setContrast] = useState(getContrastPref);
+  // The header button changes the theme too; keep these radios in step with it.
+  useEffect(() => onDisplayChange(() => { setTheme(getThemePref()); setContrast(getContrastPref()); }), []);
+  return (
+    <section className="card" aria-labelledby="display-h">
+      <h2 id="display-h">Display</h2>
+      <p className="muted">"Match phone" follows the phone's own Dark Mode and Increase Contrast settings. Dark is easier on the eyes on night shifts. High contrast uses black or white text, darker colors and thicker outlines, for bright light or low vision.</p>
+      <Choice name="theme" legend="Appearance" choices={THEME_CHOICES} value={theme} onChoose={setThemePref} />
+      <Choice name="contrast" legend="Contrast" choices={CONTRAST_CHOICES} value={contrast} onChoose={setContrastPref} />
     </section>
   );
 }

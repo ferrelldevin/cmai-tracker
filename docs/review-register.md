@@ -88,6 +88,7 @@ Newest first. Every rule change and every sign-off goes here, with who and when.
 
 | Date | Change | By | Approved by |
 |---|---|---|---|
+| 2026-10-23 | Light and dark mode as a setting (round 7): header sun/moon toggle, Data > Display "Appearance" (Match phone, Light, Dark), theme set before first paint, status bar follows. Replaces the media-query-only dark mode | Devin | n/a (no scoring change) |
 | 2026-10-23 | High-contrast display option (round 6): Data screen "Display" setting (Match phone, Standard, High). High uses AAA text contrast (7:1 or better), 2px outlines and a stronger rating ramp, in light and dark. "Match phone" follows the phone's Increase Contrast setting. Windows forced-colors mode keeps the selected-tab and rating-cell cues | Devin | n/a (no scoring change) |
 | 2026-10-23 | Visual redesign (round 5): care-teal palette, Atkinson Hyperlegible Next, patient banner, grouped Log list, amber status instead of red and green, Okabe-Ito chart colors, new icon. Sources in `docs/design/design-brief.md` | Devin | n/a (no scoring change) |
 | 2026-10-23 | UX round 4: recent logs (edit, delete), back-dating, restore from backup, delete patient, remove demo data, welcome screen, loading and storage-error states, icon tab bar with review-due dot, install button, in-app rating explainer | Devin (F-02, F-03, F-09; heuristic review round 4) | n/a (no scoring change) |

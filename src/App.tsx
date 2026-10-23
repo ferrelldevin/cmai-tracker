@@ -6,6 +6,7 @@ import { ScoresScreen } from "./ui/ScoresScreen";
 import { Icon, type IconName } from "./ui/Icon";
 import { PatientAvatar } from "./ui/PatientAvatar";
 import { useCmaiData } from "./ui/useCmaiData";
+import { currentTheme, onDisplayChange, toggleTheme } from "./ui/display";
 
 type Tab = "log" | "scores" | "review" | "data";
 
@@ -60,6 +61,7 @@ export default function App() {
         <div className="brand">
           <img src="icon.svg" alt="" width="28" height="28" />
           <b>CMAI Tracker</b>
+          <ThemeButton />
         </div>
         {hasPatient && current && (
           <div className="pt-banner">
@@ -125,5 +127,17 @@ export default function App() {
         </div>
       </nav>
     </div>
+  );
+}
+
+// Quick light/dark switch in the header. The full choice, including "Match phone", is on the Data screen.
+function ThemeButton() {
+  const [theme, setTheme] = useState(currentTheme);
+  useEffect(() => onDisplayChange(() => setTheme(currentTheme())), []);
+  const next = theme === "dark" ? "light" : "dark";
+  return (
+    <button className="theme-btn ghost" onClick={toggleTheme} aria-label={`Switch to ${next} mode`} title={`Switch to ${next} mode`}>
+      <Icon name={theme === "dark" ? "sun" : "moon"} size={20} />
+    </button>
   );
 }

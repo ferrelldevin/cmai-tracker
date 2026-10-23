@@ -7,7 +7,7 @@
     "wcag21aa",
     "wcag22aa"
   ],
-  "runAt": "2026-10-23T19:36:14.756Z",
+  "runAt": "2026-10-23T19:56:18.945Z",
   "schemes": {
     "light": [
       {
@@ -1146,7 +1146,7 @@
               },
               {
                 "target": [
-                  "text[y=\"129.5\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
+                  "text[y=\"129.5\"][x=\"28\"][height=\"162\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
                 ],
                 "why": [
                   "Element content is too short to determine if it is actual text content"
@@ -1154,7 +1154,7 @@
               },
               {
                 "target": [
-                  "text[y=\"89\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
+                  "text[y=\"89\"][x=\"28\"][height=\"162\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
                 ],
                 "why": [
                   "Element content is too short to determine if it is actual text content"
@@ -1162,7 +1162,7 @@
               },
               {
                 "target": [
-                  "text[y=\"48.5\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
+                  "text[y=\"48.5\"][x=\"28\"][height=\"162\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
                 ],
                 "why": [
                   "Element's background color could not be determined because element contains an image node"
@@ -1800,7 +1800,7 @@
               },
               {
                 "target": [
-                  "text[y=\"129.5\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
+                  "text[y=\"129.5\"][x=\"28\"][height=\"162\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
                 ],
                 "why": [
                   "Element content is too short to determine if it is actual text content"
@@ -1808,7 +1808,7 @@
               },
               {
                 "target": [
-                  "text[y=\"89\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
+                  "text[y=\"89\"][x=\"28\"][height=\"162\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
                 ],
                 "why": [
                   "Element content is too short to determine if it is actual text content"
@@ -1816,7 +1816,7 @@
               },
               {
                 "target": [
-                  "text[y=\"48.5\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
+                  "text[y=\"48.5\"][x=\"28\"][height=\"162\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
                 ],
                 "why": [
                   "Element's background color could not be determined because element contains an image node"
