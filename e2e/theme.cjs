@@ -22,8 +22,10 @@ const ok = (c, m) => { if (!c) throw new Error("FAIL: " + m); console.log("  ok"
   await p.reload(); await p.waitForTimeout(400);
   s = await st(); ok(s.theme === "dark" && s.first === "dark", "dark kept after reload, no light flash");
   await p.locator("nav.tabs button", { hasText: /data/i }).click();
+  ok((await p.getByRole("link", { name: /^Display/ }).textContent()).includes("Dark"), "Data hub row shows Dark");
+  await p.getByRole("link", { name: /^Display/ }).click();
   ok(await p.getByRole("radio", { name: "Dark" }).isChecked(), "settings show Dark selected");
-  await p.getByRole("heading", { name: "Display" }).scrollIntoViewIfNeeded(); await p.waitForTimeout(200);
+  await p.waitForTimeout(200);
   await p.screenshot({ path: `${OUT}/03-display-settings-dark.png` });
   await p.getByRole("radio", { name: "Light" }).check();
   s = await st(); ok(s.theme === "light", "Light radio switches");

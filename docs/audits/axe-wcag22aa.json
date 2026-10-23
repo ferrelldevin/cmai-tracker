@@ -7,7 +7,7 @@
     "wcag21aa",
     "wcag22aa"
   ],
-  "runAt": "2026-10-23T20:07:32.078Z",
+  "runAt": "2026-10-23T21:17:05.341Z",
   "schemes": {
     "light": [
       {
@@ -167,6 +167,12 @@
             ]
           }
         ]
+      },
+      {
+        "screen": "Patient switcher (sheet open)",
+        "url": "http://localhost:4173/#/log",
+        "violations": [],
+        "incomplete": []
       },
       {
         "screen": "Scores",
@@ -933,6 +939,12 @@
         ]
       },
       {
+        "screen": "Patient switcher (sheet open)",
+        "url": "http://localhost:4173/#/log",
+        "violations": [],
+        "incomplete": []
+      },
+      {
         "screen": "Scores",
         "url": "http://localhost:4173/#/scores",
         "violations": [],
@@ -1617,6 +1629,12 @@
         ]
       },
       {
+        "screen": "Patient switcher (sheet open)",
+        "url": "http://localhost:4173/#/log",
+        "violations": [],
+        "incomplete": []
+      },
+      {
         "screen": "Scores",
         "url": "http://localhost:4173/#/scores",
         "violations": [],
@@ -1860,7 +1878,7 @@
               },
               {
                 "target": [
-                  "text[y=\"129.5\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
+                  "text[y=\"129.5\"][x=\"28\"][height=\"162\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
                 ],
                 "why": [
                   "Element content is too short to determine if it is actual text content"
@@ -1868,7 +1886,7 @@
               },
               {
                 "target": [
-                  "text[y=\"89\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
+                  "text[y=\"89\"][x=\"28\"][height=\"162\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
                 ],
                 "why": [
                   "Element content is too short to determine if it is actual text content"
@@ -1876,7 +1894,7 @@
               },
               {
                 "target": [
-                  "text[y=\"48.5\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
+                  "text[y=\"48.5\"][x=\"28\"][height=\"162\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
                 ],
                 "why": [
                   "Element's background color could not be determined because element contains an image node"
@@ -2299,6 +2317,12 @@
             ]
           }
         ]
+      },
+      {
+        "screen": "Patient switcher (sheet open)",
+        "url": "http://localhost:4173/#/log",
+        "violations": [],
+        "incomplete": []
       },
       {
         "screen": "Scores",

@@ -90,11 +90,13 @@ const ok = (c, m) => { if (!c) throw new Error("FAIL: " + m); console.log("  ok"
   fs.writeFileSync(`${OUT}/bad.json`, "{}");
   await p.locator('input[type="file"]').setInputFiles(`${OUT}/bad.json`);
   await p.getByRole("alert").filter({ hasText: "not a CMAI Tracker backup" }).waitFor(); ok(true, "bad file refused with message");
-  await p.locator(".pt-select").selectOption("P-07");
+  await p.getByRole("button", { name: /Choose patient$/ }).click();
+  await p.getByRole("dialog", { name: "Choose patient" }).getByRole("button", { name: /^P-07/ }).click();
   await p.locator("nav.tabs button", { hasText: "Log" }).click();
   ok((await p.locator(".recent-list li").first().textContent()).includes("Mealtime"), "restored P-07 log keeps details");
   // review
-  await p.locator(".pt-select").selectOption("P-DEMO-A");
+  await p.getByRole("button", { name: /Choose patient$/ }).click();
+  await p.getByRole("dialog", { name: "Choose patient" }).getByRole("button", { name: /^P-DEMO-A/ }).click();
   await p.locator("nav.tabs button", { hasText: "Review" }).click();
   await p.getByRole("button", { name: /Confirm the other 29/ }).click();
   await p.getByText("✓ All 29 reviewed").waitFor(); ok(true, "confirm all reviews");
