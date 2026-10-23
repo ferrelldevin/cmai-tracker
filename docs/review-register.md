@@ -55,13 +55,14 @@ Each check is done by someone or something other than the author.
 |---|---|---|---|---|---|---|
 | V-01 | Two independent raters score the 12 fictional stories on paper | App within 1 point of each rater on 88%+ of items (manual p.7) | `docs/agreement/` | Two raters who have not seen the code | G1 (optional earlier) | Open: materials ready |
 | V-02 | Missed-log simulation under the current rule | Results reported, not a pass/fail | `docs/agreement/robustness.md` | Script | G0 | Done (rerun under rule 2 on 2026-10-23) |
-| V-03 | Offline test on a real iPhone after Add to Home Screen | Logs, scores and export all work with airplane mode on | none yet | Devin | G0 | Open |
+| V-03 | Offline test on a real iPhone after Add to Home Screen | Logs, scores and export all work with airplane mode on | Devin, 2026-10-23, his words: "I did the Home Screen test, behaved as I assume it should" and "data saved while in airplane mode and stayed after regaining connection". Logging offline and keeping the data are confirmed; scores and export offline were not itemized | Devin | G0 | Passed (2026-10-23) |
 | V-04 | Lighthouse and axe (WCAG 2.2 AA) | Accessibility 100, 0 axe violations | `docs/audits/` | Tools | G0 | Done |
 | V-05 | Every citation resolves and none is retracted | All sources verified or marked unverified | `research-notes.md`; 31 of 40 Crossref-verified | Crossref | G0 | Done, with 3 marked unverified (Cohen-Mansfield 1992, 1996; Yao 2023 DOI) |
 | V-06 | DOMS permission quote checked in a browser | Quote matches the live page word for word | `README.md` Permissions | Devin | G0 | Open |
 | V-07 | Other platform builds pass the same `docs/test-cases.json` | Same ratings on every case | `docs/test-cases.json` | Other candidates' apps | G1 | Open |
 | V-08 | Literature recall against a published review | Misses reported | Möhler 2023 Cochrane: 0 of 11 caught (map was scoped to the app's questions) | Published review | G1 | Done (a gap, reported) |
 | V-09 | Five-person usability test with SUS | SUS 68+ (industry average) | `docs/usability/` | Caregivers or nurses | G1 | Deferred (P-06) |
+| V-11 | Back-swipe on a real iPhone Home Screen app: from a Data page (such as Display), swipe back | Returns to the Data hub, and a second swipe does not reopen the page | `e2e/navigation.cjs` passes in Chromium. Devin, 2026-10-23, on his iPhone: "When swiping page navigates to the previous page". Returning to the previous page is confirmed; that a second swipe does not reopen the Data page was not itemized (covered in Chromium only) | Devin | G0 | Passed (2026-10-23) |
 | V-10 | End-to-end check of the production build in headless Chromium at phone size: load demo data, log, undo, Scores, Day-14 review, export, reload, then reload offline | Every step works and the console has no errors | Run on 2026-10-23 | Script | G0 | Done |
 
 ## F. Proposed features
@@ -91,6 +92,7 @@ Newest first. Every rule change and every sign-off goes here, with who and when.
 | Date | Change | By | Approved by |
 |---|---|---|---|
 | 2026-10-23 | Patient switcher (round 9, F-13, design note 002): the native pop-up menu is replaced by a bottom sheet with badge, period and day, and last log; search at 8+ patients; "Now on P-02" confirmation; banner is a real button (fixes the yellow focus ring left after a tap on iPhone) | Devin | n/a (no scoring change) |
+| 2026-10-23 | V-03 (iPhone Home Screen offline test) recorded as passed on Devin's report. V-11 (back-swipe on iPhone) added and passed on Devin's report | Devin | n/a |
 | 2026-10-23 | Change process written down (`docs/process/change-process.md`, PR template). Navigation (round 8, F-12, design note 001): pinned section bar with scroll tracking on Log, Scores and Review; Review grouped like Log with progress per group; Data split into a hub and five pages; screens in the URL so the back gesture and reload keep your place; tapping the current tab scrolls to top; browser checks moved into `e2e/` | Devin | n/a (no scoring change) |
 | 2026-10-23 | Light and dark mode as a setting (round 7): header sun/moon toggle, Data > Display "Appearance" (Match phone, Light, Dark), theme set before first paint, status bar follows. Replaces the media-query-only dark mode | Devin | n/a (no scoring change) |
 | 2026-10-23 | High-contrast display option (round 6): Data screen "Display" setting (Match phone, Standard, High). High uses AAA text contrast (7:1 or better), 2px outlines and a stronger rating ramp, in light and dark. "Match phone" follows the phone's Increase Contrast setting. Windows forced-colors mode keeps the selected-tab and rating-cell cues | Devin | n/a (no scoring change) |
