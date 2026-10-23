@@ -3,7 +3,9 @@
 
 import { ITEMS, type FactorGroup } from "./items";
 
-export const RULE_VERSION = "cmai-count-rule-1";
+// Rule 2 finds rating-7 clusters across midnight (spec section 3). The count bands
+// are unchanged from rule 1.
+export const RULE_VERSION = "cmai-count-rule-2";
 export const DAY_MS = 24 * 60 * 60 * 1000;
 export const WINDOW_DAYS = 14;
 export const WINDOW_MS = WINDOW_DAYS * DAY_MS;
@@ -14,7 +16,7 @@ export interface Observation {
   at: number; // epoch ms
 }
 
-/** Manual p.5 labels for the 1-7 scale, plus the two special codes (p.2). */
+/** Manual p.5 labels for the 1-7 scale, plus the two special codes (p.3). */
 export const RATING_LABELS: Record<number, string> = {
   1: "Never",
   2: "Less than once a week",
@@ -27,6 +29,9 @@ export const RATING_LABELS: Record<number, string> = {
   9: "Not applicable",
 };
 
+/** Ratings that enter sums: 1-7 only. Codes 8 and 9 are reported apart (manual p.5). */
+const isScale = (r: number) => r >= 1 && r <= 7;
+
 /** Count-to-rating table (spec section 2). count = logs in one 14-day window. */
 export function ratingFromCount(count: number): number {
   if (count <= 0) return 1;
@@ -37,28 +42,19 @@ export function ratingFromCount(count: number): number {
   return 6;
 }
 
-/** True if, on this day's sorted timestamps, 3+ fall inside any 60-minute span. */
-function hasHourCluster(sortedTimes: number[]): boolean {
-  for (let i = 0; i + 2 < sortedTimes.length; i++) {
-    if (sortedTimes[i + 2] - sortedTimes[i] < HOUR_MS) return true;
-  }
-  return false;
-}
-
-/** Number of window days with a cluster of 3+ logs inside 60 minutes (spec section 3). */
+/**
+ * Number of window days that start a cluster of 3+ logs inside 60 minutes (spec section 3).
+ * The 60-minute window slides over all of the item's logs, so a burst that crosses
+ * midnight still counts. Each cluster is credited to the day of its first log, and a
+ * day counts once however many clusters start on it.
+ */
 export function clusteredDays(times: number[], windowStart: number): number {
-  const byDay = new Map<number, number[]>();
-  for (const t of times) {
-    const day = Math.floor((t - windowStart) / DAY_MS);
-    const list = byDay.get(day) ?? [];
-    list.push(t);
-    byDay.set(day, list);
+  const sorted = [...times].sort((a, b) => a - b);
+  const days = new Set<number>();
+  for (let i = 0; i + 2 < sorted.length; i++) {
+    if (sorted[i + 2] - sorted[i] < HOUR_MS) days.add(Math.floor((sorted[i] - windowStart) / DAY_MS));
   }
-  let days = 0;
-  for (const list of byDay.values()) {
-    if (hasHourCluster(list.sort((a, b) => a - b))) days++;
-  }
-  return days;
+  return days.size;
 }
 
 export interface ItemScore {
@@ -102,6 +98,42 @@ export function scoreAllWindows(observations: Observation[], anchor: number, now
   return windows;
 }
 
+/**
+ * Days in a window with neither a log nor a "nothing to log today" check-in (spec section 7).
+ * `times` holds every log and check-in time for the patient. Only days that have fully
+ * ended count, so today is never called unlogged while it is still going.
+ */
+export function unloggedDays(times: number[], windowStart: number, now: number): { unlogged: number; elapsed: number } {
+  const elapsed = Math.max(0, Math.min(WINDOW_DAYS, Math.floor((now - windowStart) / DAY_MS)));
+  const covered = new Set<number>();
+  for (const t of times) {
+    const day = Math.floor((t - windowStart) / DAY_MS);
+    if (day >= 0 && day < elapsed) covered.add(day);
+  }
+  return { unlogged: elapsed - covered.size, elapsed };
+}
+
+export type Change = "up" | "down" | null;
+
+/**
+ * Which periods show a meaningful change for one behavior (spec section 6).
+ * `series` is the item's final rating in each finished period, oldest first.
+ * A period is marked when the rating moved 2+ points from the period before, or
+ * moved 1 point in the same direction as the period before also moved.
+ * A 1-point move on its own is inside the manual's rater tolerance (p.7), so it is not marked.
+ * Codes 8 and 9 are not on the scale, so a period next to one is never marked.
+ */
+export function meaningfulChanges(series: number[]): Change[] {
+  const step = (k: number) => (k >= 1 && isScale(series[k]) && isScale(series[k - 1]) ? series[k] - series[k - 1] : 0);
+  return series.map((_, k) => {
+    const d = step(k);
+    if (d === 0) return null;
+    const prev = step(k - 1);
+    const marked = Math.abs(d) >= 2 || Math.sign(prev) === Math.sign(d);
+    return marked ? (d > 0 ? "up" : "down") : null;
+  });
+}
+
 // ---------- Day-14 review (spec section 5) ----------
 
 /** What the caregiver chose for one item at review: a 1-7 rating, or code 8 / 9. */
@@ -114,8 +146,6 @@ export function finalRatings(score: WindowScore, review: Record<number, ReviewCh
   return out;
 }
 
-/** Ratings that enter sums: 1-7 only. Codes 8 and 9 are reported apart (manual p.5). */
-const isScale = (r: number) => r >= 1 && r <= 7;
 
 export interface Summary {
   total: number; // sum of 1-7 ratings across items (secondary figure)

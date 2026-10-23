@@ -1,0 +1,3991 @@
+{
+  "tool": "axe-core 4.14.0",
+  "tags": [
+    "wcag2a",
+    "wcag2aa",
+    "wcag21a",
+    "wcag21aa",
+    "wcag22aa"
+  ],
+  "runAt": "2026-10-22T22:05:15.109Z",
+  "schemes": {
+    "light": [
+      {
+        "screen": "Patients & data (empty)",
+        "url": "http://localhost:4173/",
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "help": "Elements must meet minimum color contrast ratio thresholds",
+            "nodes": 1
+          }
+        ]
+      },
+      {
+        "screen": "Log",
+        "url": "http://localhost:4173/",
+        "violations": [
+          {
+            "id": "label-content-name-mismatch",
+            "impact": "serious",
+            "tags": [
+              "cat.semantics",
+              "wcag21a",
+              "wcag253",
+              "EN-301-549",
+              "EN-9.2.5.3",
+              "RGAAv4",
+              "RGAA-6.1.5"
+            ],
+            "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+            "help": "Elements must have their visible text as part of their accessible name",
+            "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/label-content-name-mismatch?application=axeAPI",
+            "nodes": [
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Spitting\"><span class=\"item-name\"><span class=\"item-num\">3</span>Spitting</span><span class=\"item-def\">Spitting on the floor or at people. Mealtimes count too. <span class=\"ref\">Manual p.12</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Spitting\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Cursing or verbal aggression\"><span class=\"item-name\"><span class=\"item-num\">4</span>Cursing or verbal aggression</span><span class=\"item-def\">Swearing, insults, harsh or hostile words. Must involve words. <span class=\"ref\">Manual p.12</span></span></button>",
+                "target": [
+                  "section:nth-child(2) > .item-grid > .item-card:nth-child(2) > .item-btn"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Hitting (including self)\"><span class=\"item-name\"><span class=\"item-num\">7</span>Hitting (including self)</span><span class=\"item-def\">Striking or pinching someone, or hitting self or furniture. <span class=\"ref\">Manual p.12</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Hitting (including self)\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Kicking\"><span class=\"item-name\"><span class=\"item-num\">8</span>Kicking</span><span class=\"item-def\">Kicking hard at a person or an object. <span class=\"ref\">Manual p.12</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Kicking\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Grabbing onto people or things\"><span class=\"item-name\"><span class=\"item-num\">9</span>Grabbing onto people or things</span><span class=\"item-def\">Grasping hard at a person or object, or jerking it away. <span class=\"ref\">Manual p.12</span></span></button>",
+                "target": [
+                  "section:nth-child(2) > .item-grid > .item-card:nth-child(5) > .item-btn"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Pushing\"><span class=\"item-name\"><span class=\"item-num\">10</span>Pushing</span><span class=\"item-def\">Shoving or pressing hard against someone. <span class=\"ref\">Manual p.12</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Pushing\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Biting\"><span class=\"item-name\"><span class=\"item-num\">14</span>Biting</span><span class=\"item-def\">Biting or gnawing at someone, an object, or oneself. <span class=\"ref\">Manual p.12</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Biting\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Scratching\"><span class=\"item-name\"><span class=\"item-num\">15</span>Scratching</span><span class=\"item-def\">Raking nails across someone, an object, or oneself. <span class=\"ref\">Manual p.12</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Scratching\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Tearing things or destroying property\">",
+                "target": [
+                  "section:nth-child(2) > .item-grid > .item-card:nth-child(9) > .item-btn"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Pacing, aimless wandering\">",
+                "target": [
+                  "button[aria-label=\"Log Pacing, aimless wandering\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Inappropriate dressing or disrobing\">",
+                "target": [
+                  "section:nth-child(3) > .item-grid > .item-card:nth-child(2) > .item-btn"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Trying to get to a different place\">",
+                "target": [
+                  "section:nth-child(3) > .item-grid > .item-card:nth-child(3) > .item-btn"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Handling things inappropriately\">",
+                "target": [
+                  "section:nth-child(3) > .item-grid > .item-card:nth-child(4) > .item-btn"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Repetitious mannerisms\">",
+                "target": [
+                  "button[aria-label=\"Log Repetitious mannerisms\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log General restlessness\">",
+                "target": [
+                  "button[aria-label=\"Log General restlessness\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Constant unwarranted request for attention or help\">",
+                "target": [
+                  "section:nth-child(4) > .item-grid > .item-card:nth-child(1) > .item-btn"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Repetitive sentences or questions\">",
+                "target": [
+                  "section:nth-child(4) > .item-grid > .item-card:nth-child(2) > .item-btn"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Screaming\"><span class=\"item-name\"><span class=\"item-num\">13</span>Screaming</span><span class=\"item-def\">Yelling or shrieking loudly. <span class=\"ref\">Manual p.12</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Screaming\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Complaining\"><span class=\"item-name\"><span class=\"item-num\">18</span>Complaining</span><span class=\"item-def\">Whining or grumbling about self, body aches, others, or surroundings. <span class=\"ref\">Manual p.13</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Complaining\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Negativism\"><span class=\"item-name\"><span class=\"item-num\">19</span>Negativism</span><span class=\"item-def\">A sour, negative outlook: nothing pleases the person. <span class=\"ref\">Manual p.13</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Negativism\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Throwing things\"><span class=\"item-name\"><span class=\"item-num\">11</span>Throwing things</span><span class=\"item-def\">Hurling or tossing objects, sweeping things off tables, emptying food out on purpose. <span class=\"ref\">Manual p.12</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Throwing things\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Making strange noises\"><span class=\"item-name\"><span class=\"item-num\">12</span>Making strange noises</span><span class=\"item-def\">Moaning, crying, odd laughter, teeth grinding, and other strange sounds. <span class=\"ref\">Manual p.12</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Making strange noises\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Intentional falling\"><span class=\"item-name\"><span class=\"item-num\">17</span>Intentional falling</span><span class=\"item-def\">Dropping to the floor on purpose, including from a bed, chair, or wheelchair. <span class=\"ref\">Manual p.13</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Intentional falling\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Eating or drinking inappropriate substances\">",
+                "target": [
+                  "section:nth-child(5) > .item-grid > .item-card:nth-child(4) > .item-btn"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Hurting self or other\"><span class=\"item-name\"><span class=\"item-num\">21</span>Hurting self or other</span><span class=\"item-def\">Harming self or others with something dangerous, such as burns or cuts. <span class=\"ref\">Manual p.13</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Hurting self or other\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Hiding things\"><span class=\"item-name\"><span class=\"item-num\">23</span>Hiding things</span><span class=\"item-def\">Tucking objects away where they can't be seen. <span class=\"ref\">Manual p.13</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Hiding things\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Hoarding things\">",
+                "target": [
+                  "button[aria-label=\"Log Hoarding things\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Verbal sexual advances\"><span class=\"item-name\"><span class=\"item-num\">27</span>Verbal sexual advances</span><span class=\"item-def\">Sexual remarks, suggestive talk, or propositions. <span class=\"ref\">Manual p.13</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Verbal sexual advances\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Physical sexual advances or exposing genitals\">",
+                "target": [
+                  "section:nth-child(5) > .item-grid > .item-card:nth-child(9) > .item-btn"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              }
+            ]
+          }
+        ],
+        "incomplete": []
+      },
+      {
+        "screen": "Log (after a tap: toast with details, exclusion open)",
+        "url": "http://localhost:4173/",
+        "violations": [
+          {
+            "id": "label-content-name-mismatch",
+            "impact": "serious",
+            "tags": [
+              "cat.semantics",
+              "wcag21a",
+              "wcag253",
+              "EN-301-549",
+              "EN-9.2.5.3",
+              "RGAAv4",
+              "RGAA-6.1.5"
+            ],
+            "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+            "help": "Elements must have their visible text as part of their accessible name",
+            "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/label-content-name-mismatch?application=axeAPI",
+            "nodes": [
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Spitting\"><span class=\"item-name\"><span class=\"item-num\">3</span>Spitting</span><span class=\"item-def\">Spitting on the floor or at people. Mealtimes count too. <span class=\"ref\">Manual p.12</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Spitting\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Cursing or verbal aggression\"><span class=\"item-name\"><span class=\"item-num\">4</span>Cursing or verbal aggression</span><span class=\"item-def\">Swearing, insults, harsh or hostile words. Must involve words. <span class=\"ref\">Manual p.12</span></span></button>",
+                "target": [
+                  "section:nth-child(2) > .item-grid > .item-card:nth-child(2) > .item-btn"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Hitting (including self)\">",
+                "target": [
+                  "button[aria-label=\"Log Hitting (including self)\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Kicking\"><span class=\"item-name\"><span class=\"item-num\">8</span>Kicking</span><span class=\"item-def\">Kicking hard at a person or an object. <span class=\"ref\">Manual p.12</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Kicking\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Grabbing onto people or things\"><span class=\"item-name\"><span class=\"item-num\">9</span>Grabbing onto people or things</span><span class=\"item-def\">Grasping hard at a person or object, or jerking it away. <span class=\"ref\">Manual p.12</span></span></button>",
+                "target": [
+                  "section:nth-child(2) > .item-grid > .item-card:nth-child(5) > .item-btn"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Pushing\"><span class=\"item-name\"><span class=\"item-num\">10</span>Pushing</span><span class=\"item-def\">Shoving or pressing hard against someone. <span class=\"ref\">Manual p.12</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Pushing\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Biting\"><span class=\"item-name\"><span class=\"item-num\">14</span>Biting</span><span class=\"item-def\">Biting or gnawing at someone, an object, or oneself. <span class=\"ref\">Manual p.12</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Biting\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Scratching\"><span class=\"item-name\"><span class=\"item-num\">15</span>Scratching</span><span class=\"item-def\">Raking nails across someone, an object, or oneself. <span class=\"ref\">Manual p.12</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Scratching\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Tearing things or destroying property\">",
+                "target": [
+                  "section:nth-child(2) > .item-grid > .item-card:nth-child(9) > .item-btn"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Pacing, aimless wandering\">",
+                "target": [
+                  "button[aria-label=\"Log Pacing, aimless wandering\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Inappropriate dressing or disrobing\">",
+                "target": [
+                  "section:nth-child(3) > .item-grid > .item-card:nth-child(2) > .item-btn"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Trying to get to a different place\">",
+                "target": [
+                  "section:nth-child(3) > .item-grid > .item-card:nth-child(3) > .item-btn"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Handling things inappropriately\">",
+                "target": [
+                  "section:nth-child(3) > .item-grid > .item-card:nth-child(4) > .item-btn"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Repetitious mannerisms\">",
+                "target": [
+                  "button[aria-label=\"Log Repetitious mannerisms\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log General restlessness\">",
+                "target": [
+                  "button[aria-label=\"Log General restlessness\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Constant unwarranted request for attention or help\">",
+                "target": [
+                  "section:nth-child(4) > .item-grid > .item-card:nth-child(1) > .item-btn"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Repetitive sentences or questions\">",
+                "target": [
+                  "section:nth-child(4) > .item-grid > .item-card:nth-child(2) > .item-btn"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Screaming\"><span class=\"item-name\"><span class=\"item-num\">13</span>Screaming</span><span class=\"item-def\">Yelling or shrieking loudly. <span class=\"ref\">Manual p.12</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Screaming\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Complaining\"><span class=\"item-name\"><span class=\"item-num\">18</span>Complaining</span><span class=\"item-def\">Whining or grumbling about self, body aches, others, or surroundings. <span class=\"ref\">Manual p.13</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Complaining\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Negativism\"><span class=\"item-name\"><span class=\"item-num\">19</span>Negativism</span><span class=\"item-def\">A sour, negative outlook: nothing pleases the person. <span class=\"ref\">Manual p.13</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Negativism\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Throwing things\"><span class=\"item-name\"><span class=\"item-num\">11</span>Throwing things</span><span class=\"item-def\">Hurling or tossing objects, sweeping things off tables, emptying food out on purpose. <span class=\"ref\">Manual p.12</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Throwing things\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Making strange noises\"><span class=\"item-name\"><span class=\"item-num\">12</span>Making strange noises</span><span class=\"item-def\">Moaning, crying, odd laughter, teeth grinding, and other strange sounds. <span class=\"ref\">Manual p.12</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Making strange noises\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Intentional falling\"><span class=\"item-name\"><span class=\"item-num\">17</span>Intentional falling</span><span class=\"item-def\">Dropping to the floor on purpose, including from a bed, chair, or wheelchair. <span class=\"ref\">Manual p.13</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Intentional falling\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Eating or drinking inappropriate substances\">",
+                "target": [
+                  "section:nth-child(5) > .item-grid > .item-card:nth-child(4) > .item-btn"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Hurting self or other\"><span class=\"item-name\"><span class=\"item-num\">21</span>Hurting self or other</span><span class=\"item-def\">Harming self or others with something dangerous, such as burns or cuts. <span class=\"ref\">Manual p.13</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Hurting self or other\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Hiding things\"><span class=\"item-name\"><span class=\"item-num\">23</span>Hiding things</span><span class=\"item-def\">Tucking objects away where they can't be seen. <span class=\"ref\">Manual p.13</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Hiding things\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Hoarding things\">",
+                "target": [
+                  "button[aria-label=\"Log Hoarding things\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Verbal sexual advances\"><span class=\"item-name\"><span class=\"item-num\">27</span>Verbal sexual advances</span><span class=\"item-def\">Sexual remarks, suggestive talk, or propositions. <span class=\"ref\">Manual p.13</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Verbal sexual advances\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Physical sexual advances or exposing genitals\">",
+                "target": [
+                  "section:nth-child(5) > .item-grid > .item-card:nth-child(9) > .item-btn"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              }
+            ]
+          }
+        ],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "help": "Elements must meet minimum color contrast ratio thresholds",
+            "nodes": 4
+          }
+        ]
+      },
+      {
+        "screen": "Log (checked in: nothing to log today)",
+        "url": "http://localhost:4173/",
+        "violations": [
+          {
+            "id": "label-content-name-mismatch",
+            "impact": "serious",
+            "tags": [
+              "cat.semantics",
+              "wcag21a",
+              "wcag253",
+              "EN-301-549",
+              "EN-9.2.5.3",
+              "RGAAv4",
+              "RGAA-6.1.5"
+            ],
+            "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+            "help": "Elements must have their visible text as part of their accessible name",
+            "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/label-content-name-mismatch?application=axeAPI",
+            "nodes": [
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Spitting\"><span class=\"item-name\"><span class=\"item-num\">3</span>Spitting</span><span class=\"item-def\">Spitting on the floor or at people. Mealtimes count too. <span class=\"ref\">Manual p.12</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Spitting\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Cursing or verbal aggression\"><span class=\"item-name\"><span class=\"item-num\">4</span>Cursing or verbal aggression</span><span class=\"item-def\">Swearing, insults, harsh or hostile words. Must involve words. <span class=\"ref\">Manual p.12</span></span></button>",
+                "target": [
+                  "section:nth-child(2) > .item-grid > .item-card:nth-child(2) > .item-btn"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Hitting (including self)\"><span class=\"item-name\"><span class=\"item-num\">7</span>Hitting (including self)</span><span class=\"item-def\">Striking or pinching someone, or hitting self or furniture. <span class=\"ref\">Manual p.12</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Hitting (including self)\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Kicking\"><span class=\"item-name\"><span class=\"item-num\">8</span>Kicking</span><span class=\"item-def\">Kicking hard at a person or an object. <span class=\"ref\">Manual p.12</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Kicking\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Grabbing onto people or things\"><span class=\"item-name\"><span class=\"item-num\">9</span>Grabbing onto people or things</span><span class=\"item-def\">Grasping hard at a person or object, or jerking it away. <span class=\"ref\">Manual p.12</span></span></button>",
+                "target": [
+                  "section:nth-child(2) > .item-grid > .item-card:nth-child(5) > .item-btn"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Pushing\"><span class=\"item-name\"><span class=\"item-num\">10</span>Pushing</span><span class=\"item-def\">Shoving or pressing hard against someone. <span class=\"ref\">Manual p.12</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Pushing\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Biting\"><span class=\"item-name\"><span class=\"item-num\">14</span>Biting</span><span class=\"item-def\">Biting or gnawing at someone, an object, or oneself. <span class=\"ref\">Manual p.12</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Biting\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Scratching\"><span class=\"item-name\"><span class=\"item-num\">15</span>Scratching</span><span class=\"item-def\">Raking nails across someone, an object, or oneself. <span class=\"ref\">Manual p.12</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Scratching\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Tearing things or destroying property\">",
+                "target": [
+                  "section:nth-child(2) > .item-grid > .item-card:nth-child(9) > .item-btn"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Pacing, aimless wandering\">",
+                "target": [
+                  "button[aria-label=\"Log Pacing, aimless wandering\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Inappropriate dressing or disrobing\">",
+                "target": [
+                  "section:nth-child(3) > .item-grid > .item-card:nth-child(2) > .item-btn"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Trying to get to a different place\">",
+                "target": [
+                  "section:nth-child(3) > .item-grid > .item-card:nth-child(3) > .item-btn"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Handling things inappropriately\">",
+                "target": [
+                  "section:nth-child(3) > .item-grid > .item-card:nth-child(4) > .item-btn"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Repetitious mannerisms\">",
+                "target": [
+                  "button[aria-label=\"Log Repetitious mannerisms\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log General restlessness\">",
+                "target": [
+                  "button[aria-label=\"Log General restlessness\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Constant unwarranted request for attention or help\">",
+                "target": [
+                  "section:nth-child(4) > .item-grid > .item-card:nth-child(1) > .item-btn"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Repetitive sentences or questions\">",
+                "target": [
+                  "section:nth-child(4) > .item-grid > .item-card:nth-child(2) > .item-btn"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Screaming\"><span class=\"item-name\"><span class=\"item-num\">13</span>Screaming</span><span class=\"item-def\">Yelling or shrieking loudly. <span class=\"ref\">Manual p.12</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Screaming\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Complaining\"><span class=\"item-name\"><span class=\"item-num\">18</span>Complaining</span><span class=\"item-def\">Whining or grumbling about self, body aches, others, or surroundings. <span class=\"ref\">Manual p.13</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Complaining\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Negativism\"><span class=\"item-name\"><span class=\"item-num\">19</span>Negativism</span><span class=\"item-def\">A sour, negative outlook: nothing pleases the person. <span class=\"ref\">Manual p.13</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Negativism\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Throwing things\"><span class=\"item-name\"><span class=\"item-num\">11</span>Throwing things</span><span class=\"item-def\">Hurling or tossing objects, sweeping things off tables, emptying food out on purpose. <span class=\"ref\">Manual p.12</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Throwing things\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Making strange noises\"><span class=\"item-name\"><span class=\"item-num\">12</span>Making strange noises</span><span class=\"item-def\">Moaning, crying, odd laughter, teeth grinding, and other strange sounds. <span class=\"ref\">Manual p.12</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Making strange noises\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Intentional falling\"><span class=\"item-name\"><span class=\"item-num\">17</span>Intentional falling</span><span class=\"item-def\">Dropping to the floor on purpose, including from a bed, chair, or wheelchair. <span class=\"ref\">Manual p.13</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Intentional falling\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Eating or drinking inappropriate substances\">",
+                "target": [
+                  "section:nth-child(5) > .item-grid > .item-card:nth-child(4) > .item-btn"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Hurting self or other\"><span class=\"item-name\"><span class=\"item-num\">21</span>Hurting self or other</span><span class=\"item-def\">Harming self or others with something dangerous, such as burns or cuts. <span class=\"ref\">Manual p.13</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Hurting self or other\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Hiding things\"><span class=\"item-name\"><span class=\"item-num\">23</span>Hiding things</span><span class=\"item-def\">Tucking objects away where they can't be seen. <span class=\"ref\">Manual p.13</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Hiding things\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Hoarding things\">",
+                "target": [
+                  "button[aria-label=\"Log Hoarding things\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Verbal sexual advances\"><span class=\"item-name\"><span class=\"item-num\">27</span>Verbal sexual advances</span><span class=\"item-def\">Sexual remarks, suggestive talk, or propositions. <span class=\"ref\">Manual p.13</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Verbal sexual advances\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Physical sexual advances or exposing genitals\">",
+                "target": [
+                  "section:nth-child(5) > .item-grid > .item-card:nth-child(9) > .item-btn"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              }
+            ]
+          }
+        ],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "help": "Elements must meet minimum color contrast ratio thresholds",
+            "nodes": 1
+          }
+        ]
+      },
+      {
+        "screen": "Scores",
+        "url": "http://localhost:4173/",
+        "violations": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "tags": [
+              "cat.color",
+              "wcag2aa",
+              "wcag143",
+              "TTv5",
+              "TT13.c",
+              "EN-301-549",
+              "EN-9.1.4.3",
+              "ACT",
+              "RGAAv4",
+              "RGAA-3.2.1"
+            ],
+            "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+            "help": "Elements must meet minimum color contrast ratio thresholds",
+            "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/color-contrast?application=axeAPI",
+            "nodes": [
+              {
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "data": {
+                      "fgColor": "#a3aab3",
+                      "bgColor": "#ffffff",
+                      "contrastRatio": 2.34,
+                      "fontSize": "9.0pt (12px)",
+                      "fontWeight": "normal",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    },
+                    "relatedNodes": [
+                      {
+                        "html": "<section class=\"card\">",
+                        "target": [
+                          "section:nth-child(4)"
+                        ]
+                      }
+                    ],
+                    "impact": "serious",
+                    "message": "Element has insufficient color contrast of 2.34 (foreground color: #a3aab3, background color: #ffffff, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<th scope=\"col\" class=\"open\" title=\"Period 4 · Oct 22 to Nov 4\">P4<span class=\"sub\">so far</span></th>",
+                "target": [
+                  "th[title=\"Period 4 · Oct 22 to Nov 4\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.34 (foreground color: #a3aab3, background color: #ffffff, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+              },
+              {
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "data": {
+                      "fgColor": "#a3aab3",
+                      "bgColor": "#ffffff",
+                      "contrastRatio": 2.34,
+                      "fontSize": "8.3pt (11px)",
+                      "fontWeight": "normal",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    },
+                    "relatedNodes": [
+                      {
+                        "html": "<section class=\"card\">",
+                        "target": [
+                          "section:nth-child(4)"
+                        ]
+                      }
+                    ],
+                    "impact": "serious",
+                    "message": "Element has insufficient color contrast of 2.34 (foreground color: #a3aab3, background color: #ffffff, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<span class=\"sub\">so far</span>",
+                "target": [
+                  "th[title=\"Period 4 · Oct 22 to Nov 4\"] > .sub"
+                ],
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.34 (foreground color: #a3aab3, background color: #ffffff, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ]
+          }
+        ],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "help": "Elements must meet minimum color contrast ratio thresholds",
+            "nodes": 47
+          }
+        ]
+      },
+      {
+        "screen": "Scores (all 29 behaviors)",
+        "url": "http://localhost:4173/",
+        "violations": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "tags": [
+              "cat.color",
+              "wcag2aa",
+              "wcag143",
+              "TTv5",
+              "TT13.c",
+              "EN-301-549",
+              "EN-9.1.4.3",
+              "ACT",
+              "RGAAv4",
+              "RGAA-3.2.1"
+            ],
+            "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+            "help": "Elements must meet minimum color contrast ratio thresholds",
+            "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/color-contrast?application=axeAPI",
+            "nodes": [
+              {
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "data": {
+                      "fgColor": "#a3aab3",
+                      "bgColor": "#ffffff",
+                      "contrastRatio": 2.34,
+                      "fontSize": "9.0pt (12px)",
+                      "fontWeight": "normal",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    },
+                    "relatedNodes": [
+                      {
+                        "html": "<section class=\"card\">",
+                        "target": [
+                          "section:nth-child(4)"
+                        ]
+                      }
+                    ],
+                    "impact": "serious",
+                    "message": "Element has insufficient color contrast of 2.34 (foreground color: #a3aab3, background color: #ffffff, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<th scope=\"col\" class=\"open\" title=\"Period 4 · Oct 22 to Nov 4\">P4<span class=\"sub\">so far</span></th>",
+                "target": [
+                  "th[title=\"Period 4 · Oct 22 to Nov 4\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.34 (foreground color: #a3aab3, background color: #ffffff, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+              },
+              {
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "data": {
+                      "fgColor": "#a3aab3",
+                      "bgColor": "#ffffff",
+                      "contrastRatio": 2.34,
+                      "fontSize": "8.3pt (11px)",
+                      "fontWeight": "normal",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    },
+                    "relatedNodes": [
+                      {
+                        "html": "<section class=\"card\">",
+                        "target": [
+                          "section:nth-child(4)"
+                        ]
+                      }
+                    ],
+                    "impact": "serious",
+                    "message": "Element has insufficient color contrast of 2.34 (foreground color: #a3aab3, background color: #ffffff, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<span class=\"sub\">so far</span>",
+                "target": [
+                  "th[title=\"Period 4 · Oct 22 to Nov 4\"] > .sub"
+                ],
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.34 (foreground color: #a3aab3, background color: #ffffff, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ]
+          }
+        ],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "help": "Elements must meet minimum color contrast ratio thresholds",
+            "nodes": 70
+          }
+        ]
+      },
+      {
+        "screen": "Day-14 review",
+        "url": "http://localhost:4173/",
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "help": "Elements must meet minimum color contrast ratio thresholds",
+            "nodes": 3
+          }
+        ]
+      },
+      {
+        "screen": "Patients & data (with patients)",
+        "url": "http://localhost:4173/",
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "help": "Elements must meet minimum color contrast ratio thresholds",
+            "nodes": 1
+          }
+        ]
+      }
+    ],
+    "dark": [
+      {
+        "screen": "Patients & data (empty)",
+        "url": "http://localhost:4173/",
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "help": "Elements must meet minimum color contrast ratio thresholds",
+            "nodes": 1
+          }
+        ]
+      },
+      {
+        "screen": "Log",
+        "url": "http://localhost:4173/",
+        "violations": [
+          {
+            "id": "label-content-name-mismatch",
+            "impact": "serious",
+            "tags": [
+              "cat.semantics",
+              "wcag21a",
+              "wcag253",
+              "EN-301-549",
+              "EN-9.2.5.3",
+              "RGAAv4",
+              "RGAA-6.1.5"
+            ],
+            "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+            "help": "Elements must have their visible text as part of their accessible name",
+            "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/label-content-name-mismatch?application=axeAPI",
+            "nodes": [
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Spitting\"><span class=\"item-name\"><span class=\"item-num\">3</span>Spitting</span><span class=\"item-def\">Spitting on the floor or at people. Mealtimes count too. <span class=\"ref\">Manual p.12</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Spitting\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Cursing or verbal aggression\"><span class=\"item-name\"><span class=\"item-num\">4</span>Cursing or verbal aggression</span><span class=\"item-def\">Swearing, insults, harsh or hostile words. Must involve words. <span class=\"ref\">Manual p.12</span></span></button>",
+                "target": [
+                  "section:nth-child(2) > .item-grid > .item-card:nth-child(2) > .item-btn"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Hitting (including self)\"><span class=\"item-name\"><span class=\"item-num\">7</span>Hitting (including self)</span><span class=\"item-def\">Striking or pinching someone, or hitting self or furniture. <span class=\"ref\">Manual p.12</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Hitting (including self)\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Kicking\"><span class=\"item-name\"><span class=\"item-num\">8</span>Kicking</span><span class=\"item-def\">Kicking hard at a person or an object. <span class=\"ref\">Manual p.12</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Kicking\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Grabbing onto people or things\"><span class=\"item-name\"><span class=\"item-num\">9</span>Grabbing onto people or things</span><span class=\"item-def\">Grasping hard at a person or object, or jerking it away. <span class=\"ref\">Manual p.12</span></span></button>",
+                "target": [
+                  "section:nth-child(2) > .item-grid > .item-card:nth-child(5) > .item-btn"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Pushing\"><span class=\"item-name\"><span class=\"item-num\">10</span>Pushing</span><span class=\"item-def\">Shoving or pressing hard against someone. <span class=\"ref\">Manual p.12</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Pushing\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Biting\"><span class=\"item-name\"><span class=\"item-num\">14</span>Biting</span><span class=\"item-def\">Biting or gnawing at someone, an object, or oneself. <span class=\"ref\">Manual p.12</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Biting\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Scratching\"><span class=\"item-name\"><span class=\"item-num\">15</span>Scratching</span><span class=\"item-def\">Raking nails across someone, an object, or oneself. <span class=\"ref\">Manual p.12</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Scratching\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Tearing things or destroying property\">",
+                "target": [
+                  "section:nth-child(2) > .item-grid > .item-card:nth-child(9) > .item-btn"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Pacing, aimless wandering\">",
+                "target": [
+                  "button[aria-label=\"Log Pacing, aimless wandering\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Inappropriate dressing or disrobing\">",
+                "target": [
+                  "section:nth-child(3) > .item-grid > .item-card:nth-child(2) > .item-btn"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Trying to get to a different place\">",
+                "target": [
+                  "section:nth-child(3) > .item-grid > .item-card:nth-child(3) > .item-btn"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Handling things inappropriately\">",
+                "target": [
+                  "section:nth-child(3) > .item-grid > .item-card:nth-child(4) > .item-btn"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Repetitious mannerisms\">",
+                "target": [
+                  "button[aria-label=\"Log Repetitious mannerisms\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log General restlessness\">",
+                "target": [
+                  "button[aria-label=\"Log General restlessness\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Constant unwarranted request for attention or help\">",
+                "target": [
+                  "section:nth-child(4) > .item-grid > .item-card:nth-child(1) > .item-btn"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Repetitive sentences or questions\">",
+                "target": [
+                  "section:nth-child(4) > .item-grid > .item-card:nth-child(2) > .item-btn"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Screaming\"><span class=\"item-name\"><span class=\"item-num\">13</span>Screaming</span><span class=\"item-def\">Yelling or shrieking loudly. <span class=\"ref\">Manual p.12</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Screaming\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Complaining\"><span class=\"item-name\"><span class=\"item-num\">18</span>Complaining</span><span class=\"item-def\">Whining or grumbling about self, body aches, others, or surroundings. <span class=\"ref\">Manual p.13</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Complaining\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Negativism\"><span class=\"item-name\"><span class=\"item-num\">19</span>Negativism</span><span class=\"item-def\">A sour, negative outlook: nothing pleases the person. <span class=\"ref\">Manual p.13</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Negativism\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Throwing things\"><span class=\"item-name\"><span class=\"item-num\">11</span>Throwing things</span><span class=\"item-def\">Hurling or tossing objects, sweeping things off tables, emptying food out on purpose. <span class=\"ref\">Manual p.12</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Throwing things\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Making strange noises\"><span class=\"item-name\"><span class=\"item-num\">12</span>Making strange noises</span><span class=\"item-def\">Moaning, crying, odd laughter, teeth grinding, and other strange sounds. <span class=\"ref\">Manual p.12</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Making strange noises\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Intentional falling\"><span class=\"item-name\"><span class=\"item-num\">17</span>Intentional falling</span><span class=\"item-def\">Dropping to the floor on purpose, including from a bed, chair, or wheelchair. <span class=\"ref\">Manual p.13</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Intentional falling\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Eating or drinking inappropriate substances\">",
+                "target": [
+                  "section:nth-child(5) > .item-grid > .item-card:nth-child(4) > .item-btn"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Hurting self or other\"><span class=\"item-name\"><span class=\"item-num\">21</span>Hurting self or other</span><span class=\"item-def\">Harming self or others with something dangerous, such as burns or cuts. <span class=\"ref\">Manual p.13</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Hurting self or other\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Hiding things\"><span class=\"item-name\"><span class=\"item-num\">23</span>Hiding things</span><span class=\"item-def\">Tucking objects away where they can't be seen. <span class=\"ref\">Manual p.13</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Hiding things\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Hoarding things\">",
+                "target": [
+                  "button[aria-label=\"Log Hoarding things\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Verbal sexual advances\"><span class=\"item-name\"><span class=\"item-num\">27</span>Verbal sexual advances</span><span class=\"item-def\">Sexual remarks, suggestive talk, or propositions. <span class=\"ref\">Manual p.13</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Verbal sexual advances\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Physical sexual advances or exposing genitals\">",
+                "target": [
+                  "section:nth-child(5) > .item-grid > .item-card:nth-child(9) > .item-btn"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              }
+            ]
+          }
+        ],
+        "incomplete": []
+      },
+      {
+        "screen": "Log (after a tap: toast with details, exclusion open)",
+        "url": "http://localhost:4173/",
+        "violations": [
+          {
+            "id": "label-content-name-mismatch",
+            "impact": "serious",
+            "tags": [
+              "cat.semantics",
+              "wcag21a",
+              "wcag253",
+              "EN-301-549",
+              "EN-9.2.5.3",
+              "RGAAv4",
+              "RGAA-6.1.5"
+            ],
+            "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+            "help": "Elements must have their visible text as part of their accessible name",
+            "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/label-content-name-mismatch?application=axeAPI",
+            "nodes": [
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Spitting\"><span class=\"item-name\"><span class=\"item-num\">3</span>Spitting</span><span class=\"item-def\">Spitting on the floor or at people. Mealtimes count too. <span class=\"ref\">Manual p.12</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Spitting\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Cursing or verbal aggression\"><span class=\"item-name\"><span class=\"item-num\">4</span>Cursing or verbal aggression</span><span class=\"item-def\">Swearing, insults, harsh or hostile words. Must involve words. <span class=\"ref\">Manual p.12</span></span></button>",
+                "target": [
+                  "section:nth-child(2) > .item-grid > .item-card:nth-child(2) > .item-btn"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Hitting (including self)\">",
+                "target": [
+                  "button[aria-label=\"Log Hitting (including self)\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Kicking\"><span class=\"item-name\"><span class=\"item-num\">8</span>Kicking</span><span class=\"item-def\">Kicking hard at a person or an object. <span class=\"ref\">Manual p.12</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Kicking\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Grabbing onto people or things\"><span class=\"item-name\"><span class=\"item-num\">9</span>Grabbing onto people or things</span><span class=\"item-def\">Grasping hard at a person or object, or jerking it away. <span class=\"ref\">Manual p.12</span></span></button>",
+                "target": [
+                  "section:nth-child(2) > .item-grid > .item-card:nth-child(5) > .item-btn"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Pushing\"><span class=\"item-name\"><span class=\"item-num\">10</span>Pushing</span><span class=\"item-def\">Shoving or pressing hard against someone. <span class=\"ref\">Manual p.12</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Pushing\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Biting\"><span class=\"item-name\"><span class=\"item-num\">14</span>Biting</span><span class=\"item-def\">Biting or gnawing at someone, an object, or oneself. <span class=\"ref\">Manual p.12</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Biting\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Scratching\"><span class=\"item-name\"><span class=\"item-num\">15</span>Scratching</span><span class=\"item-def\">Raking nails across someone, an object, or oneself. <span class=\"ref\">Manual p.12</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Scratching\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Tearing things or destroying property\">",
+                "target": [
+                  "section:nth-child(2) > .item-grid > .item-card:nth-child(9) > .item-btn"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Pacing, aimless wandering\">",
+                "target": [
+                  "button[aria-label=\"Log Pacing, aimless wandering\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Inappropriate dressing or disrobing\">",
+                "target": [
+                  "section:nth-child(3) > .item-grid > .item-card:nth-child(2) > .item-btn"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Trying to get to a different place\">",
+                "target": [
+                  "section:nth-child(3) > .item-grid > .item-card:nth-child(3) > .item-btn"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Handling things inappropriately\">",
+                "target": [
+                  "section:nth-child(3) > .item-grid > .item-card:nth-child(4) > .item-btn"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Repetitious mannerisms\">",
+                "target": [
+                  "button[aria-label=\"Log Repetitious mannerisms\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log General restlessness\">",
+                "target": [
+                  "button[aria-label=\"Log General restlessness\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Constant unwarranted request for attention or help\">",
+                "target": [
+                  "section:nth-child(4) > .item-grid > .item-card:nth-child(1) > .item-btn"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Repetitive sentences or questions\">",
+                "target": [
+                  "section:nth-child(4) > .item-grid > .item-card:nth-child(2) > .item-btn"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Screaming\"><span class=\"item-name\"><span class=\"item-num\">13</span>Screaming</span><span class=\"item-def\">Yelling or shrieking loudly. <span class=\"ref\">Manual p.12</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Screaming\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Complaining\"><span class=\"item-name\"><span class=\"item-num\">18</span>Complaining</span><span class=\"item-def\">Whining or grumbling about self, body aches, others, or surroundings. <span class=\"ref\">Manual p.13</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Complaining\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Negativism\"><span class=\"item-name\"><span class=\"item-num\">19</span>Negativism</span><span class=\"item-def\">A sour, negative outlook: nothing pleases the person. <span class=\"ref\">Manual p.13</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Negativism\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Throwing things\"><span class=\"item-name\"><span class=\"item-num\">11</span>Throwing things</span><span class=\"item-def\">Hurling or tossing objects, sweeping things off tables, emptying food out on purpose. <span class=\"ref\">Manual p.12</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Throwing things\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Making strange noises\"><span class=\"item-name\"><span class=\"item-num\">12</span>Making strange noises</span><span class=\"item-def\">Moaning, crying, odd laughter, teeth grinding, and other strange sounds. <span class=\"ref\">Manual p.12</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Making strange noises\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Intentional falling\"><span class=\"item-name\"><span class=\"item-num\">17</span>Intentional falling</span><span class=\"item-def\">Dropping to the floor on purpose, including from a bed, chair, or wheelchair. <span class=\"ref\">Manual p.13</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Intentional falling\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Eating or drinking inappropriate substances\">",
+                "target": [
+                  "section:nth-child(5) > .item-grid > .item-card:nth-child(4) > .item-btn"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Hurting self or other\"><span class=\"item-name\"><span class=\"item-num\">21</span>Hurting self or other</span><span class=\"item-def\">Harming self or others with something dangerous, such as burns or cuts. <span class=\"ref\">Manual p.13</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Hurting self or other\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Hiding things\"><span class=\"item-name\"><span class=\"item-num\">23</span>Hiding things</span><span class=\"item-def\">Tucking objects away where they can't be seen. <span class=\"ref\">Manual p.13</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Hiding things\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Hoarding things\">",
+                "target": [
+                  "button[aria-label=\"Log Hoarding things\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Verbal sexual advances\"><span class=\"item-name\"><span class=\"item-num\">27</span>Verbal sexual advances</span><span class=\"item-def\">Sexual remarks, suggestive talk, or propositions. <span class=\"ref\">Manual p.13</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Verbal sexual advances\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Physical sexual advances or exposing genitals\">",
+                "target": [
+                  "section:nth-child(5) > .item-grid > .item-card:nth-child(9) > .item-btn"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              }
+            ]
+          }
+        ],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "help": "Elements must meet minimum color contrast ratio thresholds",
+            "nodes": 4
+          }
+        ]
+      },
+      {
+        "screen": "Log (checked in: nothing to log today)",
+        "url": "http://localhost:4173/",
+        "violations": [
+          {
+            "id": "label-content-name-mismatch",
+            "impact": "serious",
+            "tags": [
+              "cat.semantics",
+              "wcag21a",
+              "wcag253",
+              "EN-301-549",
+              "EN-9.2.5.3",
+              "RGAAv4",
+              "RGAA-6.1.5"
+            ],
+            "description": "Ensure that elements labelled through their content must have their visible text as part of their accessible name",
+            "help": "Elements must have their visible text as part of their accessible name",
+            "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/label-content-name-mismatch?application=axeAPI",
+            "nodes": [
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Spitting\"><span class=\"item-name\"><span class=\"item-num\">3</span>Spitting</span><span class=\"item-def\">Spitting on the floor or at people. Mealtimes count too. <span class=\"ref\">Manual p.12</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Spitting\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Cursing or verbal aggression\"><span class=\"item-name\"><span class=\"item-num\">4</span>Cursing or verbal aggression</span><span class=\"item-def\">Swearing, insults, harsh or hostile words. Must involve words. <span class=\"ref\">Manual p.12</span></span></button>",
+                "target": [
+                  "section:nth-child(2) > .item-grid > .item-card:nth-child(2) > .item-btn"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Hitting (including self)\"><span class=\"item-name\"><span class=\"item-num\">7</span>Hitting (including self)</span><span class=\"item-def\">Striking or pinching someone, or hitting self or furniture. <span class=\"ref\">Manual p.12</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Hitting (including self)\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Kicking\"><span class=\"item-name\"><span class=\"item-num\">8</span>Kicking</span><span class=\"item-def\">Kicking hard at a person or an object. <span class=\"ref\">Manual p.12</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Kicking\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Grabbing onto people or things\"><span class=\"item-name\"><span class=\"item-num\">9</span>Grabbing onto people or things</span><span class=\"item-def\">Grasping hard at a person or object, or jerking it away. <span class=\"ref\">Manual p.12</span></span></button>",
+                "target": [
+                  "section:nth-child(2) > .item-grid > .item-card:nth-child(5) > .item-btn"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Pushing\"><span class=\"item-name\"><span class=\"item-num\">10</span>Pushing</span><span class=\"item-def\">Shoving or pressing hard against someone. <span class=\"ref\">Manual p.12</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Pushing\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Biting\"><span class=\"item-name\"><span class=\"item-num\">14</span>Biting</span><span class=\"item-def\">Biting or gnawing at someone, an object, or oneself. <span class=\"ref\">Manual p.12</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Biting\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Scratching\"><span class=\"item-name\"><span class=\"item-num\">15</span>Scratching</span><span class=\"item-def\">Raking nails across someone, an object, or oneself. <span class=\"ref\">Manual p.12</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Scratching\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Tearing things or destroying property\">",
+                "target": [
+                  "section:nth-child(2) > .item-grid > .item-card:nth-child(9) > .item-btn"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Pacing, aimless wandering\">",
+                "target": [
+                  "button[aria-label=\"Log Pacing, aimless wandering\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Inappropriate dressing or disrobing\">",
+                "target": [
+                  "section:nth-child(3) > .item-grid > .item-card:nth-child(2) > .item-btn"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Trying to get to a different place\">",
+                "target": [
+                  "section:nth-child(3) > .item-grid > .item-card:nth-child(3) > .item-btn"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Handling things inappropriately\">",
+                "target": [
+                  "section:nth-child(3) > .item-grid > .item-card:nth-child(4) > .item-btn"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Repetitious mannerisms\">",
+                "target": [
+                  "button[aria-label=\"Log Repetitious mannerisms\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log General restlessness\">",
+                "target": [
+                  "button[aria-label=\"Log General restlessness\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Constant unwarranted request for attention or help\">",
+                "target": [
+                  "section:nth-child(4) > .item-grid > .item-card:nth-child(1) > .item-btn"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Repetitive sentences or questions\">",
+                "target": [
+                  "section:nth-child(4) > .item-grid > .item-card:nth-child(2) > .item-btn"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Screaming\"><span class=\"item-name\"><span class=\"item-num\">13</span>Screaming</span><span class=\"item-def\">Yelling or shrieking loudly. <span class=\"ref\">Manual p.12</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Screaming\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Complaining\"><span class=\"item-name\"><span class=\"item-num\">18</span>Complaining</span><span class=\"item-def\">Whining or grumbling about self, body aches, others, or surroundings. <span class=\"ref\">Manual p.13</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Complaining\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Negativism\"><span class=\"item-name\"><span class=\"item-num\">19</span>Negativism</span><span class=\"item-def\">A sour, negative outlook: nothing pleases the person. <span class=\"ref\">Manual p.13</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Negativism\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Throwing things\"><span class=\"item-name\"><span class=\"item-num\">11</span>Throwing things</span><span class=\"item-def\">Hurling or tossing objects, sweeping things off tables, emptying food out on purpose. <span class=\"ref\">Manual p.12</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Throwing things\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Making strange noises\"><span class=\"item-name\"><span class=\"item-num\">12</span>Making strange noises</span><span class=\"item-def\">Moaning, crying, odd laughter, teeth grinding, and other strange sounds. <span class=\"ref\">Manual p.12</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Making strange noises\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Intentional falling\"><span class=\"item-name\"><span class=\"item-num\">17</span>Intentional falling</span><span class=\"item-def\">Dropping to the floor on purpose, including from a bed, chair, or wheelchair. <span class=\"ref\">Manual p.13</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Intentional falling\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Eating or drinking inappropriate substances\">",
+                "target": [
+                  "section:nth-child(5) > .item-grid > .item-card:nth-child(4) > .item-btn"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Hurting self or other\"><span class=\"item-name\"><span class=\"item-num\">21</span>Hurting self or other</span><span class=\"item-def\">Harming self or others with something dangerous, such as burns or cuts. <span class=\"ref\">Manual p.13</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Hurting self or other\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Hiding things\"><span class=\"item-name\"><span class=\"item-num\">23</span>Hiding things</span><span class=\"item-def\">Tucking objects away where they can't be seen. <span class=\"ref\">Manual p.13</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Hiding things\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Hoarding things\">",
+                "target": [
+                  "button[aria-label=\"Log Hoarding things\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Verbal sexual advances\"><span class=\"item-name\"><span class=\"item-num\">27</span>Verbal sexual advances</span><span class=\"item-def\">Sexual remarks, suggestive talk, or propositions. <span class=\"ref\">Manual p.13</span></span></button>",
+                "target": [
+                  "button[aria-label=\"Log Verbal sexual advances\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              },
+              {
+                "any": [
+                  {
+                    "id": "label-content-name-mismatch",
+                    "data": null,
+                    "relatedNodes": [],
+                    "impact": "serious",
+                    "message": "Text inside the element is not included in the accessible name"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<button class=\"item-btn\" aria-label=\"Log Physical sexual advances or exposing genitals\">",
+                "target": [
+                  "section:nth-child(5) > .item-grid > .item-card:nth-child(9) > .item-btn"
+                ],
+                "failureSummary": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
+              }
+            ]
+          }
+        ],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "help": "Elements must meet minimum color contrast ratio thresholds",
+            "nodes": 1
+          }
+        ]
+      },
+      {
+        "screen": "Scores",
+        "url": "http://localhost:4173/",
+        "violations": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "tags": [
+              "cat.color",
+              "wcag2aa",
+              "wcag143",
+              "TTv5",
+              "TT13.c",
+              "EN-301-549",
+              "EN-9.1.4.3",
+              "ACT",
+              "RGAAv4",
+              "RGAA-3.2.1"
+            ],
+            "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+            "help": "Elements must meet minimum color contrast ratio thresholds",
+            "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/color-contrast?application=axeAPI",
+            "nodes": [
+              {
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "data": {
+                      "fgColor": "#5e6774",
+                      "bgColor": "#181e27",
+                      "contrastRatio": 2.92,
+                      "fontSize": "9.0pt (12px)",
+                      "fontWeight": "normal",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    },
+                    "relatedNodes": [
+                      {
+                        "html": "<section class=\"card\">",
+                        "target": [
+                          "section:nth-child(4)"
+                        ]
+                      }
+                    ],
+                    "impact": "serious",
+                    "message": "Element has insufficient color contrast of 2.92 (foreground color: #5e6774, background color: #181e27, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<th scope=\"col\" class=\"open\" title=\"Period 4 · Oct 22 to Nov 4\">P4<span class=\"sub\">so far</span></th>",
+                "target": [
+                  "th[title=\"Period 4 · Oct 22 to Nov 4\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.92 (foreground color: #5e6774, background color: #181e27, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+              },
+              {
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "data": {
+                      "fgColor": "#5e6774",
+                      "bgColor": "#181e27",
+                      "contrastRatio": 2.92,
+                      "fontSize": "8.3pt (11px)",
+                      "fontWeight": "normal",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    },
+                    "relatedNodes": [
+                      {
+                        "html": "<section class=\"card\">",
+                        "target": [
+                          "section:nth-child(4)"
+                        ]
+                      }
+                    ],
+                    "impact": "serious",
+                    "message": "Element has insufficient color contrast of 2.92 (foreground color: #5e6774, background color: #181e27, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<span class=\"sub\">so far</span>",
+                "target": [
+                  "th[title=\"Period 4 · Oct 22 to Nov 4\"] > .sub"
+                ],
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.92 (foreground color: #5e6774, background color: #181e27, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ]
+          }
+        ],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "help": "Elements must meet minimum color contrast ratio thresholds",
+            "nodes": 47
+          }
+        ]
+      },
+      {
+        "screen": "Scores (all 29 behaviors)",
+        "url": "http://localhost:4173/",
+        "violations": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "tags": [
+              "cat.color",
+              "wcag2aa",
+              "wcag143",
+              "TTv5",
+              "TT13.c",
+              "EN-301-549",
+              "EN-9.1.4.3",
+              "ACT",
+              "RGAAv4",
+              "RGAA-3.2.1"
+            ],
+            "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+            "help": "Elements must meet minimum color contrast ratio thresholds",
+            "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/color-contrast?application=axeAPI",
+            "nodes": [
+              {
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "data": {
+                      "fgColor": "#5e6774",
+                      "bgColor": "#181e27",
+                      "contrastRatio": 2.92,
+                      "fontSize": "9.0pt (12px)",
+                      "fontWeight": "normal",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    },
+                    "relatedNodes": [
+                      {
+                        "html": "<section class=\"card\">",
+                        "target": [
+                          "section:nth-child(4)"
+                        ]
+                      }
+                    ],
+                    "impact": "serious",
+                    "message": "Element has insufficient color contrast of 2.92 (foreground color: #5e6774, background color: #181e27, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<th scope=\"col\" class=\"open\" title=\"Period 4 · Oct 22 to Nov 4\">P4<span class=\"sub\">so far</span></th>",
+                "target": [
+                  "th[title=\"Period 4 · Oct 22 to Nov 4\"]"
+                ],
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.92 (foreground color: #5e6774, background color: #181e27, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+              },
+              {
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "data": {
+                      "fgColor": "#5e6774",
+                      "bgColor": "#181e27",
+                      "contrastRatio": 2.92,
+                      "fontSize": "8.3pt (11px)",
+                      "fontWeight": "normal",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    },
+                    "relatedNodes": [
+                      {
+                        "html": "<section class=\"card\">",
+                        "target": [
+                          "section:nth-child(4)"
+                        ]
+                      }
+                    ],
+                    "impact": "serious",
+                    "message": "Element has insufficient color contrast of 2.92 (foreground color: #5e6774, background color: #181e27, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+                  }
+                ],
+                "all": [],
+                "none": [],
+                "impact": "serious",
+                "html": "<span class=\"sub\">so far</span>",
+                "target": [
+                  "th[title=\"Period 4 · Oct 22 to Nov 4\"] > .sub"
+                ],
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.92 (foreground color: #5e6774, background color: #181e27, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ]
+          }
+        ],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "help": "Elements must meet minimum color contrast ratio thresholds",
+            "nodes": 70
+          }
+        ]
+      },
+      {
+        "screen": "Day-14 review",
+        "url": "http://localhost:4173/",
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "help": "Elements must meet minimum color contrast ratio thresholds",
+            "nodes": 3
+          }
+        ]
+      },
+      {
+        "screen": "Patients & data (with patients)",
+        "url": "http://localhost:4173/",
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "help": "Elements must meet minimum color contrast ratio thresholds",
+            "nodes": 1
+          }
+        ]
+      }
+    ]
+  }
+}

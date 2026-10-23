@@ -1,0 +1,17 @@
+NOTICE
+
+The source code in this repository is licensed under the MIT License (see LICENSE),
+except as noted below.
+
+Cohen-Mansfield Agitation Inventory (CMAI)
+The CMAI item names, behavior definitions, and rating scale anchors in
+src/scoring/items.ts and src/scoring/engine.ts (and any text derived from them shown
+in the app) are adapted from the Instruction Manual for the Cohen-Mansfield Agitation
+Inventory, (c) 1991 Jiska Cohen-Mansfield; forms (c) 1986 Cohen-Mansfield, all rights
+reserved. This material is NOT covered by the MIT License. The CMAI may be used free of
+charge for non-commercial purposes; other uses require permission from the author
+(Dementia Outcomes Measurement Suite, https://dementiaresearch.org.au/doms/behaviour).
+Permission to adapt and display these definitions in this app: [requested on DATE / granted on DATE].
+
+Citation: Cohen-Mansfield, J. (1991). Instruction Manual for the Cohen-Mansfield
+Agitation Inventory (CMAI). Research Institute of the Hebrew Home of Greater Washington.

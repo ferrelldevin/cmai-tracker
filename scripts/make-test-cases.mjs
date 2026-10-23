@@ -15,6 +15,12 @@ const spread = (n, times = ["10:00"]) => {
   return logs;
 };
 const everyDay = (days, times) => Array.from({ length: days }, (_, day) => ({ day, times }));
+// 23:40 and 23:55 on each of `nights` days, then 00:15 the next day: one burst per night.
+const acrossMidnight = (nights) =>
+  Array.from({ length: nights + 1 }, (_, day) => ({
+    day,
+    times: [...(day > 0 ? ["00:15"] : []), ...(day < nights ? ["23:40", "23:55"] : [])],
+  }));
 
 const countCases = [
   ["count-0", "No logs at all", 0, 1],
@@ -49,6 +55,16 @@ const clusterCases = [
     itemId: 6, logs: everyDay(7, ["10:00", "10:30", "11:01"]), expectedCount: 21, expectedRating: 5,
   },
   {
+    id: "cluster-across-midnight-7-nights",
+    description: "3 logs within 35 minutes (23:40, 23:55, then 00:15 the next day) on 7 nights. Each burst crosses midnight and is credited to the day it starts (days 0-6): 7 clustered days, so rating 7.",
+    itemId: 13, logs: acrossMidnight(7), expectedCount: 21, expectedRating: 7,
+  },
+  {
+    id: "cluster-across-midnight-6-nights",
+    description: "Same pattern on only 6 nights: 6 clustered days, under half. Falls back to the count table: 18 logs is rating 5.",
+    itemId: 13, logs: acrossMidnight(6), expectedCount: 18, expectedRating: 5,
+  },
+  {
     id: "outside-window",
     description: "One log on day 0, one on day 14 (the first day of the NEXT window). Only day 0 counts: rating 2.",
     itemId: 7, logs: [{ day: 0, times: ["08:00"] }, { day: 14, times: ["08:00"] }], expectedCount: 1, expectedRating: 2,
@@ -80,7 +96,7 @@ const summaryCases = [
 
 const doc = {
   about: "Hand-scorable test cases for the CMAI count rule. Window starts day 0 at 00:00 (2026-01-05, UTC). Days run 0-13. Score each case from docs/scoring-spec.md without reading any code; your answer should match expectedRating.",
-  ruleVersion: "cmai-count-rule-1",
+  ruleVersion: "cmai-count-rule-2",
   windowStart: "2026-01-05T00:00:00Z",
   ratingCases: [...countCases, ...clusterCases],
   summaryCases,

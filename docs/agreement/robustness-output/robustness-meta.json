@@ -1,0 +1,125 @@
+{
+  "ruleVersion": "cmai-count-rule-2",
+  "reps": 2000,
+  "rates": [
+    0.1,
+    0.3,
+    0.5
+  ],
+  "modes": [
+    "uniform",
+    "busy"
+  ],
+  "units": [
+    {
+      "source": "demo",
+      "id": "P-DEMO-A window 1",
+      "logs": 161,
+      "activeItems": 6
+    },
+    {
+      "source": "demo",
+      "id": "P-DEMO-A window 2",
+      "logs": 124,
+      "activeItems": 6
+    },
+    {
+      "source": "demo",
+      "id": "P-DEMO-A window 3",
+      "logs": 76,
+      "activeItems": 6
+    },
+    {
+      "source": "demo",
+      "id": "P-DEMO-B window 1",
+      "logs": 60,
+      "activeItems": 5
+    },
+    {
+      "source": "demo",
+      "id": "P-DEMO-B window 2",
+      "logs": 87,
+      "activeItems": 5
+    },
+    {
+      "source": "demo",
+      "id": "P-DEMO-B window 3",
+      "logs": 118,
+      "activeItems": 5
+    },
+    {
+      "source": "vignettes",
+      "id": "V01",
+      "logs": 5,
+      "activeItems": 3
+    },
+    {
+      "source": "vignettes",
+      "id": "V02",
+      "logs": 17,
+      "activeItems": 3
+    },
+    {
+      "source": "vignettes",
+      "id": "V03",
+      "logs": 23,
+      "activeItems": 4
+    },
+    {
+      "source": "vignettes",
+      "id": "V04",
+      "logs": 52,
+      "activeItems": 4
+    },
+    {
+      "source": "vignettes",
+      "id": "V05",
+      "logs": 82,
+      "activeItems": 4
+    },
+    {
+      "source": "vignettes",
+      "id": "V06",
+      "logs": 103,
+      "activeItems": 4
+    },
+    {
+      "source": "vignettes",
+      "id": "V07",
+      "logs": 90,
+      "activeItems": 3
+    },
+    {
+      "source": "vignettes",
+      "id": "V08",
+      "logs": 67,
+      "activeItems": 3
+    },
+    {
+      "source": "vignettes",
+      "id": "V09",
+      "logs": 28,
+      "activeItems": 2
+    },
+    {
+      "source": "vignettes",
+      "id": "V10",
+      "logs": 3,
+      "activeItems": 2
+    },
+    {
+      "source": "vignettes",
+      "id": "V11",
+      "logs": 33,
+      "activeItems": 5
+    },
+    {
+      "source": "vignettes",
+      "id": "V12",
+      "logs": 71,
+      "activeItems": 4
+    }
+  ],
+  "demoNow": "2026-03-02T12:00:00.000Z",
+  "itemsOnForm": 29
+}

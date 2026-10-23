@@ -4,7 +4,7 @@
 
 import { useState } from "react";
 import { Bar, BarChart, CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
-import { RATING_LABELS } from "../scoring/engine";
+import { meaningfulChanges, RATING_LABELS } from "../scoring/engine";
 import { GROUP_LABELS, ITEMS } from "../scoring/items";
 import type { StoredObservation } from "../data/db";
 import type { ScoredWindow } from "./useCmaiData";
@@ -25,6 +25,11 @@ export function ScoresScreen({ windows, observations }: Props) {
   const sel = windows[Math.min(selected, windows.length - 1)];
   const rows = ITEMS.filter((i) => showAll || windows.some((w) => w.finals[i.id] > 1));
   const label = (w: ScoredWindow, i: number) => `P${i + 1}`;
+
+  // Change marks compare finished periods only (they always come first).
+  const finished = windows.filter((w) => !w.score.provisional);
+  const changes = new Map(ITEMS.map((i) => [i.id, meaningfulChanges(finished.map((w) => w.finals[i.id]))]));
+  const changedInSel = ITEMS.filter((i) => changes.get(i.id)?.[selected]);
 
   // Trend lines use finished periods only: a period still in progress has
   // fewer days of logs, so it would always look like an improvement.
@@ -52,6 +57,8 @@ export function ScoresScreen({ windows, observations }: Props) {
         ))}
       </div>
 
+      <p className="muted">Ratings here are CMAI-based (app-derived): worked out from logged events and the day-14 review, not from a CMAI interview.</p>
+
       <section className="card">
         <h2>Agitation status, period {selected + 1}</h2>
         <p className="muted">Manual rules (p.5 to 6). A group is "agitated" when its behaviors reach the manual's frequency thresholds.</p>
@@ -64,14 +71,20 @@ export function ScoresScreen({ windows, observations }: Props) {
             </div>
           ))}
         </div>
+        {sel.unlogged > 0 && (
+          <p className="note">
+            {sel.unlogged} of {sel.elapsed} days in this period are unlogged: no logs and no "nothing to log today" check-in. Those days count as unknown, not as zero, but ratings may read low.
+          </p>
+        )}
         {sel.summary.specialCodes.length > 0 && (
           <p className="muted">Left out of sums: {sel.summary.specialCodes.map((c) => `#${c.itemId} (${RATING_LABELS[c.code]})`).join(", ")}</p>
         )}
       </section>
 
       <section className="card">
-        <h2>Each behavior, period by period</h2>
+        <h2>Each behavior, period by period <span className="tag">app-derived</span></h2>
         <p className="muted">1 = never, 7 = several times an hour. Stronger color means more often. This is the view the manual recommends.</p>
+        <p className="muted">↑ or ↓ marks a change worth noticing: 2 or more points from the period before, or 1 point the same way two periods running. A single 1-point move is within how much two raters can differ (manual p.7), so it is not marked.</p>
         <div className="heat-wrap">
           <table className="heat">
             <thead>
@@ -86,6 +99,14 @@ export function ScoresScreen({ windows, observations }: Props) {
               </tr>
             </thead>
             <tbody>
+              <tr className="unlogged-row">
+                <th scope="row">Unlogged days</th>
+                {windows.map((w, i) => (
+                  <td key={i} className={w.unlogged ? "gap" : ""} title={`${w.unlogged} of ${w.elapsed} finished days with no log and no "nothing to log" check-in`}>
+                    {w.unlogged}
+                  </td>
+                ))}
+              </tr>
               {rows.map((item) => (
                 <tr key={item.id}>
                   <th scope="row">{item.id}. {item.name}</th>
@@ -93,9 +114,16 @@ export function ScoresScreen({ windows, observations }: Props) {
                     const r = w.finals[item.id];
                     const s = w.score.items[item.id - 1];
                     const reviewed = item.id in w.review;
+                    const ch = changes.get(item.id)?.[i];
                     return (
-                      <td key={i} className={`r r${r}${w.score.provisional ? " open" : ""}`} title={`${RATING_LABELS[r]} · ${s.count} logged${reviewed ? " · set at review" : ""}${w.score.provisional ? " · period not finished" : ""}`}>
+                      <td key={i} className={`r r${r}${w.score.provisional ? " open" : ""}`} title={`${RATING_LABELS[r]} · ${s.count} logged${reviewed ? " · set at review" : ""}${w.score.provisional ? " · period not finished" : ""}${ch ? ` · changed (${ch === "up" ? "more often" : "less often"})` : ""}`}>
                         {r}
+                        {ch && (
+                          <span className="chg">
+                            <span aria-hidden>{ch === "up" ? "↑" : "↓"}</span>
+                            <span className="sr">{ch === "up" ? "changed, more often" : "changed, less often"}</span>
+                          </span>
+                        )}
                         {reviewed && <span className="dot" aria-label="set at review">•</span>}
                       </td>
                     );
@@ -110,7 +138,7 @@ export function ScoresScreen({ windows, observations }: Props) {
 
       <section className="card">
         <h2>Average rating by behavior group</h2>
-        <p className="muted">Finished periods only. Mean of the 1 to 7 ratings in each group (manual factors, p.6).</p>
+        <p className="muted">Finished periods only. Mean of the 1 to 7 ratings in each group (manual factors, p.7).</p>
         <div className="chart">
           <ResponsiveContainer width="100%" height={240}>
             <LineChart data={trend} margin={{ top: 8, right: 16, bottom: 0, left: -16 }}>
@@ -128,8 +156,16 @@ export function ScoresScreen({ windows, observations }: Props) {
       </section>
 
       <section className="card">
-        <h2>Total score <span className="tag">secondary</span></h2>
-        <p className="muted">Sum of all 29 ratings (29 to 203). Shown because the lab asked. The manual (p.5) says a total on its own "is not useful", so read it with the views above.</p>
+        <h2>Total score <span className="tag">secondary</span><span className="tag">app-derived</span></h2>
+        <p className="muted">Sum of all 29 CMAI-based ratings (29 to 203). Shown because the lab asked. The manual (p.5) says a total on its own "is not useful", so read it with the views above.</p>
+        <p className="note">Totals often fall over time without any change in treatment, so check which behaviors drove a change before crediting it.</p>
+        {!sel.score.provisional && selected > 0 && (
+          <p className="muted">
+            {changedInSel.length
+              ? `Behaviors that changed in period ${selected + 1}: ${changedInSel.map((i) => `#${i.id} ${i.name} (${changes.get(i.id)![selected] === "up" ? "more often" : "less often"})`).join("; ")}.`
+              : `No behavior changed enough to mark in period ${selected + 1}.`}
+          </p>
+        )}
         <div className="chart">
           <ResponsiveContainer width="100%" height={180}>
             <LineChart data={trend} margin={{ top: 8, right: 16, bottom: 0, left: -16 }}>

@@ -1,6 +1,6 @@
 {
   "about": "Hand-scorable test cases for the CMAI count rule. Window starts day 0 at 00:00 (2026-01-05, UTC). Days run 0-13. Score each case from docs/scoring-spec.md without reading any code; your answer should match expectedRating.",
-  "ruleVersion": "cmai-count-rule-1",
+  "ruleVersion": "cmai-count-rule-2",
   "windowStart": "2026-01-05T00:00:00Z",
   "ratingCases": [
     {
@@ -659,6 +659,138 @@
         }
       ],
       "expectedCount": 21,
+      "expectedRating": 5
+    },
+    {
+      "id": "cluster-across-midnight-7-nights",
+      "description": "3 logs within 35 minutes (23:40, 23:55, then 00:15 the next day) on 7 nights. Each burst crosses midnight and is credited to the day it starts (days 0-6): 7 clustered days, so rating 7.",
+      "itemId": 13,
+      "logs": [
+        {
+          "day": 0,
+          "times": [
+            "23:40",
+            "23:55"
+          ]
+        },
+        {
+          "day": 1,
+          "times": [
+            "00:15",
+            "23:40",
+            "23:55"
+          ]
+        },
+        {
+          "day": 2,
+          "times": [
+            "00:15",
+            "23:40",
+            "23:55"
+          ]
+        },
+        {
+          "day": 3,
+          "times": [
+            "00:15",
+            "23:40",
+            "23:55"
+          ]
+        },
+        {
+          "day": 4,
+          "times": [
+            "00:15",
+            "23:40",
+            "23:55"
+          ]
+        },
+        {
+          "day": 5,
+          "times": [
+            "00:15",
+            "23:40",
+            "23:55"
+          ]
+        },
+        {
+          "day": 6,
+          "times": [
+            "00:15",
+            "23:40",
+            "23:55"
+          ]
+        },
+        {
+          "day": 7,
+          "times": [
+            "00:15"
+          ]
+        }
+      ],
+      "expectedCount": 21,
+      "expectedRating": 7
+    },
+    {
+      "id": "cluster-across-midnight-6-nights",
+      "description": "Same pattern on only 6 nights: 6 clustered days, under half. Falls back to the count table: 18 logs is rating 5.",
+      "itemId": 13,
+      "logs": [
+        {
+          "day": 0,
+          "times": [
+            "23:40",
+            "23:55"
+          ]
+        },
+        {
+          "day": 1,
+          "times": [
+            "00:15",
+            "23:40",
+            "23:55"
+          ]
+        },
+        {
+          "day": 2,
+          "times": [
+            "00:15",
+            "23:40",
+            "23:55"
+          ]
+        },
+        {
+          "day": 3,
+          "times": [
+            "00:15",
+            "23:40",
+            "23:55"
+          ]
+        },
+        {
+          "day": 4,
+          "times": [
+            "00:15",
+            "23:40",
+            "23:55"
+          ]
+        },
+        {
+          "day": 5,
+          "times": [
+            "00:15",
+            "23:40",
+            "23:55"
+          ]
+        },
+        {
+          "day": 6,
+          "times": [
+            "00:15"
+          ]
+        }
+      ],
+      "expectedCount": 18,
       "expectedRating": 5
     },
     {
