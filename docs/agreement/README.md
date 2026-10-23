@@ -4,7 +4,7 @@ Does the app's count-to-rating rule give the same 1 to 7 rating a person would g
 
 - **Everything here is fictional.** 12 made-up 2-week caregiver stories. No patient data.
 - **Status:** materials ready, not yet run. No human ratings exist, so agreement is not yet known.
-- **Robustness:** done, under rule 1. See `robustness.md`.
+- **Robustness:** done, rerun under rule 2. See `robustness.md`.
 
 **Raters must not open this folder.** It holds the app's answers (`app-ratings.csv`) and the design notes (`vignettes.json`). Give raters only the printed `rating-sheet.html` and the CMAI manual.
 
@@ -25,7 +25,7 @@ Does the app's count-to-rating rule give the same 1 to 7 rating a person would g
 
 ## Rule 2 note
 
-`app-ratings.csv` was regenerated with `cmai-count-rule-2`, which finds rating-7 clusters across midnight. Only one rating changed: V08 #13 Screaming, 3 screams in 35 minutes on 8 nights, went from 5 to 7. `robustness.md` and `robustness-output/` were run under rule 1 and have not been rerun; rule 2 can only add 7s, so its rating-7 numbers may differ.
+`app-ratings.csv` was regenerated with `cmai-count-rule-2`, which finds rating-7 clusters across midnight. Only one rating changed: V08 #13 Screaming, 3 screams in 35 minutes on 8 nights, went from 5 to 7. `robustness-output/` was rerun under rule 2 on 2026-10-23. Rating 7 is now lost in 38% of runs at 10% missed logs (see the note at the top of `robustness.md`).
 
 ## Running the study
 

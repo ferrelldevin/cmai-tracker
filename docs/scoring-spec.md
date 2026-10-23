@@ -80,6 +80,8 @@ The app labels every rating it shows **CMAI-based (app-derived)**. They come fro
 
 ## 8. Decisions the lab must confirm
 
+Tracked with IDs, evidence and sign-off in [review-register.md](review-register.md) (section D). This table is a summary.
+
 | Decision | Default in this build |
 |---|---|
 | Count-to-rating boundaries (section 2) | As in the table |

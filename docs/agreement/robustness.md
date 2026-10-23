@@ -2,7 +2,16 @@
 
 Rule tested: `cmai-count-rule-1` (`docs/scoring-spec.md`), run through the app's own `scoreWindow` and `summarize`. Nothing about the rule was reimplemented. Script: `scripts/simulate-missing-logs.ts`. Raw output: `robustness-output/`.
 
-> **Note (repo copy).** These results are for `cmai-count-rule-1`. Since then the app adopted proposal 2 (`cmai-count-rule-2`, clusters across midnight) and part of proposal 4 ("Nothing to log today" check-in and unlogged-day counts; periods with unlogged days are flagged but not left out of trend lines). The simulation has not been rerun under rule 2. Proposals 1 and 3 are still open.
+> **Rerun under `cmai-count-rule-2` (2026-10-23).** The app adopted proposal 2 (clusters across midnight) and part of proposal 4 ("Nothing to log today" check-in and unlogged-day counts). `robustness-output/` now holds the rule 2 run (same seed, 2,000 runs). The demo rows did not change. The vignette rows changed because V08 now reaches rating 7, so there are two rating-7 items instead of one:
+>
+> | Vignettes | Missed | Rating 7 lost (rule 1, V07 only) | Rating 7 lost (rule 2, V07 + V08) |
+> |---|---|---|---|
+> | uniform | 10% | 0.1% | 38.4% |
+> | uniform | 30% | 70.5% | 85.2% |
+> | busy days | 10% | 0.4% | 39.6% |
+> | busy days | 30% | 81.8% | 90.9% |
+>
+> V08 has 8 clustered days, one above the floor of 7, so losing a single cluster drops it. **Rating 7 is fragile even at 10% missed logs.** That makes proposal 3 (send likely 7s to the day-14 review) more important, not less. The tables below are the original rule 1 run and are kept for the record. Proposals 1 and 3 are still open (see `docs/review-register.md`).
 
 ## Answer first
 

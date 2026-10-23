@@ -19,7 +19,7 @@ interface Props {
 
 export function LogScreen({ patientId, observations, checkins, onChange }: Props) {
   const [openInfo, setOpenInfo] = useState<number | null>(null);
-  const [last, setLast] = useState<{ id: number; itemId: number } | null>(null);
+  const [last, setLast] = useState<{ id: number; itemId: number; at: number } | null>(null);
   const [details, setDetails] = useState(false);
   const timer = useRef<number>();
 
@@ -34,7 +34,7 @@ export function LogScreen({ patientId, observations, checkins, onChange }: Props
   async function log(itemId: number) {
     const now = Date.now();
     const id = await db.observations.add({ patientId, itemId, at: now, loggedAt: now });
-    setLast({ id, itemId });
+    setLast({ id, itemId, at: now });
     setDetails(false);
     window.clearTimeout(timer.current);
     timer.current = window.setTimeout(() => setLast(null), 8000);
@@ -66,7 +66,7 @@ export function LogScreen({ patientId, observations, checkins, onChange }: Props
 
   return (
     <div className="log">
-      <p className="hint">Tap a behavior the moment you see it. One tap is one event. For pacing, restlessness, and mannerisms, one tap is one stretch of it.</p>
+      <p className="hint">Logging for <b>{patientId}</b>. Tap a behavior the moment you see it. One tap is one event. For pacing, restlessness, and mannerisms, one tap is one stretch of it.</p>
       {GROUP_ORDER.map((g) => (
         <section key={g}>
           <h2 className="group-title">{GROUP_LABELS[g]}</h2>
@@ -112,7 +112,7 @@ export function LogScreen({ patientId, observations, checkins, onChange }: Props
         <div className="toast" role="status">
           <div className="toast-row">
             <span>
-              Logged <b>{ITEMS[last.itemId - 1].name}</b> at {timeOfDay(Date.now())}
+              Logged <b>{ITEMS[last.itemId - 1].name}</b> for {patientId} at {timeOfDay(last.at)}
             </span>
             <button onClick={undo}>Undo</button>
             <button className="ghost" onClick={() => setDetails(!details)}>{details ? "Done" : "Add detail"}</button>
