@@ -14,10 +14,10 @@ The CMAI isn't a count. It's a caregiver's look-back rating (1 to 7) of how ofte
 
 ## What it does
 
-- **Log:** 29 buttons, one per CMAI behavior, grouped the way the manual groups them. Each button shows a short description in our own words with the manual page for the full definition, plus a "Does not count" note where the manual excludes things. You can undo a tap, mark the time as approximate, or note what happened just before. On a quiet day, "Nothing to log today" records that the day was quiet rather than missed.
+- **Log:** 29 buttons, one per CMAI behavior, grouped the way the manual groups them. Each button shows a short description in our own words with the manual page for the full definition, plus a "What does not count?" note where the manual excludes things. You can undo a tap, set when it happened (5 to 60 minutes ago, or a clock time), mark the time as approximate, or note what happened just before. "Recent logs" lists the last 24 hours so a time can be fixed or a mistaken log deleted, with undo. On a quiet day, "Nothing to log today" records that the day was quiet rather than missed.
 - **Scores:** per-behavior CMAI-based (app-derived) ratings for each period, agitated or not for three behavior groups (manual thresholds), group averages over time, the total (labeled secondary), and when in the day behaviors happen.
 - **Day-14 review:** confirm or change each rating, including codes 8 (prevented) and 9 (not applicable).
-- **Patients & data:** pseudonymous patient codes only, six weeks of demo data, export to JSON and CSV (including check-ins and unlogged days per period).
+- **Data:** a welcome screen on first run; pseudonymous patient codes only, with delete (confirmed); six weeks of demo data, which can be removed; a backup file (JSON) that can be restored on this or another phone, plus CSVs (including check-ins and unlogged days per period); an install button where the browser supports it; and a short page on how ratings are worked out.
 
 ## Run it
 
@@ -36,7 +36,7 @@ Deploy: every push to `main` runs the tests, builds, and publishes to GitHub Pag
 | Folder | What's in it |
 |---|---|
 | `src/scoring/` | The CMAI items and the scoring engine. Pure functions, no screens or storage, so they can be tested and reused on other platforms. |
-| `src/data/` | Local storage (IndexedDB through Dexie), demo data, export. |
+| `src/data/` | Local storage (IndexedDB through Dexie), demo data, export, restore and delete. |
 | `src/ui/` | The four screens. |
 | `docs/` | Scoring spec, hand-scorable test cases, research notes, agreement study materials (`agreement/`), audit reports (`audits/`), usability materials (`usability/`). |
 | `tests/` | Runs the engine against every case in `docs/test-cases.json`. |
@@ -89,8 +89,6 @@ Each waits on a lab decision or the agreement study (register section F).
 - **Medication-change marker:** mark the date of a medication change on the charts, with a baseline period logged before it.
 - **Rater print view:** 14-day per-behavior counts on one page, for a rater's CMAI interview.
 - **Target behaviors:** pick 1 to 3 behaviors that matter most and sort them to the top.
-- **Recent logs:** edit or delete a log after the undo window.
-- **Back-dating:** log something that happened earlier.
 - **MCID reference band:** show a total change next to published meaningful-change values (Liu 2025; Meunier 2024).
 
 ## License

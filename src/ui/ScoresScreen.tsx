@@ -2,7 +2,7 @@
 // then the total (shown because the lab asked; the manual, p.5, warns it is not
 // useful on its own). Time-of-day pattern last.
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Bar, BarChart, CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { meaningfulChanges, RATING_LABELS } from "../scoring/engine";
 import { GROUP_LABELS, ITEMS } from "../scoring/items";
@@ -15,12 +15,28 @@ const SERIES = { aggressive: "var(--series-1)", physical: "var(--series-2)", ver
 interface Props {
   windows: ScoredWindow[];
   observations: StoredObservation[];
+  onLog: () => void;
 }
 
-export function ScoresScreen({ windows, observations }: Props) {
+export function ScoresScreen({ windows, observations, onLog }: Props) {
   const [showAll, setShowAll] = useState(false);
   const [selected, setSelected] = useState(() => Math.max(0, windows.filter((w) => !w.score.provisional).length - 1));
-  if (!windows.length) return <p className="empty">No logs yet for this patient.</p>;
+  const chips = useRef<HTMLDivElement>(null);
+
+  // Keep the selected period's chip in view (the row scrolls sideways on a phone).
+  useEffect(() => {
+    chips.current?.querySelector<HTMLElement>("[aria-selected=true]")?.scrollIntoView({ block: "nearest", inline: "center" });
+  }, [selected, windows.length]);
+
+  if (!windows.length || !observations.length) {
+    return (
+      <div className="empty">
+        <p><b>No logs yet for this patient.</b></p>
+        <p>Scores appear here once behaviors are logged. Ratings for a period are final after its 14 days end.</p>
+        <button onClick={onLog}>Go to Log</button>
+      </div>
+    );
+  }
 
   const sel = windows[Math.min(selected, windows.length - 1)];
   const rows = ITEMS.filter((i) => showAll || windows.some((w) => w.finals[i.id] > 1));
@@ -48,7 +64,7 @@ export function ScoresScreen({ windows, observations }: Props) {
 
   return (
     <div className="scores">
-      <div className="period-chips" role="tablist" aria-label="14-day period">
+      <div className="period-chips" ref={chips} role="tablist" aria-label="14-day period">
         {windows.map((w, i) => (
           <button key={w.score.windowStart} role="tab" aria-selected={i === selected} className={i === selected ? "chip on" : "chip"} onClick={() => setSelected(i)}>
             {windowLabel(w.score.windowStart, w.score.windowEnd, i)}
@@ -65,9 +81,9 @@ export function ScoresScreen({ windows, observations }: Props) {
         <div className="status-row">
           {(["aggressive", "physical", "verbal"] as const).map((g) => (
             <div key={g} className={sel.summary.agitated[g] ? "status warn" : "status ok"}>
-              <span aria-hidden>{sel.summary.agitated[g] ? "▲" : "●"}</span>
+              <span className="status-icon" aria-hidden>{sel.summary.agitated[g] ? "▲" : "●"}</span>
               <b>{GROUP_LABELS[g]}</b>
-              <span>{sel.summary.agitated[g] ? "Meets agitated rule" : "Below threshold"}</span>
+              <span className="status-state">{sel.summary.agitated[g] ? "Meets agitated rule" : "Below threshold"}</span>
             </div>
           ))}
         </div>

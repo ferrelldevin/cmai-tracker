@@ -7,7 +7,7 @@ import { RATING_LABELS } from "../scoring/engine";
 import { ITEMS } from "../scoring/items";
 import { db, reviewKey } from "../data/db";
 import type { ScoredWindow } from "./useCmaiData";
-import { windowLabel } from "./format";
+import { shortDate, windowLabel } from "./format";
 
 interface Props {
   patientId: string;
@@ -19,7 +19,15 @@ export function ReviewScreen({ patientId, windows, onChange }: Props) {
   const finished = windows.map((w, i) => ({ w, i })).filter(({ w }) => !w.score.provisional);
   const [pick, setPick] = useState(finished.length ? finished[finished.length - 1].i : -1);
   const [saved, setSaved] = useState(false);
-  if (!finished.length) return <p className="empty">The first 14-day period is not finished yet. Review opens on day 15.</p>;
+  if (!finished.length) {
+    const opens = windows[0]?.score.windowEnd;
+    return (
+      <div className="empty">
+        <p><b>Nothing to review yet.</b></p>
+        <p>The first 14-day period is still running. Review opens on day 15{opens ? `, ${shortDate(opens)}` : ""}. Until then, keep logging.</p>
+      </div>
+    );
+  }
 
   const { score, review } = windows[pick];
 
@@ -55,7 +63,10 @@ export function ReviewScreen({ patientId, windows, onChange }: Props) {
       <p className="hint">
         The app's ratings are CMAI-based (app-derived): worked out from your logs. Look back over these two weeks. Does each rating match what you saw? Change it if not. Use <b>8</b> if the behavior would have happened but was prevented (for example, restrained), and <b>9</b> if it cannot happen (for example, cannot walk, so cannot pace).
       </p>
-      <p className="muted">{reviewedCount} of 29 reviewed{saved ? " · saved" : ""}</p>
+      <div className="progress-line" role="status">
+        <span>{reviewedCount === 29 ? "✓ All 29 reviewed" : `${reviewedCount} of 29 reviewed`}{saved ? " · saved" : ""}</span>
+        <progress max={29} value={reviewedCount} aria-hidden />
+      </div>
       <ul className="review-list">
         {ITEMS.map((item) => {
           const s = score.items[item.id - 1];
@@ -77,7 +88,7 @@ export function ReviewScreen({ patientId, windows, onChange }: Props) {
           );
         })}
       </ul>
-      <button onClick={confirmAll}>Confirm all remaining as the app rated them</button>
+      {reviewedCount < 29 && <button onClick={confirmAll}>Confirm the other {29 - reviewedCount} as the app rated them</button>}
     </div>
   );
 }

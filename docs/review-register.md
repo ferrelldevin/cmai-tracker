@@ -34,6 +34,7 @@ Nothing at G1 or G2 blocks the interview demo. Until an item is signed off, the 
 | D-10 | When a behavior's change counts as meaningful | Marked at a 2+ point move, or a 1-point move in the same direction over two finished periods | Manual p.7 (raters agree within 1 point); Smith 2025 | Lab | G1 | Default in build |
 | D-11 | Unlogged days: flag only, or also leave the period out of trend lines | Flag only | Robustness proposal 4 | Lab | G1 | Default in build |
 | D-12 | Never scale counts up to make up for missed logs | Not scaled | Robustness proposal 5 | Lab | G1 | Default in build |
+| D-13 | Back-dated logs (approximate times) in rating-7 clusters: count them, or count only exact times | Counted like any other log | F-03; spec section 3 | Lab | G1 | Default in build |
 
 ## P. Permissions and compliance
 
@@ -63,21 +64,23 @@ Each check is done by someone or something other than the author.
 | V-09 | Five-person usability test with SUS | SUS 68+ (industry average) | `docs/usability/` | Caregivers or nurses | G1 | Deferred (P-06) |
 | V-10 | End-to-end check of the production build in headless Chromium at phone size: load demo data, log, undo, Scores, Day-14 review, export, reload, then reload offline | Every step works and the console has no errors | Run on 2026-10-23 | Script | G0 | Done |
 
-## F. Proposed features (not built)
+## F. Proposed features
 
 Each one waits on a lab decision or on V-01. Severity comes from the heuristic review in `docs/usability/`, where it applies.
 
 | ID | Feature | Why | Depends on | Gate |
 |---|---|---|---|---|
 | F-01 | Show the resident's code on the Log screen and in the toast | Stops logs going to the wrong resident (severity 3) | none | Done (2026-10-23) |
-| F-02 | Recent logs list with edit and delete after the undo window | Fixes mistakes found later | none | G1 |
-| F-03 | Back-date a log ("Happened earlier?") | Caregivers often log after the fact | D-02 (clusters need accurate times) | G1 |
+| F-02 | Recent logs list with edit and delete after the undo window | Fixes mistakes found later | none | Built (2026-10-23): last 24 hours, edit time or delete, delete has Undo |
+| F-03 | Back-date a log ("Happened earlier?") | Caregivers often log after the fact | D-02 (clusters need accurate times) | Built (2026-10-23): 5/15/30/60 min ago or a clock time, plus "approximate". How back-dated logs should count toward rating-7 clusters is still D-13 |
 | F-04 | Day-14 prompt for likely 7s | Rating 7 is fragile | D-03 | G1 |
 | F-05 | Medication-change marker on the charts, with a baseline period first | The lab's goal is reducing medication | Lab | G1 |
 | F-06 | Rater print view of 14-day counts per behavior | Supports a rater's CMAI interview (as with the AVP-786 caregiver diary) | Lab | G1 |
 | F-07 | Target behaviors: pick 1 to 3 to sort to the top | Long scroll (walkthrough W4); clinicians judge change behavior by behavior | Lab | G1 |
 | F-08 | Show total change next to published meaningful-change values | Two values disagree: about -4 (Liu 2025) vs -20 (Meunier 2024) | Lab picks a value | G1 |
-| F-09 | In-app page explaining how ratings are worked out | Transparency for caregivers and raters | D-01, D-02 | G1 |
+| F-09 | In-app page explaining how ratings are worked out | Transparency for caregivers and raters | D-01, D-02 | Built (2026-10-23): Data screen. The count table is generated from the engine, so it cannot drift from the rule; wording still needs lab review at G1 |
+| F-10 | Encrypt the backup file, or a passcode on the app | A backup holds behavior logs; codes, not names, but still sensitive | P-04 | G2 |
+| F-11 | Sync or shared device use for several caregivers on one resident | One phone per resident today; shift handover needs shared data | P-04, lab infrastructure | G1 |
 
 ## Decision log
 
@@ -85,6 +88,7 @@ Newest first. Every rule change and every sign-off goes here, with who and when.
 
 | Date | Change | By | Approved by |
 |---|---|---|---|
+| 2026-10-23 | UX round 4: recent logs (edit, delete), back-dating, restore from backup, delete patient, remove demo data, welcome screen, loading and storage-error states, icon tab bar with review-due dot, install button, in-app rating explainer | Devin (F-02, F-03, F-09; heuristic review round 4) | n/a (no scoring change) |
 | 2026-10-23 | Lab approvals deferred until after hiring; this register created | Devin | n/a (process) |
 | 2026-10-23 | Log screen and toast name the resident; toast shows the time of the log, not the time of the last redraw | Devin (F-01) | n/a (no scoring change) |
 | 2026-10-22 | `cmai-count-rule-2`: rating-7 clusters found with a 60-minute window across midnight | Devin (from robustness proposal 2) | Pending (D-02) |
