@@ -2,21 +2,25 @@
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 import { VitePWA } from "vite-plugin-pwa";
+import pkg from "./package.json";
 
 // base: "./" lets the build run from any folder, including GitHub Pages.
 export default defineConfig({
   base: "./",
+  define: { __APP_VERSION__: JSON.stringify(pkg.version) },
   plugins: [
     react(),
     VitePWA({
       registerType: "autoUpdate",
       includeAssets: ["icon.svg", "apple-touch-icon.png"],
+      // Fonts are bundled, so they must be cached too for the app to look right offline.
+      workbox: { globPatterns: ["**/*.{js,css,html,svg,png,woff2}"] },
       manifest: {
         name: "CMAI Tracker",
         short_name: "CMAI",
         description: "Log agitated behaviors and see 14-day CMAI scores.",
-        theme_color: "#1f55a5",
-        background_color: "#f4f6f9",
+        theme_color: "#0b6b66",
+        background_color: "#f6f5f1",
         display: "standalone",
         start_url: ".",
         icons: [

@@ -17,7 +17,7 @@ async function scan(page, name, results) {
 }
 
 (async () => {
-  const browser = await chromium.launch({ executablePath: "/opt/pw-browsers/chromium-1194/chrome-linux/chrome" });
+  const browser = await chromium.launch({ executablePath: process.env.CHROME || "/opt/pw-browsers/chromium-1243/chrome-linux64/chrome" });
   const all = { tool: `axe-core ${axeVersion}`, tags: TAGS, runAt: new Date().toISOString(), schemes: {} };
   for (const scheme of ["light", "dark"]) {
     const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, colorScheme: scheme });
@@ -25,26 +25,30 @@ async function scan(page, name, results) {
     const results = [];
     console.log(`== ${scheme}`);
     await page.goto(URL);
-    await scan(page, "Patients & data (empty)", results);
-    await page.getByRole("button", { name: "Load demo data" }).click();
+    await scan(page, "Welcome (first run)", results);
+    await page.getByRole("button", { name: "Try demo data" }).click();
     await page.getByRole("button", { name: /^7 Hitting/ }).waitFor();
     await scan(page, "Log", results);
-    await page.getByRole("button", { name: "Does not count" }).first().click();
+    await page.getByRole("button", { name: /^What does not count/ }).first().click();
     await page.getByRole("button", { name: /^7 Hitting/ }).click();
-    await page.getByRole("button", { name: "Add detail" }).click();
+    await page.getByRole("button", { name: "Time or detail" }).click();
     await scan(page, "Log (after a tap: toast with details, exclusion open)", results);
     await page.getByRole("button", { name: "Undo" }).click();
     await page.getByRole("button", { name: "Nothing to log today" }).click();
     await scan(page, "Log (checked in: nothing to log today)", results);
+    await page.getByRole("button", { name: /^Edit / }).first().click();
+    await scan(page, "Log (editing a recent log)", results);
     await page.getByRole("button", { name: "Scores" }).click();
     await page.getByText("Each behavior, period by period").waitFor();
     await scan(page, "Scores", results);
     await page.getByRole("button", { name: "Show all 29 behaviors" }).click();
     await scan(page, "Scores (all 29 behaviors)", results);
-    await page.getByRole("button", { name: "Day-14 review" }).click();
+    await page.getByRole("button", { name: /^Day-14 review/ }).click();
     await scan(page, "Day-14 review", results);
-    await page.getByRole("button", { name: "Patients & data" }).click();
+    await page.getByRole("button", { name: "Patients and data" }).click();
     await scan(page, "Patients & data (with patients)", results);
+    await page.getByRole("button", { name: "Delete P-DEMO-B" }).click();
+    await scan(page, "Patients & data (confirm delete)", results);
     all.schemes[scheme] = results;
     await ctx.close();
   }

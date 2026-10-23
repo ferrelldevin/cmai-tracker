@@ -2,25 +2,44 @@
 // then the total (shown because the lab asked; the manual, p.5, warns it is not
 // useful on its own). Time-of-day pattern last.
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Bar, BarChart, CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { meaningfulChanges, RATING_LABELS } from "../scoring/engine";
 import { GROUP_LABELS, ITEMS } from "../scoring/items";
 import type { StoredObservation } from "../data/db";
 import type { ScoredWindow } from "./useCmaiData";
 import { shortDate, windowLabel } from "./format";
+import { Icon } from "./Icon";
 
 const SERIES = { aggressive: "var(--series-1)", physical: "var(--series-2)", verbal: "var(--series-3)" } as const;
+// A line pattern per group as well as a color, so the lines stay apart without color vision.
+const DASH = { aggressive: undefined, physical: "7 4", verbal: "2 4" } as const;
 
 interface Props {
   windows: ScoredWindow[];
   observations: StoredObservation[];
+  onLog: () => void;
 }
 
-export function ScoresScreen({ windows, observations }: Props) {
+export function ScoresScreen({ windows, observations, onLog }: Props) {
   const [showAll, setShowAll] = useState(false);
   const [selected, setSelected] = useState(() => Math.max(0, windows.filter((w) => !w.score.provisional).length - 1));
-  if (!windows.length) return <p className="empty">No logs yet for this patient.</p>;
+  const chips = useRef<HTMLDivElement>(null);
+
+  // Keep the selected period's chip in view (the row scrolls sideways on a phone).
+  useEffect(() => {
+    chips.current?.querySelector<HTMLElement>("[aria-selected=true]")?.scrollIntoView({ block: "nearest", inline: "center" });
+  }, [selected, windows.length]);
+
+  if (!windows.length || !observations.length) {
+    return (
+      <div className="empty">
+        <p><b>No logs yet for this patient.</b></p>
+        <p>Scores appear here once behaviors are logged. Ratings for a period are final after its 14 days end.</p>
+        <button onClick={onLog}><Icon name="plus" /> Go to Log</button>
+      </div>
+    );
+  }
 
   const sel = windows[Math.min(selected, windows.length - 1)];
   const rows = ITEMS.filter((i) => showAll || windows.some((w) => w.finals[i.id] > 1));
@@ -48,7 +67,7 @@ export function ScoresScreen({ windows, observations }: Props) {
 
   return (
     <div className="scores">
-      <div className="period-chips" role="tablist" aria-label="14-day period">
+      <div className="period-chips" ref={chips} role="tablist" aria-label="14-day period">
         {windows.map((w, i) => (
           <button key={w.score.windowStart} role="tab" aria-selected={i === selected} className={i === selected ? "chip on" : "chip"} onClick={() => setSelected(i)}>
             {windowLabel(w.score.windowStart, w.score.windowEnd, i)}
@@ -65,9 +84,9 @@ export function ScoresScreen({ windows, observations }: Props) {
         <div className="status-row">
           {(["aggressive", "physical", "verbal"] as const).map((g) => (
             <div key={g} className={sel.summary.agitated[g] ? "status warn" : "status ok"}>
-              <span aria-hidden>{sel.summary.agitated[g] ? "▲" : "●"}</span>
+              <Icon name={sel.summary.agitated[g] ? "alert" : "check"} className="status-icon" />
               <b>{GROUP_LABELS[g]}</b>
-              <span>{sel.summary.agitated[g] ? "Meets agitated rule" : "Below threshold"}</span>
+              <span className="status-state">{sel.summary.agitated[g] ? "Meets agitated rule" : "Below threshold"}</span>
             </div>
           ))}
         </div>
@@ -148,7 +167,7 @@ export function ScoresScreen({ windows, observations }: Props) {
               <Tooltip contentStyle={{ background: "var(--surface)", border: "1px solid var(--rule)", color: "var(--text)" }} />
               <Legend />
               {(Object.keys(SERIES) as (keyof typeof SERIES)[]).map((k) => (
-                <Line key={k} type="monotone" dataKey={k} name={GROUP_LABELS[k]} stroke={SERIES[k]} strokeWidth={2} dot={{ r: 4 }} activeDot={{ r: 6 }} />
+                <Line key={k} type="monotone" dataKey={k} name={GROUP_LABELS[k]} stroke={SERIES[k]} strokeWidth={2.5} strokeDasharray={DASH[k]} dot={{ r: 4, strokeDasharray: "" }} activeDot={{ r: 6 }} />
               ))}
             </LineChart>
           </ResponsiveContainer>
@@ -173,7 +192,7 @@ export function ScoresScreen({ windows, observations }: Props) {
               <XAxis dataKey="name" stroke="var(--text-muted)" tickLine={false} />
               <YAxis stroke="var(--text-muted)" tickLine={false} domain={["dataMin - 5", "dataMax + 5"]} />
               <Tooltip contentStyle={{ background: "var(--surface)", border: "1px solid var(--rule)", color: "var(--text)" }} />
-              <Line type="monotone" dataKey="total" name="Total" stroke="var(--series-1)" strokeWidth={2} dot={{ r: 4 }} />
+              <Line type="monotone" dataKey="total" name="Total" stroke="var(--accent)" strokeWidth={2.5} dot={{ r: 4 }} />
             </LineChart>
           </ResponsiveContainer>
         </div>
@@ -189,7 +208,7 @@ export function ScoresScreen({ windows, observations }: Props) {
               <XAxis dataKey="label" stroke="var(--text-muted)" tickLine={false} interval={2} />
               <YAxis allowDecimals={false} stroke="var(--text-muted)" tickLine={false} />
               <Tooltip cursor={{ fill: "var(--hover)" }} contentStyle={{ background: "var(--surface)", border: "1px solid var(--rule)", color: "var(--text)" }} formatter={(v) => [v, "Logs"]} />
-              <Bar dataKey="count" name="Logs" fill="var(--series-1)" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="count" name="Logs" fill="var(--accent)" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>
