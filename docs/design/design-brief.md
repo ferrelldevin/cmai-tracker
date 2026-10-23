@@ -31,16 +31,16 @@ A caregiver or nurse on a phone, often rushed, often mid-shift, sometimes at nig
 - **Type:** Atkinson Hyperlegible Next at 400, 600 and 700. Sizes 13, 15, 17, 20 and 24px.
 - **Space and shape:** 4-point spacing (4, 8, 12, 16, 24, 32). Radius 14px for cards and 10px for controls; pills for chips and tags.
 - **Hierarchy per screen (MC-6):** on Log, the primary element is the behavior rows, the secondary is the patient banner, and the tertiary is the hint and recent logs. On Scores, the primary is the status and the heatmap; the total stays secondary, as the manual advises. On Data, the primary is the welcome card on first run, otherwise the patients list.
+- **High contrast (round 6):** a Display setting on the Data screen with three choices: Match phone (the default, which follows iOS "Increase Contrast" and the Android and Windows equivalents through `prefers-contrast: more`), Standard and High. High swaps in a second token set: black or white text, every text pair at 7:1 or better (WCAG AAA), 2px outlines on cards, rows and controls, no decorative shadows or tints, and a rating ramp that keeps its number on every cell. Dark mode has its own high-contrast set. Windows forced-colors mode keeps the cues that were drawn with background color only (selected tab, chosen chip, rating cells).
 - **Motion:** a 0.9s row flash on log, and smooth scrolling for the jump chips. Both are turned off under "reduce motion".
 
 ## Checked
 
-- axe-core WCAG 2.2 AA: 0 violations on 10 screens, light and dark (`docs/audits/axe-wcag22aa.json`).
+- axe-core WCAG 2.2 AA: 0 violations on 10 screens in each of four modes: light, dark, and both with high contrast (`docs/audits/axe-wcag22aa.json`).
 - The 26-step end-to-end flow passes. The font loads while offline.
-- Unit tests: 44 pass.
+- Unit tests: 48 pass.
 
 ## Not done
 
 - Testing on a real iPhone, and with real caregivers (V-03, V-09).
-- A high-contrast theme. Better recommends one for older displays, and the tokens make it a small addition.
 - Pinning target behaviors to the top of Log (F-07). This is a clinical choice, so it waits for the lab.

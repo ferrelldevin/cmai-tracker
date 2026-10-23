@@ -254,3 +254,68 @@ input[type="checkbox"] { width: 22px; height: 22px; min-height: 0; accent-color:
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
+
+/* High contrast. Set on <html> as data-contrast="high" by src/ui/contrast.ts, from the Data screen's
+   Display setting or the device's "increase contrast" setting. Every text pair here is 7:1 or better
+   (WCAG AAA), borders are 2px and at least 5:1, shadows and tints that carry no meaning are dropped. */
+:root[data-contrast="high"] {
+  --bg: #ffffff; --surface: #ffffff; --surface-2: #eef0f1; --rule: #5b6670; --rule-strong: #1b2630;
+  --text: #000000; --text-muted: #2e3a44;
+  --accent: #064e4a; --accent-hover: #043f3c; --accent-text: #ffffff; --accent-soft: #d9eeeb; --accent-ink: #043f3c;
+  --attn: #6b3500; --attn-soft: #fdf1e3;
+  --danger: #8f1a10; --danger-soft: #fdecea;
+  --ok: #043f3c; --ok-soft: #d9eeeb;
+  --focus: #ffd426; --focus-edge: #000000;
+  --grid: #b9c0c5; --hover: rgba(6, 78, 74, 0.1); --press: rgba(6, 78, 74, 0.2);
+  --series-1: #005b8f; --series-2: #a34700; --series-3: #006b4d;
+  --r1: #ffffff; --r2: #d4ece9; --r3: #9fd3cc; --r4: #62b3aa; --r5: #0d5f5a; --r6: #08423f; --r7: #021f1d;
+  --r-ink: #000000; --r-light: #ffffff;
+  --shadow-1: none;
+}
+@media (prefers-color-scheme: dark) {
+  :root[data-contrast="high"]:not([data-theme="light"]) {
+    --bg: #000000; --surface: #0b1013; --surface-2: #161d22; --rule: #8c9aa4; --rule-strong: #d3dce1;
+    --text: #ffffff; --text-muted: #d3dce1;
+    --accent: #8be6dc; --accent-hover: #a7efe7; --accent-text: #000000; --accent-soft: #0f2e2b; --accent-ink: #a7efe7;
+    --attn: #ffbf66; --attn-soft: #2e1f08;
+    --danger: #ffa597; --danger-soft: #33130f;
+    --ok: #a7efe7; --ok-soft: #0f2e2b;
+    --focus: #ffd426; --focus-edge: #000000;
+    --grid: #3a4952; --hover: rgba(139, 230, 220, 0.12); --press: rgba(139, 230, 220, 0.22);
+    --series-1: #7cc8f2; --series-2: #ffb000; --series-3: #3fd3a6;
+    --r1: #000000; --r2: #0f3633; --r3: #16524d; --r4: #1a615b; --r5: #6fd0c6; --r6: #a5e6de; --r7: #e0faf6;
+    --r-ink: #ffffff; --r-light: #000000;
+  }
+}
+[data-contrast="high"] .card, [data-contrast="high"] .item-list, [data-contrast="high"] .pt-banner, [data-contrast="high"] .status,
+[data-contrast="high"] .review-list li, [data-contrast="high"] select, [data-contrast="high"] input, [data-contrast="high"] .chip,
+[data-contrast="high"] button.ghost { border-width: 2px; border-color: var(--rule-strong); }
+[data-contrast="high"] .tabs { border-top: 2px solid var(--rule-strong); }
+[data-contrast="high"] .item + .item, [data-contrast="high"] .recent-list li, [data-contrast="high"] .patient-list li { border-top-color: var(--rule); }
+[data-contrast="high"] .tabs button.on .tab-icon { box-shadow: inset 0 0 0 2px var(--accent-ink); }
+[data-contrast="high"] .tabs button.on { font-weight: 700; }
+[data-contrast="high"] .status.warn { border-color: var(--attn); }
+[data-contrast="high"] .r1, [data-contrast="high"] .r8, [data-contrast="high"] .r9 { color: var(--text); }
+[data-contrast="high"] .r5 { color: var(--r-light); }
+[data-contrast="high"] .heat td { box-shadow: inset 0 0 0 1px var(--rule); }
+[data-contrast="high"] .welcome { background: var(--surface); }
+[data-contrast="high"] button:disabled { opacity: 1; background: var(--surface-2); color: var(--text-muted); border: 2px dashed var(--rule); }
+
+/* Display setting: a segmented choice built from radio buttons. */
+.segmented { display: flex; flex-wrap: wrap; gap: var(--s2); border: 0; padding: 0; margin: var(--s3) 0 0; }
+.segmented legend { padding: 0; margin-bottom: var(--s2); font-weight: 600; }
+.segmented label { display: inline-flex; align-items: center; gap: var(--s2); min-height: 48px; padding: 6px 16px; border: 1px solid var(--rule-strong); border-radius: 999px; background: var(--surface); cursor: pointer; font-size: var(--fs-sm); font-weight: 600; }
+.segmented label:has(input:checked) { background: var(--accent-soft); border-color: var(--accent); color: var(--accent-ink); }
+.segmented label:has(input:focus-visible) { outline: 3px solid var(--focus); box-shadow: 0 0 0 5px var(--focus-edge); }
+.segmented input { width: 20px; height: 20px; min-height: 0; margin: 0; accent-color: var(--accent); }
+.segmented input:focus-visible { outline: none; box-shadow: none; }
+[data-contrast="high"] .segmented label { border-width: 2px; }
+
+/* Windows High Contrast and other forced-color modes: keep the cues that are drawn with
+   background color only. */
+@media (forced-colors: active) {
+  .tabs button.on .tab-icon, .chip.on, .segmented label:has(input:checked) { outline: 2px solid Highlight; }
+  .badge { background: Highlight; border-color: Canvas; forced-color-adjust: none; }
+  .heat td { border: 1px solid CanvasText; }
+  .avatar { forced-color-adjust: none; }
+}
