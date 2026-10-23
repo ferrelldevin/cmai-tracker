@@ -24,11 +24,15 @@ const ok = (c, m) => { if (!c) throw new Error("FAIL: " + m); console.log("  ok"
   const first = await rows.nth(0).textContent();
   ok(/Period \d+ · day \d+ of 14/.test(first) && /Last log /.test(first), "rows show period, day and last log: " + first);
   ok((await rows.nth(0).getAttribute("aria-current")) === "true", "current patient is marked");
-  ok(await p.evaluate(() => document.activeElement?.getAttribute("aria-current") === "true"), "focus starts on the current patient");
+  ok(await p.evaluate(() => document.activeElement?.tagName === "DIALOG" && !document.querySelector(".sheet :focus-visible")), "opened by tap: focus on the sheet, no focus ring on any row");
+  ok(await p.evaluate(() => getComputedStyle(document.querySelector('.sheet-row[aria-current="true"] .tag')).backgroundColor !== getComputedStyle(document.querySelector('.sheet-row[aria-current="true"]')).backgroundColor), "demo tag keeps its pill on the current row");
   await shot("sw-02-sheet");
   await p.keyboard.press("Escape");
   ok(!(await sheet().isVisible()), "Esc closes the sheet");
   ok(await p.evaluate(() => document.activeElement?.classList.contains("pt-banner")), "focus returns to the banner");
+  await p.keyboard.press("Enter"); await sheet().waitFor();
+  ok(await p.evaluate(() => document.activeElement?.getAttribute("aria-current") === "true"), "opened by keyboard: focus starts on the current patient");
+  await p.keyboard.press("Escape");
   await banner().click(); await sheet().waitFor();
   await p.mouse.click(195, 40); await p.waitForTimeout(200);
   ok(!(await sheet().isVisible()), "tapping the backdrop closes the sheet");

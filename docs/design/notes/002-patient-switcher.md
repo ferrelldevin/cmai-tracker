@@ -32,3 +32,16 @@ Logging against the wrong patient is the costliest mistake in this app. AHRQ's w
 
 ## Done when
 Switching shows who each patient is before the tap and confirms the result after it, with no stuck focus ring. All checks in `docs/process/change-process.md` pass.
+
+## Follow-up, 2026-10-23: starting focus (F-14)
+
+**Problem.** Devin's iPhone screenshot after the first release showed the yellow focus ring on the current patient row as soon as the sheet opened, and that row's "demo" tag had no visible pill (tag and row shared the same accent-soft color).
+
+**Cause.** The sheet moved focus to the current row with `focus()`. Safari treats script focus as keyboard-style focus and draws `:focus-visible`, so a touch user saw a keyboard ring they never asked for.
+
+**Decision.** Starting focus follows how the sheet was opened, the pattern used by Radix, React Aria and Apple's own sheets:
+- Keyboard (the banner's click event has `detail === 0`): focus the current row, so Enter confirms and arrows move on.
+- Tap or mouse: focus the dialog itself (`tabIndex=-1`, no outline). The focus trap, Esc and screen reader announcement of "Choose patient" still work; the first Tab reaches the Close button.
+- Inside the highlighted row, the tag uses the surface color so it stays a pill.
+
+**Verified.** `e2e/patient-switcher.cjs` now checks both openings and the tag contrast (18 checks); axe 0 violations in 4 modes. Before/after: `docs/design/screens/patient-switcher-focus.png`.

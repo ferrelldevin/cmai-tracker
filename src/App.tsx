@@ -72,6 +72,7 @@ export default function App() {
 
   // Switching patient: close the sheet, then say who is now open (announced, and a banner flash).
   const [choosing, setChoosing] = useState(false);
+  const [choosingByKey, setChoosingByKey] = useState(false);
   const [notice, setNotice] = useState("");
   const [switched, setSwitched] = useState(false);
   useEffect(() => {
@@ -120,7 +121,7 @@ export default function App() {
             className={switched ? "pt-banner switched" : "pt-banner"}
             aria-haspopup="dialog"
             aria-label={`Patient ${current.id}${current.demo ? " (demo)" : ""}, ${periodLine}. Choose patient`}
-            onClick={() => setChoosing(true)}
+            onClick={(e) => { setChoosingByKey(e.detail === 0); setChoosing(true); }}
           >
             <PatientAvatar id={current.id} />
             <span className="pt-id">
@@ -168,6 +169,7 @@ export default function App() {
       </main>
 
       <PatientSheet
+        viaKeyboard={choosingByKey}
         open={choosing}
         patients={patients}
         current={hasPatient ? patientId : null}

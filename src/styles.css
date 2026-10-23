@@ -148,6 +148,8 @@ input[type="checkbox"] { width: 22px; height: 22px; min-height: 0; accent-color:
 @media (hover: hover) { .sheet-row:hover { background: var(--hover); } }
 .sheet-row:active { background: var(--press); }
 .sheet-row[aria-current="true"] { background: var(--accent-soft); }
+.sheet-row[aria-current="true"] .tag { background: var(--surface); }
+.sheet:focus, .sheet:focus-visible { outline: none; box-shadow: none; }
 .sheet-text { display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0; }
 .sheet-code { font-weight: 700; font-size: var(--fs-md); }
 .sheet-meta { font-size: var(--fs-sm); color: var(--text-muted); }
