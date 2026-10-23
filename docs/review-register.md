@@ -55,7 +55,7 @@ Each check is done by someone or something other than the author.
 |---|---|---|---|---|---|---|
 | V-01 | Two independent raters score the 12 fictional stories on paper | App within 1 point of each rater on 88%+ of items (manual p.7) | `docs/agreement/` | Two raters who have not seen the code | G1 (optional earlier) | Open: materials ready |
 | V-02 | Missed-log simulation under the current rule | Results reported, not a pass/fail | `docs/agreement/robustness.md` | Script | G0 | Done (rerun under rule 2 on 2026-10-23) |
-| V-03 | Offline test on a real iPhone after Add to Home Screen | Logs, scores and export all work with airplane mode on | Devin, 2026-10-23, his words: "I did the Home Screen test, behaved as I assume it should". Which steps he ran (log, scores, export) was not itemized | Devin | G0 | Passed (2026-10-23) |
+| V-03 | Offline test on a real iPhone after Add to Home Screen | Logs, scores and export all work with airplane mode on | Devin, 2026-10-23, his words: "I did the Home Screen test, behaved as I assume it should" and "data saved while in airplane mode and stayed after regaining connection". Logging offline and keeping the data are confirmed; scores and export offline were not itemized | Devin | G0 | Passed (2026-10-23) |
 | V-04 | Lighthouse and axe (WCAG 2.2 AA) | Accessibility 100, 0 axe violations | `docs/audits/` | Tools | G0 | Done |
 | V-05 | Every citation resolves and none is retracted | All sources verified or marked unverified | `research-notes.md`; 31 of 40 Crossref-verified | Crossref | G0 | Done, with 3 marked unverified (Cohen-Mansfield 1992, 1996; Yao 2023 DOI) |
 | V-06 | DOMS permission quote checked in a browser | Quote matches the live page word for word | `README.md` Permissions | Devin | G0 | Open |
