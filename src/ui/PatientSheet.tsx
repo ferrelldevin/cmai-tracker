@@ -14,6 +14,8 @@ const SEARCH_FROM = 8; // a search box appears once the list is this long
 
 interface Props {
   open: boolean;
+  /** Opened from the keyboard: start on the current row. From touch or mouse: start on the sheet itself, so no focus ring appears. */
+  viaKeyboard: boolean;
   patients: Patient[];
   current: string | null;
   onPick: (id: string) => void;
@@ -21,7 +23,7 @@ interface Props {
   onClose: () => void;
 }
 
-export function PatientSheet({ open, patients, current, onPick, onManage, onClose }: Props) {
+export function PatientSheet({ open, viaKeyboard, patients, current, onPick, onManage, onClose }: Props) {
   const dialog = useRef<HTMLDialogElement>(null);
   const [rows, setRows] = useState<PatientSummary[] | null>(null);
   const [query, setQuery] = useState("");
@@ -32,8 +34,12 @@ export function PatientSheet({ open, patients, current, onPick, onManage, onClos
     if (open && !d.open) {
       setQuery("");
       d.showModal();
-      // Start on the current patient, so a quick confirm is one tap away.
-      d.querySelector<HTMLElement>('[aria-current="true"]')?.focus();
+      // Set the starting focus ourselves; showModal() would otherwise pick the Close button.
+      // Keyboard users start on the current patient, one key from a confirm. Touch and mouse
+      // users start on the sheet itself: Safari draws the focus ring on any button focused by
+      // script, which left a ring on the current row after a tap (F-14).
+      const row = viaKeyboard ? d.querySelector<HTMLElement>('[aria-current="true"]') : null;
+      (row ?? d).focus();
     }
     if (!open && d.open) d.close();
   }, [open]);
@@ -52,6 +58,7 @@ export function PatientSheet({ open, patients, current, onPick, onManage, onClos
     <dialog
       ref={dialog}
       className="sheet"
+      tabIndex={-1}
       aria-labelledby="sheet-h"
       onClose={onClose}
       onClick={(e) => { if (e.target === dialog.current) onClose(); }}

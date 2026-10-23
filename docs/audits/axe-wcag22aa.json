@@ -7,7 +7,7 @@
     "wcag21aa",
     "wcag22aa"
   ],
-  "runAt": "2026-10-23T21:17:05.341Z",
+  "runAt": "2026-10-23T22:24:26.350Z",
   "schemes": {
     "light": [
       {
@@ -1878,7 +1878,7 @@
               },
               {
                 "target": [
-                  "text[y=\"129.5\"][x=\"28\"][height=\"162\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
+                  "text[y=\"129.5\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
                 ],
                 "why": [
                   "Element content is too short to determine if it is actual text content"
@@ -1886,7 +1886,7 @@
               },
               {
                 "target": [
-                  "text[y=\"89\"][x=\"28\"][height=\"162\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
+                  "text[y=\"89\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
                 ],
                 "why": [
                   "Element content is too short to determine if it is actual text content"
@@ -1894,7 +1894,7 @@
               },
               {
                 "target": [
-                  "text[y=\"48.5\"][x=\"28\"][height=\"162\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
+                  "text[y=\"48.5\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
                 ],
                 "why": [
                   "Element's background color could not be determined because element contains an image node"
