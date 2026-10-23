@@ -29,7 +29,7 @@ async function scan(page, name, results) {
     await page.getByRole("button", { name: "Try demo data" }).click();
     await page.getByRole("button", { name: /^7 Hitting/ }).waitFor();
     await scan(page, "Log", results);
-    await page.getByRole("button", { name: "What does not count?" }).first().click();
+    await page.getByRole("button", { name: /^What does not count/ }).first().click();
     await page.getByRole("button", { name: /^7 Hitting/ }).click();
     await page.getByRole("button", { name: "Time or detail" }).click();
     await scan(page, "Log (after a tap: toast with details, exclusion open)", results);

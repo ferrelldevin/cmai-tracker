@@ -88,6 +88,7 @@ Newest first. Every rule change and every sign-off goes here, with who and when.
 
 | Date | Change | By | Approved by |
 |---|---|---|---|
+| 2026-10-23 | Visual redesign (round 5): care-teal palette, Atkinson Hyperlegible Next, patient banner, grouped Log list, amber status instead of red and green, Okabe-Ito chart colors, new icon. Sources in `docs/design/design-brief.md` | Devin | n/a (no scoring change) |
 | 2026-10-23 | UX round 4: recent logs (edit, delete), back-dating, restore from backup, delete patient, remove demo data, welcome screen, loading and storage-error states, icon tab bar with review-due dot, install button, in-app rating explainer | Devin (F-02, F-03, F-09; heuristic review round 4) | n/a (no scoring change) |
 | 2026-10-23 | Lab approvals deferred until after hiring; this register created | Devin | n/a (process) |
 | 2026-10-23 | Log screen and toast name the resident; toast shows the time of the log, not the time of the last redraw | Devin (F-01) | n/a (no scoring change) |

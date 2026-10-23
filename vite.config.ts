@@ -13,12 +13,14 @@ export default defineConfig({
     VitePWA({
       registerType: "autoUpdate",
       includeAssets: ["icon.svg", "apple-touch-icon.png"],
+      // Fonts are bundled, so they must be cached too for the app to look right offline.
+      workbox: { globPatterns: ["**/*.{js,css,html,svg,png,woff2}"] },
       manifest: {
         name: "CMAI Tracker",
         short_name: "CMAI",
         description: "Log agitated behaviors and see 14-day CMAI scores.",
-        theme_color: "#1f55a5",
-        background_color: "#f4f6f9",
+        theme_color: "#0b6b66",
+        background_color: "#f6f5f1",
         display: "standalone",
         start_url: ".",
         icons: [

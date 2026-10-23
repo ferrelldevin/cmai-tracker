@@ -8,6 +8,7 @@ import { GROUP_LABELS, ITEMS, type FactorGroup } from "../scoring/items";
 import { DAY_MS } from "../scoring/engine";
 import { checkInKey, db, localMidnight, type CheckIn, type StoredObservation } from "../data/db";
 import { dayAndTime, timeOfDay } from "./format";
+import { Icon } from "./Icon";
 
 const BEFORE_OPTIONS = ["Personal care or bathing", "Mealtime", "Noise or crowding", "Seemed in pain", "Change in routine", "Visitor or phone call", "Nothing noticed", "Other"];
 const GROUP_ORDER: FactorGroup[] = ["aggressive", "physical", "verbal", "other"];
@@ -45,6 +46,7 @@ export function LogScreen({ patientId, observations, checkins, onChange }: Props
   const [editing, setEditing] = useState<number | null>(null);
   const [showAllRecent, setShowAllRecent] = useState(false);
   const lastTap = useRef<{ itemId: number; t: number } | null>(null);
+  const [flash, setFlash] = useState<number | null>(null); // the row just logged, highlighted briefly
 
   const now = Date.now();
   const todayStart = localMidnight(now);
@@ -72,6 +74,8 @@ export function LogScreen({ patientId, observations, checkins, onChange }: Props
     const obs = { patientId, itemId, at: t, loggedAt: t };
     const id = await db.observations.add(obs);
     navigator.vibrate?.(15);
+    setFlash(itemId);
+    window.setTimeout(() => setFlash((f) => (f === itemId ? null : f)), 900);
     setToast({ kind: "logged", obs: { ...obs, id } });
     setDetails(false);
     onChange();
@@ -115,34 +119,50 @@ export function LogScreen({ patientId, observations, checkins, onChange }: Props
   return (
     <div className="log">
       <div className="log-head">
-        <p className="for">Logging for <b>{patientId}</b></p>
-        <p className="muted">{loggedToday ? `${loggedToday} logged today` : "Nothing logged yet today"}</p>
+        <p className="screen-title" aria-hidden>Log a behavior</p>{/* the screen heading is the h1 in App */}
+        <p className="today-count">{loggedToday ? <><b>{loggedToday}</b> logged today</> : "Nothing logged yet today"}</p>
       </div>
-      <p className="hint">Tap a behavior the moment you see it. One tap is one event. For pacing, restlessness, and mannerisms, one tap is one stretch of it.</p>
+      <p className="hint">Tap a behavior the moment you see it. One tap is one event. For pacing, restlessness and mannerisms, one tap is one stretch of it.</p>
+      <nav className="jump" aria-label="Jump to a group">
+        {GROUP_ORDER.map((g) => (
+          <a key={g} href={`#group-${g}`} className="chip" onClick={(e) => { e.preventDefault(); document.getElementById(`group-${g}`)?.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" }); }}>
+            {GROUP_LABELS[g].split(/[ ,]/)[0]}
+          </a>
+        ))}
+      </nav>
       {GROUP_ORDER.map((g) => (
-        <section key={g}>
-          <h2 className="group-title">{GROUP_LABELS[g]}</h2>
-          <div className="item-grid">
+        <section key={g} id={`group-${g}`} className="group" aria-labelledby={`group-${g}-h`}>
+          <h2 className="group-title" id={`group-${g}-h`}>{GROUP_LABELS[g]}</h2>
+          <ul className="item-list">
             {ITEMS.filter((i) => i.group === g).map((item) => (
-              <div key={item.id} className="item-card">
-                <button className="item-btn" onClick={() => log(item.id)}>
-                  <span className="item-name">
-                    <span className="item-num">{item.id}</span>
-                    {item.name}
-                    {item.continuous && <span className="tag">per stretch</span>}
-                  </span>
-                  <span className="item-def">{item.counts} <span className="ref">Manual p.{item.manualPage}</span></span>
-                  {todayCounts.get(item.id) ? <span className="today">{todayCounts.get(item.id)} today</span> : null}
-                </button>
-                {item.doesNotCount && (
-                  <button className="info-btn" aria-expanded={openInfo === item.id} onClick={() => setOpenInfo(openInfo === item.id ? null : item.id)}>
-                    {openInfo === item.id ? "Hide" : "What does not count?"}
+              <li key={item.id} className={flash === item.id ? "item just-logged" : "item"}>
+                <div className="item-row">
+                  <button className="item-btn" onClick={() => log(item.id)}>
+                    <span className="item-num" aria-hidden>{item.id}</span>
+                    <span className="item-text">
+                      <span className="item-name">
+                        <span className="sr">{item.id} </span>{item.name}
+                        {item.continuous && <span className="tag">per stretch</span>}
+                      </span>
+                      <span className="item-def">{item.counts} <span className="ref">Manual p.{item.manualPage}</span></span>
+                    </span>
+                    {todayCounts.get(item.id) ? <span className="today">{todayCounts.get(item.id)} today</span> : null}
                   </button>
-                )}
-                {openInfo === item.id && <p className="not-count">Not this item: {item.doesNotCount}</p>}
-              </div>
+                  {item.doesNotCount && (
+                    <button
+                      className="info-btn"
+                      aria-expanded={openInfo === item.id}
+                      aria-label={`What does not count as ${item.name}?`}
+                      onClick={() => setOpenInfo(openInfo === item.id ? null : item.id)}
+                    >
+                      <Icon name="info" size={22} />
+                    </button>
+                  )}
+                </div>
+                {openInfo === item.id && <p className="not-count"><b>Not this item:</b> {item.doesNotCount}</p>}
+              </li>
             ))}
-          </div>
+          </ul>
         </section>
       ))}
 
@@ -206,6 +226,7 @@ export function LogScreen({ patientId, observations, checkins, onChange }: Props
           onBlur={(e) => { if (!e.currentTarget.contains(e.relatedTarget as Node)) setHeld(false); }}
         >
           <div className="toast-row">
+            <Icon name={toast.kind === "logged" ? "checkCircle" : "trash"} size={22} className="toast-icon" />
             <span>
               {toast.kind === "logged" ? "Logged" : "Deleted"} <b>{ITEMS[toast.obs.itemId - 1].name}</b> for {toast.obs.patientId} at {timeOfDay(toast.obs.at)}
               {toast.obs.approx ? " (about)" : ""}

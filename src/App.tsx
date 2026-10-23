@@ -3,16 +3,17 @@ import { DataScreen } from "./ui/DataScreen";
 import { LogScreen } from "./ui/LogScreen";
 import { ReviewScreen } from "./ui/ReviewScreen";
 import { ScoresScreen } from "./ui/ScoresScreen";
+import { Icon, type IconName } from "./ui/Icon";
+import { PatientAvatar } from "./ui/PatientAvatar";
 import { useCmaiData } from "./ui/useCmaiData";
 
 type Tab = "log" | "scores" | "review" | "data";
 
-// Icon paths are 24x24 strokes, drawn here so the app needs no icon library.
-const TABS: { id: Tab; label: string; title: string; icon: string }[] = [
-  { id: "log", label: "Log", title: "Log a behavior", icon: "M12 5v14M5 12h14" },
-  { id: "scores", label: "Scores", title: "Scores", icon: "M4 20V10M10 20V4M16 20v-7M22 20H2" },
-  { id: "review", label: "Review", title: "Day-14 review", icon: "M9 11l3 3 8-8M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9" },
-  { id: "data", label: "Data", title: "Patients and data", icon: "M4 6c0-1.7 3.6-3 8-3s8 1.3 8 3-3.6 3-8 3-8-1.3-8-3zM4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6" },
+const TABS: { id: Tab; label: string; title: string; icon: IconName }[] = [
+  { id: "log", label: "Log", title: "Log a behavior", icon: "plus" },
+  { id: "scores", label: "Scores", title: "Scores", icon: "chart" },
+  { id: "review", label: "Review", title: "Day-14 review", icon: "review" },
+  { id: "data", label: "Data", title: "Patients and data", icon: "data" },
 ];
 
 const readSaved = () => {
@@ -50,21 +51,34 @@ export default function App() {
   // Nudge on the Review tab when the latest finished period has no review yet.
   const finished = windows.filter((w) => !w.score.provisional);
   const reviewDue = finished.length > 0 && Object.keys(finished[finished.length - 1].review).length === 0;
+  const open = windows[windows.length - 1];
+  const periodLine = open ? `Period ${windows.length} · day ${Math.min(14, open.elapsed + 1)} of 14` : "";
 
   return (
     <div className="app">
       <header className="top">
         <div className="brand">
+          <img src="icon.svg" alt="" width="28" height="28" />
           <b>CMAI Tracker</b>
-          <span className="muted">CMAI-based ratings from event logs</span>
         </div>
-        {patients.length > 0 && (
-          <label className="patient">
-            <span className="patient-label">Patient</span>
-            <select value={patientId ?? ""} onChange={(e) => setPatientId(e.target.value)}>
-              {patients.map((p) => <option key={p.id} value={p.id}>{p.id}{p.demo ? " (demo)" : ""}</option>)}
-            </select>
-          </label>
+        {hasPatient && current && (
+          <div className="pt-banner">
+            <PatientAvatar id={current.id} />
+            <div className="pt-id">
+              <b>{current.id}</b>
+              {current.demo && <span className="tag">demo</span>}
+              <span className="pt-meta">{periodLine}</span>
+            </div>
+            {patients.length > 1 && (
+              <>
+                <span className="pt-switch-hint" aria-hidden>Switch <Icon name="chevron" size={18} /></span>
+                {/* The whole banner opens the phone's own picker: a big target, native on every platform. */}
+                <select className="pt-select" aria-label={`Patient: ${current.id}. Switch patient`} value={patientId ?? ""} onChange={(e) => setPatientId(e.target.value)}>
+                  {patients.map((p) => <option key={p.id} value={p.id}>{p.id}{p.demo ? " (demo)" : ""}</option>)}
+                </select>
+              </>
+            )}
+          </div>
         )}
       </header>
 
@@ -102,7 +116,7 @@ export default function App() {
               disabled={id !== "data" && !hasPatient}
             >
               <span className="tab-icon" aria-hidden>
-                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d={icon} /></svg>
+                <Icon name={icon} size={22} />
                 {id === "review" && reviewDue && <span className="badge" />}
               </span>
               <span>{label}</span>

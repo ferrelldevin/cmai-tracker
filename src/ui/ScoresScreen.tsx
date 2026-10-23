@@ -9,8 +9,11 @@ import { GROUP_LABELS, ITEMS } from "../scoring/items";
 import type { StoredObservation } from "../data/db";
 import type { ScoredWindow } from "./useCmaiData";
 import { shortDate, windowLabel } from "./format";
+import { Icon } from "./Icon";
 
 const SERIES = { aggressive: "var(--series-1)", physical: "var(--series-2)", verbal: "var(--series-3)" } as const;
+// A line pattern per group as well as a color, so the lines stay apart without color vision.
+const DASH = { aggressive: undefined, physical: "7 4", verbal: "2 4" } as const;
 
 interface Props {
   windows: ScoredWindow[];
@@ -33,7 +36,7 @@ export function ScoresScreen({ windows, observations, onLog }: Props) {
       <div className="empty">
         <p><b>No logs yet for this patient.</b></p>
         <p>Scores appear here once behaviors are logged. Ratings for a period are final after its 14 days end.</p>
-        <button onClick={onLog}>Go to Log</button>
+        <button onClick={onLog}><Icon name="plus" /> Go to Log</button>
       </div>
     );
   }
@@ -81,7 +84,7 @@ export function ScoresScreen({ windows, observations, onLog }: Props) {
         <div className="status-row">
           {(["aggressive", "physical", "verbal"] as const).map((g) => (
             <div key={g} className={sel.summary.agitated[g] ? "status warn" : "status ok"}>
-              <span className="status-icon" aria-hidden>{sel.summary.agitated[g] ? "▲" : "●"}</span>
+              <Icon name={sel.summary.agitated[g] ? "alert" : "check"} className="status-icon" />
               <b>{GROUP_LABELS[g]}</b>
               <span className="status-state">{sel.summary.agitated[g] ? "Meets agitated rule" : "Below threshold"}</span>
             </div>
@@ -164,7 +167,7 @@ export function ScoresScreen({ windows, observations, onLog }: Props) {
               <Tooltip contentStyle={{ background: "var(--surface)", border: "1px solid var(--rule)", color: "var(--text)" }} />
               <Legend />
               {(Object.keys(SERIES) as (keyof typeof SERIES)[]).map((k) => (
-                <Line key={k} type="monotone" dataKey={k} name={GROUP_LABELS[k]} stroke={SERIES[k]} strokeWidth={2} dot={{ r: 4 }} activeDot={{ r: 6 }} />
+                <Line key={k} type="monotone" dataKey={k} name={GROUP_LABELS[k]} stroke={SERIES[k]} strokeWidth={2.5} strokeDasharray={DASH[k]} dot={{ r: 4, strokeDasharray: "" }} activeDot={{ r: 6 }} />
               ))}
             </LineChart>
           </ResponsiveContainer>
@@ -189,7 +192,7 @@ export function ScoresScreen({ windows, observations, onLog }: Props) {
               <XAxis dataKey="name" stroke="var(--text-muted)" tickLine={false} />
               <YAxis stroke="var(--text-muted)" tickLine={false} domain={["dataMin - 5", "dataMax + 5"]} />
               <Tooltip contentStyle={{ background: "var(--surface)", border: "1px solid var(--rule)", color: "var(--text)" }} />
-              <Line type="monotone" dataKey="total" name="Total" stroke="var(--series-1)" strokeWidth={2} dot={{ r: 4 }} />
+              <Line type="monotone" dataKey="total" name="Total" stroke="var(--accent)" strokeWidth={2.5} dot={{ r: 4 }} />
             </LineChart>
           </ResponsiveContainer>
         </div>
@@ -205,7 +208,7 @@ export function ScoresScreen({ windows, observations, onLog }: Props) {
               <XAxis dataKey="label" stroke="var(--text-muted)" tickLine={false} interval={2} />
               <YAxis allowDecimals={false} stroke="var(--text-muted)" tickLine={false} />
               <Tooltip cursor={{ fill: "var(--hover)" }} contentStyle={{ background: "var(--surface)", border: "1px solid var(--rule)", color: "var(--text)" }} formatter={(v) => [v, "Logs"]} />
-              <Bar dataKey="count" name="Logs" fill="var(--series-1)" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="count" name="Logs" fill="var(--accent)" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>

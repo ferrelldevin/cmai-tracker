@@ -7,6 +7,8 @@ import { buildExport, download } from "../data/exporter";
 import { deletePatient, removeDemoData, restoreBackup } from "../data/manage";
 import { RATING_LABELS, ratingFromCount, RULE_VERSION, WINDOW_DAYS } from "../scoring/engine";
 import { ago, shortDate } from "./format";
+import { Icon } from "./Icon";
+import { PatientAvatar } from "./PatientAvatar";
 import { canInstall, install, isInstalled, onInstallChange } from "./install";
 
 interface Props {
@@ -138,6 +140,7 @@ export function DataScreen({ patients, current, onPatient, onChange }: Props) {
     <div className="data">
       {firstRun && (
         <section className="card welcome" aria-labelledby="welcome-h">
+          <img className="welcome-mark" src="icon.svg" alt="" width="56" height="56" />
           <h2 id="welcome-h">Welcome to CMAI Tracker</h2>
           <p>Log agitated behaviors as they happen. Every 14 days the app turns the logs into CMAI-based ratings, 1 to 7 for each of the 29 behaviors.</p>
           <ol className="steps">
@@ -145,7 +148,7 @@ export function DataScreen({ patients, current, onPatient, onChange }: Props) {
             <li><b>Scores.</b> See each behavior period by period, and when in the day it happens.</li>
             <li><b>Review.</b> On day 15, check the app's ratings against what you saw.</li>
           </ol>
-          <p className="muted">Everything stays on this phone. Nothing is sent anywhere unless you export it.</p>
+          <p className="privacy"><Icon name="lock" size={18} /> Everything stays on this phone. Nothing is sent anywhere unless you export it.</p>
           <div className="row wrap">
             <button onClick={() => codeInput.current?.focus()}>Add a patient</button>
             <button className="ghost" onClick={demo}>Try demo data</button>
@@ -187,11 +190,11 @@ export function DataScreen({ patients, current, onPatient, onChange }: Props) {
                   </div>
                 ) : (
                   <>
+                    <PatientAvatar id={p.id} size={36} />
                     <div className="patient-main">
                       <b>{p.id}</b>
                       {p.demo && <span className="tag">demo</span>}
-                      {p.id === current && <span className="tag">open</span>}
-                      <span className="muted">Period 1 started {shortDate(p.anchor)}</span>
+                      <span className="muted">{p.id === current ? "Open now · " : ""}Period 1 started {shortDate(p.anchor)}</span>
                     </div>
                     <div className="row">
                       {p.id !== current && <button className="ghost small" onClick={() => onPatient(p.id)}>Open</button>}
@@ -224,12 +227,12 @@ export function DataScreen({ patients, current, onPatient, onChange }: Props) {
         </p>
         <p className="muted">Last export: <b>{lastExport ? `${ago(lastExport)} (${shortDate(lastExport)})` : "never"}</b></p>
         <div className="row wrap">
-          <button onClick={() => exportFile("json")} disabled={firstRun}>Download backup</button>
+          <button onClick={() => exportFile("json")} disabled={firstRun}><Icon name="download" /> Download backup</button>
           <button className="ghost" onClick={() => exportFile("observations")} disabled={firstRun}>Logs CSV</button>
           <button className="ghost" onClick={() => exportFile("scores")} disabled={firstRun}>Scores CSV</button>
         </div>
         <div className="row wrap restore">
-          <button className="ghost" onClick={() => fileInput.current?.click()}>Restore from backup</button>
+          <button className="ghost" onClick={() => fileInput.current?.click()}><Icon name="upload" /> Restore from backup</button>
           <input ref={fileInput} type="file" accept="application/json,.json" hidden onChange={(e) => restore(e.target.files?.[0])} />
         </div>
         {msgFor("export")}
