@@ -5,6 +5,8 @@ import { ReviewScreen } from "./ui/ReviewScreen";
 import { ScoresScreen } from "./ui/ScoresScreen";
 import { Icon, type IconName } from "./ui/Icon";
 import { PatientAvatar } from "./ui/PatientAvatar";
+import { PatientSheet } from "./ui/PatientSheet";
+import { patientPosition } from "./data/patients";
 import { useCmaiData } from "./ui/useCmaiData";
 import { currentTheme, onDisplayChange, toggleTheme } from "./ui/display";
 import { useRoute, type DataPage, type Tab } from "./ui/route";
@@ -68,6 +70,24 @@ export default function App() {
     return () => ro.disconnect();
   }, [hasPatient]);
 
+  // Switching patient: close the sheet, then say who is now open (announced, and a banner flash).
+  const [choosing, setChoosing] = useState(false);
+  const [notice, setNotice] = useState("");
+  const [switched, setSwitched] = useState(false);
+  useEffect(() => {
+    if (!notice) return;
+    const t = setTimeout(() => { setNotice(""); setSwitched(false); }, 4000);
+    return () => clearTimeout(t);
+  }, [notice]);
+
+  function pickPatient(id: string) {
+    setChoosing(false);
+    if (id === patientId) return;
+    setPatientId(id);
+    setNotice(`Now on ${id}`);
+    setSwitched(true);
+  }
+
   function onTab(id: Tab) {
     if (id !== tab) return setTab(id);
     // Tapping the tab you are on: leave a Data page, or go back to the top (iOS convention).
@@ -81,8 +101,8 @@ export default function App() {
   // Nudge on the Review tab when the latest finished period has no review yet.
   const finished = windows.filter((w) => !w.score.provisional);
   const reviewDue = finished.length > 0 && Object.keys(finished[finished.length - 1].review).length === 0;
-  const open = windows[windows.length - 1];
-  const periodLine = open ? `Period ${windows.length} · day ${Math.min(14, open.elapsed + 1)} of 14` : "";
+  const pos = current ? patientPosition(current.anchor, Date.now()) : null;
+  const periodLine = pos ? `Period ${pos.period} · day ${pos.day} of 14` : "";
 
   return (
     <div className="app">
@@ -96,23 +116,23 @@ export default function App() {
 
       {hasPatient && current && (
         <div className="pin" ref={pinRef}>
-          <div className="pt-banner">
+          <button
+            className={switched ? "pt-banner switched" : "pt-banner"}
+            aria-haspopup="dialog"
+            aria-label={`Patient ${current.id}${current.demo ? " (demo)" : ""}, ${periodLine}. Choose patient`}
+            onClick={() => setChoosing(true)}
+          >
             <PatientAvatar id={current.id} />
-            <div className="pt-id">
+            <span className="pt-id">
               <b>{current.id}</b>
               {current.demo && <span className="tag">demo</span>}
               <span className="pt-meta">{periodLine}</span>
-            </div>
-            {patients.length > 1 && (
-              <>
-                <span className="pt-switch-hint" aria-hidden>Switch <Icon name="chevron" size={18} /></span>
-                {/* The whole banner opens the phone's own picker: a big target, native on every platform. */}
-                <select className="pt-select" aria-label={`Patient: ${current.id}. Switch patient`} value={patientId ?? ""} onChange={(e) => setPatientId(e.target.value)}>
-                  {patients.map((p) => <option key={p.id} value={p.id}>{p.id}{p.demo ? " (demo)" : ""}</option>)}
-                </select>
-              </>
-            )}
-          </div>
+            </span>
+            <span className="pt-switch-hint" aria-hidden>{patients.length > 1 ? "Switch" : "Patients"} <Icon name="chevron" size={18} /></span>
+          </button>
+          <p className={notice ? "switch-notice on" : "switch-notice"} role="status">
+            {notice && <><Icon name="check" size={16} /> {notice}</>}
+          </p>
         </div>
       )}
 
@@ -135,7 +155,7 @@ export default function App() {
             pageTitle={route.page ? PAGE_TITLES[route.page] : ""}
             onPage={(page) => go({ tab: "data", page })}
             onBack={back}
-            onPatient={(id) => { setPatientId(id); setTab("log"); }}
+            onPatient={(id) => { pickPatient(id); setTab("log"); }}
             onChange={refresh}
           />
         ) : shown === "log" ? (
@@ -146,6 +166,15 @@ export default function App() {
           <ReviewScreen key={patientId} patientId={patientId!} windows={windows} onChange={refresh} />
         )}
       </main>
+
+      <PatientSheet
+        open={choosing}
+        patients={patients}
+        current={hasPatient ? patientId : null}
+        onPick={pickPatient}
+        onManage={() => { setChoosing(false); go({ tab: "data", page: null }); }}
+        onClose={() => setChoosing(false)}
+      />
 
       <nav className="tabs" aria-label="Screens">
         <div className="tabs-inner">

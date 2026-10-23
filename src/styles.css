@@ -84,15 +84,16 @@ input[type="checkbox"] { width: 22px; height: 22px; min-height: 0; accent-color:
 .brand { display: flex; align-items: center; gap: var(--s2); font-size: var(--fs-md); }
 .brand img { border-radius: 7px; }
 .theme-btn { margin-left: auto; width: 44px; min-height: 44px; padding: 0; border-radius: 50%; }
-.pt-banner { position: relative; display: flex; align-items: center; gap: var(--s3); background: var(--surface); border: 1px solid var(--rule); border-radius: var(--radius); padding: var(--s2) var(--s3); box-shadow: var(--shadow-1); }
+.pt-banner { position: relative; display: flex; align-items: center; gap: var(--s3); width: 100%; min-height: 64px; background: var(--surface); color: var(--text); border: 1px solid var(--rule); border-radius: var(--radius); padding: var(--s2) var(--s3); box-shadow: var(--shadow-1); text-align: left; font-weight: 400; justify-content: flex-start; }
+@media (hover: hover) { button.pt-banner:hover { background: var(--surface); border-color: var(--accent); } }
+.pt-banner:focus-visible { border-radius: var(--radius); }
+.pt-banner.switched { animation: switched 1.2s ease-out; }
+@keyframes switched { 0% { box-shadow: 0 0 0 4px var(--accent); } 100% { box-shadow: var(--shadow-1); } }
 .avatar { display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; color: #fff; font-weight: 700; letter-spacing: 0.02em; flex: none; }
 .pt-id { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: var(--s2); min-width: 0; flex: 1; }
 .pt-id b { font-size: var(--fs-lg); }
 .pt-meta { flex-basis: 100%; color: var(--text-muted); font-size: var(--fs-sm); }
 .pt-switch-hint { display: inline-flex; align-items: center; gap: 2px; color: var(--accent-ink); font-size: var(--fs-sm); font-weight: 700; }
-.pt-select { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; min-height: 0; }
-.pt-banner:has(.pt-select:focus-visible) { outline: 3px solid var(--focus); box-shadow: 0 0 0 5px var(--focus-edge); }
-.pt-banner:has(.pt-select):hover { border-color: var(--accent); }
 
 .tabs { position: fixed; left: 0; right: 0; bottom: 0; z-index: 4; background: var(--surface); border-top: 1px solid var(--rule); padding: var(--s1) var(--s2) calc(var(--s1) + env(safe-area-inset-bottom)); }
 .tabs-inner { max-width: 760px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); }
@@ -126,6 +127,40 @@ input[type="checkbox"] { width: 22px; height: 22px; min-height: 0; accent-color:
 .chip { display: inline-flex; align-items: center; background: var(--surface); color: var(--text); border: 1px solid var(--rule-strong); border-radius: 999px; white-space: nowrap; font-size: var(--fs-sm); font-weight: 600; min-height: 44px; padding: 6px 16px; text-decoration: none; }
 @media (hover: hover) { .chip:hover { background: var(--hover); } }
 .chip.on { background: var(--accent); border-color: var(--accent); color: var(--accent-text); }
+
+/* After switching patient: a short confirmation pinned under the banner. */
+.switch-notice { position: absolute; left: 50%; bottom: -14px; transform: translate(-50%, 4px); z-index: 4; margin: 0; display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 999px; background: var(--accent); color: var(--accent-text); font-size: var(--fs-sm); font-weight: 700; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s; }
+.switch-notice.on { opacity: 1; transform: translate(-50%, 0); }
+
+/* Patient switcher sheet (src/ui/PatientSheet.tsx): from the bottom on a phone, centered on desktop. */
+.sheet { border: 0; padding: 0; margin: auto auto 0; width: 100%; max-width: 560px; max-height: 85vh; background: transparent; color: var(--text); overflow: visible; }
+.sheet::backdrop { background: rgba(10, 16, 20, 0.45); }
+.sheet[open] .sheet-body { animation: sheet-up .22s ease-out; }
+@keyframes sheet-up { from { transform: translateY(24px); opacity: 0.6; } to { transform: none; opacity: 1; } }
+.sheet-body { display: flex; flex-direction: column; max-height: 85vh; background: var(--surface); border-radius: 20px 20px 0 0; padding: var(--s2) var(--s4) calc(var(--s4) + env(safe-area-inset-bottom)); box-shadow: var(--shadow-2); }
+.sheet-grab { width: 40px; height: 5px; border-radius: 3px; background: var(--rule-strong); margin: 0 auto var(--s2); }
+.sheet-head { display: flex; align-items: center; justify-content: space-between; gap: var(--s2); }
+.sheet-head h2 { font-size: var(--fs-lg); margin: 0; }
+.sheet-search { width: 100%; margin: var(--s2) 0; }
+.sheet-list { list-style: none; margin: var(--s2) 0; padding: 0; overflow-y: auto; overscroll-behavior: contain; }
+.sheet-list li + li { border-top: 1px solid var(--rule); }
+.sheet-row { width: 100%; justify-content: flex-start; gap: var(--s3); background: transparent; color: var(--text); border: 0; border-radius: var(--radius-sm); padding: var(--s3) var(--s2); min-height: 64px; text-align: left; font-weight: 400; }
+@media (hover: hover) { .sheet-row:hover { background: var(--hover); } }
+.sheet-row:active { background: var(--press); }
+.sheet-row[aria-current="true"] { background: var(--accent-soft); }
+.sheet-text { display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0; }
+.sheet-code { font-weight: 700; font-size: var(--fs-md); }
+.sheet-meta { font-size: var(--fs-sm); color: var(--text-muted); }
+.sheet-check { color: var(--accent-ink); }
+.sheet-empty { padding: var(--s4) var(--s2); }
+.sheet-manage { align-self: flex-start; }
+@media (min-width: 700px) {
+  .sheet { margin: auto; }
+  .sheet-body { border-radius: var(--radius); }
+  .sheet-grab { display: none; }
+}
+[data-contrast="high"] .sheet-body { border: 2px solid var(--rule-strong); }
+[data-contrast="high"] .sheet-list li + li { border-top-color: var(--rule-strong); }
 
 /* Section bar: pinned under the banner on long screens (src/ui/SectionNav.tsx). */
 .section-nav { position: sticky; top: var(--pin-h, 0px); z-index: 2; display: flex; gap: var(--s2); overflow-x: auto; scrollbar-width: none; background: var(--bg); margin: 0 calc(-1 * var(--s4)); padding: var(--s2) var(--s4); border-bottom: 1px solid var(--rule); }

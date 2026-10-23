@@ -82,6 +82,7 @@ Each one waits on a lab decision or on V-01. Severity comes from the heuristic r
 | F-10 | Encrypt the backup file, or a passcode on the app | A backup holds behavior logs; codes, not names, but still sensitive | P-04 | G2 |
 | F-11 | Sync or shared device use for several caregivers on one resident | One phone per resident today; shift handover needs shared data | P-04, lab infrastructure | G1 |
 | F-12 | Quick navigation on long screens: pinned section bar with scroll tracking on Log, Scores and Review; Data split into a hub and sub-pages; back gesture and reload keep your place | Screens were 3.3 to 5.5 phone heights with no pinned shortcuts (design note 001) | none | Built (2026-10-23) |
+| F-13 | Patient switcher as a bottom sheet with badge, period and day, and last log; confirmation after switching | The native menu showed codes only and gave no confirmation, a wrong-patient risk (design note 002, iPhone screenshot 2026-10-23) | none | Built (2026-10-23) |
 
 ## Decision log
 
@@ -89,6 +90,7 @@ Newest first. Every rule change and every sign-off goes here, with who and when.
 
 | Date | Change | By | Approved by |
 |---|---|---|---|
+| 2026-10-23 | Patient switcher (round 9, F-13, design note 002): the native pop-up menu is replaced by a bottom sheet with badge, period and day, and last log; search at 8+ patients; "Now on P-02" confirmation; banner is a real button (fixes the yellow focus ring left after a tap on iPhone) | Devin | n/a (no scoring change) |
 | 2026-10-23 | Change process written down (`docs/process/change-process.md`, PR template). Navigation (round 8, F-12, design note 001): pinned section bar with scroll tracking on Log, Scores and Review; Review grouped like Log with progress per group; Data split into a hub and five pages; screens in the URL so the back gesture and reload keep your place; tapping the current tab scrolls to top; browser checks moved into `e2e/` | Devin | n/a (no scoring change) |
 | 2026-10-23 | Light and dark mode as a setting (round 7): header sun/moon toggle, Data > Display "Appearance" (Match phone, Light, Dark), theme set before first paint, status bar follows. Replaces the media-query-only dark mode | Devin | n/a (no scoring change) |
 | 2026-10-23 | High-contrast display option (round 6): Data screen "Display" setting (Match phone, Standard, High). High uses AAA text contrast (7:1 or better), 2px outlines and a stronger rating ramp, in light and dark. "Match phone" follows the phone's Increase Contrast setting. Windows forced-colors mode keeps the selected-tab and rating-cell cues | Devin | n/a (no scoring change) |

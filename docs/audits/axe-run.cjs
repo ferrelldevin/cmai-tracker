@@ -41,6 +41,10 @@ async function scan(page, name, results) {
     await page.getByRole("button", { name: /^7 Hitting/ }).click(); // makes sure there is a recent log to edit
     await page.getByRole("button", { name: /^Edit / }).first().click();
     await scan(page, "Log (editing a recent log)", results);
+    await page.getByRole("button", { name: /Choose patient$/ }).click();
+    await page.getByRole("dialog", { name: "Choose patient" }).waitFor();
+    await scan(page, "Patient switcher (sheet open)", results);
+    await page.keyboard.press("Escape");
     await page.getByRole("button", { name: "Scores" }).click();
     await page.getByText("Each behavior, period by period").waitFor();
     await scan(page, "Scores", results);
