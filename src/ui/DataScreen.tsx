@@ -10,6 +10,7 @@ import { ago, shortDate } from "./format";
 import { Icon } from "./Icon";
 import { PatientAvatar } from "./PatientAvatar";
 import { canInstall, install, isInstalled, onInstallChange } from "./install";
+import { getContrastPref, setContrastPref, type ContrastPref } from "./contrast";
 
 interface Props {
   patients: Patient[];
@@ -257,6 +258,8 @@ export function DataScreen({ patients, current, onPatient, onChange }: Props) {
         {msgFor("safe")}
       </section>
 
+      <DisplaySettings />
+
       <section className="card" aria-labelledby="about-h">
         <h2 id="about-h">How ratings are worked out</h2>
         <p className="muted">
@@ -285,5 +288,34 @@ export function DataScreen({ patients, current, onPatient, onChange }: Props) {
         </p>
       </section>
     </div>
+  );
+}
+
+const CONTRAST_CHOICES: { value: ContrastPref; label: string }[] = [
+  { value: "auto", label: "Match phone" },
+  { value: "standard", label: "Standard" },
+  { value: "high", label: "High" },
+];
+
+function DisplaySettings() {
+  const [contrast, setContrast] = useState(getContrastPref);
+  const choose = (pref: ContrastPref) => {
+    setContrast(pref);
+    setContrastPref(pref);
+  };
+  return (
+    <section className="card" aria-labelledby="display-h">
+      <h2 id="display-h">Display</h2>
+      <p className="muted">High contrast uses black text, darker colors and thicker outlines, for bright light or low vision. "Match phone" turns it on when the phone's Increase Contrast setting is on.</p>
+      <fieldset className="segmented">
+        <legend>Contrast</legend>
+        {CONTRAST_CHOICES.map((c) => (
+          <label key={c.value}>
+            <input type="radio" name="contrast" value={c.value} checked={contrast === c.value} onChange={() => choose(c.value)} />
+            {c.label}
+          </label>
+        ))}
+      </fieldset>
+    </section>
   );
 }

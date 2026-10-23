@@ -19,8 +19,10 @@ async function scan(page, name, results) {
 (async () => {
   const browser = await chromium.launch({ executablePath: process.env.CHROME || "/opt/pw-browsers/chromium-1243/chrome-linux64/chrome" });
   const all = { tool: `axe-core ${axeVersion}`, tags: TAGS, runAt: new Date().toISOString(), schemes: {} };
-  for (const scheme of ["light", "dark"]) {
-    const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, colorScheme: scheme });
+  // Each color scheme, standard and with the high-contrast Display setting on.
+  for (const [scheme, colorScheme, high] of [["light", "light", false], ["dark", "dark", false], ["light, high contrast", "light", true], ["dark, high contrast", "dark", true]]) {
+    const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, colorScheme });
+    if (high) await ctx.addInitScript(() => localStorage.setItem("cmai-contrast", "high"));
     const page = await ctx.newPage();
     const results = [];
     console.log(`== ${scheme}`);
@@ -36,6 +38,7 @@ async function scan(page, name, results) {
     await page.getByRole("button", { name: "Undo" }).click();
     await page.getByRole("button", { name: "Nothing to log today" }).click();
     await scan(page, "Log (checked in: nothing to log today)", results);
+    await page.getByRole("button", { name: /^7 Hitting/ }).click(); // makes sure there is a recent log to edit
     await page.getByRole("button", { name: /^Edit / }).first().click();
     await scan(page, "Log (editing a recent log)", results);
     await page.getByRole("button", { name: "Scores" }).click();
