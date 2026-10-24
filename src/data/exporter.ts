@@ -17,9 +17,9 @@ export async function buildExport(now = Date.now()) {
   const checkins = await db.checkins.toArray();
   const reviewMap = new Map(reviews.map((r) => [r.key, r.choice]));
 
-  const obsRows: (string | number | boolean)[][] = [["patient_id", "item_id", "item_name", "occurred_at", "time_approximate", "what_happened_before", "logged_at"]];
+  const obsRows: (string | number | boolean)[][] = [["patient_id", "item_id", "item_name", "occurred_at", "time_approximate", "what_happened_before", "before_note", "logged_at"]];
   for (const o of observations) {
-    obsRows.push([o.patientId, o.itemId, ITEMS[o.itemId - 1].name, new Date(o.at).toISOString(), !!o.approx, o.before ?? "", new Date(o.loggedAt).toISOString()]);
+    obsRows.push([o.patientId, o.itemId, ITEMS[o.itemId - 1].name, new Date(o.at).toISOString(), !!o.approx, o.before ?? "", o.beforeNote ?? "", new Date(o.loggedAt).toISOString()]);
   }
 
   const scoreRows: (string | number | boolean)[][] = [["patient_id", "window_start", "window_end", "provisional", "item_id", "item_name", "count", "derived_rating", "final_rating", "reviewed", "unlogged_days", "rule_version"]];

@@ -168,7 +168,7 @@ export function LogScreen({ patientId, observations, checkins, onChange }: Props
                 <li key={o.id}>
                   <div className="recent-main">
                     <span className="recent-time">{o.at < todayStart ? dayAndTime(o.at) : timeOfDay(o.at)}{o.approx ? " (about)" : ""}</span>
-                    <span><b>{ITEMS[o.itemId - 1].name}</b>{o.before ? <span className="muted"> · before: {o.before}</span> : null}</span>
+                    <span><b>{ITEMS[o.itemId - 1].name}</b>{o.before ? <span className="muted"> · before: {o.before}{o.beforeNote ? ` (${o.beforeNote})` : ""}</span> : null}</span>
                   </div>
                   <button className="ghost small" aria-label={`Edit ${ITEMS[o.itemId - 1].name} at ${timeOfDay(o.at)}`} onClick={(e) => edit(o as SavedObs, e)}>Edit</button>
                 </li>

@@ -142,6 +142,10 @@ input[type="checkbox"] { width: 22px; height: 22px; min-height: 0; accent-color:
 @keyframes sheet-up { from { transform: translateY(24px); opacity: 0.6; } to { transform: none; opacity: 1; } }
 .sheet-body { display: flex; flex-direction: column; max-height: 85vh; background: var(--surface); border-radius: 20px 20px 0 0; padding: var(--s2) var(--s4) calc(var(--s4) + env(safe-area-inset-bottom)); box-shadow: var(--shadow-2); }
 .sheet-grab { width: 40px; height: 5px; border-radius: 3px; background: var(--rule-strong); margin: 0 auto var(--s2); }
+/* The handle, header and footer drag the sheet down to close it (Sheet.tsx), so the browser must not scroll from them. */
+.sheet-grab, .sheet-head, .sheet-footer { touch-action: none; }
+.sheet { overscroll-behavior: contain; }
+.sheet-grab { box-sizing: content-box; padding: 8px 40px; margin-top: -8px; background-clip: content-box; cursor: grab; }
 .sheet-head { display: flex; align-items: center; justify-content: space-between; gap: var(--s2); }
 .sheet-head h2 { font-size: var(--fs-lg); margin: 0; }
 .sheet-search { width: 100%; margin: var(--s2) 0; }
@@ -257,7 +261,14 @@ input[type="checkbox"] { width: 22px; height: 22px; min-height: 0; accent-color:
 .form-row + .form-row { border-top: 1px solid var(--rule); }
 .form-row.stacked { flex-direction: column; align-items: stretch; gap: var(--s2); }
 .form-hint { font-size: var(--fs-sm); color: var(--text-muted); }
-.form-row input[type="time"] { min-height: 44px; width: auto; background: var(--surface); }
+.time-pill { position: relative; display: inline-flex; align-items: center; gap: 6px; padding: 0 14px; min-height: 44px; border-radius: 999px; background: var(--accent-soft); color: var(--accent-ink); border: 1px solid var(--accent); cursor: pointer; }
+.time-pill input[type="time"] { min-height: 42px; width: auto; padding: 0; border: 0; background: transparent; color: inherit; font: inherit; font-weight: 700; font-variant-numeric: tabular-nums; cursor: pointer; }
+/* Chrome's own picker icon becomes an invisible layer over the whole pill, so any tap opens the picker. */
+.time-pill input[type="time"]::-webkit-calendar-picker-indicator { position: absolute; inset: 0; width: auto; height: auto; opacity: 0; cursor: pointer; }
+.time-pill:has(input:focus-visible) { outline: 3px solid var(--focus); box-shadow: 0 0 0 5px var(--focus-edge); }
+.time-pill input[type="time"]:focus-visible { outline: none; box-shadow: none; }
+.other-note { display: grid; gap: var(--s1); margin-top: var(--s2); font-size: var(--fs-sm); font-weight: 600; }
+.other-note input { min-height: 48px; width: 100%; }
 .quick-times { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; padding: 4px; background: var(--surface); border: 1px solid var(--rule); border-radius: var(--radius-sm); }
 .quick-times button { min-height: 40px; padding: 4px; background: transparent; color: var(--text-muted); border: 1px solid transparent; border-radius: 8px; font-size: var(--fs-sm); white-space: nowrap; }
 @media (hover: hover) { .quick-times button:hover { background: var(--hover); } }
