@@ -1,17 +1,18 @@
 // Screen 1: one tap logs a behavior. A short description sits on the button so
 // the caregiver picks the right item, with the manual page for the full
-// definition (p.12-13). Undo for 8 seconds; the timer stops while the caregiver
-// is using the toast (WCAG 2.2.1). Recent logs below can be re-timed or deleted.
+// definition (p.12-13). A short confirmation offers Edit and Undo for 8 seconds; the timer
+// stops while the caregiver is using it (WCAG 2.2.1). Edit, here and in Recent logs, opens
+// the one log details sheet (design note 003).
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type MouseEvent } from "react";
 import { GROUP_LABELS, ITEMS, type FactorGroup } from "../scoring/items";
 import { DAY_MS } from "../scoring/engine";
 import { checkInKey, db, localMidnight, type CheckIn, type StoredObservation } from "../data/db";
 import { dayAndTime, timeOfDay } from "./format";
 import { Icon } from "./Icon";
+import { LogSheet } from "./LogSheet";
 import { SectionNav, type Section } from "./SectionNav";
 
-const BEFORE_OPTIONS = ["Personal care or bathing", "Mealtime", "Noise or crowding", "Seemed in pain", "Change in routine", "Visitor or phone call", "Nothing noticed", "Other"];
 const GROUP_ORDER: FactorGroup[] = ["aggressive", "physical", "verbal", "other"];
 
 // The pinned bar: each behavior group, then recent logs (where mistakes get fixed).
@@ -19,11 +20,11 @@ const sections: Section[] = [
   ...GROUP_ORDER.map((g) => ({ id: `group-${g}`, label: GROUP_LABELS[g].split(/[ ,]/)[0] })),
   { id: "recent", label: "Recent logs" },
 ];
-const EARLIER = [0, 5, 15, 30, 60]; // minutes ago
 const TOAST_MS = 8000;
 const RECENT_SHOWN = 8;
 
-type Toast = { kind: "logged" | "deleted"; obs: StoredObservation & { id: number } };
+type SavedObs = StoredObservation & { id: number };
+type Toast = { kind: "logged" | "deleted"; obs: SavedObs };
 
 interface Props {
   patientId: string;
@@ -32,25 +33,11 @@ interface Props {
   onChange: () => void;
 }
 
-const hhmm = (t: number) => {
-  const d = new Date(t);
-  return `${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")}`;
-};
-
-/** A clock time typed for a log: today, or yesterday if that time has not come yet today. */
-function fromClock(value: string, now: number) {
-  const [h, m] = value.split(":").map(Number);
-  const d = new Date(now);
-  d.setHours(h, m, 0, 0);
-  return d.getTime() > now ? d.getTime() - DAY_MS : d.getTime();
-}
-
 export function LogScreen({ patientId, observations, checkins, onChange }: Props) {
   const [openInfo, setOpenInfo] = useState<number | null>(null);
   const [toast, setToast] = useState<Toast | null>(null);
-  const [details, setDetails] = useState(false);
-  const [held, setHeld] = useState(false); // pointer or focus inside the toast
-  const [editing, setEditing] = useState<number | null>(null);
+  const [held, setHeld] = useState(false); // pointer or focus inside the confirmation
+  const [editing, setEditing] = useState<{ obs: SavedObs; viaKeyboard: boolean } | null>(null);
   const [showAllRecent, setShowAllRecent] = useState(false);
   const lastTap = useRef<{ itemId: number; t: number } | null>(null);
   const [flash, setFlash] = useState<number | null>(null); // the row just logged, highlighted briefly
@@ -63,12 +50,12 @@ export function LogScreen({ patientId, observations, checkins, onChange }: Props
   const checkedIn = checkins.some((c) => c.day === todayStart);
   const recent = observations.filter((o) => o.loggedAt >= now - DAY_MS || o.at >= now - DAY_MS).sort((a, b) => b.at - a.at);
 
-  // The toast closes on its own only while nobody is using it.
+  // The confirmation closes on its own only while nobody is using it.
   useEffect(() => {
-    if (!toast || details || held) return;
+    if (!toast || held) return;
     const t = window.setTimeout(() => setToast(null), TOAST_MS);
     return () => window.clearTimeout(t);
-  }, [toast, details, held]);
+  }, [toast, held]);
 
   // Switching resident closes anything that belonged to the last one.
   useEffect(() => { setToast(null); setEditing(null); }, [patientId]);
@@ -84,7 +71,6 @@ export function LogScreen({ patientId, observations, checkins, onChange }: Props
     setFlash(itemId);
     window.setTimeout(() => setFlash((f) => (f === itemId ? null : f)), 900);
     setToast({ kind: "logged", obs: { ...obs, id } });
-    setDetails(false);
     onChange();
   }
 
@@ -105,23 +91,26 @@ export function LogScreen({ patientId, observations, checkins, onChange }: Props
     onChange();
   }
 
-  async function patch(id: number, change: Partial<StoredObservation>) {
+  function edit(o: SavedObs, e: MouseEvent) {
+    setToast(null);
+    setHeld(false);
+    setEditing({ obs: o, viaKeyboard: e.detail === 0 });
+  }
+
+  async function patch(change: Partial<StoredObservation>) {
+    if (!editing) return;
     // Show the change at once; the save follows.
-    setToast((t) => (t && t.obs.id === id ? { ...t, obs: { ...t.obs, ...change } } : t));
-    await db.observations.update(id, change);
+    setEditing({ ...editing, obs: { ...editing.obs, ...change } });
+    await db.observations.update(editing.obs.id, change);
     onChange();
   }
 
-  async function remove(o: StoredObservation) {
-    if (o.id === undefined) return;
+  async function remove(o: SavedObs) {
     await db.observations.delete(o.id);
     setEditing(null);
-    setDetails(false);
-    setToast({ kind: "deleted", obs: { ...o, id: o.id } });
+    setToast({ kind: "deleted", obs: o });
     onChange();
   }
-
-  const minutesAgo = toast ? Math.round((toast.obs.loggedAt - toast.obs.at) / 60_000) : 0;
 
   return (
     <div className="log">
@@ -181,18 +170,7 @@ export function LogScreen({ patientId, observations, checkins, onChange }: Props
                     <span className="recent-time">{o.at < todayStart ? dayAndTime(o.at) : timeOfDay(o.at)}{o.approx ? " (about)" : ""}</span>
                     <span><b>{ITEMS[o.itemId - 1].name}</b>{o.before ? <span className="muted"> · before: {o.before}</span> : null}</span>
                   </div>
-                  {editing === o.id ? (
-                    <div className="recent-edit">
-                      <label>
-                        Happened at
-                        <input type="time" defaultValue={hhmm(o.at)} onChange={(e) => e.target.value && patch(o.id!, { at: fromClock(e.target.value, Date.now()) })} />
-                      </label>
-                      <button className="ghost" onClick={() => setEditing(null)}>Done</button>
-                      <button className="danger" onClick={() => remove(o)}>Delete</button>
-                    </div>
-                  ) : (
-                    <button className="ghost small" aria-label={`Edit ${ITEMS[o.itemId - 1].name} at ${timeOfDay(o.at)}`} onClick={() => setEditing(o.id!)}>Edit</button>
-                  )}
+                  <button className="ghost small" aria-label={`Edit ${ITEMS[o.itemId - 1].name} at ${timeOfDay(o.at)}`} onClick={(e) => edit(o as SavedObs, e)}>Edit</button>
                 </li>
               ))}
             </ul>
@@ -219,54 +197,34 @@ export function LogScreen({ patientId, observations, checkins, onChange }: Props
 
       {toast && (
         <div
-          className="toast"
+          className="snackbar"
           role="status"
           onPointerEnter={() => setHeld(true)}
           onPointerLeave={() => setHeld(false)}
           onFocus={() => setHeld(true)}
           onBlur={(e) => { if (!e.currentTarget.contains(e.relatedTarget as Node)) setHeld(false); }}
         >
-          <div className="toast-row">
-            <Icon name={toast.kind === "logged" ? "checkCircle" : "trash"} size={22} className="toast-icon" />
-            <span>
-              {toast.kind === "logged" ? "Logged" : "Deleted"} <b>{ITEMS[toast.obs.itemId - 1].name}</b> for {toast.obs.patientId} at {timeOfDay(toast.obs.at)}
-              {toast.obs.approx ? " (about)" : ""}
+          <Icon name={toast.kind === "logged" ? "checkCircle" : "trash"} size={22} className="snackbar-icon" />
+          <span className="snackbar-text">
+            <b className="snackbar-title"><span className="sr">{toast.kind === "logged" ? "Logged: " : "Deleted: "}</span>{ITEMS[toast.obs.itemId - 1].name}</b>
+            <span className="snackbar-meta">
+              {toast.kind === "deleted" && "Deleted · "}{toast.obs.patientId} · {timeOfDay(toast.obs.at)}{toast.obs.approx ? " (about)" : ""}
             </span>
-            <button onClick={undo}>Undo</button>
-            {toast.kind === "logged" && (
-              <button className="ghost" aria-expanded={details} onClick={() => setDetails(!details)}>{details ? "Done" : "Time or detail"}</button>
-            )}
-          </div>
-          {details && toast.kind === "logged" && (
-            <div className="toast-details">
-              <fieldset className="earlier">
-                <legend>When did it happen?</legend>
-                <div className="earlier-chips">
-                  {EARLIER.map((m) => (
-                    <button key={m} className={minutesAgo === m ? "chip on" : "chip"} aria-pressed={minutesAgo === m} onClick={() => patch(toast.obs.id, { at: toast.obs.loggedAt - m * 60_000 })}>
-                      {m === 0 ? "Just now" : m === 60 ? "1 hr ago" : `${m} min ago`}
-                    </button>
-                  ))}
-                </div>
-                <label className="inline">
-                  Or a time
-                  <input type="time" value={hhmm(toast.obs.at)} onChange={(e) => e.target.value && patch(toast.obs.id, { at: fromClock(e.target.value, toast.obs.loggedAt) })} />
-                </label>
-              </fieldset>
-              <label className="inline">
-                <input type="checkbox" checked={!!toast.obs.approx} onChange={(e) => patch(toast.obs.id, { approx: e.target.checked })} /> Time is approximate
-              </label>
-              <label>
-                What happened just before?
-                <select value={toast.obs.before ?? ""} onChange={(e) => patch(toast.obs.id, { before: e.target.value })}>
-                  <option value="" disabled>Choose one (optional)</option>
-                  {BEFORE_OPTIONS.map((o) => <option key={o}>{o}</option>)}
-                </select>
-              </label>
-            </div>
-          )}
+          </span>
+          <span className="snackbar-actions">
+            {toast.kind === "logged" && <button className="snackbar-btn" onClick={(e) => edit(toast.obs, e)}>Edit</button>}
+            <button className="snackbar-btn" onClick={undo}>Undo</button>
+          </span>
         </div>
       )}
+
+      <LogSheet
+        obs={editing?.obs ?? null}
+        viaKeyboard={editing?.viaKeyboard ?? false}
+        onPatch={patch}
+        onDelete={() => editing && remove(editing.obs)}
+        onClose={() => setEditing(null)}
+      />
     </div>
   );
 }

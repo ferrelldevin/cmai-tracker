@@ -28,33 +28,54 @@ const ok = (c, m) => { if (!c) throw new Error("FAIL: " + m); console.log("  ok"
   // log, double tap guard
   const hit = p.getByRole("button", { name: /^7 Hitting/ });
   await hit.dblclick();
-  await p.locator(".toast").waitFor();
+  await p.locator(".snackbar").waitFor();
   ok((await p.locator("li.item", { hasText: "Hitting" }).locator(".today").textContent()) === "1 today", "double tap logs once");
-  // toast stays while details open; back-date 15 min
-  await p.getByRole("button", { name: "Time or detail" }).click();
-  await p.getByRole("button", { name: "15 min ago" }).click();
-  await p.getByLabel("Time is approximate").check();
-  await p.getByLabel("What happened just before?").selectOption("Mealtime");
-  await p.screenshot({ path: `${OUT}/flow-02-toast-details.png` });
-  await p.waitForTimeout(9000);
-  ok(await p.locator(".toast").isVisible(), "toast stays open past 8 s while details are open");
-  await p.getByRole("button", { name: "Done" }).click();
-  await p.mouse.click(10, 300);
-  await p.waitForTimeout(8600);
-  ok(!(await p.locator(".toast").isVisible()), "toast closes 8 s after leaving it");
+  const snack = p.locator(".snackbar");
+  ok(/P-\S+ · \d/.test(await snack.textContent()), "confirmation names the patient and time");
+  ok((await snack.boundingBox()).height <= 80, "confirmation is compact: " + Math.round((await snack.boundingBox()).height) + " px");
+  // timer pauses while the confirmation is in use
+  await snack.hover(); await p.waitForTimeout(9000);
+  ok(await snack.isVisible(), "confirmation stays past 8 s while in use");
+  // Edit opens the log details sheet; back-date 15 min, approximate, before = Mealtime
+  await snack.getByRole("button", { name: "Edit" }).click();
+  const sheet = p.getByRole("dialog", { name: /^Hitting/ });
+  await sheet.waitFor();
+  ok(!(await snack.isVisible()), "confirmation gives way to the sheet");
+  ok(await p.evaluate(() => document.activeElement?.tagName === "DIALOG"), "opened by tap: no focus ring inside the sheet");
+  await sheet.getByRole("button", { name: "15 min before" }).click();
+  await sheet.getByLabel("Time is approximate").check();
+  await sheet.getByRole("button", { name: "Mealtime" }).click();
+  ok((await sheet.getByRole("button", { name: "Mealtime" }).getAttribute("aria-pressed")) === "true", "before chip selected");
+  await p.screenshot({ path: `${OUT}/flow-02-log-sheet.png` });
+  await sheet.getByRole("button", { name: "Done" }).click();
+  ok(!(await sheet.isVisible()), "Done closes the sheet");
   // recent logs
   const recent = p.locator(".recent-list li").first();
   ok((await recent.textContent()).includes("(about)") && (await recent.textContent()).includes("Mealtime"), "recent log shows approx and before");
   await recent.scrollIntoViewIfNeeded();
   await p.screenshot({ path: `${OUT}/flow-03-recent.png` });
+  // Edit from Recent logs opens the same sheet with the saved details
   await recent.getByRole("button", { name: /Edit/ }).click();
+  await sheet.waitFor();
+  ok(await sheet.getByLabel("Time is approximate").isChecked() && (await sheet.getByRole("button", { name: "15 min before" }).getAttribute("aria-pressed")) === "true", "Recent logs opens the same sheet with the saved details");
+  await sheet.getByRole("button", { name: "Mealtime" }).click();
+  ok((await sheet.getByRole("button", { name: "Mealtime" }).getAttribute("aria-pressed")) === "false", "tapping the chosen chip clears it");
+  await sheet.getByRole("button", { name: "Mealtime" }).click();
   await p.screenshot({ path: `${OUT}/flow-04-recent-edit.png` });
-  await recent.getByRole("button", { name: "Delete" }).click();
-  await p.locator(".toast", { hasText: "Deleted" }).waitFor();
+  await sheet.getByRole("button", { name: "Delete log" }).click();
+  await p.locator(".snackbar", { hasText: "Deleted" }).waitFor();
   ok((await p.locator(".recent-list li").count()) === 0, "delete removes the log");
+  ok((await p.locator(".snackbar").getByRole("button").count()) === 1, "deleted confirmation offers Undo only");
   await p.getByRole("button", { name: "Undo" }).click();
   await p.locator(".recent-list li").first().waitFor();
   ok((await p.locator(".recent-list li").first().textContent()).includes("Mealtime"), "undo delete brings back the log with its details");
+  // keyboard: Edit from Recent logs starts on the first chip
+  await p.locator(".recent-list li").first().getByRole("button", { name: /Edit/ }).focus();
+  await p.keyboard.press("Enter"); await sheet.waitFor();
+  ok(await p.evaluate(() => document.activeElement?.getAttribute("type") === "time"), "opened by keyboard: focus on the time field");
+  await p.keyboard.press("Escape");
+  ok(!(await sheet.isVisible()), "Esc closes the sheet");
+  await p.mouse.click(10, 300);
   // data: demo, export, restore, delete patient
   await p.locator("nav.tabs button", { hasText: "Data" }).click();
   await p.getByRole("link", { name: /^Demo data/ }).click();

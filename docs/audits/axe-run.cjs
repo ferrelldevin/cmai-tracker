@@ -33,14 +33,19 @@ async function scan(page, name, results) {
     await scan(page, "Log", results);
     await page.getByRole("button", { name: /^What does not count/ }).first().click();
     await page.getByRole("button", { name: /^7 Hitting/ }).click();
-    await page.getByRole("button", { name: "Time or detail" }).click();
-    await scan(page, "Log (after a tap: toast with details, exclusion open)", results);
-    await page.getByRole("button", { name: "Undo" }).click();
+    await page.locator(".snackbar").waitFor();
+    await scan(page, "Log (after a tap: confirmation, exclusion open)", results);
+    await page.locator(".snackbar").getByRole("button", { name: "Edit" }).click();
+    await page.getByRole("dialog", { name: /^Hitting/ }).waitFor();
+    await scan(page, "Log details sheet (from the confirmation)", results);
+    await page.getByRole("button", { name: "Delete log" }).click();
     await page.getByRole("button", { name: "Nothing to log today" }).click();
     await scan(page, "Log (checked in: nothing to log today)", results);
     await page.getByRole("button", { name: /^7 Hitting/ }).click(); // makes sure there is a recent log to edit
     await page.getByRole("button", { name: /^Edit / }).first().click();
-    await scan(page, "Log (editing a recent log)", results);
+    await page.getByRole("dialog").waitFor();
+    await scan(page, "Log details sheet (from Recent logs)", results);
+    await page.keyboard.press("Escape");
     await page.getByRole("button", { name: /Choose patient$/ }).click();
     await page.getByRole("dialog", { name: "Choose patient" }).waitFor();
     await scan(page, "Patient switcher (sheet open)", results);

@@ -1,14 +1,13 @@
-// Patient switcher: a bottom sheet (centered on desktop) listing every patient with the
-// details that tell them apart: color badge, code, period and day, and last log.
-// Built on the native <dialog>, which traps focus, closes on Esc and makes the page behind
-// it inert. Design note: docs/design/notes/002-patient-switcher.md.
+// Patient switcher: a sheet listing every patient with the details that tell them apart:
+// color badge, code, period and day, and last log. Design note: docs/design/notes/002-patient-switcher.md.
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import type { Patient } from "../data/db";
 import { patientSummaries, type PatientSummary } from "../data/patients";
 import { lastSeen } from "./format";
 import { Icon } from "./Icon";
 import { PatientAvatar } from "./PatientAvatar";
+import { Sheet } from "./Sheet";
 
 const SEARCH_FROM = 8; // a search box appears once the list is this long
 
@@ -24,25 +23,10 @@ interface Props {
 }
 
 export function PatientSheet({ open, viaKeyboard, patients, current, onPick, onManage, onClose }: Props) {
-  const dialog = useRef<HTMLDialogElement>(null);
   const [rows, setRows] = useState<PatientSummary[] | null>(null);
   const [query, setQuery] = useState("");
 
-  useEffect(() => {
-    const d = dialog.current;
-    if (!d) return;
-    if (open && !d.open) {
-      setQuery("");
-      d.showModal();
-      // Set the starting focus ourselves; showModal() would otherwise pick the Close button.
-      // Keyboard users start on the current patient, one key from a confirm. Touch and mouse
-      // users start on the sheet itself: Safari draws the focus ring on any button focused by
-      // script, which left a ring on the current row after a tap (F-14).
-      const row = viaKeyboard ? d.querySelector<HTMLElement>('[aria-current="true"]') : null;
-      (row ?? d).focus();
-    }
-    if (!open && d.open) d.close();
-  }, [open]);
+  useEffect(() => { if (open) setQuery(""); }, [open]);
 
   useEffect(() => {
     if (!open) return;
@@ -55,55 +39,41 @@ export function PatientSheet({ open, viaKeyboard, patients, current, onPick, onM
     .filter((p) => p.id.toLowerCase().includes(query.trim().toLowerCase()));
 
   return (
-    <dialog
-      ref={dialog}
-      className="sheet"
-      tabIndex={-1}
-      aria-labelledby="sheet-h"
-      onClose={onClose}
-      onClick={(e) => { if (e.target === dialog.current) onClose(); }}
-    >
-      <div className="sheet-body">
-        <div className="sheet-grab" aria-hidden />
-        <div className="sheet-head">
-          <h2 id="sheet-h">Choose patient</h2>
-          <button className="ghost small sheet-close" onClick={onClose}>Close</button>
-        </div>
-        {patients.length >= SEARCH_FROM && (
-          <input
-            className="sheet-search"
-            type="search"
-            placeholder="Find a code"
-            aria-label="Find a patient by code"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            autoCapitalize="characters"
-            autoComplete="off"
-            autoCorrect="off"
-            spellCheck={false}
-          />
-        )}
-        <ul className="sheet-list">
-          {list.map((p) => {
-            const isCurrent = p.id === current;
-            return (
-              <li key={p.id}>
-                <button className="sheet-row" aria-current={isCurrent} onClick={() => onPick(p.id)}>
-                  <PatientAvatar id={p.id} size={40} />
-                  <span className="sheet-text">
-                    <span className="sheet-code">{p.id}{p.demo && <span className="tag">demo</span>}</span>
-                    {p.period > 0 && <span className="sheet-meta">Period {p.period} · day {p.day} of 14</span>}
-                    {p.lastLogged !== undefined && <span className="sheet-meta">{p.lastLogged === null ? "No logs yet" : `Last log ${lastSeen(p.lastLogged)}`}</span>}
-                  </span>
-                  {isCurrent && <Icon name="check" size={22} className="sheet-check" />}
-                </button>
-              </li>
-            );
-          })}
-          {list.length === 0 && <li className="sheet-empty muted">No patient code contains "{query}".</li>}
-        </ul>
-        <button className="ghost sheet-manage" onClick={onManage}><Icon name="data" size={18} /> Manage patients</button>
-      </div>
-    </dialog>
+    <Sheet open={open} viaKeyboard={viaKeyboard} keyboardFocus='[aria-current="true"]' title="Choose patient" onClose={onClose}>
+      {patients.length >= SEARCH_FROM && (
+        <input
+          className="sheet-search"
+          type="search"
+          placeholder="Find a code"
+          aria-label="Find a patient by code"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          autoCapitalize="characters"
+          autoComplete="off"
+          autoCorrect="off"
+          spellCheck={false}
+        />
+      )}
+      <ul className="sheet-list">
+        {list.map((p) => {
+          const isCurrent = p.id === current;
+          return (
+            <li key={p.id}>
+              <button className="sheet-row" aria-current={isCurrent} onClick={() => onPick(p.id)}>
+                <PatientAvatar id={p.id} size={40} />
+                <span className="sheet-text">
+                  <span className="sheet-code">{p.id}{p.demo && <span className="tag">demo</span>}</span>
+                  {p.period > 0 && <span className="sheet-meta">Period {p.period} · day {p.day} of 14</span>}
+                  {p.lastLogged !== undefined && <span className="sheet-meta">{p.lastLogged === null ? "No logs yet" : `Last log ${lastSeen(p.lastLogged)}`}</span>}
+                </span>
+                {isCurrent && <Icon name="check" size={22} className="sheet-check" />}
+              </button>
+            </li>
+          );
+        })}
+        {list.length === 0 && <li className="sheet-empty muted">No patient code contains "{query}".</li>}
+      </ul>
+      <button className="ghost sheet-manage" onClick={onManage}><Icon name="data" size={18} /> Manage patients</button>
+    </Sheet>
   );
 }

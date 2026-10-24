@@ -7,7 +7,7 @@
     "wcag21aa",
     "wcag22aa"
   ],
-  "runAt": "2026-10-23T22:24:26.350Z",
+  "runAt": "2026-10-24T00:40:09.239Z",
   "schemes": {
     "light": [
       {
@@ -103,34 +103,16 @@
         "incomplete": []
       },
       {
-        "screen": "Log (after a tap: toast with details, exclusion open)",
+        "screen": "Log (after a tap: confirmation, exclusion open)",
         "url": "http://localhost:4173/#/log",
         "violations": [],
-        "incomplete": [
-          {
-            "id": "color-contrast",
-            "impact": "serious",
-            "help": "Elements must meet minimum color contrast ratio thresholds",
-            "nodes": [
-              {
-                "target": [
-                  ".toast-row > span"
-                ],
-                "why": [
-                  "Element's background color could not be determined because it partially overlaps other elements"
-                ]
-              },
-              {
-                "target": [
-                  ".toast-row > span > b"
-                ],
-                "why": [
-                  "Element's background color could not be determined because it partially overlaps other elements"
-                ]
-              }
-            ]
-          }
-        ]
+        "incomplete": []
+      },
+      {
+        "screen": "Log details sheet (from the confirmation)",
+        "url": "http://localhost:4173/#/log",
+        "violations": [],
+        "incomplete": []
       },
       {
         "screen": "Log (checked in: nothing to log today)",
@@ -139,7 +121,7 @@
         "incomplete": []
       },
       {
-        "screen": "Log (editing a recent log)",
+        "screen": "Log details sheet (from Recent logs)",
         "url": "http://localhost:4173/#/log",
         "violations": [],
         "incomplete": [
@@ -150,7 +132,7 @@
             "nodes": [
               {
                 "target": [
-                  ".toast-row > span"
+                  ".sheet-sub"
                 ],
                 "why": [
                   "Element's background color could not be determined because it partially overlaps other elements"
@@ -158,7 +140,7 @@
               },
               {
                 "target": [
-                  ".toast-row > span > b"
+                  ".choice:nth-child(1) > span"
                 ],
                 "why": [
                   "Element's background color could not be determined because it partially overlaps other elements"
@@ -418,7 +400,7 @@
               },
               {
                 "target": [
-                  "text[y=\"129.5\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
+                  "text[y=\"129.5\"][x=\"28\"][height=\"162\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
                 ],
                 "why": [
                   "Element content is too short to determine if it is actual text content"
@@ -426,7 +408,7 @@
               },
               {
                 "target": [
-                  "text[y=\"89\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
+                  "text[y=\"89\"][x=\"28\"][height=\"162\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
                 ],
                 "why": [
                   "Element content is too short to determine if it is actual text content"
@@ -434,7 +416,7 @@
               },
               {
                 "target": [
-                  "text[y=\"48.5\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
+                  "text[y=\"48.5\"][x=\"28\"][height=\"162\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
                 ],
                 "why": [
                   "Element's background color could not be determined because element contains an image node"
@@ -873,34 +855,16 @@
         "incomplete": []
       },
       {
-        "screen": "Log (after a tap: toast with details, exclusion open)",
+        "screen": "Log (after a tap: confirmation, exclusion open)",
         "url": "http://localhost:4173/#/log",
         "violations": [],
-        "incomplete": [
-          {
-            "id": "color-contrast",
-            "impact": "serious",
-            "help": "Elements must meet minimum color contrast ratio thresholds",
-            "nodes": [
-              {
-                "target": [
-                  ".toast-row > span"
-                ],
-                "why": [
-                  "Element's background color could not be determined because it partially overlaps other elements"
-                ]
-              },
-              {
-                "target": [
-                  ".toast-row > span > b"
-                ],
-                "why": [
-                  "Element's background color could not be determined because it partially overlaps other elements"
-                ]
-              }
-            ]
-          }
-        ]
+        "incomplete": []
+      },
+      {
+        "screen": "Log details sheet (from the confirmation)",
+        "url": "http://localhost:4173/#/log",
+        "violations": [],
+        "incomplete": []
       },
       {
         "screen": "Log (checked in: nothing to log today)",
@@ -909,7 +873,7 @@
         "incomplete": []
       },
       {
-        "screen": "Log (editing a recent log)",
+        "screen": "Log details sheet (from Recent logs)",
         "url": "http://localhost:4173/#/log",
         "violations": [],
         "incomplete": [
@@ -920,7 +884,7 @@
             "nodes": [
               {
                 "target": [
-                  ".toast-row > span"
+                  ".sheet-sub"
                 ],
                 "why": [
                   "Element's background color could not be determined because it partially overlaps other elements"
@@ -928,7 +892,7 @@
               },
               {
                 "target": [
-                  ".toast-row > span > b"
+                  ".choice:nth-child(1) > span"
                 ],
                 "why": [
                   "Element's background color could not be determined because it partially overlaps other elements"
@@ -1563,7 +1527,7 @@
         "incomplete": []
       },
       {
-        "screen": "Log (after a tap: toast with details, exclusion open)",
+        "screen": "Log (after a tap: confirmation, exclusion open)",
         "url": "http://localhost:4173/#/log",
         "violations": [],
         "incomplete": [
@@ -1574,15 +1538,29 @@
             "nodes": [
               {
                 "target": [
-                  ".toast-row > span"
+                  ".snackbar-meta"
                 ],
                 "why": [
                   "Element's background color could not be determined because it partially overlaps other elements"
                 ]
-              },
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "screen": "Log details sheet (from the confirmation)",
+        "url": "http://localhost:4173/#/log",
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "help": "Elements must meet minimum color contrast ratio thresholds",
+            "nodes": [
               {
                 "target": [
-                  ".toast-row > span > b"
+                  ".choice:nth-child(1) > span"
                 ],
                 "why": [
                   "Element's background color could not be determined because it partially overlaps other elements"
@@ -1599,7 +1577,7 @@
         "incomplete": []
       },
       {
-        "screen": "Log (editing a recent log)",
+        "screen": "Log details sheet (from Recent logs)",
         "url": "http://localhost:4173/#/log",
         "violations": [],
         "incomplete": [
@@ -1610,7 +1588,7 @@
             "nodes": [
               {
                 "target": [
-                  ".toast-row > span"
+                  ".sheet-sub"
                 ],
                 "why": [
                   "Element's background color could not be determined because it partially overlaps other elements"
@@ -1618,7 +1596,7 @@
               },
               {
                 "target": [
-                  ".toast-row > span > b"
+                  ".choice:nth-child(1) > span"
                 ],
                 "why": [
                   "Element's background color could not be determined because it partially overlaps other elements"
@@ -2253,7 +2231,7 @@
         "incomplete": []
       },
       {
-        "screen": "Log (after a tap: toast with details, exclusion open)",
+        "screen": "Log (after a tap: confirmation, exclusion open)",
         "url": "http://localhost:4173/#/log",
         "violations": [],
         "incomplete": [
@@ -2264,15 +2242,29 @@
             "nodes": [
               {
                 "target": [
-                  ".toast-row > span"
+                  ".snackbar-meta"
                 ],
                 "why": [
                   "Element's background color could not be determined because it partially overlaps other elements"
                 ]
-              },
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "screen": "Log details sheet (from the confirmation)",
+        "url": "http://localhost:4173/#/log",
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "help": "Elements must meet minimum color contrast ratio thresholds",
+            "nodes": [
               {
                 "target": [
-                  ".toast-row > span > b"
+                  ".choice:nth-child(1) > span"
                 ],
                 "why": [
                   "Element's background color could not be determined because it partially overlaps other elements"
@@ -2289,7 +2281,7 @@
         "incomplete": []
       },
       {
-        "screen": "Log (editing a recent log)",
+        "screen": "Log details sheet (from Recent logs)",
         "url": "http://localhost:4173/#/log",
         "violations": [],
         "incomplete": [
@@ -2300,7 +2292,7 @@
             "nodes": [
               {
                 "target": [
-                  ".toast-row > span"
+                  ".sheet-sub"
                 ],
                 "why": [
                   "Element's background color could not be determined because it partially overlaps other elements"
@@ -2308,7 +2300,7 @@
               },
               {
                 "target": [
-                  ".toast-row > span > b"
+                  ".choice:nth-child(1) > span"
                 ],
                 "why": [
                   "Element's background color could not be determined because it partially overlaps other elements"
@@ -2568,7 +2560,7 @@
               },
               {
                 "target": [
-                  "text[y=\"129.5\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
+                  "text[y=\"129.5\"][x=\"28\"][height=\"162\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
                 ],
                 "why": [
                   "Element content is too short to determine if it is actual text content"
@@ -2576,7 +2568,7 @@
               },
               {
                 "target": [
-                  "text[y=\"89\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
+                  "text[y=\"89\"][x=\"28\"][height=\"162\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
                 ],
                 "why": [
                   "Element content is too short to determine if it is actual text content"
@@ -2584,7 +2576,7 @@
               },
               {
                 "target": [
-                  "text[y=\"48.5\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
+                  "text[y=\"48.5\"][x=\"28\"][height=\"162\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
                 ],
                 "why": [
                   "Element's background color could not be determined because element contains an image node"

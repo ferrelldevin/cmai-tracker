@@ -30,6 +30,7 @@ const ok = (c, m) => { if (!c) throw new Error("FAIL: " + m); console.log("  ok"
   await p.keyboard.press("Escape");
   ok(!(await sheet().isVisible()), "Esc closes the sheet");
   ok(await p.evaluate(() => document.activeElement?.classList.contains("pt-banner")), "focus returns to the banner");
+  await p.waitForTimeout(100); // let the app see the close before reopening (a person cannot press this fast)
   await p.keyboard.press("Enter"); await sheet().waitFor();
   ok(await p.evaluate(() => document.activeElement?.getAttribute("aria-current") === "true"), "opened by keyboard: focus starts on the current patient");
   await p.keyboard.press("Escape");
