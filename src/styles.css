@@ -247,6 +247,9 @@ input[type="checkbox"] { width: 22px; height: 22px; min-height: 0; accent-color:
 .sheet-sub { margin: 2px 0 0; font-size: var(--fs-sm); color: var(--text-muted); }
 .sheet-scroll { flex: 1 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain; margin-top: var(--s3); padding-bottom: var(--s3); display: grid; align-content: start; gap: var(--s4); }
 .form-group { display: grid; gap: var(--s2); }
+.sheet-footer { display: flex; align-items: center; justify-content: space-between; gap: var(--s3); padding-top: var(--s3); border-top: 1px solid var(--rule); }
+.sheet-done { min-width: 120px; }
+[data-contrast="high"] .sheet-footer { border-top: 2px solid var(--rule-strong); }
 .form-label { margin: 0; font-size: var(--fs-sm); font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; }
 .form-label .muted { text-transform: none; letter-spacing: 0; font-weight: 400; margin-left: var(--s1); }
 .form-card { background: var(--surface-2); border-radius: var(--radius-sm); }
@@ -267,7 +270,7 @@ input[type="checkbox"].switch:checked::after { transform: translateX(20px); }
 .choice { justify-content: space-between; text-align: left; gap: var(--s2); min-height: 48px; padding: 8px 12px; background: var(--surface); color: var(--text); border: 1px solid var(--rule-strong); border-radius: var(--radius-sm); font-size: var(--fs-sm); font-weight: 600; line-height: 1.25; }
 @media (hover: hover) { .choice:hover { background: var(--hover); } }
 .choice[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--accent-ink); }
-button.text-danger { justify-self: center; background: transparent; color: var(--danger); border: 0; min-height: 44px; }
+button.text-danger { background: transparent; color: var(--danger); border: 0; min-height: 44px; }
 @media (hover: hover) { button.text-danger:hover { background: var(--danger-soft); } }
 [data-contrast="high"] .form-card, [data-contrast="high"] .quick-times { border: 2px solid var(--rule-strong); }
 [data-contrast="high"] .choice { border: 2px solid var(--rule-strong); }

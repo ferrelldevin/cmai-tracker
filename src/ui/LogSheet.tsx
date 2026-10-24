@@ -1,7 +1,7 @@
 // Log details: the one place a log's time and context are changed, reached from the
-// confirmation's Edit and from Recent logs. Changes save as they are made, so the header
-// says Done and closing the sheet any way loses nothing. Laid out as grouped form rows,
-// the pattern of iOS and Material settings sheets. Design note: docs/design/notes/003-log-confirmation.md.
+// confirmation's Edit and from Recent logs. Changes save as they are made, so Done only
+// closes and closing the sheet any way (Esc, backdrop) loses nothing. Grouped form rows,
+// then one action row at the bottom: Delete on the left, Done on the right (Devin, 2026-10-24). Design note: docs/design/notes/003-log-confirmation.md.
 
 import type { StoredObservation } from "../data/db";
 import { DAY_MS } from "../scoring/engine";
@@ -46,8 +46,11 @@ export function LogSheet({ obs, viaKeyboard, onPatch, onDelete, onClose }: Props
       className="log-sheet"
       title={item?.name ?? ""}
       subtitle={obs && <>{obs.patientId} · logged {dayAndTime(obs.loggedAt)}</>}
-      closeLabel="Done"
-      closePrimary
+      headerClose={false}
+      footer={obs && <>
+        <button className="text-danger" onClick={onDelete}><Icon name="trash" size={18} /> Delete log</button>
+        <button className="sheet-done" onClick={onClose}>Done</button>
+      </>}
       onClose={onClose}
     >
       {obs && (
@@ -93,8 +96,6 @@ export function LogSheet({ obs, viaKeyboard, onPatch, onDelete, onClose }: Props
               ))}
             </div>
           </section>
-
-          <button className="text-danger" onClick={onDelete}><Icon name="trash" size={18} /> Delete log</button>
         </div>
       )}
     </Sheet>

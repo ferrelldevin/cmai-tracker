@@ -7,7 +7,7 @@
     "wcag21aa",
     "wcag22aa"
   ],
-  "runAt": "2026-10-24T00:02:41.216Z",
+  "runAt": "2026-10-24T00:40:09.239Z",
   "schemes": {
     "light": [
       {
@@ -130,14 +130,6 @@
             "impact": "serious",
             "help": "Elements must meet minimum color contrast ratio thresholds",
             "nodes": [
-              {
-                "target": [
-                  "#\\:r1\\:"
-                ],
-                "why": [
-                  "Element's background color could not be determined because it partially overlaps other elements"
-                ]
-              },
               {
                 "target": [
                   ".sheet-sub"
@@ -408,7 +400,7 @@
               },
               {
                 "target": [
-                  "text[y=\"129.5\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
+                  "text[y=\"129.5\"][x=\"28\"][height=\"162\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
                 ],
                 "why": [
                   "Element content is too short to determine if it is actual text content"
@@ -416,7 +408,7 @@
               },
               {
                 "target": [
-                  "text[y=\"89\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
+                  "text[y=\"89\"][x=\"28\"][height=\"162\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
                 ],
                 "why": [
                   "Element content is too short to determine if it is actual text content"
@@ -424,7 +416,7 @@
               },
               {
                 "target": [
-                  "text[y=\"48.5\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
+                  "text[y=\"48.5\"][x=\"28\"][height=\"162\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
                 ],
                 "why": [
                   "Element's background color could not be determined because element contains an image node"
@@ -890,14 +882,6 @@
             "impact": "serious",
             "help": "Elements must meet minimum color contrast ratio thresholds",
             "nodes": [
-              {
-                "target": [
-                  "#\\:r1\\:"
-                ],
-                "why": [
-                  "Element's background color could not be determined because it partially overlaps other elements"
-                ]
-              },
               {
                 "target": [
                   ".sheet-sub"
@@ -1604,14 +1588,6 @@
             "nodes": [
               {
                 "target": [
-                  "#\\:r1\\:"
-                ],
-                "why": [
-                  "Element's background color could not be determined because it partially overlaps other elements"
-                ]
-              },
-              {
-                "target": [
                   ".sheet-sub"
                 ],
                 "why": [
@@ -2316,14 +2292,6 @@
             "nodes": [
               {
                 "target": [
-                  "#\\:r1\\:"
-                ],
-                "why": [
-                  "Element's background color could not be determined because it partially overlaps other elements"
-                ]
-              },
-              {
-                "target": [
                   ".sheet-sub"
                 ],
                 "why": [
@@ -2592,7 +2560,7 @@
               },
               {
                 "target": [
-                  "text[y=\"129.5\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
+                  "text[y=\"129.5\"][x=\"28\"][height=\"162\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
                 ],
                 "why": [
                   "Element content is too short to determine if it is actual text content"
@@ -2600,7 +2568,7 @@
               },
               {
                 "target": [
-                  "text[y=\"89\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
+                  "text[y=\"89\"][x=\"28\"][height=\"162\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
                 ],
                 "why": [
                   "Element content is too short to determine if it is actual text content"
@@ -2608,7 +2576,7 @@
               },
               {
                 "target": [
-                  "text[y=\"48.5\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
+                  "text[y=\"48.5\"][x=\"28\"][height=\"162\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
                 ],
                 "why": [
                   "Element's background color could not be determined because element contains an image node"

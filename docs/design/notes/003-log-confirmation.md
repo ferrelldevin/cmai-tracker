@@ -68,3 +68,5 @@ After a tap on a behavior, a confirmation box rises above the tab bar. Devin's i
 - **"What happened just before":** an even two-column grid. The chosen answer is tinted and shows a check, and tapping it again clears it.
 - **Delete log:** a quiet red text button at the end. Undo still follows a delete.
 - **Keyboard:** a keyboard user starts on the time field.
+
+**Revised the same day, from Devin's comment on the screenshot.** The Done button moves out of the header and into one action row pinned at the bottom: Delete log on the left, Done on the right. The header holds only the title. The row stays in thumb reach however far the form scrolls. Done is the right word rather than Save, because every change already saves as it is made. Esc and tapping outside still close the sheet without losing anything.
