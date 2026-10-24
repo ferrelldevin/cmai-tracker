@@ -16,6 +16,7 @@ export interface StoredObservation {
   at: number; // when it happened (epoch ms)
   approx?: boolean; // caregiver marked the time as approximate
   before?: string; // optional: what happened just before
+  beforeNote?: string; // optional: a few words when "before" is "Other" (no names)
   loggedAt: number; // when it was entered
 }
 

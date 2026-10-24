@@ -12,6 +12,7 @@ async function seed() {
     { patientId: "P-01", itemId: 7, at: 1000, loggedAt: 1000 },
     { patientId: "P-01", itemId: 13, at: 2000, loggedAt: 2100, approx: true, before: "Mealtime" },
     { patientId: "P-DEMO-A", itemId: 1, at: 3000, loggedAt: 3000 },
+    { patientId: "P-01", itemId: 16, at: 4000, loggedAt: 4000, before: "Other", beforeNote: "fire alarm test" },
   ]);
   await db.reviews.put({ key: reviewKey("P-01", 0, 7), patientId: "P-01", windowStart: 0, itemId: 7, choice: 8, derived: 2, reviewedAt: 5000 });
   await db.checkins.put({ key: checkInKey("P-01", 86_400_000), patientId: "P-01", day: 86_400_000, at: 90_000_000 });
@@ -30,10 +31,11 @@ describe("restore from backup", () => {
     await Dexie.delete("cmai-tracker");
     await db.open();
     const r = await restoreBackup(json);
-    expect(r).toMatchObject({ patients: 2, observations: 3, reviews: 1, checkins: 1 });
+    expect(r).toMatchObject({ patients: 2, observations: 4, reviews: 1, checkins: 1 });
     expect(await db.patients.get("P-DEMO-A")).toEqual({ id: "P-DEMO-A", anchor: 0, demo: true });
     const obs = await db.observations.where("patientId").equals("P-01").sortBy("at");
     expect(obs[1]).toMatchObject({ itemId: 13, approx: true, before: "Mealtime" });
+    expect(obs[2]).toMatchObject({ itemId: 16, before: "Other", beforeNote: "fire alarm test" });
     expect((await db.reviews.get(reviewKey("P-01", 0, 7)))?.choice).toBe(8);
     expect(await db.checkins.count()).toBe(1);
   });
@@ -44,7 +46,15 @@ describe("restore from backup", () => {
     const r = await restoreBackup(json);
     expect(r.patients).toBe(0);
     expect(r.observations).toBe(0);
-    expect(await db.observations.count()).toBe(3);
+    expect(await db.observations.count()).toBe(4);
+  });
+
+  it("the observations CSV carries the note written for Other", async () => {
+    await seed();
+    const { observationsCsv } = await buildExport(100_000);
+    const lines = observationsCsv.split("\n");
+    expect(lines[0]).toContain("what_happened_before,before_note,logged_at");
+    expect(lines.find((l) => l.includes("Other"))).toContain("Other,fire alarm test,");
   });
 
   it("refuses a file that is not a backup, with a readable message", () => {
@@ -74,6 +84,6 @@ describe("deleting", () => {
     await seed();
     expect(await removeDemoData()).toBe(1);
     expect((await db.patients.toArray()).map((p) => p.id)).toEqual(["P-01"]);
-    expect(await db.observations.count()).toBe(2);
+    expect(await db.observations.count()).toBe(3);
   });
 });

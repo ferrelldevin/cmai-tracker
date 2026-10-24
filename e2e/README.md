@@ -9,6 +9,7 @@ node e2e/flows.cjs http://localhost:4173/ /tmp/out        # end-to-end flow, inc
 node e2e/navigation.cjs http://localhost:4173/ /tmp/out   # section bars, Data pages, back gesture, reload
 node e2e/theme.cjs http://localhost:4173/ /tmp/out        # light/dark/high contrast settings
 node e2e/patient-switcher.cjs http://localhost:4173/ /tmp/out  # switcher sheet, Esc, backdrop, confirmation, search
+node e2e/sheet.cjs http://localhost:4173/ /tmp/out       # page held still, swipe to close, Other note, time pill
 node docs/audits/axe-run.cjs http://localhost:4173/ docs/audits/axe-wcag22aa.json
 ```
 

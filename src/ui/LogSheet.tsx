@@ -3,6 +3,7 @@
 // closes and closing the sheet any way (Esc, backdrop) loses nothing. Grouped form rows,
 // then one action row at the bottom: Delete on the left, Done on the right (Devin, 2026-10-24). Design note: docs/design/notes/003-log-confirmation.md.
 
+import { useRef } from "react";
 import type { StoredObservation } from "../data/db";
 import { DAY_MS } from "../scoring/engine";
 import { ITEMS } from "../scoring/items";
@@ -37,6 +38,7 @@ interface Props {
 export function LogSheet({ obs, viaKeyboard, onPatch, onDelete, onClose }: Props) {
   const item = obs ? ITEMS[obs.itemId - 1] : null;
   const minutesBefore = obs ? Math.round((obs.loggedAt - obs.at) / 60_000) : 0;
+  const noteWanted = useRef(false); // set by tapping Other, so reopening a log does not jump to the note
 
   return (
     <Sheet
@@ -60,7 +62,11 @@ export function LogSheet({ obs, viaKeyboard, onPatch, onDelete, onClose }: Props
             <div className="form-card">
               <label className="form-row">
                 <span>Time</span>
-                <input type="time" value={hhmm(obs.at)} onChange={(e) => e.target.value && onPatch({ at: fromClock(e.target.value, obs.loggedAt) })} />
+                {/* A tinted pill with a clock, so it reads as tappable; iOS shows a bare time otherwise (F-16). */}
+                <span className="time-pill">
+                  <Icon name="clock" size={18} />
+                  <input type="time" value={hhmm(obs.at)} onChange={(e) => e.target.value && onPatch({ at: fromClock(e.target.value, obs.loggedAt) })} />
+                </span>
               </label>
               <div className="form-row stacked">
                 <span id="ls-earlier" className="form-hint">How long before you logged it</span>
@@ -89,12 +95,35 @@ export function LogSheet({ obs, viaKeyboard, onPatch, onDelete, onClose }: Props
             <h3 className="form-label" id="ls-before">What happened just before <span className="muted">Optional</span></h3>
             <div className="choice-grid">
               {BEFORE_OPTIONS.map((o) => (
-                <button key={o} className="choice" aria-pressed={obs.before === o} onClick={() => onPatch({ before: obs.before === o ? undefined : o })}>
+                <button key={o} className="choice" aria-pressed={obs.before === o} onClick={() => { noteWanted.current = o === "Other" && obs.before !== o; onPatch({ before: obs.before === o ? undefined : o, beforeNote: undefined }); }}>
                   <span>{o}</span>
                   {obs.before === o && <Icon name="check" size={18} />}
                 </button>
               ))}
             </div>
+            {obs.before === "Other" && (
+              <label className="other-note">
+                <span>What happened?</span>
+                <input
+                  type="text"
+                  ref={(el) => {
+                    // Right after Other is tapped: bring the field above the action row and open the keyboard.
+                    if (el && noteWanted.current) {
+                      noteWanted.current = false;
+                      el.focus({ preventScroll: true });
+                      el.scrollIntoView({ block: "nearest" });
+                    }
+                  }}
+                  value={obs.beforeNote ?? ""}
+                  maxLength={120}
+                  placeholder="A few words, no names"
+                  autoComplete="off"
+                  enterKeyHint="done"
+                  onChange={(e) => onPatch({ beforeNote: e.target.value || undefined })}
+                  onKeyDown={(e) => { if (e.key === "Enter") (e.target as HTMLInputElement).blur(); }}
+                />
+              </label>
+            )}
           </section>
         </div>
       )}

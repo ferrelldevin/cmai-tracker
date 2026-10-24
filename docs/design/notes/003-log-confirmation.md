@@ -70,3 +70,22 @@ After a tap on a behavior, a confirmation box rises above the tab bar. Devin's i
 - **Keyboard:** a keyboard user starts on the time field.
 
 **Revised the same day, from Devin's comment on the screenshot.** The Done button moves out of the header and into one action row pinned at the bottom: Delete log on the left, Done on the right. The header holds only the title. The row stays in thumb reach however far the form scrolls. Done is the right word rather than Save, because every change already saves as it is made. Esc and tapping outside still close the sheet without losing anything.
+
+## Follow-up, 2026-10-24: iPhone test of the sheet (F-16)
+Devin tested the merged sheet on his iPhone and found three problems:
+1. **A drag on the sheet footer scrolled the page behind it, and a swipe down did not close the sheet.** iOS Safari lets a scroll that starts on a modal `<dialog>` move the page underneath. The grab handle also suggests a swipe that wasn't wired up.
+   - **Fix:** while a sheet is open, the page is held in place: the body is fixed at its scroll position and restored exactly on close.
+   - **Fix:** a downward drag on the handle, header or footer moves the sheet with the finger. It closes past 100 px or on a quick flick, and springs back otherwise.
+   - These parts use `touch-action: none`, and a drag never also presses a button.
+   - The form keeps scrolling normally, and both sheets get this behavior because they share `Sheet.tsx`.
+2. **"Other" had no way to say what.**
+   - **Fix:** choosing Other shows a "What happened?" field ("A few words, no names", 120 characters max). It takes focus, so the keyboard opens and the field scrolls clear of the action row.
+   - **Storage:** the note is saved as `beforeNote`. It appears in Recent logs, the JSON backup and restore, and a new `before_note` CSV column.
+   - Choosing another answer removes the note. No schema version change is needed, because the field is not indexed.
+3. **The time didn't always look tappable.** On iOS a time input renders as bare text.
+   - **Fix:** it now sits in a tinted pill with a clock icon, and in Chrome the whole pill opens the picker.
+
+**Verified.**
+- `e2e/sheet.cjs`: 17 checks (scroll lock, drag and flick, spring-back, note flow, pill).
+- `tests/manage.test.ts`: the note survives a restore and appears in the CSV.
+- axe: 72 scans, 0 violations, now including the note field.

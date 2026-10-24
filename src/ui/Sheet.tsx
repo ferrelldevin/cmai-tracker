@@ -1,8 +1,17 @@
 // A bottom sheet (centered on desktop), shared by the patient switcher and log details.
 // Built on the native <dialog>, which traps focus, closes on Esc and makes the page behind
-// it inert. Design notes: docs/design/notes/002-patient-switcher.md, 003-log-confirmation.md.
+// it inert. Two things the dialog does not do on iPhone, done here (F-16):
+// - the page behind keeps scrolling when a drag starts on the sheet, so the page is locked
+//   in place while a sheet is open;
+// - the grab handle suggests a swipe down closes the sheet, so a downward drag on the
+//   handle, the header or the footer does (past 100 px, or a quick flick).
+// Design notes: docs/design/notes/002-patient-switcher.md, 003-log-confirmation.md.
 
-import { useEffect, useId, useRef, type ReactNode } from "react";
+import { useEffect, useId, useRef, type PointerEvent as ReactPointerEvent, type ReactNode } from "react";
+
+const CLOSE_DISTANCE = 100; // px dragged down that closes the sheet
+const CLOSE_SPEED = 0.6; // px per ms: a flick closes it sooner
+const DRAG_SLOP = 6; // px before a press counts as a drag rather than a tap
 
 interface Props {
   open: boolean;
@@ -21,8 +30,22 @@ interface Props {
   children: ReactNode;
 }
 
+/** Holds the page still behind a sheet. iOS Safari ignores overflow: hidden on the body, so the body is fixed in place at its scroll position. */
+function lockPage() {
+  const y = window.scrollY;
+  const b = document.body.style;
+  Object.assign(b, { position: "fixed", top: `-${y}px`, left: "0", right: "0", width: "100%" });
+  return () => {
+    Object.assign(b, { position: "", top: "", left: "", right: "", width: "" });
+    window.scrollTo({ top: y, behavior: "instant" as ScrollBehavior });
+  };
+}
+
 export function Sheet({ open, viaKeyboard, keyboardFocus, title, subtitle, className, headerClose = true, footer, onClose, children }: Props) {
   const dialog = useRef<HTMLDialogElement>(null);
+  const body = useRef<HTMLDivElement>(null);
+  const drag = useRef<{ y: number; t: number; dy: number; moved: boolean } | null>(null);
+  const justDragged = useRef(false);
   const titleId = useId();
 
   useEffect(() => {
@@ -37,7 +60,51 @@ export function Sheet({ open, viaKeyboard, keyboardFocus, title, subtitle, class
       (start ?? d).focus();
     }
     if (!open && d.open) d.close();
+    if (!open) return;
+    return lockPage();
   }, [open]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  function setOffset(dy: number, animate: boolean) {
+    const el = body.current;
+    if (!el) return;
+    el.style.transition = animate ? "transform .2s ease-out" : "none";
+    el.style.transform = dy ? `translateY(${dy}px)` : "";
+  }
+
+  function onPointerDown(e: ReactPointerEvent) {
+    if (e.pointerType === "mouse" && e.button !== 0) return;
+    // Only the handle, header and footer drag the sheet; the form and list scroll as usual.
+    if (!(e.target as HTMLElement).closest(".sheet-grab, .sheet-head, .sheet-footer")) return;
+    drag.current = { y: e.clientY, t: e.timeStamp, dy: 0, moved: false };
+  }
+
+  function onPointerMove(e: ReactPointerEvent) {
+    const g = drag.current;
+    if (!g) return;
+    const dy = Math.max(0, e.clientY - g.y);
+    if (!g.moved && dy < DRAG_SLOP) return;
+    if (!g.moved) {
+      g.moved = true;
+      body.current?.setPointerCapture(e.pointerId);
+    }
+    g.dy = dy;
+    setOffset(dy, false);
+  }
+
+  function onPointerUp(e: ReactPointerEvent) {
+    const g = drag.current;
+    drag.current = null;
+    if (!g || !g.moved) return;
+    justDragged.current = true;
+    window.setTimeout(() => { justDragged.current = false; }, 0);
+    const speed = g.dy / Math.max(1, e.timeStamp - g.t);
+    if (g.dy > CLOSE_DISTANCE || speed > CLOSE_SPEED) {
+      setOffset(window.innerHeight, true);
+      window.setTimeout(() => { setOffset(0, false); onClose(); }, 180);
+    } else {
+      setOffset(0, true);
+    }
+  }
 
   return (
     <dialog
@@ -48,7 +115,16 @@ export function Sheet({ open, viaKeyboard, keyboardFocus, title, subtitle, class
       onClose={onClose}
       onClick={(e) => { if (e.target === dialog.current) onClose(); }}
     >
-      <div className="sheet-body">
+      <div
+        className="sheet-body"
+        ref={body}
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={onPointerUp}
+        onPointerCancel={() => { drag.current = null; setOffset(0, true); }}
+        // A drag that started on a button must not also press it.
+        onClickCapture={(e) => { if (justDragged.current) { e.stopPropagation(); e.preventDefault(); } }}
+      >
         <div className="sheet-grab" aria-hidden />
         <div className="sheet-head">
           <div className="sheet-title">

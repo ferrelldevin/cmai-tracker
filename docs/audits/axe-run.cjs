@@ -38,6 +38,8 @@ async function scan(page, name, results) {
     await page.locator(".snackbar").getByRole("button", { name: "Edit" }).click();
     await page.getByRole("dialog", { name: /^Hitting/ }).waitFor();
     await scan(page, "Log details sheet (from the confirmation)", results);
+    await page.getByRole("dialog").getByRole("button", { name: "Other" }).click();
+    await scan(page, "Log details sheet (Other chosen: note field)", results);
     await page.getByRole("button", { name: "Delete log" }).click();
     await page.getByRole("button", { name: "Nothing to log today" }).click();
     await scan(page, "Log (checked in: nothing to log today)", results);
