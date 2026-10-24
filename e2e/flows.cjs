@@ -72,7 +72,7 @@ const ok = (c, m) => { if (!c) throw new Error("FAIL: " + m); console.log("  ok"
   // keyboard: Edit from Recent logs starts on the first chip
   await p.locator(".recent-list li").first().getByRole("button", { name: /Edit/ }).focus();
   await p.keyboard.press("Enter"); await sheet.waitFor();
-  ok(await p.evaluate(() => document.activeElement?.classList.contains("chip")), "opened by keyboard: focus on the first chip");
+  ok(await p.evaluate(() => document.activeElement?.getAttribute("type") === "time"), "opened by keyboard: focus on the time field");
   await p.keyboard.press("Escape");
   ok(!(await sheet.isVisible()), "Esc closes the sheet");
   await p.mouse.click(10, 300);

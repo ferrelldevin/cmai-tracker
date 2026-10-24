@@ -13,11 +13,14 @@ interface Props {
   title: ReactNode;
   subtitle?: ReactNode;
   className?: string;
+  /** The header button. Sheets that save as you go say "Done" and make it the primary button. */
+  closeLabel?: string;
+  closePrimary?: boolean;
   onClose: () => void;
   children: ReactNode;
 }
 
-export function Sheet({ open, viaKeyboard, keyboardFocus, title, subtitle, className, onClose, children }: Props) {
+export function Sheet({ open, viaKeyboard, keyboardFocus, title, subtitle, className, closeLabel = "Close", closePrimary = false, onClose, children }: Props) {
   const dialog = useRef<HTMLDialogElement>(null);
   const titleId = useId();
 
@@ -26,7 +29,7 @@ export function Sheet({ open, viaKeyboard, keyboardFocus, title, subtitle, class
     if (!d) return;
     if (open && !d.open) {
       d.showModal();
-      // Set the starting focus ourselves; showModal() would otherwise pick the Close button.
+      // Set the starting focus ourselves; showModal() would otherwise pick the header button.
       // Safari draws the focus ring on any button focused by script, so after a tap the
       // sheet itself takes focus (F-14).
       const start = viaKeyboard && keyboardFocus ? d.querySelector<HTMLElement>(keyboardFocus) : null;
@@ -51,7 +54,7 @@ export function Sheet({ open, viaKeyboard, keyboardFocus, title, subtitle, class
             <h2 id={titleId}>{title}</h2>
             {subtitle && <p className="sheet-sub">{subtitle}</p>}
           </div>
-          <button className="ghost small sheet-close" onClick={onClose}>Close</button>
+          <button className={closePrimary ? "small sheet-close" : "ghost small sheet-close"} onClick={onClose}>{closeLabel}</button>
         </div>
         {open && children}
       </div>

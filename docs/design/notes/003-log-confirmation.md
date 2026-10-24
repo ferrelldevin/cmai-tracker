@@ -51,3 +51,20 @@ After a tap on a behavior, a confirmation box rises above the tab bar. Devin's i
 - After a tap, the confirmation is two lines with matching Edit and Undo.
 - All editing of a log happens in one sheet, reached the same way from the confirmation and from Recent logs.
 - All checks in `docs/process/change-process.md` pass.
+
+## Follow-up, 2026-10-24: tidier details sheet
+**Problem.** Devin reviewed the first build of the sheet and said it "could use some attention." It had:
+- 13 chips of the same weight in two ragged blocks.
+- Two ways to close it: Close in the header and Done in the footer.
+- A full-size red outlined Delete beside Done.
+- A plain checkbox.
+
+**Decision.** The sheet now uses the grouped-form layout found in iOS and Material settings sheets:
+- **Header:** one primary **Done**. The sheet saves as you go, so Close and Done meant the same thing.
+- **"When it happened":** a grouped card with three rows.
+  - A Time row with the time field.
+  - A five-way control: "At log · 5 min · 15 min · 30 min · 1 hr", under the hint "How long before you logged it". Screen readers hear "15 min before logging".
+  - "Time is approximate" as a switch (`role="switch"`).
+- **"What happened just before":** an even two-column grid. The chosen answer is tinted and shows a check, and tapping it again clears it.
+- **Delete log:** a quiet red text button at the end. Undo still follows a delete.
+- **Keyboard:** a keyboard user starts on the time field.
