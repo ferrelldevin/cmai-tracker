@@ -76,7 +76,11 @@ button.ghost.danger-text { color: var(--danger); border-color: var(--rule-strong
 button.small { min-height: 44px; padding: 6px 14px; font-size: var(--fs-sm); }
 button:disabled { opacity: 0.45; cursor: default; transform: none; }
 select, input { background: var(--surface); border: 1px solid var(--rule-strong); border-radius: var(--radius-sm); padding: 10px 12px; min-height: 48px; }
-input::placeholder { color: var(--text-muted); }
+input::placeholder { color: var(--text-muted); opacity: 0.8; }
+/* Text fields show focus as an accent edge and soft halo, the way iOS and Material fields do; the
+   yellow ring stays for buttons and other controls a keyboard reaches. High contrast keeps yellow. */
+input:not([type="checkbox"]):not([type="radio"]):focus-visible, select:focus-visible { outline: 2px solid var(--accent); outline-offset: 0; box-shadow: 0 0 0 4px var(--accent-soft); border-color: var(--accent); }
+[data-contrast="high"] input:not([type="checkbox"]):not([type="radio"]):focus-visible, [data-contrast="high"] select:focus-visible { outline: 3px solid var(--focus); box-shadow: 0 0 0 5px var(--focus-edge); }
 input[type="checkbox"] { width: 22px; height: 22px; min-height: 0; accent-color: var(--accent); }
 
 /* Shell */
@@ -336,11 +340,14 @@ button.text-danger { background: transparent; color: var(--danger); border: 0; m
 .steps { margin: var(--s2) 0 var(--s4); padding-left: 24px; display: grid; gap: var(--s2); }
 .privacy { display: flex; gap: var(--s2); align-items: flex-start; font-size: var(--fs-sm); color: var(--text-muted); }
 .privacy .icon { margin-top: 2px; color: var(--accent); }
+.add-patient { display: grid; gap: var(--s1); }
+.field-label { font-size: var(--fs-sm); font-weight: 700; }
+.confirm-sheet .sheet-scroll p { margin: 0; }
+.confirm-sheet .sheet-scroll { gap: var(--s2); }
 .patient-list { list-style: none; padding: 0; margin: var(--s3) 0 0; }
 .patient-list li { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s3); padding: var(--s3) 0; border-top: 1px solid var(--rule); }
 .patient-main { flex: 1 1 160px; min-width: 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px var(--s1); }
 .patient-main .muted { flex-basis: 100%; }
-.confirm { width: 100%; background: var(--danger-soft); border-radius: var(--radius-sm); padding: var(--s3) var(--s4); }
 .restore { margin-top: var(--s2); }
 .ok-line { color: var(--ok); font-weight: 700; }
 .bands { border-collapse: collapse; width: 100%; font-size: var(--fs-sm); margin: var(--s2) 0 var(--s4); }

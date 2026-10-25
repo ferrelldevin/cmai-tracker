@@ -13,8 +13,13 @@ const ok = (c, m) => { if (!c) throw new Error("FAIL: " + m); console.log("  ok"
   ok(true, "first run shows welcome");
   // add patient via Enter key, lower case
   await p.getByRole("button", { name: "Add a patient" }).click();
-  ok(await p.evaluate(() => document.activeElement?.getAttribute("aria-label")) === "New patient code", "Add a patient focuses code field");
-  await p.keyboard.type("bad name!"); await p.keyboard.press("Enter");
+  ok(await p.evaluate(() => document.activeElement?.id) === "new-code", "Add a patient focuses code field");
+  ok((await p.getByLabel("New patient code").getAttribute("placeholder")) === "e.g. P-01", "the example is the next free code, marked as an example");
+  await p.keyboard.press("Enter");
+  await p.getByRole("alert").filter({ hasText: "Type a code first, such as P-01" }).waitFor(); ok(true, "an empty field says to type a code, not that the code is wrong");
+  await p.keyboard.type("bad name!");
+  ok(!(await p.getByRole("alert").count()), "typing clears the error");
+  await p.keyboard.press("Enter");
   await p.getByRole("alert").filter({ hasText: "Use a code like" }).waitFor(); ok(true, "invalid code shows error");
   await p.getByLabel("New patient code").fill("p-07"); await p.keyboard.press("Enter");
   await p.getByRole("heading", { name: /^Log a behavior/ }).waitFor(); ok((await p.locator(".pt-id b").textContent()) === "P-07", "Enter adds P-07 and opens Log with P-07 in the banner");
@@ -93,9 +98,18 @@ const ok = (c, m) => { if (!c) throw new Error("FAIL: " + m); console.log("  ok"
   const before = JSON.parse(fs.readFileSync(path, "utf8")).observations.length;
   await p.getByRole("button", { name: "Data", exact: true }).click();
   await p.getByRole("link", { name: /Last export today/ }).waitFor(); ok(true, "hub row shows last export");
+  const rows = await p.locator(".patient-list li").count();
   await p.getByRole("button", { name: "Delete P-07" }).click();
+  const confirm = p.getByRole("dialog", { name: "Delete P-07?" });
+  await confirm.waitFor(); await p.waitForTimeout(300);
+  ok(await p.evaluate(() => document.activeElement?.tagName === "DIALOG"), "delete opened by tap: no focus ring on Cancel");
+  ok(!(await confirm.textContent()).includes("is the patient open now"), "no open-patient warning when P-07 is not the open patient");
   await p.screenshot({ path: `${OUT}/flow-05-confirm-delete.png` });
-  await p.getByRole("button", { name: "Delete P-07" }).click();
+  await confirm.getByRole("button", { name: "Cancel" }).click();
+  ok(!(await confirm.isVisible()) && (await p.locator(".patient-list li").count()) === rows, "Cancel keeps the patient");
+  await p.getByRole("button", { name: "Delete P-07" }).focus(); await p.keyboard.press("Enter"); await confirm.waitFor();
+  ok(await p.evaluate(() => document.activeElement?.classList.contains("confirm-cancel")), "delete opened by keyboard: focus starts on Cancel, the safe choice");
+  await confirm.getByRole("button", { name: "Delete P-07" }).click();
   await p.getByText("Deleted P-07").waitFor(); ok(true, "patient deleted after confirm");
   await p.getByRole("link", { name: /^Demo data/ }).click();
   await p.getByRole("button", { name: "Remove demo data" }).click();

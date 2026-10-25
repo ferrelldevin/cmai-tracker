@@ -11,6 +11,7 @@ import { RATING_LABELS, ratingFromCount, RULE_VERSION, WINDOW_DAYS } from "../sc
 import { ago, shortDate } from "./format";
 import { Icon, type IconName } from "./Icon";
 import { PatientAvatar } from "./PatientAvatar";
+import { Sheet } from "./Sheet";
 import { canInstall, install, isInstalled, onInstallChange } from "./install";
 import type { DataPage } from "./route";
 import { currentTheme, getContrastPref, getThemePref, onDisplayChange, setContrastPref, setThemePref, type ContrastPref, type ThemePref } from "./display";
@@ -33,6 +34,16 @@ const readLastExport = () => {
   try { return Number(localStorage.getItem(LAST_EXPORT)) || null; } catch { return null; }
 };
 
+/** The next unused code in the P-NN series, offered as the example in the add field. */
+function nextCode(patients: Patient[]) {
+  const used = new Set(patients.map((p) => p.id));
+  for (let n = 1; n < 1000; n++) {
+    const id = `P-${String(n).padStart(2, "0")}`;
+    if (!used.has(id)) return id;
+  }
+  return "P-01";
+}
+
 /** Count bands from the engine itself, so this page cannot drift from the rule. */
 function countBands() {
   const bands: { from: number; to: number | null; rating: number }[] = [];
@@ -50,12 +61,14 @@ export function DataScreen({ patients, current, page, pageTitle, onPage, onBack,
   const [code, setCode] = useState("");
   const [msg, setMsg] = useState<Msg | null>(null);
   const [persisted, setPersisted] = useState<boolean | null>(null);
-  const [confirmDelete, setConfirmDelete] = useState<string | null>(null);
+  // Deleting asks in a sheet; viaKeyboard decides where focus starts (F-14 rule).
+  const [confirmDelete, setConfirmDelete] = useState<{ id: string; viaKeyboard: boolean } | null>(null);
   const [lastExport, setLastExport] = useState(readLastExport);
   const [, setInstallTick] = useState(0);
   const codeInput = useRef<HTMLInputElement>(null);
   const fileInput = useRef<HTMLInputElement>(null);
   const hasDemo = patients.some((p) => p.demo);
+  const suggested = nextCode(patients);
   const firstRun = patients.length === 0;
 
   useEffect(() => {
@@ -70,6 +83,11 @@ export function DataScreen({ patients, current, page, pageTitle, onPage, onBack,
   async function addPatient(e: React.FormEvent) {
     e.preventDefault();
     const id = code.trim().toUpperCase();
+    if (!id) {
+      say("patients", `Type a code first, such as ${suggested}.`, "error");
+      codeInput.current?.focus();
+      return;
+    }
     if (!/^[A-Z0-9-]{2,12}$/.test(id)) {
       say("patients", "Use a code like P-03: 2 to 12 letters, numbers or dashes. No names.", "error");
       codeInput.current?.focus();
@@ -264,13 +282,15 @@ export function DataScreen({ patients, current, page, pageTitle, onPage, onBack,
       <section className="card" aria-labelledby="patients-h">
         <h2 id="patients-h">Patients</h2>
         <p className="muted">Use a code, never a name. A new patient's first 14-day period starts today.</p>
-        <form className="row" onSubmit={addPatient}>
+        <form className="add-patient" onSubmit={addPatient}>
+          <label htmlFor="new-code" className="field-label">New patient code</label>
+          <div className="row">
           <input
+            id="new-code"
             ref={codeInput}
             value={code}
-            onChange={(e) => setCode(e.target.value)}
-            placeholder="P-03"
-            aria-label="New patient code"
+            onChange={(e) => { setCode(e.target.value); if (msg?.at === "patients") setMsg(null); }}
+            placeholder={`e.g. ${suggested}`}
             autoCapitalize="characters"
             autoComplete="off"
             autoCorrect="off"
@@ -279,38 +299,48 @@ export function DataScreen({ patients, current, page, pageTitle, onPage, onBack,
             maxLength={12}
           />
           <button type="submit">Add</button>
+          </div>
         </form>
         {msgFor("patients")}
         {patients.length > 0 && (
           <ul className="patient-list">
             {patients.map((p) => (
               <li key={p.id} className={p.id === current ? "current" : ""}>
-                {confirmDelete === p.id ? (
-                  <div className="confirm" role="group" aria-label={`Confirm deleting ${p.id}`}>
-                    <p><b>Delete {p.id}?</b> This removes all of its logs, reviews and check-ins from this phone, and cannot be undone. Export a backup first if you may need them.</p>
-                    <div className="row wrap">
-                      <button className="danger" onClick={() => remove(p.id)}>Delete {p.id}</button>
-                      <button className="ghost" autoFocus onClick={() => setConfirmDelete(null)}>Cancel</button>
-                    </div>
-                  </div>
-                ) : (
-                  <>
-                    <PatientAvatar id={p.id} size={36} />
-                    <div className="patient-main">
-                      <b>{p.id}</b>
-                      {p.demo && <span className="tag">demo</span>}
-                      <span className="muted">{p.id === current ? "Open now · " : ""}Period 1 started {shortDate(p.anchor)}</span>
-                    </div>
-                    <div className="row">
-                      {p.id !== current && <button className="ghost small" onClick={() => onPatient(p.id)}>Open</button>}
-                      <button className="ghost small danger-text" aria-label={`Delete ${p.id}`} onClick={() => setConfirmDelete(p.id)}>Delete</button>
-                    </div>
-                  </>
-                )}
+                <PatientAvatar id={p.id} size={36} />
+                <div className="patient-main">
+                  <b>{p.id}</b>
+                  {p.demo && <span className="tag">demo</span>}
+                  <span className="muted">{p.id === current ? "Open now · " : ""}Period 1 started {shortDate(p.anchor)}</span>
+                </div>
+                <div className="row">
+                  {p.id !== current && <button className="ghost small" onClick={() => onPatient(p.id)}>Open</button>}
+                  <button className="ghost small danger-text" aria-label={`Delete ${p.id}`} onClick={(e) => { setMsg(null); setConfirmDelete({ id: p.id, viaKeyboard: e.detail === 0 }); }}>Delete</button>
+                </div>
               </li>
             ))}
           </ul>
         )}
+        <Sheet
+          open={!!confirmDelete}
+          viaKeyboard={confirmDelete?.viaKeyboard ?? false}
+          keyboardFocus=".confirm-cancel"
+          className="confirm-sheet"
+          title={confirmDelete ? `Delete ${confirmDelete.id}?` : ""}
+          headerClose={false}
+          footer={confirmDelete && <>
+            <button className="ghost confirm-cancel" onClick={() => setConfirmDelete(null)}>Cancel</button>
+            <button className="danger" onClick={() => remove(confirmDelete.id)}>Delete {confirmDelete.id}</button>
+          </>}
+          onClose={() => setConfirmDelete(null)}
+        >
+          {confirmDelete && (
+            <div className="sheet-scroll">
+              <p>This removes all of its logs, reviews and check-ins from this phone. It cannot be undone.</p>
+              {confirmDelete.id === current && <p className="muted">{confirmDelete.id} is the patient open now.</p>}
+              <p className="muted">Export a backup first if you may need them.</p>
+            </div>
+          )}
+        </Sheet>
       </section>
 
       <nav className="card menu" aria-label="More">
