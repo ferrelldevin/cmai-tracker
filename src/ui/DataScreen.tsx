@@ -60,6 +60,8 @@ function countBands() {
 export function DataScreen({ patients, current, page, pageTitle, onPage, onBack, onPatient, onChange }: Props) {
   const [code, setCode] = useState("");
   const [msg, setMsg] = useState<Msg | null>(null);
+  // A message belongs to the page it was said on; leaving the page clears it.
+  useEffect(() => setMsg(null), [page]);
   const [persisted, setPersisted] = useState<boolean | null>(null);
   // Deleting asks in a sheet; viaKeyboard decides where focus starts (F-14 rule).
   const [confirmDelete, setConfirmDelete] = useState<{ id: string; viaKeyboard: boolean } | null>(null);
@@ -172,19 +174,20 @@ export function DataScreen({ patients, current, page, pageTitle, onPage, onBack,
           <p className="screen-title" aria-hidden>{pageTitle}</p>{/* the screen heading is the h1 in App */}
         </div>
         {page === "backup" && (
-          <section className="card" aria-label="Backup and export">
-            <p className="muted">
-              The backup holds everything and can be restored on this or another phone. The CSVs open in Excel for the research team: one row per logged behavior, and one row per patient, period and behavior.
-            </p>
-            <p className="muted">Last export: <b>{lastExport ? `${ago(lastExport)} (${shortDate(lastExport)})` : "never"}</b></p>
+          <section className="card backup" aria-label="Backup and export">
+            <h3 className="form-label">Backup</h3>
+            <p className="muted">Everything on this phone in one file. Restore it here or on another phone; logs already there are kept, not doubled.</p>
             <div className="row wrap">
               <button onClick={() => exportFile("json")} disabled={firstRun}><Icon name="download" /> Download backup</button>
-              <button className="ghost" onClick={() => exportFile("observations")} disabled={firstRun}>Logs CSV</button>
-              <button className="ghost" onClick={() => exportFile("scores")} disabled={firstRun}>Scores CSV</button>
-            </div>
-            <div className="row wrap restore">
               <button className="ghost" onClick={() => fileInput.current?.click()}><Icon name="upload" /> Restore from backup</button>
               <input ref={fileInput} type="file" accept="application/json,.json" hidden onChange={(e) => restore(e.target.files?.[0])} />
+            </div>
+            <p className="muted">Last export: <b>{lastExport ? `${ago(lastExport)} (${shortDate(lastExport)})` : "never"}</b></p>
+            <h3 className="form-label">For the research team</h3>
+            <p className="muted">Spreadsheets that open in Excel. Logs: one row per logged behavior. Scores: one row per patient, period and behavior.</p>
+            <div className="row wrap">
+              <button className="ghost" onClick={() => exportFile("observations")} disabled={firstRun}>Logs CSV</button>
+              <button className="ghost" onClick={() => exportFile("scores")} disabled={firstRun}>Scores CSV</button>
             </div>
             {msgFor("export")}
           </section>
@@ -310,7 +313,7 @@ export function DataScreen({ patients, current, page, pageTitle, onPage, onBack,
                 <div className="patient-main">
                   <b>{p.id}</b>
                   {p.demo && <span className="tag">demo</span>}
-                  <span className="muted">{p.id === current ? "Open now · " : ""}Period 1 started {shortDate(p.anchor)}</span>
+                  <span className="muted">{p.id === current ? `Open now · since ${shortDate(p.anchor)}` : `Since ${shortDate(p.anchor)}`}</span>
                 </div>
                 <div className="row">
                   {p.id !== current && <button className="ghost small" onClick={() => onPatient(p.id)}>Open</button>}

@@ -325,13 +325,24 @@ button.text-danger { background: transparent; color: var(--danger); border: 0; m
 .recharts-text, .recharts-legend-item-text { font-family: inherit; font-size: 13px; }
 
 /* Review */
-.period-pick { display: flex; flex-direction: column; gap: var(--s1); margin-top: var(--s3); font-size: var(--fs-sm); color: var(--text-muted); font-weight: 600; }
 .progress-line { display: flex; align-items: center; gap: var(--s3); margin: 0 0 var(--s3); font-size: var(--fs-sm); color: var(--text-muted); }
 .progress-line progress { flex: 1; height: 8px; accent-color: var(--accent); }
-.review-list { list-style: none; padding: 0; margin: 0 0 var(--s4); display: grid; gap: var(--s2); }
-.review-list li { background: var(--surface); border: 1px solid var(--rule); border-radius: var(--radius); padding: var(--s3) var(--s4); display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s2); box-shadow: var(--shadow-1); }
-.review-list li.changed { border-color: var(--attn); box-shadow: inset 4px 0 0 var(--attn); }
-.review-list select { width: 100%; }
+/* Review rows: the rating in Scores colors, then the behavior and whether it was checked (F-18). */
+.review-list { margin-bottom: var(--s4); }
+.review-btn { width: 100%; align-items: center; }
+.rv-cell { flex: none; width: 40px; height: 40px; border-radius: var(--radius-sm); display: inline-flex; align-items: center; justify-content: center; font-weight: 700; font-size: var(--fs-md); font-variant-numeric: tabular-nums; }
+.rv-cell.small { width: 32px; height: 32px; font-size: var(--fs-sm); }
+.rv-cell.unchecked { outline: 2px dashed var(--rule-strong); outline-offset: -2px; }
+.rv-state { font-size: var(--fs-xs); font-weight: 700; color: var(--text-muted); display: inline-flex; align-items: center; gap: 4px; }
+.rv-state.done { color: var(--accent-ink); }
+.rv-state.changed { color: var(--attn); }
+.fwd-icon { flex: none; transform: rotate(-90deg); color: var(--text-muted); }
+.rating-opts { display: grid; gap: var(--s2); }
+.rating-opt { justify-content: flex-start; gap: var(--s3); }
+.rating-opt .rating-label { flex: 1; }
+.rating-opt[aria-pressed="true"] .rv-cell { box-shadow: 0 0 0 2px var(--accent); }
+button.text-quiet { background: transparent; color: var(--accent-ink); border: 0; min-height: 44px; }
+@media (hover: hover) { button.text-quiet:hover { background: var(--hover); } }
 
 /* Data */
 .welcome { text-align: left; padding: var(--s5) var(--s4); background: linear-gradient(180deg, var(--accent-soft), var(--surface) 60%); }
@@ -345,10 +356,14 @@ button.text-danger { background: transparent; color: var(--danger); border: 0; m
 .confirm-sheet .sheet-scroll p { margin: 0; }
 .confirm-sheet .sheet-scroll { gap: var(--s2); }
 .patient-list { list-style: none; padding: 0; margin: var(--s3) 0 0; }
-.patient-list li { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s3); padding: var(--s3) 0; border-top: 1px solid var(--rule); }
+.patient-list li { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: var(--s3); padding: var(--s3) 0; border-top: 1px solid var(--rule); }
+.patient-list li > .row { flex-wrap: nowrap; }
+.patient-main { display: flex; flex-wrap: wrap; align-items: center; column-gap: 0; min-width: 0; }
+.patient-main .muted { flex-basis: 100%; font-size: var(--fs-sm); }
+.patient-main .tag { margin-left: var(--s1); }
 .patient-main { flex: 1 1 160px; min-width: 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px var(--s1); }
 .patient-main .muted { flex-basis: 100%; }
-.restore { margin-top: var(--s2); }
+.backup .form-label:not(:first-child) { margin-top: var(--s4); }
 .ok-line { color: var(--ok); font-weight: 700; }
 .bands { border-collapse: collapse; width: 100%; font-size: var(--fs-sm); margin: var(--s2) 0 var(--s4); }
 .bands th, .bands td { text-align: left; padding: var(--s2); border-bottom: 1px solid var(--rule); }
@@ -396,7 +411,7 @@ button.text-danger { background: transparent; color: var(--danger); border: 0; m
   --r-ink: #ffffff; --r-light: #000000;
 }
 [data-contrast="high"] .card, [data-contrast="high"] .item-list, [data-contrast="high"] .pt-banner, [data-contrast="high"] .status,
-[data-contrast="high"] .review-list li, [data-contrast="high"] select, [data-contrast="high"] input, [data-contrast="high"] .chip,
+[data-contrast="high"] select, [data-contrast="high"] input, [data-contrast="high"] .chip,
 [data-contrast="high"] button.ghost { border-width: 2px; border-color: var(--rule-strong); }
 [data-contrast="high"] .tabs { border-top: 2px solid var(--rule-strong); }
 [data-contrast="high"] .item + .item, [data-contrast="high"] .recent-list li, [data-contrast="high"] .patient-list li { border-top-color: var(--rule); }

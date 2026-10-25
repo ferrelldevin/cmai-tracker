@@ -59,6 +59,10 @@ async function scan(page, name, results) {
     await scan(page, "Scores (all 29 behaviors)", results);
     await page.getByRole("button", { name: /^Day-14 review/ }).click();
     await scan(page, "Day-14 review", results);
+    await page.getByRole("button", { name: /^3\. Spitting/ }).click();
+    await page.getByRole("dialog", { name: /^3\. Spitting/ }).waitFor();
+    await scan(page, "Day-14 review (rating sheet)", results);
+    await page.getByRole("dialog").getByRole("button", { name: "Cancel" }).click();
     await page.getByRole("button", { name: "Patients and data" }).click();
     await scan(page, "Patients & data (with patients)", results);
     await page.getByRole("button", { name: "Delete P-DEMO-B" }).click();
