@@ -69,6 +69,9 @@ export function ScoresScreen({ windows, observations, onLog }: Props) {
     total: w.summary.total,
   }));
 
+  // Round steps (5, 10 or 20) so the total axis reads 45, 50, 55 rather than 44, 48, 52, 59.
+  const totalAxis = niceAxis(trend.map((t) => t.total));
+
   const hours = Array.from({ length: 24 }, (_, h) => ({ hour: h, label: `${(h % 12) || 12}${h < 12 ? "a" : "p"}`, count: 0 }));
   for (const o of observations) {
     if (o.at >= sel.score.windowStart && o.at < sel.score.windowEnd) hours[new Date(o.at).getHours()].count++;
@@ -173,7 +176,7 @@ export function ScoresScreen({ windows, observations, onLog }: Props) {
             <LineChart data={trend} margin={{ top: 8, right: 16, bottom: 0, left: -16 }}>
               <CartesianGrid stroke="var(--grid)" vertical={false} />
               <XAxis dataKey="name" stroke="var(--text-muted)" tickLine={false} />
-              <YAxis domain={[1, 7]} ticks={[1, 2, 3, 4, 5, 6, 7]} stroke="var(--text-muted)" tickLine={false} />
+              <YAxis domain={[1, 7]} ticks={[1, 2, 3, 4, 5, 6, 7]} interval={0} stroke="var(--text-muted)" tickLine={false} />
               <Tooltip contentStyle={{ background: "var(--surface)", border: "1px solid var(--rule)", color: "var(--text)" }} />
               <Legend />
               {(Object.keys(SERIES) as (keyof typeof SERIES)[]).map((k) => (
@@ -200,7 +203,7 @@ export function ScoresScreen({ windows, observations, onLog }: Props) {
             <LineChart data={trend} margin={{ top: 8, right: 16, bottom: 0, left: -16 }}>
               <CartesianGrid stroke="var(--grid)" vertical={false} />
               <XAxis dataKey="name" stroke="var(--text-muted)" tickLine={false} />
-              <YAxis stroke="var(--text-muted)" tickLine={false} domain={["dataMin - 5", "dataMax + 5"]} />
+              <YAxis stroke="var(--text-muted)" tickLine={false} domain={totalAxis.domain} ticks={totalAxis.ticks} interval={0} />
               <Tooltip contentStyle={{ background: "var(--surface)", border: "1px solid var(--rule)", color: "var(--text)" }} />
               <Line type="monotone" dataKey="total" name="Total" stroke="var(--accent)" strokeWidth={2.5} dot={{ r: 4 }} />
             </LineChart>
@@ -225,4 +228,16 @@ export function ScoresScreen({ windows, observations, onLog }: Props) {
       </section>
     </div>
   );
+}
+
+/** A padded axis on round numbers, within the possible 29 to 203 total. */
+function niceAxis(values: number[]) {
+  if (!values.length) return { domain: [29, 203] as [number, number], ticks: undefined };
+  const lo = Math.min(...values), hi = Math.max(...values);
+  const step = [5, 10, 20, 50].find((s) => (hi - lo) / s <= 4) ?? 50;
+  const min = Math.max(0, Math.floor((lo - 1) / step) * step);
+  const max = Math.ceil((hi + 1) / step) * step;
+  const ticks: number[] = [];
+  for (let t = min; t <= max; t += step) ticks.push(t);
+  return { domain: [min, max] as [number, number], ticks };
 }
