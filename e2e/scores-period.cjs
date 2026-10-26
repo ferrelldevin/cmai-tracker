@@ -38,6 +38,7 @@ const ok = (condition, label) => { if (!condition) throw Error('FAIL: ' + label)
   const kicking = page.locator('#sc-behaviors tr[data-behavior="8"]');
   ok((await kicking.textContent()).includes('Caregiver reviewed · app suggested 2'), 'review override and original derived rating remain distinct');
   ok(await kicking.locator('td').first().textContent() === '4' && await kicking.locator('td').last().textContent() === '1', 'P2 kicking: reviewed 4 from one log');
+  ok((await kicking.locator('th').textContent()).includes('Up from 1'), 'P2 kicking says how it moved since P1 (1 to 4)');
   ok((await page.locator('#sc-total').textContent()).includes('13 unlogged days'), 'P2 coverage stays scoped');
   ok((await page.locator('.score-group-values').textContent()).includes('1.43'), 'P2 aggressive mean excludes special codes');
   ok(!(await page.locator('#sc-history table').count()), 'history data is absent until explicitly opened');
@@ -48,6 +49,8 @@ const ok = (condition, label) => { if (!condition) throw Error('FAIL: ' + label)
   await page.getByRole('button',{name:'Previous period',exact:true}).click();
   await page.getByRole('heading',{name:'Period 1 scores',exact:true}).waitFor();
   ok(await total.textContent()==='32', 'P1 total is hand-expected 32');
+  ok(page.url().endsWith('#/scores/p1'), 'the chosen period is in the URL');
+  ok((await page.locator('.score-range').textContent()).includes('period 3 is in progress'), 'an earlier period says which one is in progress');
   ok(await page.locator('#sc-behaviors tbody tr').count()===1, 'P1 never inherits P2/P3 behaviors');
   ok(await page.locator('#sc-behaviors tr[data-behavior="7"] td').last().textContent()==='5', 'end-exclusive boundary assigns fifth hitting log to P1');
   ok((await page.locator('#sc-total').textContent()).includes('11 unlogged days'), 'quiet-day check-in counts as covered; missed days remain unknown');
@@ -64,6 +67,7 @@ const ok = (condition, label) => { if (!condition) throw Error('FAIL: ' + label)
   await page.getByText('Compare finished periods (2)',{exact:true}).click();
   await page.locator('#sc-history table').first().waitFor();
   ok(await page.locator('#sc-history .heat thead th').count()===3, 'history excludes open P3');
+  ok(await page.locator('#sc-history .heat tbody tr').count() < 30, 'history lists only behaviors seen, like the table above');
   ok((await page.locator('#sc-history').textContent()).includes('32') && (await page.locator('#sc-history').textContent()).includes('30'), 'historical totals remain available');
   await page.getByRole('button',{name:'Previous period',exact:true}).click();
   ok(!(await page.locator('#sc-history table').count()), 'switching period closes comparison');

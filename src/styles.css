@@ -480,3 +480,8 @@ button.text-quiet { background: transparent; color: var(--accent-ink); border: 0
 #sc-history .period-scores th { overflow-wrap: anywhere; }
 [data-contrast="high"] .rating-cell { border: 2px solid var(--rule-strong); }
 @media (max-width: 380px) { .period-controls { gap: 4px; } .period-controls > button { padding-inline: 8px; } }
+.icon-btn { min-width: 44px; min-height: 44px; padding: 0; }
+.icon-btn:disabled { opacity: 0.4; }
+.score-row-change { display: block; margin-top: 2px; font-size: var(--fs-xs); font-weight: 600; color: var(--text-muted); }
+.score-row-change.up { color: var(--attn); }
+.score-row-change.down { color: var(--accent-ink); }

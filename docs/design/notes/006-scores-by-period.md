@@ -30,7 +30,7 @@ Hand expectations in `e2e/scores-period.cjs`: P1 has five Hitting logs (rating 4
 1. **One period overview, supporting sections, history disclosure (chosen).** Total and behavior scores immediately follow period context. Group values, status and hourly counts follow. History requires an explicit action. Reuses SectionNav and chips; no new route or bottom tab. Trade-off: the period's behavior list can still require scrolling when all 29 are requested.
 2. **Period overview plus separate detail subpages.** Shorter initial page, but adds routes/back navigation for closely related data and separates ratings from their counts. More navigation work for this task.
 
-Choice is implementation judgment, backed by the existing navigation pattern and the operator's scope. Default remains latest ended period, or the only open period, consistent with the previous behavior. A chosen window start is saved per patient for the current browser session, so reload and tab changes retain it. Previous/Next and compact date-labeled period buttons support many periods. Switching period collapses history. Patient switches wait for that patient's data to load, avoiding stale results during the read.
+Choice is implementation judgment, backed by the existing navigation pattern and the operator's scope. Default remains latest ended period, or the only open period, consistent with the previous behavior. The chosen period is in the URL (`#/scores/p2`), so reload and a shared link keep it; the app also remembers each patient's choice, so leaving Scores and coming back keeps it (see Additions). Previous/Next and compact period buttons support many periods. Switching period collapses history. Patient switches wait for that patient's data to load, avoiding stale results during the read.
 
 Appetite: one focused Scores-page revision and its tests. Kill when: it would require changing scoring, storage schema, clinical thresholds, or other product screens.
 
@@ -56,3 +56,16 @@ Appetite: one focused Scores-page revision and its tests. Kill when: it would re
 ## Verification
 
 See `docs/design/scores-period-verification.md` for executed results and limitations. No representative-user sessions were run. No clinical validation claim is made.
+
+## Additions after comparing two builds (2026-10-26)
+
+Two builds of this change were made: this one (Codex) and a Claude build (PR #15, closed). Devin picked this layout, plus two pieces from the other build and fixes for three rough edges found in a phone walkthrough.
+
+- **Change since last period on every behavior row**, in words under the rating label: "Up from 3 ↑", "Down from 5 ↓", "About the same (was 6)", "Same as last period", "First period". It uses the engine's existing rule (D-10: 2+ points, or 1 point the same way two periods running), so it agrees with the History arrows. A single 1-point move is within how much two raters differ (manual p.7), so it reads "about the same". A period in progress shows "Last period N" with no judgment, and codes 8 and 9 are never compared. Reason: "better or worse than last period" is the question a nurse brings to a period, and it was only answerable by opening History.
+- **The period in the URL** instead of session storage: `#/scores/p<n>`, replacing the history entry like a tab. A reload, a shared link and leaving Scores and coming back all keep it (the app remembers the last period per patient). Switching patient reopens on that patient's own choice, so period numbers never carry across patients.
+- **Fixes:**
+  - Previous and Next are now arrow icon buttons (44 px), so P1 to P4 fit beside them at 390 px instead of scrolling out of sight.
+  - When the page shows an earlier period, the date line adds "period 4 is in progress", matching the banner's "Current: Period 4".
+  - The History table follows "Show all 29 behaviors" like the table above it, instead of always listing all 29.
+
+Verified: unit tests for `changeSince` and the period route; `e2e/scores-period.cjs` adds checks for the change wording, the URL and the in-progress line; all other e2e suites pass; axe-core 4.10.3 shows 0 violations in 4 modes.

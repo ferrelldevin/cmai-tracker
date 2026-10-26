@@ -7,7 +7,7 @@ import type { ScoredWindow } from "./useCmaiData";
 import { shortDate, windowLabel } from "./format";
 import { Icon } from "./Icon";
 import { SectionNav, type Section } from "./SectionNav";
-import { periodBehaviors, selectedPeriod } from "./scoreView";
+import { changeSince, periodBehaviors, selectedPeriod } from "./scoreView";
 
 const sections: Section[] = [
   { id: "sc-total", label: "Total" },
@@ -26,19 +26,16 @@ interface Props {
   windows: ScoredWindow[];
   observations: StoredObservation[];
   hasActivity: boolean;
+  period?: number; // 1-based, from the URL
+  onPeriod: (period: number) => void;
   onLog: () => void;
 }
 
-export function ScoresScreen({ patientId, windows, observations, hasActivity, onLog }: Props) {
-  const storageKey = `cmai-scores-period:${patientId}`;
-  const [start, setStart] = useState<number | null>(() => {
-    try { const saved = sessionStorage.getItem(storageKey); return saved === null ? null : Number(saved); }
-    catch { return null; }
-  });
+export function ScoresScreen({ patientId, windows, observations, hasActivity, period, onPeriod, onLog }: Props) {
   const [showAll, setShowAll] = useState(false);
   const [historyOpen, setHistoryOpen] = useState(false);
   const chips = useRef<HTMLDivElement>(null);
-  const selected = selectedPeriod(windows, start);
+  const selected = selectedPeriod(windows, period);
   const sel = windows[selected];
 
   useEffect(() => {
@@ -48,9 +45,9 @@ export function ScoresScreen({ patientId, windows, observations, hasActivity, on
   function choose(index: number) {
     const next = windows[index];
     if (!next) return;
-    setStart(next.score.windowStart);
+    // The period lives in the URL, so reload, the back gesture and a shared link all keep it.
+    onPeriod(index + 1);
     setHistoryOpen(false);
-    try { sessionStorage.setItem(storageKey, String(next.score.windowStart)); } catch { /* storage optional */ }
   }
 
   // Quiet-day check-ins also establish a period; no observations is not necessarily no data.
@@ -77,15 +74,19 @@ export function ScoresScreen({ patientId, windows, observations, hasActivity, on
       <h2>Period {selected + 1} scores</h2>
       <span className="tag">{sel.score.provisional ? "In progress · so far" : "Period ended"}</span>
     </div>
-    <p className="score-range" role="status">{date(sel.score.windowStart)} to {date(sel.score.windowEnd - 1)}</p>
+    <p className="score-range" role="status">
+      {date(sel.score.windowStart)} to {date(sel.score.windowEnd - 1)}
+      {/* The banner shows today's period; say so when this page shows an earlier one. */}
+      {selected < windows.length - 1 && windows[windows.length - 1].score.provisional && <> · period {windows.length} is in progress</>}
+    </p>
     <div className="period-controls" role="group" aria-label="Choose a score period">
-      <button className="ghost" aria-label="Previous period" disabled={selected === 0} onClick={() => choose(selected - 1)}>Previous</button>
+      <button className="ghost icon-btn" aria-label="Previous period" disabled={selected === 0} onClick={() => choose(selected - 1)}><Icon name="chevron" size={22} className="back-icon" /></button>
       <div className="period-chips" ref={chips} role="group" aria-label="14-day period">
         {windows.map((w, i) => <button key={w.score.windowStart} aria-pressed={i === selected}
           className={i === selected ? "chip on" : "chip"} onClick={() => choose(i)}
           aria-label={`P${i + 1}, ${windowLabel(w.score.windowStart, w.score.windowEnd, i)}${w.score.provisional ? ", in progress" : ""}`}>P{i + 1}</button>)}
       </div>
-      <button className="ghost" aria-label="Next period" disabled={selected === windows.length - 1} onClick={() => choose(selected + 1)}>Next</button>
+      <button className="ghost icon-btn" aria-label="Next period" disabled={selected === windows.length - 1} onClick={() => choose(selected + 1)}><Icon name="chevron" size={22} className="fwd-icon" /></button>
     </div>
     <SectionNav label="Jump to a chart" sections={sections} />
 
@@ -113,8 +114,12 @@ export function ScoresScreen({ patientId, windows, observations, hasActivity, on
             const rating = sel.finals[item.id];
             const derived = sel.score.items[item.id - 1];
             const reviewed = item.id in sel.review;
+            const moved = changeSince(windows, selected, item.id);
             return <tr key={item.id} data-behavior={item.id}>
               <th scope="row"><b>{item.id}. {item.name}</b><span className="score-row-label">{RATING_LABELS[rating]}</span>
+                <span className={moved.change ? `score-row-change ${moved.change}` : "score-row-change"}>
+                  {moved.text}{moved.change && <span aria-hidden> {moved.change === "up" ? "↑" : "↓"}</span>}
+                </span>
                 <span className="score-row-source">{reviewed ? `Caregiver reviewed · app suggested ${derived.rating}` : "App-derived · not reviewed"}</span></th>
               <td><span className={`rating-cell r${rating}${sel.score.provisional ? " provisional" : ""}`}>{rating}</span></td>
               <td>{derived.count}</td>
@@ -168,7 +173,7 @@ export function ScoresScreen({ patientId, windows, observations, hasActivity, on
             <caption>Behavior ratings across finished periods</caption>
             <thead><tr><th scope="col">Behavior</th>{finished.map((w, i) => <th key={w.score.windowStart} scope="col">P{i + 1}<span className="sub">{shortDate(w.score.windowStart)}</span></th>)}</tr></thead>
             <tbody><tr className="unlogged-row"><th scope="row">Unlogged days</th>{finished.map((w) => <td key={w.score.windowStart}>{w.unlogged}</td>)}</tr>
-              {ITEMS.map((item) => <tr key={item.id}><th scope="row">{item.id}. {item.name}</th>{finished.map((w, i) => {
+              {ITEMS.filter((item) => showAll || finished.some((w) => w.finals[item.id] > 1)).map((item) => <tr key={item.id}><th scope="row">{item.id}. {item.name}</th>{finished.map((w, i) => {
                 const change = changes.get(item.id)?.[i];
                 return <td key={w.score.windowStart} className={`r${w.finals[item.id]}`}>
                   {w.finals[item.id]}{change && <span className="chg" aria-label={change === "up" ? "changed, more often" : "changed, less often"}>{change === "up" ? "↑" : "↓"}</span>}
