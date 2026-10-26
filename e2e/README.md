@@ -10,6 +10,7 @@ node e2e/navigation.cjs http://localhost:4173/ /tmp/out   # section bars, Data p
 node e2e/theme.cjs http://localhost:4173/ /tmp/out        # light/dark/high contrast settings
 node e2e/patient-switcher.cjs http://localhost:4173/ /tmp/out  # switcher sheet, Esc, backdrop, confirmation, search
 node e2e/sheet.cjs http://localhost:4173/ /tmp/out       # page held still, swipe to close, Other note, time pill
+node e2e/scores-period.cjs http://localhost:4173/ /tmp/out  # one period per view, URL, reload, back, All periods, counts vs storage
 node docs/audits/axe-run.cjs http://localhost:4173/ docs/audits/axe-wcag22aa.json
 ```
 

@@ -23,3 +23,19 @@ describe("routes", () => {
     for (const h of ["#/log", "#/data", "#/data/display", "#/data/about"]) expect(routeHash(parseRoute(h)!)).toBe(h);
   });
 });
+
+describe("Scores periods in the URL", () => {
+  it("reads a period and All periods", () => {
+    expect(parseRoute("#/scores/p3")).toEqual({ tab: "scores", page: null, period: 3 });
+    expect(parseRoute("#/scores/all")).toEqual({ tab: "scores", page: "all" });
+  });
+
+  it("drops a period it cannot read", () => {
+    for (const h of ["#/scores/p0", "#/scores/3", "#/scores/px", "#/scores/backup"]) expect(parseRoute(h)).toEqual({ tab: "scores", page: null });
+  });
+
+  it("writes what it reads", () => {
+    for (const h of ["#/scores", "#/scores/p2", "#/scores/all"]) expect(routeHash(parseRoute(h)!)).toBe(h);
+    expect(routeHash({ tab: "log", page: null, period: 2 })).toBe("#/log");
+  });
+});

@@ -9,7 +9,7 @@ import { PatientSheet } from "./ui/PatientSheet";
 import { patientPosition } from "./data/patients";
 import { useCmaiData } from "./ui/useCmaiData";
 import { currentTheme, onDisplayChange, toggleTheme } from "./ui/display";
-import { useRoute, type DataPage, type Tab } from "./ui/route";
+import { useRoute, type DataPage, type Route, type Tab } from "./ui/route";
 
 const TABS: { id: Tab; label: string; title: string; icon: IconName }[] = [
   { id: "log", label: "Log", title: "Log a behavior", icon: "plus" },
@@ -18,7 +18,8 @@ const TABS: { id: Tab; label: string; title: string; icon: IconName }[] = [
   { id: "data", label: "Data", title: "Patients and data", icon: "data" },
 ];
 
-const PAGE_TITLES: Record<DataPage, string> = {
+const PAGE_TITLES: Record<NonNullable<Route["page"]>, string> = {
+  all: "Scores, all periods",
   backup: "Backup and export",
   display: "Display",
   safe: "Keep data safe",
@@ -145,14 +146,14 @@ export default function App() {
       )}
 
       <main ref={mainRef} tabIndex={-1} aria-busy={!everLoaded}>
-        <h1 className="sr">{shown === "data" && route.page ? PAGE_TITLES[route.page] : TABS.find((t) => t.id === shown)!.title}{current ? `, ${current.id}` : ""}</h1>
+        <h1 className="sr">{(shown === "data" || shown === "scores") && route.page ? PAGE_TITLES[route.page] : TABS.find((t) => t.id === shown)!.title}{current ? `, ${current.id}` : ""}</h1>
         {!everLoaded ? (
           <div className="loading" role="status"><span className="spinner" aria-hidden /> Loading…</div>
         ) : shown === "data" ? (
           <DataScreen
             patients={patients}
             current={hasPatient ? patientId : null}
-            page={route.page}
+            page={route.page as DataPage | null}
             pageTitle={route.page ? PAGE_TITLES[route.page] : ""}
             onPage={(page) => go({ tab: "data", page })}
             onBack={back}
@@ -161,8 +162,23 @@ export default function App() {
           />
         ) : shown === "log" ? (
           <LogScreen patientId={patientId!} observations={observations} checkins={checkins} onChange={refresh} />
+        ) : shown === "scores" && !loaded ? (
+          // Wait for the new patient's data, so a switch never shows the last patient's scores.
+          <div className="loading" role="status"><span className="spinner" aria-hidden /> Loading scores…</div>
         ) : shown === "scores" ? (
-          <ScoresScreen key={patientId} windows={windows} observations={observations} onLog={() => setTab("log")} />
+          <ScoresScreen
+            key={patientId}
+            windows={windows}
+            observations={observations}
+            checkins={checkins}
+            view={route.page === "all" ? "all" : "period"}
+            period={route.period}
+            onPeriod={(n) => go({ tab: "scores", page: null, period: n })}
+            onAll={() => go({ tab: "scores", page: "all" })}
+            onBack={back}
+            onLog={() => setTab("log")}
+            onReview={() => setTab("review")}
+          />
         ) : (
           <ReviewScreen key={patientId} patientId={patientId!} windows={windows} onChange={refresh} />
         )}

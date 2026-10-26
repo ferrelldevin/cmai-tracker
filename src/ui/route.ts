@@ -1,4 +1,6 @@
-// Where the app is, kept in the URL hash: #/log, #/scores, #/review, #/data, #/data/<page>.
+// Where the app is, kept in the URL hash: #/log, #/scores, #/scores/p<n>, #/scores/all,
+// #/review, #/data, #/data/<page>. Picking a period on Scores replaces the entry, like a tab;
+// "All periods" is pushed like a Data page, so the back gesture returns to the period.
 // Switching tabs replaces the history entry (the platform norm: Back does not walk through
 // tab taps). Opening a Data page pushes one, so the back gesture returns to the Data hub.
 // A reload lands on the same screen.
@@ -7,7 +9,9 @@ import { useEffect, useRef, useState } from "react";
 
 export type Tab = "log" | "scores" | "review" | "data";
 export type DataPage = "backup" | "display" | "safe" | "demo" | "about";
-export interface Route { tab: Tab; page: DataPage | null }
+export type ScoresPage = "all";
+/** `period` is 1-based, as people read it ("Period 3"); absent means the default period. */
+export interface Route { tab: Tab; page: DataPage | ScoresPage | null; period?: number }
 
 const TABS: readonly Tab[] = ["log", "scores", "review", "data"];
 const PAGES: readonly DataPage[] = ["backup", "display", "safe", "demo", "about"];
@@ -15,10 +19,16 @@ const PAGES: readonly DataPage[] = ["backup", "display", "safe", "demo", "about"
 export function parseRoute(hash: string): Route | null {
   const [tab, page] = hash.replace(/^#\/?/, "").split("/");
   if (!TABS.includes(tab as Tab)) return null;
+  if (tab === "scores") {
+    if (page === "all") return { tab, page: "all" };
+    const n = /^p([1-9]\d{0,3})$/.exec(page ?? "");
+    return n ? { tab, page: null, period: Number(n[1]) } : { tab, page: null };
+  }
   return { tab: tab as Tab, page: tab === "data" && PAGES.includes(page as DataPage) ? (page as DataPage) : null };
 }
 
-export const routeHash = (r: Route) => `#/${r.tab}${r.page ? `/${r.page}` : ""}`;
+export const routeHash = (r: Route) =>
+  `#/${r.tab}${r.page ? `/${r.page}` : r.tab === "scores" && r.period ? `/p${r.period}` : ""}`;
 
 /**
  * The current route, plus go() and back(). Only a Data page is pushed onto history, and
@@ -56,6 +66,7 @@ export function useRoute(fallback: () => Route) {
     setRoute(next);
   };
 
-  const back = () => go({ tab: route.tab, page: null });
+  // Back from a page we pushed pops it, so Scores returns to the period it came from.
+  const back = () => (route.page && pushed() ? history.back() : go({ tab: route.tab, page: null }));
   return { route, go, back };
 }

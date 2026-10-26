@@ -7,7 +7,7 @@
     "wcag21aa",
     "wcag22aa"
   ],
-  "runAt": "2026-10-24T01:26:48.005Z",
+  "runAt": "2026-10-26T19:23:15.498Z",
   "schemes": {
     "light": [
       {
@@ -154,14 +154,6 @@
             "nodes": [
               {
                 "target": [
-                  ".sheet-sub"
-                ],
-                "why": [
-                  "Element's background color could not be determined because it partially overlaps other elements"
-                ]
-              },
-              {
-                "target": [
                   ".choice:nth-child(1) > span"
                 ],
                 "why": [
@@ -179,7 +171,7 @@
         "incomplete": []
       },
       {
-        "screen": "Scores",
+        "screen": "Scores (one period)",
         "url": "http://localhost:4173/#/scores",
         "violations": [],
         "incomplete": [
@@ -190,7 +182,7 @@
             "nodes": [
               {
                 "target": [
-                  ".chg > span[aria-hidden=\"true\"]"
+                  "#sc-summary > ul > li:nth-child(5) > .beh-text > .beh-meta > .chg[aria-hidden=\"true\"]"
                 ],
                 "why": [
                   "Element content contains only non-text characters"
@@ -198,154 +190,10 @@
               },
               {
                 "target": [
-                  "text[y=\"167\"][text-anchor=\"middle\"][x=\"44\"] > tspan[dy=\"0.71em\"][x=\"44\"]"
+                  "#sc-behaviors > ul > li:nth-child(5) > .beh-text > .beh-meta > .chg[aria-hidden=\"true\"]"
                 ],
                 "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"167\"][x=\"176\"][text-anchor=\"middle\"] > tspan[x=\"176\"][dy=\"0.71em\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"167\"][x=\"308\"][text-anchor=\"middle\"] > tspan[x=\"308\"][dy=\"0.71em\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"159\"][height=\"151\"][text-anchor=\"end\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element content is too short to determine if it is actual text content"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"133.83333333333334\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element content is too short to determine if it is actual text content"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"108.66666666666669\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element content is too short to determine if it is actual text content"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"83.5\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element content is too short to determine if it is actual text content"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"58.33333333333334\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element content is too short to determine if it is actual text content"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"9.75\"][height=\"151\"][text-anchor=\"end\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element content is too short to determine if it is actual text content"
-                ]
-              },
-              {
-                "target": [
-                  ".legend-item-0 > .recharts-legend-item-text"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  ".legend-item-1 > .recharts-legend-item-text"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  ".legend-item-2 > .recharts-legend-item-text"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"158\"][text-anchor=\"middle\"][x=\"44\"] > tspan[dy=\"0.71em\"][x=\"44\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"158\"][x=\"176\"][text-anchor=\"middle\"] > tspan[x=\"176\"][dy=\"0.71em\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"158\"][x=\"308\"][text-anchor=\"middle\"] > tspan[x=\"308\"][dy=\"0.71em\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"150\"][height=\"142\"][text-anchor=\"end\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"112.13333333333335\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"74.26666666666667\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"9.75\"][height=\"142\"][text-anchor=\"end\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
+                  "Element content contains only non-text characters"
                 ]
               },
               {
@@ -414,7 +262,7 @@
               },
               {
                 "target": [
-                  "text[y=\"170\"][x=\"28\"][height=\"162\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
+                  "text[y=\"170\"][text-anchor=\"end\"][orientation=\"left\"] > tspan[dy=\"0.355em\"][x=\"28\"]"
                 ],
                 "why": [
                   "Element content is too short to determine if it is actual text content"
@@ -422,7 +270,7 @@
               },
               {
                 "target": [
-                  "text[y=\"129.5\"][x=\"28\"][height=\"162\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
+                  "text[y=\"129.5\"] > tspan[dy=\"0.355em\"][x=\"28\"]"
                 ],
                 "why": [
                   "Element content is too short to determine if it is actual text content"
@@ -430,7 +278,7 @@
               },
               {
                 "target": [
-                  "text[y=\"89\"][x=\"28\"][height=\"162\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
+                  "text[y=\"89\"] > tspan[dy=\"0.355em\"][x=\"28\"]"
                 ],
                 "why": [
                   "Element content is too short to determine if it is actual text content"
@@ -438,7 +286,7 @@
               },
               {
                 "target": [
-                  "text[y=\"48.5\"][x=\"28\"][height=\"162\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
+                  "text[y=\"48.5\"] > tspan[dy=\"0.355em\"][x=\"28\"]"
                 ],
                 "why": [
                   "Element's background color could not be determined because element contains an image node"
@@ -446,7 +294,7 @@
               },
               {
                 "target": [
-                  "text[y=\"9.75\"][x=\"28\"][height=\"162\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
+                  "text[y=\"9.75\"] > tspan[dy=\"0.355em\"][x=\"28\"]"
                 ],
                 "why": [
                   "Element's background color could not be determined because element contains an image node"
@@ -468,7 +316,7 @@
             "nodes": [
               {
                 "target": [
-                  ".chg > span[aria-hidden=\"true\"]"
+                  "li:nth-child(5) > .beh-text > .beh-meta > .chg[aria-hidden=\"true\"]"
                 ],
                 "why": [
                   "Element content contains only non-text characters"
@@ -476,154 +324,10 @@
               },
               {
                 "target": [
-                  "text[y=\"167\"][text-anchor=\"middle\"][x=\"44\"] > tspan[dy=\"0.71em\"][x=\"44\"]"
+                  "li:nth-child(13) > .beh-text > .beh-meta > .chg[aria-hidden=\"true\"]"
                 ],
                 "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"167\"][x=\"176\"][text-anchor=\"middle\"] > tspan[x=\"176\"][dy=\"0.71em\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"167\"][x=\"308\"][text-anchor=\"middle\"] > tspan[x=\"308\"][dy=\"0.71em\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"159\"][text-anchor=\"end\"][orientation=\"left\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element content is too short to determine if it is actual text content"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"133.83333333333334\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element content is too short to determine if it is actual text content"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"108.66666666666669\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element content is too short to determine if it is actual text content"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"83.5\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element content is too short to determine if it is actual text content"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"58.33333333333334\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element content is too short to determine if it is actual text content"
-                ]
-              },
-              {
-                "target": [
-                  ".recharts-cartesian-axis-tick.recharts-layer:nth-child(6) > text[y=\"9.75\"][text-anchor=\"end\"][orientation=\"left\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element content is too short to determine if it is actual text content"
-                ]
-              },
-              {
-                "target": [
-                  ".legend-item-0 > .recharts-legend-item-text"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  ".legend-item-1 > .recharts-legend-item-text"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  ".legend-item-2 > .recharts-legend-item-text"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"158\"][text-anchor=\"middle\"][x=\"44\"] > tspan[dy=\"0.71em\"][x=\"44\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"158\"][x=\"176\"][text-anchor=\"middle\"] > tspan[x=\"176\"][dy=\"0.71em\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"158\"][x=\"308\"][text-anchor=\"middle\"] > tspan[x=\"308\"][dy=\"0.71em\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"150\"][height=\"142\"][text-anchor=\"end\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"112.13333333333335\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"74.26666666666667\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"9.75\"][height=\"142\"][text-anchor=\"end\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
+                  "Element content contains only non-text characters"
                 ]
               },
               {
@@ -692,7 +396,7 @@
               },
               {
                 "target": [
-                  "text[y=\"170\"][x=\"28\"][height=\"162\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
+                  "text[y=\"170\"][text-anchor=\"end\"][orientation=\"left\"] > tspan[dy=\"0.355em\"][x=\"28\"]"
                 ],
                 "why": [
                   "Element content is too short to determine if it is actual text content"
@@ -700,7 +404,7 @@
               },
               {
                 "target": [
-                  "text[y=\"129.5\"][x=\"28\"][height=\"162\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
+                  "text[y=\"129.5\"][text-anchor=\"end\"][orientation=\"left\"] > tspan[dy=\"0.355em\"][x=\"28\"]"
                 ],
                 "why": [
                   "Element content is too short to determine if it is actual text content"
@@ -708,7 +412,7 @@
               },
               {
                 "target": [
-                  "text[y=\"89\"][x=\"28\"][height=\"162\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
+                  "text[y=\"89\"][text-anchor=\"end\"][orientation=\"left\"] > tspan[dy=\"0.355em\"][x=\"28\"]"
                 ],
                 "why": [
                   "Element content is too short to determine if it is actual text content"
@@ -716,7 +420,7 @@
               },
               {
                 "target": [
-                  "text[y=\"48.5\"][x=\"28\"][height=\"162\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
+                  "text[y=\"48.5\"][text-anchor=\"end\"][orientation=\"left\"] > tspan[dy=\"0.355em\"][x=\"28\"]"
                 ],
                 "why": [
                   "Element's background color could not be determined because element contains an image node"
@@ -724,7 +428,331 @@
               },
               {
                 "target": [
-                  "text[y=\"9.75\"][x=\"28\"][height=\"162\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
+                  "text[y=\"9.75\"] > tspan[dy=\"0.355em\"][x=\"28\"]"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "screen": "Scores (period in progress)",
+        "url": "http://localhost:4173/#/scores/p4",
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "help": "Elements must meet minimum color contrast ratio thresholds",
+            "nodes": [
+              {
+                "target": [
+                  "tspan[x=\"41.833333333333336\"][dy=\"0.71em\"]"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  "tspan[x=\"76.83333333333333\"][dy=\"0.71em\"]"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  "tspan[x=\"111.83333333333333\"][dy=\"0.71em\"]"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  "tspan[x=\"146.83333333333334\"][dy=\"0.71em\"]"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  "tspan[x=\"181.83333333333334\"][dy=\"0.71em\"]"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  "tspan[x=\"216.83333333333334\"][dy=\"0.71em\"]"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  "tspan[x=\"251.83333333333334\"][dy=\"0.71em\"]"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  "tspan[x=\"286.8333333333333\"][dy=\"0.71em\"]"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  "text[y=\"170\"][text-anchor=\"end\"][orientation=\"left\"] > tspan[dy=\"0.355em\"][x=\"28\"]"
+                ],
+                "why": [
+                  "Element content is too short to determine if it is actual text content"
+                ]
+              },
+              {
+                "target": [
+                  "text[y=\"129.5\"] > tspan[dy=\"0.355em\"][x=\"28\"]"
+                ],
+                "why": [
+                  "Element content is too short to determine if it is actual text content"
+                ]
+              },
+              {
+                "target": [
+                  "text[y=\"89\"] > tspan[dy=\"0.355em\"][x=\"28\"]"
+                ],
+                "why": [
+                  "Element content is too short to determine if it is actual text content"
+                ]
+              },
+              {
+                "target": [
+                  "text[y=\"48.5\"] > tspan[dy=\"0.355em\"][x=\"28\"]"
+                ],
+                "why": [
+                  "Element content is too short to determine if it is actual text content"
+                ]
+              },
+              {
+                "target": [
+                  "text[y=\"9.75\"] > tspan[dy=\"0.355em\"][x=\"28\"]"
+                ],
+                "why": [
+                  "Element content is too short to determine if it is actual text content"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "screen": "Scores (all periods)",
+        "url": "http://localhost:4173/#/scores/all",
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "help": "Elements must meet minimum color contrast ratio thresholds",
+            "nodes": [
+              {
+                "target": [
+                  "th[scope=\"col\"]:nth-child(4) > .col-btn > .sub"
+                ],
+                "why": [
+                  "Element's background color could not be determined because it's partially obscured by another element"
+                ]
+              },
+              {
+                "target": [
+                  ".open[scope=\"col\"] > .col-btn"
+                ],
+                "why": [
+                  "Element's background color could not be determined because it's partially obscured by another element"
+                ]
+              },
+              {
+                "target": [
+                  ".open[scope=\"col\"] > .col-btn > .sub"
+                ],
+                "why": [
+                  "Element's background color could not be determined because it's partially obscured by another element"
+                ]
+              },
+              {
+                "target": [
+                  ".unlogged-row > td:nth-child(5)"
+                ],
+                "why": [
+                  "Element content is too short to determine if it is actual text content"
+                ]
+              },
+              {
+                "target": [
+                  ".chg > span[aria-hidden=\"true\"]"
+                ],
+                "why": [
+                  "Element content contains only non-text characters"
+                ]
+              },
+              {
+                "target": [
+                  ".recharts-cartesian-axis-tick.recharts-layer:nth-child(1) > text[y=\"167\"][text-anchor=\"middle\"][orientation=\"bottom\"] > tspan[dy=\"0.71em\"]"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  "text[y=\"167\"][x=\"176\"][text-anchor=\"middle\"] > tspan[x=\"176\"][dy=\"0.71em\"]"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  "text[y=\"167\"][x=\"308\"][text-anchor=\"middle\"] > tspan[x=\"308\"][dy=\"0.71em\"]"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  "text[y=\"159\"][text-anchor=\"end\"][orientation=\"left\"] > tspan[dy=\"0.355em\"]"
+                ],
+                "why": [
+                  "Element content is too short to determine if it is actual text content"
+                ]
+              },
+              {
+                "target": [
+                  "text[y=\"133.83333333333334\"] > tspan[dy=\"0.355em\"]"
+                ],
+                "why": [
+                  "Element content is too short to determine if it is actual text content"
+                ]
+              },
+              {
+                "target": [
+                  "text[y=\"108.66666666666669\"] > tspan[dy=\"0.355em\"]"
+                ],
+                "why": [
+                  "Element content is too short to determine if it is actual text content"
+                ]
+              },
+              {
+                "target": [
+                  "text[y=\"83.5\"] > tspan[dy=\"0.355em\"]"
+                ],
+                "why": [
+                  "Element content is too short to determine if it is actual text content"
+                ]
+              },
+              {
+                "target": [
+                  "text[y=\"58.33333333333334\"] > tspan[dy=\"0.355em\"]"
+                ],
+                "why": [
+                  "Element content is too short to determine if it is actual text content"
+                ]
+              },
+              {
+                "target": [
+                  "text[y=\"33.16666666666666\"] > tspan[dy=\"0.355em\"]"
+                ],
+                "why": [
+                  "Element content is too short to determine if it is actual text content"
+                ]
+              },
+              {
+                "target": [
+                  ".recharts-cartesian-axis-tick.recharts-layer:nth-child(7) > text[text-anchor=\"end\"][orientation=\"left\"][width=\"60\"] > tspan[dy=\"0.355em\"]"
+                ],
+                "why": [
+                  "Element content is too short to determine if it is actual text content"
+                ]
+              },
+              {
+                "target": [
+                  ".legend-item-0 > .recharts-legend-item-text"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  ".legend-item-1 > .recharts-legend-item-text"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  ".legend-item-2 > .recharts-legend-item-text"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  ".recharts-cartesian-axis-tick.recharts-layer:nth-child(1) > text[y=\"158\"][text-anchor=\"middle\"][orientation=\"bottom\"] > tspan[dy=\"0.71em\"]"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  "text[y=\"158\"][x=\"176\"][text-anchor=\"middle\"] > tspan[x=\"176\"][dy=\"0.71em\"]"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  "text[y=\"158\"][x=\"308\"][text-anchor=\"middle\"] > tspan[x=\"308\"][dy=\"0.71em\"]"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  "text[y=\"150\"][height=\"142\"][text-anchor=\"end\"] > tspan[dy=\"0.355em\"]"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  "text[y=\"79\"] > tspan[dy=\"0.355em\"]"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  ".recharts-cartesian-axis-tick.recharts-layer:nth-child(3) > text[height=\"142\"][text-anchor=\"end\"][orientation=\"left\"] > tspan[dy=\"0.355em\"]"
                 ],
                 "why": [
                   "Element's background color could not be determined because element contains an image node"
@@ -741,16 +769,62 @@
         "incomplete": []
       },
       {
+        "screen": "Day-14 review (rating sheet)",
+        "url": "http://localhost:4173/#/review",
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "help": "Elements must meet minimum color contrast ratio thresholds",
+            "nodes": [
+              {
+                "target": [
+                  ".r8"
+                ],
+                "why": [
+                  "Element content is too short to determine if it is actual text content"
+                ]
+              },
+              {
+                "target": [
+                  ".r9"
+                ],
+                "why": [
+                  "Element content is too short to determine if it is actual text content"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
         "screen": "Patients & data (with patients)",
         "url": "http://localhost:4173/#/data",
         "violations": [],
         "incomplete": []
       },
       {
-        "screen": "Patients & data (confirm delete)",
+        "screen": "Patients & data (confirm delete sheet)",
         "url": "http://localhost:4173/#/data",
         "violations": [],
-        "incomplete": []
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "help": "Elements must meet minimum color contrast ratio thresholds",
+            "nodes": [
+              {
+                "target": [
+                  "p:nth-child(1)"
+                ],
+                "why": [
+                  "Element's background color could not be determined because it partially overlaps other elements"
+                ]
+              }
+            ]
+          }
+        ]
       },
       {
         "screen": "Data: Backup and export",
@@ -928,14 +1002,6 @@
             "nodes": [
               {
                 "target": [
-                  ".sheet-sub"
-                ],
-                "why": [
-                  "Element's background color could not be determined because it partially overlaps other elements"
-                ]
-              },
-              {
-                "target": [
                   ".choice:nth-child(1) > span"
                 ],
                 "why": [
@@ -953,7 +1019,7 @@
         "incomplete": []
       },
       {
-        "screen": "Scores",
+        "screen": "Scores (one period)",
         "url": "http://localhost:4173/#/scores",
         "violations": [],
         "incomplete": [
@@ -964,7 +1030,7 @@
             "nodes": [
               {
                 "target": [
-                  ".chg > span[aria-hidden=\"true\"]"
+                  "#sc-summary > ul > li:nth-child(5) > .beh-text > .beh-meta > .chg[aria-hidden=\"true\"]"
                 ],
                 "why": [
                   "Element content contains only non-text characters"
@@ -972,154 +1038,10 @@
               },
               {
                 "target": [
-                  "text[y=\"167\"][text-anchor=\"middle\"][x=\"44\"] > tspan[dy=\"0.71em\"][x=\"44\"]"
+                  "#sc-behaviors > ul > li:nth-child(5) > .beh-text > .beh-meta > .chg[aria-hidden=\"true\"]"
                 ],
                 "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"167\"][x=\"176\"][text-anchor=\"middle\"] > tspan[x=\"176\"][dy=\"0.71em\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"167\"][x=\"308\"][text-anchor=\"middle\"] > tspan[x=\"308\"][dy=\"0.71em\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"159\"][height=\"151\"][text-anchor=\"end\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element content is too short to determine if it is actual text content"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"133.83333333333334\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element content is too short to determine if it is actual text content"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"108.66666666666669\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element content is too short to determine if it is actual text content"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"83.5\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element content is too short to determine if it is actual text content"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"58.33333333333334\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element content is too short to determine if it is actual text content"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"9.75\"][height=\"151\"][text-anchor=\"end\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element content is too short to determine if it is actual text content"
-                ]
-              },
-              {
-                "target": [
-                  ".legend-item-0 > .recharts-legend-item-text"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  ".legend-item-1 > .recharts-legend-item-text"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  ".legend-item-2 > .recharts-legend-item-text"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"158\"][text-anchor=\"middle\"][x=\"44\"] > tspan[dy=\"0.71em\"][x=\"44\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"158\"][x=\"176\"][text-anchor=\"middle\"] > tspan[x=\"176\"][dy=\"0.71em\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"158\"][x=\"308\"][text-anchor=\"middle\"] > tspan[x=\"308\"][dy=\"0.71em\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"150\"][height=\"142\"][text-anchor=\"end\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"112.13333333333335\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"74.26666666666667\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"9.75\"][height=\"142\"][text-anchor=\"end\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
+                  "Element content contains only non-text characters"
                 ]
               },
               {
@@ -1188,7 +1110,7 @@
               },
               {
                 "target": [
-                  "text[y=\"170\"][x=\"28\"][height=\"162\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
+                  "text[y=\"170\"][text-anchor=\"end\"][orientation=\"left\"] > tspan[dy=\"0.355em\"][x=\"28\"]"
                 ],
                 "why": [
                   "Element content is too short to determine if it is actual text content"
@@ -1196,7 +1118,7 @@
               },
               {
                 "target": [
-                  "text[y=\"129.5\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
+                  "text[y=\"129.5\"] > tspan[dy=\"0.355em\"][x=\"28\"]"
                 ],
                 "why": [
                   "Element content is too short to determine if it is actual text content"
@@ -1204,7 +1126,7 @@
               },
               {
                 "target": [
-                  "text[y=\"89\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
+                  "text[y=\"89\"] > tspan[dy=\"0.355em\"][x=\"28\"]"
                 ],
                 "why": [
                   "Element content is too short to determine if it is actual text content"
@@ -1212,7 +1134,7 @@
               },
               {
                 "target": [
-                  "text[y=\"48.5\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
+                  "text[y=\"48.5\"] > tspan[dy=\"0.355em\"][x=\"28\"]"
                 ],
                 "why": [
                   "Element's background color could not be determined because element contains an image node"
@@ -1220,7 +1142,7 @@
               },
               {
                 "target": [
-                  "text[y=\"9.75\"][x=\"28\"][height=\"162\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
+                  "text[y=\"9.75\"] > tspan[dy=\"0.355em\"][x=\"28\"]"
                 ],
                 "why": [
                   "Element's background color could not be determined because element contains an image node"
@@ -1242,7 +1164,7 @@
             "nodes": [
               {
                 "target": [
-                  ".chg > span[aria-hidden=\"true\"]"
+                  "li:nth-child(5) > .beh-text > .beh-meta > .chg[aria-hidden=\"true\"]"
                 ],
                 "why": [
                   "Element content contains only non-text characters"
@@ -1250,154 +1172,10 @@
               },
               {
                 "target": [
-                  "text[y=\"167\"][text-anchor=\"middle\"][x=\"44\"] > tspan[dy=\"0.71em\"][x=\"44\"]"
+                  "li:nth-child(13) > .beh-text > .beh-meta > .chg[aria-hidden=\"true\"]"
                 ],
                 "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"167\"][x=\"176\"][text-anchor=\"middle\"] > tspan[x=\"176\"][dy=\"0.71em\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"167\"][x=\"308\"][text-anchor=\"middle\"] > tspan[x=\"308\"][dy=\"0.71em\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"159\"][text-anchor=\"end\"][orientation=\"left\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element content is too short to determine if it is actual text content"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"133.83333333333334\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element content is too short to determine if it is actual text content"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"108.66666666666669\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element content is too short to determine if it is actual text content"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"83.5\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element content is too short to determine if it is actual text content"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"58.33333333333334\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element content is too short to determine if it is actual text content"
-                ]
-              },
-              {
-                "target": [
-                  ".recharts-cartesian-axis-tick.recharts-layer:nth-child(6) > text[y=\"9.75\"][text-anchor=\"end\"][orientation=\"left\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element content is too short to determine if it is actual text content"
-                ]
-              },
-              {
-                "target": [
-                  ".legend-item-0 > .recharts-legend-item-text"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  ".legend-item-1 > .recharts-legend-item-text"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  ".legend-item-2 > .recharts-legend-item-text"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"158\"][text-anchor=\"middle\"][x=\"44\"] > tspan[dy=\"0.71em\"][x=\"44\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"158\"][x=\"176\"][text-anchor=\"middle\"] > tspan[x=\"176\"][dy=\"0.71em\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"158\"][x=\"308\"][text-anchor=\"middle\"] > tspan[x=\"308\"][dy=\"0.71em\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"150\"][height=\"142\"][text-anchor=\"end\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"112.13333333333335\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"74.26666666666667\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"9.75\"][height=\"142\"][text-anchor=\"end\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
+                  "Element content contains only non-text characters"
                 ]
               },
               {
@@ -1466,7 +1244,7 @@
               },
               {
                 "target": [
-                  "text[y=\"170\"][x=\"28\"][height=\"162\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
+                  "text[y=\"170\"][text-anchor=\"end\"][orientation=\"left\"] > tspan[dy=\"0.355em\"][x=\"28\"]"
                 ],
                 "why": [
                   "Element content is too short to determine if it is actual text content"
@@ -1474,7 +1252,7 @@
               },
               {
                 "target": [
-                  "text[y=\"129.5\"][x=\"28\"][height=\"162\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
+                  "text[y=\"129.5\"][text-anchor=\"end\"][orientation=\"left\"] > tspan[dy=\"0.355em\"][x=\"28\"]"
                 ],
                 "why": [
                   "Element content is too short to determine if it is actual text content"
@@ -1482,7 +1260,7 @@
               },
               {
                 "target": [
-                  "text[y=\"89\"][x=\"28\"][height=\"162\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
+                  "text[y=\"89\"][text-anchor=\"end\"][orientation=\"left\"] > tspan[dy=\"0.355em\"][x=\"28\"]"
                 ],
                 "why": [
                   "Element content is too short to determine if it is actual text content"
@@ -1490,7 +1268,7 @@
               },
               {
                 "target": [
-                  "text[y=\"48.5\"][x=\"28\"][height=\"162\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
+                  "text[y=\"48.5\"][text-anchor=\"end\"][orientation=\"left\"] > tspan[dy=\"0.355em\"][x=\"28\"]"
                 ],
                 "why": [
                   "Element's background color could not be determined because element contains an image node"
@@ -1498,7 +1276,331 @@
               },
               {
                 "target": [
-                  "text[y=\"9.75\"][x=\"28\"][height=\"162\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
+                  "text[y=\"9.75\"] > tspan[dy=\"0.355em\"][x=\"28\"]"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "screen": "Scores (period in progress)",
+        "url": "http://localhost:4173/#/scores/p4",
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "help": "Elements must meet minimum color contrast ratio thresholds",
+            "nodes": [
+              {
+                "target": [
+                  "tspan[x=\"41.833333333333336\"][dy=\"0.71em\"]"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  "tspan[x=\"76.83333333333333\"][dy=\"0.71em\"]"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  "tspan[x=\"111.83333333333333\"][dy=\"0.71em\"]"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  "tspan[x=\"146.83333333333334\"][dy=\"0.71em\"]"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  "tspan[x=\"181.83333333333334\"][dy=\"0.71em\"]"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  "tspan[x=\"216.83333333333334\"][dy=\"0.71em\"]"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  "tspan[x=\"251.83333333333334\"][dy=\"0.71em\"]"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  "tspan[x=\"286.8333333333333\"][dy=\"0.71em\"]"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  "text[y=\"170\"][text-anchor=\"end\"][orientation=\"left\"] > tspan[dy=\"0.355em\"][x=\"28\"]"
+                ],
+                "why": [
+                  "Element content is too short to determine if it is actual text content"
+                ]
+              },
+              {
+                "target": [
+                  "text[y=\"129.5\"] > tspan[dy=\"0.355em\"][x=\"28\"]"
+                ],
+                "why": [
+                  "Element content is too short to determine if it is actual text content"
+                ]
+              },
+              {
+                "target": [
+                  "text[y=\"89\"] > tspan[dy=\"0.355em\"][x=\"28\"]"
+                ],
+                "why": [
+                  "Element content is too short to determine if it is actual text content"
+                ]
+              },
+              {
+                "target": [
+                  "text[y=\"48.5\"] > tspan[dy=\"0.355em\"][x=\"28\"]"
+                ],
+                "why": [
+                  "Element content is too short to determine if it is actual text content"
+                ]
+              },
+              {
+                "target": [
+                  "text[y=\"9.75\"] > tspan[dy=\"0.355em\"][x=\"28\"]"
+                ],
+                "why": [
+                  "Element content is too short to determine if it is actual text content"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "screen": "Scores (all periods)",
+        "url": "http://localhost:4173/#/scores/all",
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "help": "Elements must meet minimum color contrast ratio thresholds",
+            "nodes": [
+              {
+                "target": [
+                  "th[scope=\"col\"]:nth-child(4) > .col-btn > .sub"
+                ],
+                "why": [
+                  "Element's background color could not be determined because it's partially obscured by another element"
+                ]
+              },
+              {
+                "target": [
+                  ".open[scope=\"col\"] > .col-btn"
+                ],
+                "why": [
+                  "Element's background color could not be determined because it's partially obscured by another element"
+                ]
+              },
+              {
+                "target": [
+                  ".open[scope=\"col\"] > .col-btn > .sub"
+                ],
+                "why": [
+                  "Element's background color could not be determined because it's partially obscured by another element"
+                ]
+              },
+              {
+                "target": [
+                  ".unlogged-row > td:nth-child(5)"
+                ],
+                "why": [
+                  "Element content is too short to determine if it is actual text content"
+                ]
+              },
+              {
+                "target": [
+                  ".chg > span[aria-hidden=\"true\"]"
+                ],
+                "why": [
+                  "Element content contains only non-text characters"
+                ]
+              },
+              {
+                "target": [
+                  ".recharts-cartesian-axis-tick.recharts-layer:nth-child(1) > text[y=\"167\"][text-anchor=\"middle\"][orientation=\"bottom\"] > tspan[dy=\"0.71em\"]"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  "text[y=\"167\"][x=\"176\"][text-anchor=\"middle\"] > tspan[x=\"176\"][dy=\"0.71em\"]"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  "text[y=\"167\"][x=\"308\"][text-anchor=\"middle\"] > tspan[x=\"308\"][dy=\"0.71em\"]"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  "text[y=\"159\"][text-anchor=\"end\"][orientation=\"left\"] > tspan[dy=\"0.355em\"]"
+                ],
+                "why": [
+                  "Element content is too short to determine if it is actual text content"
+                ]
+              },
+              {
+                "target": [
+                  "text[y=\"133.83333333333334\"] > tspan[dy=\"0.355em\"]"
+                ],
+                "why": [
+                  "Element content is too short to determine if it is actual text content"
+                ]
+              },
+              {
+                "target": [
+                  "text[y=\"108.66666666666669\"] > tspan[dy=\"0.355em\"]"
+                ],
+                "why": [
+                  "Element content is too short to determine if it is actual text content"
+                ]
+              },
+              {
+                "target": [
+                  "text[y=\"83.5\"] > tspan[dy=\"0.355em\"]"
+                ],
+                "why": [
+                  "Element content is too short to determine if it is actual text content"
+                ]
+              },
+              {
+                "target": [
+                  "text[y=\"58.33333333333334\"] > tspan[dy=\"0.355em\"]"
+                ],
+                "why": [
+                  "Element content is too short to determine if it is actual text content"
+                ]
+              },
+              {
+                "target": [
+                  "text[y=\"33.16666666666666\"] > tspan[dy=\"0.355em\"]"
+                ],
+                "why": [
+                  "Element content is too short to determine if it is actual text content"
+                ]
+              },
+              {
+                "target": [
+                  ".recharts-cartesian-axis-tick.recharts-layer:nth-child(7) > text[text-anchor=\"end\"][orientation=\"left\"][width=\"60\"] > tspan[dy=\"0.355em\"]"
+                ],
+                "why": [
+                  "Element content is too short to determine if it is actual text content"
+                ]
+              },
+              {
+                "target": [
+                  ".legend-item-0 > .recharts-legend-item-text"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  ".legend-item-1 > .recharts-legend-item-text"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  ".legend-item-2 > .recharts-legend-item-text"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  ".recharts-cartesian-axis-tick.recharts-layer:nth-child(1) > text[y=\"158\"][text-anchor=\"middle\"][orientation=\"bottom\"] > tspan[dy=\"0.71em\"]"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  "text[y=\"158\"][x=\"176\"][text-anchor=\"middle\"] > tspan[x=\"176\"][dy=\"0.71em\"]"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  "text[y=\"158\"][x=\"308\"][text-anchor=\"middle\"] > tspan[x=\"308\"][dy=\"0.71em\"]"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  "text[y=\"150\"][height=\"142\"][text-anchor=\"end\"] > tspan[dy=\"0.355em\"]"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  "text[y=\"79\"] > tspan[dy=\"0.355em\"]"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  ".recharts-cartesian-axis-tick.recharts-layer:nth-child(3) > text[height=\"142\"][text-anchor=\"end\"][orientation=\"left\"] > tspan[dy=\"0.355em\"]"
                 ],
                 "why": [
                   "Element's background color could not be determined because element contains an image node"
@@ -1515,16 +1617,62 @@
         "incomplete": []
       },
       {
+        "screen": "Day-14 review (rating sheet)",
+        "url": "http://localhost:4173/#/review",
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "help": "Elements must meet minimum color contrast ratio thresholds",
+            "nodes": [
+              {
+                "target": [
+                  ".r8"
+                ],
+                "why": [
+                  "Element content is too short to determine if it is actual text content"
+                ]
+              },
+              {
+                "target": [
+                  ".r9"
+                ],
+                "why": [
+                  "Element content is too short to determine if it is actual text content"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
         "screen": "Patients & data (with patients)",
         "url": "http://localhost:4173/#/data",
         "violations": [],
         "incomplete": []
       },
       {
-        "screen": "Patients & data (confirm delete)",
+        "screen": "Patients & data (confirm delete sheet)",
         "url": "http://localhost:4173/#/data",
         "violations": [],
-        "incomplete": []
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "help": "Elements must meet minimum color contrast ratio thresholds",
+            "nodes": [
+              {
+                "target": [
+                  "p:nth-child(1)"
+                ],
+                "why": [
+                  "Element's background color could not be determined because it partially overlaps other elements"
+                ]
+              }
+            ]
+          }
+        ]
       },
       {
         "screen": "Data: Backup and export",
@@ -1638,14 +1786,6 @@
             "nodes": [
               {
                 "target": [
-                  ".sheet-sub"
-                ],
-                "why": [
-                  "Element's background color could not be determined because it partially overlaps other elements"
-                ]
-              },
-              {
-                "target": [
                   ".choice:nth-child(1) > span"
                 ],
                 "why": [
@@ -1663,7 +1803,7 @@
         "incomplete": []
       },
       {
-        "screen": "Scores",
+        "screen": "Scores (one period)",
         "url": "http://localhost:4173/#/scores",
         "violations": [],
         "incomplete": [
@@ -1674,7 +1814,7 @@
             "nodes": [
               {
                 "target": [
-                  ".chg > span[aria-hidden=\"true\"]"
+                  "#sc-summary > ul > li:nth-child(5) > .beh-text > .beh-meta > .chg[aria-hidden=\"true\"]"
                 ],
                 "why": [
                   "Element content contains only non-text characters"
@@ -1682,154 +1822,10 @@
               },
               {
                 "target": [
-                  "text[y=\"167\"][text-anchor=\"middle\"][x=\"44\"] > tspan[dy=\"0.71em\"][x=\"44\"]"
+                  "#sc-behaviors > ul > li:nth-child(5) > .beh-text > .beh-meta > .chg[aria-hidden=\"true\"]"
                 ],
                 "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"167\"][x=\"175\"][text-anchor=\"middle\"] > tspan[x=\"175\"][dy=\"0.71em\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"167\"][x=\"306\"][text-anchor=\"middle\"] > tspan[x=\"306\"][dy=\"0.71em\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"159\"][height=\"151\"][text-anchor=\"end\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element content is too short to determine if it is actual text content"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"133.83333333333334\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element content is too short to determine if it is actual text content"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"108.66666666666669\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element content is too short to determine if it is actual text content"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"83.5\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element content is too short to determine if it is actual text content"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"58.33333333333334\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element content is too short to determine if it is actual text content"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"9.75\"][height=\"151\"][text-anchor=\"end\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element content is too short to determine if it is actual text content"
-                ]
-              },
-              {
-                "target": [
-                  ".legend-item-0 > .recharts-legend-item-text"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  ".legend-item-1 > .recharts-legend-item-text"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  ".legend-item-2 > .recharts-legend-item-text"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"158\"][text-anchor=\"middle\"][x=\"44\"] > tspan[dy=\"0.71em\"][x=\"44\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"158\"][x=\"175\"][text-anchor=\"middle\"] > tspan[x=\"175\"][dy=\"0.71em\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"158\"][x=\"306\"][text-anchor=\"middle\"] > tspan[x=\"306\"][dy=\"0.71em\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"150\"][height=\"142\"][text-anchor=\"end\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"112.13333333333335\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"74.26666666666667\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"9.75\"][height=\"142\"][text-anchor=\"end\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
+                  "Element content contains only non-text characters"
                 ]
               },
               {
@@ -1898,7 +1894,7 @@
               },
               {
                 "target": [
-                  "text[y=\"170\"][x=\"28\"][height=\"162\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
+                  "text[y=\"170\"][text-anchor=\"end\"][orientation=\"left\"] > tspan[dy=\"0.355em\"][x=\"28\"]"
                 ],
                 "why": [
                   "Element content is too short to determine if it is actual text content"
@@ -1906,7 +1902,7 @@
               },
               {
                 "target": [
-                  "text[y=\"129.5\"][x=\"28\"][height=\"162\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
+                  "text[y=\"129.5\"] > tspan[dy=\"0.355em\"][x=\"28\"]"
                 ],
                 "why": [
                   "Element content is too short to determine if it is actual text content"
@@ -1914,7 +1910,7 @@
               },
               {
                 "target": [
-                  "text[y=\"89\"][x=\"28\"][height=\"162\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
+                  "text[y=\"89\"] > tspan[dy=\"0.355em\"][x=\"28\"]"
                 ],
                 "why": [
                   "Element content is too short to determine if it is actual text content"
@@ -1922,7 +1918,7 @@
               },
               {
                 "target": [
-                  "text[y=\"48.5\"][x=\"28\"][height=\"162\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
+                  "text[y=\"48.5\"] > tspan[dy=\"0.355em\"][x=\"28\"]"
                 ],
                 "why": [
                   "Element's background color could not be determined because element contains an image node"
@@ -1930,7 +1926,7 @@
               },
               {
                 "target": [
-                  "text[y=\"9.75\"][x=\"28\"][height=\"162\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
+                  "text[y=\"9.75\"] > tspan[dy=\"0.355em\"][x=\"28\"]"
                 ],
                 "why": [
                   "Element's background color could not be determined because element contains an image node"
@@ -1952,7 +1948,7 @@
             "nodes": [
               {
                 "target": [
-                  ".chg > span[aria-hidden=\"true\"]"
+                  "li:nth-child(5) > .beh-text > .beh-meta > .chg[aria-hidden=\"true\"]"
                 ],
                 "why": [
                   "Element content contains only non-text characters"
@@ -1960,154 +1956,10 @@
               },
               {
                 "target": [
-                  "text[y=\"167\"][text-anchor=\"middle\"][x=\"44\"] > tspan[dy=\"0.71em\"][x=\"44\"]"
+                  "li:nth-child(13) > .beh-text > .beh-meta > .chg[aria-hidden=\"true\"]"
                 ],
                 "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"167\"][x=\"175\"][text-anchor=\"middle\"] > tspan[x=\"175\"][dy=\"0.71em\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"167\"][x=\"306\"][text-anchor=\"middle\"] > tspan[x=\"306\"][dy=\"0.71em\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"159\"][text-anchor=\"end\"][orientation=\"left\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element content is too short to determine if it is actual text content"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"133.83333333333334\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element content is too short to determine if it is actual text content"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"108.66666666666669\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element content is too short to determine if it is actual text content"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"83.5\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element content is too short to determine if it is actual text content"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"58.33333333333334\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element content is too short to determine if it is actual text content"
-                ]
-              },
-              {
-                "target": [
-                  ".recharts-cartesian-axis-tick.recharts-layer:nth-child(6) > text[y=\"9.75\"][text-anchor=\"end\"][orientation=\"left\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element content is too short to determine if it is actual text content"
-                ]
-              },
-              {
-                "target": [
-                  ".legend-item-0 > .recharts-legend-item-text"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  ".legend-item-1 > .recharts-legend-item-text"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  ".legend-item-2 > .recharts-legend-item-text"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"158\"][text-anchor=\"middle\"][x=\"44\"] > tspan[dy=\"0.71em\"][x=\"44\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"158\"][x=\"175\"][text-anchor=\"middle\"] > tspan[x=\"175\"][dy=\"0.71em\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"158\"][x=\"306\"][text-anchor=\"middle\"] > tspan[x=\"306\"][dy=\"0.71em\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"150\"][height=\"142\"][text-anchor=\"end\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"112.13333333333335\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"74.26666666666667\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"9.75\"][height=\"142\"][text-anchor=\"end\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
+                  "Element content contains only non-text characters"
                 ]
               },
               {
@@ -2176,7 +2028,7 @@
               },
               {
                 "target": [
-                  "text[y=\"170\"][x=\"28\"][height=\"162\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
+                  "text[y=\"170\"][text-anchor=\"end\"][orientation=\"left\"] > tspan[dy=\"0.355em\"][x=\"28\"]"
                 ],
                 "why": [
                   "Element content is too short to determine if it is actual text content"
@@ -2184,7 +2036,7 @@
               },
               {
                 "target": [
-                  "text[y=\"129.5\"][x=\"28\"][height=\"162\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
+                  "text[y=\"129.5\"][text-anchor=\"end\"][orientation=\"left\"] > tspan[dy=\"0.355em\"][x=\"28\"]"
                 ],
                 "why": [
                   "Element content is too short to determine if it is actual text content"
@@ -2192,7 +2044,7 @@
               },
               {
                 "target": [
-                  "text[y=\"89\"][x=\"28\"][height=\"162\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
+                  "text[y=\"89\"][text-anchor=\"end\"][orientation=\"left\"] > tspan[dy=\"0.355em\"][x=\"28\"]"
                 ],
                 "why": [
                   "Element content is too short to determine if it is actual text content"
@@ -2200,7 +2052,7 @@
               },
               {
                 "target": [
-                  "text[y=\"48.5\"][x=\"28\"][height=\"162\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
+                  "text[y=\"48.5\"][text-anchor=\"end\"][orientation=\"left\"] > tspan[dy=\"0.355em\"][x=\"28\"]"
                 ],
                 "why": [
                   "Element's background color could not be determined because element contains an image node"
@@ -2208,7 +2060,331 @@
               },
               {
                 "target": [
-                  "text[y=\"9.75\"][x=\"28\"][height=\"162\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
+                  "text[y=\"9.75\"] > tspan[dy=\"0.355em\"][x=\"28\"]"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "screen": "Scores (period in progress)",
+        "url": "http://localhost:4173/#/scores/p4",
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "help": "Elements must meet minimum color contrast ratio thresholds",
+            "nodes": [
+              {
+                "target": [
+                  "tspan[x=\"41.791666666666664\"][dy=\"0.71em\"]"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  "tspan[x=\"76.54166666666667\"][dy=\"0.71em\"]"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  "tspan[x=\"111.29166666666667\"][dy=\"0.71em\"]"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  "tspan[x=\"146.04166666666666\"][dy=\"0.71em\"]"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  "tspan[x=\"180.79166666666666\"][dy=\"0.71em\"]"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  "tspan[x=\"215.54166666666666\"][dy=\"0.71em\"]"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  "tspan[x=\"250.29166666666666\"][dy=\"0.71em\"]"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  "tspan[x=\"285.0416666666667\"][dy=\"0.71em\"]"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  "text[y=\"170\"][text-anchor=\"end\"][orientation=\"left\"] > tspan[dy=\"0.355em\"][x=\"28\"]"
+                ],
+                "why": [
+                  "Element content is too short to determine if it is actual text content"
+                ]
+              },
+              {
+                "target": [
+                  "text[y=\"129.5\"] > tspan[dy=\"0.355em\"][x=\"28\"]"
+                ],
+                "why": [
+                  "Element content is too short to determine if it is actual text content"
+                ]
+              },
+              {
+                "target": [
+                  "text[y=\"89\"] > tspan[dy=\"0.355em\"][x=\"28\"]"
+                ],
+                "why": [
+                  "Element content is too short to determine if it is actual text content"
+                ]
+              },
+              {
+                "target": [
+                  "text[y=\"48.5\"] > tspan[dy=\"0.355em\"][x=\"28\"]"
+                ],
+                "why": [
+                  "Element content is too short to determine if it is actual text content"
+                ]
+              },
+              {
+                "target": [
+                  "text[y=\"9.75\"] > tspan[dy=\"0.355em\"][x=\"28\"]"
+                ],
+                "why": [
+                  "Element content is too short to determine if it is actual text content"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "screen": "Scores (all periods)",
+        "url": "http://localhost:4173/#/scores/all",
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "help": "Elements must meet minimum color contrast ratio thresholds",
+            "nodes": [
+              {
+                "target": [
+                  "th[scope=\"col\"]:nth-child(4) > .col-btn > .sub"
+                ],
+                "why": [
+                  "Element's background color could not be determined because it's partially obscured by another element"
+                ]
+              },
+              {
+                "target": [
+                  ".open[scope=\"col\"] > .col-btn"
+                ],
+                "why": [
+                  "Element's background color could not be determined because it's partially obscured by another element"
+                ]
+              },
+              {
+                "target": [
+                  ".open[scope=\"col\"] > .col-btn > .sub"
+                ],
+                "why": [
+                  "Element's background color could not be determined because it's partially obscured by another element"
+                ]
+              },
+              {
+                "target": [
+                  ".unlogged-row > td:nth-child(5)"
+                ],
+                "why": [
+                  "Element content is too short to determine if it is actual text content"
+                ]
+              },
+              {
+                "target": [
+                  ".chg > span[aria-hidden=\"true\"]"
+                ],
+                "why": [
+                  "Element content contains only non-text characters"
+                ]
+              },
+              {
+                "target": [
+                  ".recharts-cartesian-axis-tick.recharts-layer:nth-child(1) > text[y=\"167\"][text-anchor=\"middle\"][orientation=\"bottom\"] > tspan[dy=\"0.71em\"]"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  "text[y=\"167\"][x=\"175\"][text-anchor=\"middle\"] > tspan[x=\"175\"][dy=\"0.71em\"]"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  "text[y=\"167\"][x=\"306\"][text-anchor=\"middle\"] > tspan[x=\"306\"][dy=\"0.71em\"]"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  "text[y=\"159\"][text-anchor=\"end\"][orientation=\"left\"] > tspan[dy=\"0.355em\"]"
+                ],
+                "why": [
+                  "Element content is too short to determine if it is actual text content"
+                ]
+              },
+              {
+                "target": [
+                  "text[y=\"133.83333333333334\"] > tspan[dy=\"0.355em\"]"
+                ],
+                "why": [
+                  "Element content is too short to determine if it is actual text content"
+                ]
+              },
+              {
+                "target": [
+                  "text[y=\"108.66666666666669\"] > tspan[dy=\"0.355em\"]"
+                ],
+                "why": [
+                  "Element content is too short to determine if it is actual text content"
+                ]
+              },
+              {
+                "target": [
+                  "text[y=\"83.5\"] > tspan[dy=\"0.355em\"]"
+                ],
+                "why": [
+                  "Element content is too short to determine if it is actual text content"
+                ]
+              },
+              {
+                "target": [
+                  "text[y=\"58.33333333333334\"] > tspan[dy=\"0.355em\"]"
+                ],
+                "why": [
+                  "Element content is too short to determine if it is actual text content"
+                ]
+              },
+              {
+                "target": [
+                  "text[y=\"33.16666666666666\"] > tspan[dy=\"0.355em\"]"
+                ],
+                "why": [
+                  "Element content is too short to determine if it is actual text content"
+                ]
+              },
+              {
+                "target": [
+                  ".recharts-cartesian-axis-tick.recharts-layer:nth-child(7) > text[text-anchor=\"end\"][orientation=\"left\"][width=\"60\"] > tspan[dy=\"0.355em\"]"
+                ],
+                "why": [
+                  "Element content is too short to determine if it is actual text content"
+                ]
+              },
+              {
+                "target": [
+                  ".legend-item-0 > .recharts-legend-item-text"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  ".legend-item-1 > .recharts-legend-item-text"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  ".legend-item-2 > .recharts-legend-item-text"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  ".recharts-cartesian-axis-tick.recharts-layer:nth-child(1) > text[y=\"158\"][text-anchor=\"middle\"][orientation=\"bottom\"] > tspan[dy=\"0.71em\"]"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  "text[y=\"158\"][x=\"175\"][text-anchor=\"middle\"] > tspan[x=\"175\"][dy=\"0.71em\"]"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  "text[y=\"158\"][x=\"306\"][text-anchor=\"middle\"] > tspan[x=\"306\"][dy=\"0.71em\"]"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  "text[y=\"150\"][height=\"142\"][text-anchor=\"end\"] > tspan[dy=\"0.355em\"]"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  "text[y=\"79\"] > tspan[dy=\"0.355em\"]"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  ".recharts-cartesian-axis-tick.recharts-layer:nth-child(3) > text[height=\"142\"][text-anchor=\"end\"][orientation=\"left\"] > tspan[dy=\"0.355em\"]"
                 ],
                 "why": [
                   "Element's background color could not be determined because element contains an image node"
@@ -2225,16 +2401,62 @@
         "incomplete": []
       },
       {
+        "screen": "Day-14 review (rating sheet)",
+        "url": "http://localhost:4173/#/review",
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "help": "Elements must meet minimum color contrast ratio thresholds",
+            "nodes": [
+              {
+                "target": [
+                  ".r8"
+                ],
+                "why": [
+                  "Element content is too short to determine if it is actual text content"
+                ]
+              },
+              {
+                "target": [
+                  ".r9"
+                ],
+                "why": [
+                  "Element content is too short to determine if it is actual text content"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
         "screen": "Patients & data (with patients)",
         "url": "http://localhost:4173/#/data",
         "violations": [],
         "incomplete": []
       },
       {
-        "screen": "Patients & data (confirm delete)",
+        "screen": "Patients & data (confirm delete sheet)",
         "url": "http://localhost:4173/#/data",
         "violations": [],
-        "incomplete": []
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "help": "Elements must meet minimum color contrast ratio thresholds",
+            "nodes": [
+              {
+                "target": [
+                  "p:nth-child(1)"
+                ],
+                "why": [
+                  "Element's background color could not be determined because it partially overlaps other elements"
+                ]
+              }
+            ]
+          }
+        ]
       },
       {
         "screen": "Data: Backup and export",
@@ -2348,14 +2570,6 @@
             "nodes": [
               {
                 "target": [
-                  ".sheet-sub"
-                ],
-                "why": [
-                  "Element's background color could not be determined because it partially overlaps other elements"
-                ]
-              },
-              {
-                "target": [
                   ".choice:nth-child(1) > span"
                 ],
                 "why": [
@@ -2373,7 +2587,7 @@
         "incomplete": []
       },
       {
-        "screen": "Scores",
+        "screen": "Scores (one period)",
         "url": "http://localhost:4173/#/scores",
         "violations": [],
         "incomplete": [
@@ -2384,7 +2598,7 @@
             "nodes": [
               {
                 "target": [
-                  ".chg > span[aria-hidden=\"true\"]"
+                  "#sc-summary > ul > li:nth-child(5) > .beh-text > .beh-meta > .chg[aria-hidden=\"true\"]"
                 ],
                 "why": [
                   "Element content contains only non-text characters"
@@ -2392,154 +2606,10 @@
               },
               {
                 "target": [
-                  "text[y=\"167\"][text-anchor=\"middle\"][x=\"44\"] > tspan[dy=\"0.71em\"][x=\"44\"]"
+                  "#sc-behaviors > ul > li:nth-child(5) > .beh-text > .beh-meta > .chg[aria-hidden=\"true\"]"
                 ],
                 "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"167\"][x=\"175\"][text-anchor=\"middle\"] > tspan[x=\"175\"][dy=\"0.71em\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"167\"][x=\"306\"][text-anchor=\"middle\"] > tspan[x=\"306\"][dy=\"0.71em\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"159\"][height=\"151\"][text-anchor=\"end\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element content is too short to determine if it is actual text content"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"133.83333333333334\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element content is too short to determine if it is actual text content"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"108.66666666666669\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element content is too short to determine if it is actual text content"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"83.5\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element content is too short to determine if it is actual text content"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"58.33333333333334\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element content is too short to determine if it is actual text content"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"9.75\"][height=\"151\"][text-anchor=\"end\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element content is too short to determine if it is actual text content"
-                ]
-              },
-              {
-                "target": [
-                  ".legend-item-0 > .recharts-legend-item-text"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  ".legend-item-1 > .recharts-legend-item-text"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  ".legend-item-2 > .recharts-legend-item-text"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"158\"][text-anchor=\"middle\"][x=\"44\"] > tspan[dy=\"0.71em\"][x=\"44\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"158\"][x=\"175\"][text-anchor=\"middle\"] > tspan[x=\"175\"][dy=\"0.71em\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"158\"][x=\"306\"][text-anchor=\"middle\"] > tspan[x=\"306\"][dy=\"0.71em\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"150\"][height=\"142\"][text-anchor=\"end\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"112.13333333333335\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"74.26666666666667\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"9.75\"][height=\"142\"][text-anchor=\"end\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
+                  "Element content contains only non-text characters"
                 ]
               },
               {
@@ -2608,7 +2678,7 @@
               },
               {
                 "target": [
-                  "text[y=\"170\"][x=\"28\"][height=\"162\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
+                  "text[y=\"170\"][text-anchor=\"end\"][orientation=\"left\"] > tspan[dy=\"0.355em\"][x=\"28\"]"
                 ],
                 "why": [
                   "Element content is too short to determine if it is actual text content"
@@ -2616,7 +2686,7 @@
               },
               {
                 "target": [
-                  "text[y=\"129.5\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
+                  "text[y=\"129.5\"] > tspan[dy=\"0.355em\"][x=\"28\"]"
                 ],
                 "why": [
                   "Element content is too short to determine if it is actual text content"
@@ -2624,7 +2694,7 @@
               },
               {
                 "target": [
-                  "text[y=\"89\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
+                  "text[y=\"89\"] > tspan[dy=\"0.355em\"][x=\"28\"]"
                 ],
                 "why": [
                   "Element content is too short to determine if it is actual text content"
@@ -2632,7 +2702,7 @@
               },
               {
                 "target": [
-                  "text[y=\"48.5\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
+                  "text[y=\"48.5\"] > tspan[dy=\"0.355em\"][x=\"28\"]"
                 ],
                 "why": [
                   "Element's background color could not be determined because element contains an image node"
@@ -2640,7 +2710,7 @@
               },
               {
                 "target": [
-                  "text[y=\"9.75\"][x=\"28\"][height=\"162\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
+                  "text[y=\"9.75\"] > tspan[dy=\"0.355em\"][x=\"28\"]"
                 ],
                 "why": [
                   "Element's background color could not be determined because element contains an image node"
@@ -2662,7 +2732,7 @@
             "nodes": [
               {
                 "target": [
-                  ".chg > span[aria-hidden=\"true\"]"
+                  "li:nth-child(5) > .beh-text > .beh-meta > .chg[aria-hidden=\"true\"]"
                 ],
                 "why": [
                   "Element content contains only non-text characters"
@@ -2670,154 +2740,10 @@
               },
               {
                 "target": [
-                  "text[y=\"167\"][text-anchor=\"middle\"][x=\"44\"] > tspan[dy=\"0.71em\"][x=\"44\"]"
+                  "li:nth-child(13) > .beh-text > .beh-meta > .chg[aria-hidden=\"true\"]"
                 ],
                 "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"167\"][x=\"175\"][text-anchor=\"middle\"] > tspan[x=\"175\"][dy=\"0.71em\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"167\"][x=\"306\"][text-anchor=\"middle\"] > tspan[x=\"306\"][dy=\"0.71em\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"159\"][text-anchor=\"end\"][orientation=\"left\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element content is too short to determine if it is actual text content"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"133.83333333333334\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element content is too short to determine if it is actual text content"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"108.66666666666669\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element content is too short to determine if it is actual text content"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"83.5\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element content is too short to determine if it is actual text content"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"58.33333333333334\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element content is too short to determine if it is actual text content"
-                ]
-              },
-              {
-                "target": [
-                  ".recharts-cartesian-axis-tick.recharts-layer:nth-child(6) > text[y=\"9.75\"][text-anchor=\"end\"][orientation=\"left\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element content is too short to determine if it is actual text content"
-                ]
-              },
-              {
-                "target": [
-                  ".legend-item-0 > .recharts-legend-item-text"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  ".legend-item-1 > .recharts-legend-item-text"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  ".legend-item-2 > .recharts-legend-item-text"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"158\"][text-anchor=\"middle\"][x=\"44\"] > tspan[dy=\"0.71em\"][x=\"44\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"158\"][x=\"175\"][text-anchor=\"middle\"] > tspan[x=\"175\"][dy=\"0.71em\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"158\"][x=\"306\"][text-anchor=\"middle\"] > tspan[x=\"306\"][dy=\"0.71em\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"150\"][height=\"142\"][text-anchor=\"end\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"112.13333333333335\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"74.26666666666667\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
-                ]
-              },
-              {
-                "target": [
-                  "text[y=\"9.75\"][height=\"142\"][text-anchor=\"end\"] > tspan[dy=\"0.355em\"][x=\"36\"]"
-                ],
-                "why": [
-                  "Element's background color could not be determined because element contains an image node"
+                  "Element content contains only non-text characters"
                 ]
               },
               {
@@ -2886,7 +2812,7 @@
               },
               {
                 "target": [
-                  "text[y=\"170\"][x=\"28\"][height=\"162\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
+                  "text[y=\"170\"][text-anchor=\"end\"][orientation=\"left\"] > tspan[dy=\"0.355em\"][x=\"28\"]"
                 ],
                 "why": [
                   "Element content is too short to determine if it is actual text content"
@@ -2894,7 +2820,7 @@
               },
               {
                 "target": [
-                  "text[y=\"129.5\"][x=\"28\"][height=\"162\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
+                  "text[y=\"129.5\"][text-anchor=\"end\"][orientation=\"left\"] > tspan[dy=\"0.355em\"][x=\"28\"]"
                 ],
                 "why": [
                   "Element content is too short to determine if it is actual text content"
@@ -2902,7 +2828,7 @@
               },
               {
                 "target": [
-                  "text[y=\"89\"][x=\"28\"][height=\"162\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
+                  "text[y=\"89\"][text-anchor=\"end\"][orientation=\"left\"] > tspan[dy=\"0.355em\"][x=\"28\"]"
                 ],
                 "why": [
                   "Element content is too short to determine if it is actual text content"
@@ -2910,7 +2836,7 @@
               },
               {
                 "target": [
-                  "text[y=\"48.5\"][x=\"28\"][height=\"162\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
+                  "text[y=\"48.5\"][text-anchor=\"end\"][orientation=\"left\"] > tspan[dy=\"0.355em\"][x=\"28\"]"
                 ],
                 "why": [
                   "Element's background color could not be determined because element contains an image node"
@@ -2918,7 +2844,331 @@
               },
               {
                 "target": [
-                  "text[y=\"9.75\"][x=\"28\"][height=\"162\"] > tspan[x=\"28\"][dy=\"0.355em\"]"
+                  "text[y=\"9.75\"] > tspan[dy=\"0.355em\"][x=\"28\"]"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "screen": "Scores (period in progress)",
+        "url": "http://localhost:4173/#/scores/p4",
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "help": "Elements must meet minimum color contrast ratio thresholds",
+            "nodes": [
+              {
+                "target": [
+                  "tspan[x=\"41.791666666666664\"][dy=\"0.71em\"]"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  "tspan[x=\"76.54166666666667\"][dy=\"0.71em\"]"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  "tspan[x=\"111.29166666666667\"][dy=\"0.71em\"]"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  "tspan[x=\"146.04166666666666\"][dy=\"0.71em\"]"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  "tspan[x=\"180.79166666666666\"][dy=\"0.71em\"]"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  "tspan[x=\"215.54166666666666\"][dy=\"0.71em\"]"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  "tspan[x=\"250.29166666666666\"][dy=\"0.71em\"]"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  "tspan[x=\"285.0416666666667\"][dy=\"0.71em\"]"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  "text[y=\"170\"][text-anchor=\"end\"][orientation=\"left\"] > tspan[dy=\"0.355em\"][x=\"28\"]"
+                ],
+                "why": [
+                  "Element content is too short to determine if it is actual text content"
+                ]
+              },
+              {
+                "target": [
+                  "text[y=\"129.5\"][text-anchor=\"end\"][orientation=\"left\"] > tspan[dy=\"0.355em\"][x=\"28\"]"
+                ],
+                "why": [
+                  "Element content is too short to determine if it is actual text content"
+                ]
+              },
+              {
+                "target": [
+                  "text[y=\"89\"] > tspan[dy=\"0.355em\"][x=\"28\"]"
+                ],
+                "why": [
+                  "Element content is too short to determine if it is actual text content"
+                ]
+              },
+              {
+                "target": [
+                  "text[y=\"48.5\"] > tspan[dy=\"0.355em\"][x=\"28\"]"
+                ],
+                "why": [
+                  "Element content is too short to determine if it is actual text content"
+                ]
+              },
+              {
+                "target": [
+                  "text[y=\"9.75\"] > tspan[dy=\"0.355em\"][x=\"28\"]"
+                ],
+                "why": [
+                  "Element content is too short to determine if it is actual text content"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "screen": "Scores (all periods)",
+        "url": "http://localhost:4173/#/scores/all",
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "help": "Elements must meet minimum color contrast ratio thresholds",
+            "nodes": [
+              {
+                "target": [
+                  "th[scope=\"col\"]:nth-child(4) > .col-btn > .sub"
+                ],
+                "why": [
+                  "Element's background color could not be determined because it's partially obscured by another element"
+                ]
+              },
+              {
+                "target": [
+                  ".open[scope=\"col\"] > .col-btn"
+                ],
+                "why": [
+                  "Element's background color could not be determined because it's partially obscured by another element"
+                ]
+              },
+              {
+                "target": [
+                  ".open[scope=\"col\"] > .col-btn > .sub"
+                ],
+                "why": [
+                  "Element's background color could not be determined because it's partially obscured by another element"
+                ]
+              },
+              {
+                "target": [
+                  ".unlogged-row > td:nth-child(5)"
+                ],
+                "why": [
+                  "Element content is too short to determine if it is actual text content"
+                ]
+              },
+              {
+                "target": [
+                  ".chg > span[aria-hidden=\"true\"]"
+                ],
+                "why": [
+                  "Element content contains only non-text characters"
+                ]
+              },
+              {
+                "target": [
+                  ".recharts-cartesian-axis-tick.recharts-layer:nth-child(1) > text[y=\"167\"][text-anchor=\"middle\"][orientation=\"bottom\"] > tspan[dy=\"0.71em\"]"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  "text[y=\"167\"][x=\"175\"][text-anchor=\"middle\"] > tspan[x=\"175\"][dy=\"0.71em\"]"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  "text[y=\"167\"][x=\"306\"][text-anchor=\"middle\"] > tspan[x=\"306\"][dy=\"0.71em\"]"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  "text[y=\"159\"][text-anchor=\"end\"][orientation=\"left\"] > tspan[dy=\"0.355em\"]"
+                ],
+                "why": [
+                  "Element content is too short to determine if it is actual text content"
+                ]
+              },
+              {
+                "target": [
+                  "text[y=\"133.83333333333334\"] > tspan[dy=\"0.355em\"]"
+                ],
+                "why": [
+                  "Element content is too short to determine if it is actual text content"
+                ]
+              },
+              {
+                "target": [
+                  "text[y=\"108.66666666666669\"] > tspan[dy=\"0.355em\"]"
+                ],
+                "why": [
+                  "Element content is too short to determine if it is actual text content"
+                ]
+              },
+              {
+                "target": [
+                  "text[y=\"83.5\"] > tspan[dy=\"0.355em\"]"
+                ],
+                "why": [
+                  "Element content is too short to determine if it is actual text content"
+                ]
+              },
+              {
+                "target": [
+                  "text[y=\"58.33333333333334\"] > tspan[dy=\"0.355em\"]"
+                ],
+                "why": [
+                  "Element content is too short to determine if it is actual text content"
+                ]
+              },
+              {
+                "target": [
+                  "text[y=\"33.16666666666666\"] > tspan[dy=\"0.355em\"]"
+                ],
+                "why": [
+                  "Element content is too short to determine if it is actual text content"
+                ]
+              },
+              {
+                "target": [
+                  ".recharts-cartesian-axis-tick.recharts-layer:nth-child(7) > text[text-anchor=\"end\"][orientation=\"left\"][width=\"60\"] > tspan[dy=\"0.355em\"]"
+                ],
+                "why": [
+                  "Element content is too short to determine if it is actual text content"
+                ]
+              },
+              {
+                "target": [
+                  ".legend-item-0 > .recharts-legend-item-text"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  ".legend-item-1 > .recharts-legend-item-text"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  ".legend-item-2 > .recharts-legend-item-text"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  ".recharts-cartesian-axis-tick.recharts-layer:nth-child(1) > text[y=\"158\"][text-anchor=\"middle\"][orientation=\"bottom\"] > tspan[dy=\"0.71em\"]"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  "text[y=\"158\"][x=\"175\"][text-anchor=\"middle\"] > tspan[x=\"175\"][dy=\"0.71em\"]"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  "text[y=\"158\"][x=\"306\"][text-anchor=\"middle\"] > tspan[x=\"306\"][dy=\"0.71em\"]"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  "text[y=\"150\"][height=\"142\"][text-anchor=\"end\"] > tspan[dy=\"0.355em\"]"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  "text[y=\"79\"] > tspan[dy=\"0.355em\"]"
+                ],
+                "why": [
+                  "Element's background color could not be determined because element contains an image node"
+                ]
+              },
+              {
+                "target": [
+                  ".recharts-cartesian-axis-tick.recharts-layer:nth-child(3) > text[height=\"142\"][text-anchor=\"end\"][orientation=\"left\"] > tspan[dy=\"0.355em\"]"
                 ],
                 "why": [
                   "Element's background color could not be determined because element contains an image node"
@@ -2935,16 +3185,62 @@
         "incomplete": []
       },
       {
+        "screen": "Day-14 review (rating sheet)",
+        "url": "http://localhost:4173/#/review",
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "help": "Elements must meet minimum color contrast ratio thresholds",
+            "nodes": [
+              {
+                "target": [
+                  ".r8"
+                ],
+                "why": [
+                  "Element content is too short to determine if it is actual text content"
+                ]
+              },
+              {
+                "target": [
+                  ".r9"
+                ],
+                "why": [
+                  "Element content is too short to determine if it is actual text content"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
         "screen": "Patients & data (with patients)",
         "url": "http://localhost:4173/#/data",
         "violations": [],
         "incomplete": []
       },
       {
-        "screen": "Patients & data (confirm delete)",
+        "screen": "Patients & data (confirm delete sheet)",
         "url": "http://localhost:4173/#/data",
         "violations": [],
-        "incomplete": []
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "help": "Elements must meet minimum color contrast ratio thresholds",
+            "nodes": [
+              {
+                "target": [
+                  "p:nth-child(1)"
+                ],
+                "why": [
+                  "Element's background color could not be determined because it partially overlaps other elements"
+                ]
+              }
+            ]
+          }
+        ]
       },
       {
         "screen": "Data: Backup and export",

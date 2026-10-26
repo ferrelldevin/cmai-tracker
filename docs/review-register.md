@@ -62,6 +62,7 @@ Each check is done by someone or something other than the author.
 | V-07 | Other platform builds pass the same `docs/test-cases.json` | Same ratings on every case | `docs/test-cases.json` | Other candidates' apps | G1 | Open |
 | V-08 | Literature recall against a published review | Misses reported | Möhler 2023 Cochrane: 0 of 11 caught (map was scoped to the app's questions) | Published review | G1 | Done (a gap, reported) |
 | V-09 | Five-person usability test with SUS | SUS 68+ (industry average) | `docs/usability/` | Caregivers or nurses | G1 | Deferred (P-06) |
+| V-12 | Scores by period: 5-second test and first-click test with a nurse or caregiver. Show a finished period for 5 seconds, then ask "Is this patient agitated, and what got worse?" First-click tasks: find last period's pacing count; see all periods; which group is agitated | Correct answer after 5 seconds; first click right on each task | Script in design note 006; no session run yet | A nurse or caregiver | G0 | Open |
 | V-11 | Back-swipe on a real iPhone Home Screen app: from a Data page (such as Display), swipe back | Returns to the Data hub, and a second swipe does not reopen the page | `e2e/navigation.cjs` passes in Chromium. Devin, 2026-10-23, on his iPhone: "When swiping page navigates to the previous page". Returning to the previous page is confirmed; that a second swipe does not reopen the Data page was not itemized (covered in Chromium only) | Devin | G0 | Passed (2026-10-23) |
 | V-10 | End-to-end check of the production build in headless Chromium at phone size: load demo data, log, undo, Scores, Day-14 review, export, reload, then reload offline | Every step works and the console has no errors | Run on 2026-10-23 | Script | G0 | Done |
 
@@ -90,6 +91,8 @@ Each one waits on a lab decision or on V-01. Severity comes from the heuristic r
 | F-17 | Patients card: labeled code field with an "e.g." example and a clear empty-field message; delete confirm moves to the shared bottom sheet (Cancel, then Delete); teal focus style on text fields; old messages clear | Devin's iPhone screenshots, 2026-10-24: placeholder looked typed in, yellow ring stuck on Cancel and the field, cramped inline confirm, "Deleted" message stayed (design note 004) | none | Verified on iPhone (2026-10-26) |
 | F-18 | App-wide sweep: Review rows with rating colors and a rating sheet instead of 29 native menus; period chips on Review; chart axes show every tick on round numbers; patient rows on a fixed grid; backup page in two labeled groups; Data page messages clear on leaving | Devin, 2026-10-25: find and fix other cases like F-17; screenshot tour of every screen (design note 005) | none | Verified on iPhone (2026-10-26) |
 | F-19 | Sheets sit above the on-screen keyboard and keep the focused field in view | Devin's iPhone test, 2026-10-26: choosing Other opened the keyboard but the note field was hidden behind it (note 003 follow-up) | none | Built (2026-10-26) |
+| F-20 | Scores by period: one period per view with a summary on top (status, most frequent behaviors with change since last period, coverage, review state); period in the URL; all periods on their own page | Devin, 2026-10-26: show what is needed first, one period at a time; the period chips only scoped two of five sections (design note 006) | none | Built (2026-10-26) |
+| F-21 | Patient banner, time pill and Review section chips: accessible names that start with their visible text | axe-core 4.14 adds `label-content-name-mismatch` (WCAG 2.5.3) and flags these on main; the repo's pinned axe 4.10.3 does not | none | Open (follow-up) |
 
 ## Decision log
 
@@ -97,6 +100,7 @@ Newest first. Every rule change and every sign-off goes here, with who and when.
 
 | Date | Change | By | Approved by |
 |---|---|---|---|
+| 2026-10-26 | Scores by period (F-20, design note 006): one period per view, summary first, `#/scores/p<n>` and `#/scores/all` routes, Scores waits for a switched patient's data. Same engine and change rule | Devin | n/a (no scoring change) |
 | 2026-10-26 | Sheets follow the keyboard (F-19): `visualViewport` sets the sheet's bottom offset and height while it is open | Devin | n/a (no scoring change) |
 | 2026-10-25 | App sweep (F-18, design note 005): Review ratings picked in a sheet instead of native selects (same review records, no scoring change); chart axis ticks fixed; patient rows, backup page and Data messages tidied | Devin | n/a (no scoring change) |
 | 2026-10-25 | Patients card (F-17, design note 004): delete confirmation uses the shared Sheet; text-field focus becomes a teal outline and halo outside high contrast; empty Add gets its own message | Devin | n/a (no scoring change) |

@@ -448,3 +448,44 @@ button.text-quiet { background: transparent; color: var(--accent-ink); border: 0
   .heat td { border: 1px solid CanvasText; }
   .avatar { forced-color-adjust: none; }
 }
+
+/* Scores by period (design note 006) */
+.period-step { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: var(--s2); margin-top: var(--s3); }
+.icon-btn { min-width: 44px; min-height: 44px; padding: 0; justify-content: center; }
+.icon-btn:disabled { opacity: 0.4; }
+.period-step-label { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: center; column-gap: var(--s2); text-align: center; }
+.period-step-label b { font-size: var(--fs-lg); }
+.period-step-label .tag { background: var(--attn-soft); color: var(--attn); margin-left: 0; }
+.period-step-label .muted { flex-basis: 100%; font-variant-numeric: tabular-nums; }
+.period-sub { display: flex; align-items: center; justify-content: space-between; gap: var(--s2); margin: var(--s1) 0 var(--s2); }
+.period-sub .muted { margin: 0; }
+.period-sub button, .card > button.small { gap: 4px; }
+.sub-h { font-size: var(--fs-md); margin: var(--s4) 0 var(--s2); }
+.beh-list { list-style: none; margin: var(--s2) 0 var(--s3); padding: 0; display: grid; gap: var(--s1); }
+.beh { display: flex; align-items: center; gap: var(--s3); padding: var(--s2) 0; border-bottom: 1px solid var(--rule); }
+.beh:last-child { border-bottom: 0; }
+.beh-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.beh-name { font-weight: 700; }
+.beh-meta { font-size: var(--fs-sm); color: var(--text-muted); font-variant-numeric: tabular-nums; }
+.beh-meta .chg { color: var(--accent-ink); }
+.beh-meta .chg.up { color: var(--attn); }
+.coverage { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s2); margin: var(--s3) 0 0; }
+.coverage div { background: var(--surface-2); border: 1px solid var(--rule); border-radius: var(--radius-sm); padding: var(--s2) var(--s3); }
+.coverage dt { font-size: var(--fs-xs); color: var(--text-muted); }
+.coverage dd { margin: 2px 0 0; font-weight: 700; font-variant-numeric: tabular-nums; }
+@media (max-width: 420px) { .coverage { grid-template-columns: 1fr; } .coverage div { display: flex; justify-content: space-between; align-items: baseline; gap: var(--s2); } .coverage dd { margin: 0; text-align: right; } }
+.card > .note + button, .card > .coverage + button, .card > dl + .note + button { margin-top: var(--s3); }
+.compare { width: 100%; border-collapse: collapse; margin: var(--s3) 0; font-variant-numeric: tabular-nums; }
+.compare th, .compare td { padding: var(--s2); border-bottom: 1px solid var(--rule); text-align: right; }
+.compare th[scope="row"], .compare thead th:first-child { text-align: left; font-weight: 600; }
+.compare thead th { font-size: var(--fs-xs); color: var(--text-muted); }
+.big-num { font-size: var(--fs-xl); font-weight: 700; margin: var(--s2) 0; font-variant-numeric: tabular-nums; }
+.big-num .muted { font-weight: 400; }
+.heat thead th.open { font-style: italic; }
+.col-btn { min-height: 44px; min-width: 54px; white-space: nowrap; padding: 2px 6px; flex-direction: column; background: transparent; border-color: transparent; color: var(--accent-ink); font-size: var(--fs-xs); font-weight: 700; text-decoration: underline; text-underline-offset: 2px; }
+@media (hover: hover) { .col-btn:hover { background: var(--hover); } }
+/* Three status tiles side by side, so the period's behaviors start above the fold on a phone. */
+.status-row.compact { grid-template-columns: repeat(3, 1fr); }
+.status-row.compact .status { grid-template-columns: 1fr; row-gap: 2px; align-content: start; padding: var(--s2); font-size: var(--fs-xs); }
+.status-row.compact .status b { font-size: var(--fs-sm); line-height: 1.25; }
+.status-row.compact .status-state { grid-column: 1; text-align: left; }

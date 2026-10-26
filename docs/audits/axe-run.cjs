@@ -53,10 +53,16 @@ async function scan(page, name, results) {
     await scan(page, "Patient switcher (sheet open)", results);
     await page.keyboard.press("Escape");
     await page.getByRole("button", { name: "Scores" }).click();
-    await page.getByText("Each behavior, period by period").waitFor();
-    await scan(page, "Scores", results);
+    await page.getByText(/^Period \d+ at a glance/).waitFor();
+    await scan(page, "Scores (one period)", results);
     await page.getByRole("button", { name: "Show all 29 behaviors" }).click();
     await scan(page, "Scores (all 29 behaviors)", results);
+    await page.getByRole("button", { name: "Next period" }).click();
+    await page.getByText("Still in progress").waitFor();
+    await scan(page, "Scores (period in progress)", results);
+    await page.getByRole("button", { name: /^All periods/ }).click();
+    await page.getByText("Each behavior, period by period").waitFor();
+    await scan(page, "Scores (all periods)", results);
     await page.getByRole("button", { name: /^Day-14 review/ }).click();
     await scan(page, "Day-14 review", results);
     await page.getByRole("button", { name: /^3\. Spitting/ }).click();

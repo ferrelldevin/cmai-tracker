@@ -37,8 +37,8 @@ const ok = (c, m) => { if (!c) throw new Error("FAIL: " + m); console.log("  ok"
   // Scores
   await tab(/scores/i); await p.waitForTimeout(600);
   ok(p.url().endsWith("#/scores"), "Scores in URL");
-  await p.locator('nav[aria-label="Jump to a chart"] a', { hasText: "Total" }).click(); await p.waitForTimeout(900);
-  ok(await active("Jump to a chart") === "Total", "Scores: jump to Total");
+  await p.locator('nav[aria-label="Jump to a section"] a', { hasText: "Total" }).click(); await p.waitForTimeout(900);
+  ok(await active("Jump to a section") === "Total", "Scores: jump to Total");
   await shot("05-scores-total");
   await p.reload(); await p.waitForTimeout(800);
   ok(p.url().endsWith("#/scores") && (await p.locator("nav.tabs button.on").textContent()).includes("Scores"), "reload stays on Scores");
