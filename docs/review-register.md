@@ -93,6 +93,14 @@ Each one waits on a lab decision or on V-01. Severity comes from the heuristic r
 
 ## Decision log
 
+### Scores period revision · F-20 · 2026-10-26
+
+Implemented on a review branch: one selected period scopes totals, behaviors, status, group values, coverage and hourly counts; totals and behavior scores appear near the top. History is explicitly opened and compares finished periods only. No scoring rule or storage schema changed. [Design note](design/notes/006-scores-by-period.md), [verification](design/scores-period-verification.md). Operator review and merge pending; representative-caregiver usability remains unverified (V-09). A fresh full-app axe run found existing label/name mismatches outside Scores; the same findings were reproduced on baseline. Scores has zero violations in all four modes.
+
+| Date | Change | By | Approved by |
+|---|---|---|---|
+| 2026-10-26 | Period-specific Scores overview (F-20): total and behavior scores first, counts and review sources visible, supporting data scoped to the same range, finished history disclosed separately | Codex, at operator request | Pending operator review; no scoring change |
+
 Newest first. Every rule change and every sign-off goes here, with who and when.
 
 | Date | Change | By | Approved by |

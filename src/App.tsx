@@ -120,16 +120,19 @@ export default function App() {
           <button
             className={switched ? "pt-banner switched" : "pt-banner"}
             aria-haspopup="dialog"
-            aria-label={`Patient ${current.id}${current.demo ? " (demo)" : ""}, ${periodLine}. Choose patient`}
+            aria-label={tab === "scores"
+              ? undefined
+              : `Patient ${current.id}${current.demo ? " (demo)" : ""}, ${periodLine}. Choose patient`}
             onClick={(e) => { setChoosingByKey(e.detail === 0); setChoosing(true); }}
           >
             <PatientAvatar id={current.id} />
             <span className="pt-id">
               <b>{current.id}</b>
               {current.demo && <span className="tag">demo</span>}
-              <span className="pt-meta">{periodLine}</span>
+              <span className="pt-meta">{tab === "scores" ? "Current: " : ""}{periodLine}</span>
             </span>
             <span className="pt-switch-hint" aria-hidden>{patients.length > 1 ? "Switch" : "Patients"} <Icon name="chevron" size={18} /></span>
+            {tab === "scores" && <span className="sr">Choose patient</span>}
           </button>
           <p className={notice ? "switch-notice on" : "switch-notice"} role="status">
             {notice && <><Icon name="check" size={16} /> {notice}</>}
@@ -162,7 +165,8 @@ export default function App() {
         ) : shown === "log" ? (
           <LogScreen patientId={patientId!} observations={observations} checkins={checkins} onChange={refresh} />
         ) : shown === "scores" ? (
-          <ScoresScreen key={patientId} windows={windows} observations={observations} onLog={() => setTab("log")} />
+          loaded && !error ? <ScoresScreen key={patientId} patientId={patientId!} windows={windows} observations={observations} hasActivity={observations.length > 0 || checkins.length > 0} onLog={() => setTab("log")} />
+            : <div className="loading" role="status">{error ? "Scores are unavailable while saved data cannot be read." : "Loading scores…"}</div>
         ) : (
           <ReviewScreen key={patientId} patientId={patientId!} windows={windows} onChange={refresh} />
         )}

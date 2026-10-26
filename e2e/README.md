@@ -14,3 +14,5 @@ node docs/audits/axe-run.cjs http://localhost:4173/ docs/audits/axe-wcag22aa.jso
 ```
 
 Set `CHROME` to a Chromium binary if Playwright's own browser is not installed. Each script prints one `ok` line per check, saves screenshots to the output folder, and exits non-zero on the first failure.
+
+`node e2e/scores-period.cjs http://localhost:4173/ docs/design/screens` checks hand-expected fictional period totals, boundary logs, review overrides, special codes, quiet-day coverage, patient isolation, period persistence, history, phone layout, all four accessibility modes and offline reload. It requires the same Playwright and axe-core tools above. It creates its own isolated browser context and does not read real patient records.
