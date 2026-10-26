@@ -6,6 +6,13 @@ const ok = (c, m) => { if (!c) throw new Error("FAIL: " + m); console.log("  ok"
 (async () => {
   const b = await chromium.launch({ executablePath: process.env.CHROME || undefined });
   const ctx = await b.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, hasTouch: true });
+  // A stand-in for iOS's visualViewport, so a test can raise and lower a keyboard.
+  await ctx.addInitScript(() => {
+    const vv = new EventTarget();
+    Object.assign(vv, { width: innerWidth, height: innerHeight, offsetTop: 0, offsetLeft: 0, pageTop: 0, scale: 1 });
+    Object.defineProperty(window, "visualViewport", { value: vv });
+    window.__keyboard = (kb) => { vv.height = innerHeight - kb; vv.dispatchEvent(new Event("resize")); };
+  });
   const p = await ctx.newPage();
   const errs = []; p.on("pageerror", (e) => errs.push(e.message)); p.on("console", (m) => m.type() === "error" && errs.push(m.text()));
   await p.goto(URL);
@@ -35,6 +42,17 @@ const ok = (c, m) => { if (!c) throw new Error("FAIL: " + m); console.log("  ok"
   ok(await note.evaluate((el) => el === document.activeElement), "the note field takes focus so the keyboard opens");
   const nb = await note.boundingBox(), fb = await sheet.locator(".sheet-footer").boundingBox();
   ok(nb.y + nb.height <= fb.y + 1, "the note field is scrolled clear of the action row");
+  // The iPhone keyboard shrinks only the visible area (F-19): the sheet must sit above it with the note in view.
+  const KB = 336, H = 844;
+  await p.evaluate((kb) => window.__keyboard(kb), KB); await p.waitForTimeout(250);
+  const bodyBox = await sheet.locator(".sheet-body").boundingBox(), nk = await note.boundingBox(), fk = await sheet.locator(".sheet-footer").boundingBox();
+  ok(bodyBox.y + bodyBox.height <= H - KB + 1, "with the keyboard up, the sheet sits on top of it");
+  ok(bodyBox.y >= 0, "and still fits on screen");
+  ok(nk.y >= 0 && nk.y + nk.height <= fk.y + 1, "the note field stays in view above the action row");
+  await p.screenshot({ path: `${OUT}/sheet-keyboard.png` });
+  await p.evaluate(() => window.__keyboard(0)); await p.waitForTimeout(250);
+  const back = await sheet.locator(".sheet-body").boundingBox();
+  ok(Math.abs(back.y + back.height - H) <= 1, "with the keyboard down, the sheet returns to the bottom");
   await note.fill("fire alarm test");
   await p.screenshot({ path: `${OUT}/sheet-other-note.png` });
 

@@ -89,3 +89,23 @@ Devin tested the merged sheet on his iPhone and found three problems:
 - `e2e/sheet.cjs`: 17 checks (scroll lock, drag and flick, spring-back, note flow, pill).
 - `tests/manage.test.ts`: the note survives a restore and appears in the CSV.
 - axe: 72 scans, 0 violations, now including the note field.
+
+## Follow-up, 2026-10-26: the keyboard covered the note (F-19)
+**Problem.** On his iPhone, Devin tapped Other in Log details. The keyboard opened, but the "What happened?" field stayed hidden behind it. iOS Safari does not resize the page for the keyboard: it shrinks only the *visual* viewport. A dialog pinned to the bottom of the page therefore stays where it was, under the keyboard. The scroll-into-view from F-16 worked out where the field was, but it measured against the full screen.
+
+**Fix.** It is in the shared `Sheet.tsx`, so every sheet gets it.
+- While a sheet is open, it listens to `visualViewport` resize and scroll events.
+- It writes the keyboard's height (`--kb`) and the visible height (`--vvh`) onto the dialog:
+  - the sheet's bottom margin becomes `--kb`, so it sits right on the keyboard;
+  - its maximum height becomes `--vvh` minus a small gap, so it still fits on screen.
+- The focused field is then scrolled back into view inside the sheet.
+- While the keyboard is up, the home-indicator padding is dropped.
+- When the keyboard closes, the sheet returns to the bottom.
+
+**Verified.** `e2e/sheet.cjs` stands in for iOS's `visualViewport` and raises a 336 px keyboard. It then checks that:
+- the sheet sits on the keyboard;
+- the sheet still fits on screen;
+- the note field stays in view above the action row;
+- the sheet returns to the bottom when the keyboard closes.
+
+The check fails on the code before this fix and passes after it. A real iPhone check is still needed (Chromium has no on-screen keyboard).
