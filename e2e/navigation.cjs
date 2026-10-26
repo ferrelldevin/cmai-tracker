@@ -54,7 +54,8 @@ const ok = (c, m) => { if (!c) throw new Error("FAIL: " + m); console.log("  ok"
   await rs.waitFor(); ok(await p.evaluate(() => document.activeElement?.tagName === "DIALOG"), "rating sheet opened by tap: no focus ring");
   await rs.getByRole("button", { name: /^Once or twice a week/ }).click();
   await rs.waitFor({ state: "hidden" }); ok(true, "choosing a rating saves and closes the sheet");
-  ok((await p.getByRole("button", { name: /^5\. Constant unwarranted/ }).getAttribute("aria-label")).includes("You changed it to 3"), "row shows the changed rating");
+  // The row re-renders after the save lands, so wait for it rather than reading at once.
+  await p.getByRole("button", { name: /^5\. Constant unwarranted.*You changed it to 3/ }).waitFor({ timeout: 3000 }); ok(true, "row shows the changed rating");
   await p.waitForTimeout(300);
   ok((await p.locator('nav[aria-label="Jump to a group"] a', { hasText: "Verbal" }).textContent()).includes("1/5"), "reviewing one verbal item updates the chip to 1/5");
   await shot("07-review-verbal");

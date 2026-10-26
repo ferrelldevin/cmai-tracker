@@ -140,11 +140,11 @@ input[type="checkbox"] { width: 22px; height: 22px; min-height: 0; accent-color:
 .switch-notice.on { opacity: 1; transform: translate(-50%, 0); }
 
 /* Patient switcher sheet (src/ui/PatientSheet.tsx): from the bottom on a phone, centered on desktop. */
-.sheet { border: 0; padding: 0; margin: auto auto 0; width: 100%; max-width: 560px; max-height: 85vh; background: transparent; color: var(--text); overflow: visible; }
+.sheet { border: 0; padding: 0; margin: auto auto var(--kb, 0px); width: 100%; max-width: 560px; max-height: min(85vh, calc(var(--vvh, 100vh) - 12px)); background: transparent; color: var(--text); overflow: visible; }
 .sheet::backdrop { background: rgba(10, 16, 20, 0.45); }
 .sheet[open] .sheet-body { animation: sheet-up .22s ease-out; }
 @keyframes sheet-up { from { transform: translateY(24px); opacity: 0.6; } to { transform: none; opacity: 1; } }
-.sheet-body { display: flex; flex-direction: column; max-height: 85vh; background: var(--surface); border-radius: 20px 20px 0 0; padding: var(--s2) var(--s4) calc(var(--s4) + env(safe-area-inset-bottom)); box-shadow: var(--shadow-2); }
+.sheet-body { display: flex; flex-direction: column; max-height: min(85vh, calc(var(--vvh, 100vh) - 12px)); background: var(--surface); border-radius: 20px 20px 0 0; padding: var(--s2) var(--s4) calc(var(--s4) + env(safe-area-inset-bottom)); box-shadow: var(--shadow-2); }
 .sheet-grab { width: 40px; height: 5px; border-radius: 3px; background: var(--rule-strong); margin: 0 auto var(--s2); }
 /* The handle, header and footer drag the sheet down to close it (Sheet.tsx), so the browser must not scroll from them. */
 .sheet-grab, .sheet-head, .sheet-footer { touch-action: none; }
@@ -203,6 +203,9 @@ input[type="checkbox"] { width: 22px; height: 22px; min-height: 0; accent-color:
 .page-head { display: flex; flex-direction: column; align-items: flex-start; gap: var(--s2); margin-top: var(--s2); }
 .back-btn { padding-left: 8px; }
 .back-icon { transform: rotate(90deg); }
+
+/* With the keyboard up, the sheet sits right on it: no home-indicator gap (F-19). */
+.sheet.kb-open .sheet-body { padding-bottom: var(--s3); border-radius: 20px 20px 0 0; }
 
 /* Log */
 .log-head { display: flex; justify-content: space-between; align-items: baseline; gap: var(--s2); flex-wrap: wrap; margin-top: var(--s2); }

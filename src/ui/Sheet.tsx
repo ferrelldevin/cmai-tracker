@@ -4,7 +4,9 @@
 // - the page behind keeps scrolling when a drag starts on the sheet, so the page is locked
 //   in place while a sheet is open;
 // - the grab handle suggests a swipe down closes the sheet, so a downward drag on the
-//   handle, the header or the footer does (past 100 px, or a quick flick).
+//   handle, the header or the footer does (past 100 px, or a quick flick);
+// - the keyboard covers the bottom of the screen without resizing the page, so the sheet
+//   follows the visible area above it and keeps the field being typed in on screen (F-19).
 // Design notes: docs/design/notes/002-patient-switcher.md, 003-log-confirmation.md.
 
 import { useEffect, useId, useRef, type PointerEvent as ReactPointerEvent, type ReactNode } from "react";
@@ -28,6 +30,37 @@ interface Props {
   footer?: ReactNode;
   onClose: () => void;
   children: ReactNode;
+}
+
+/**
+ * Keeps an open sheet above the on-screen keyboard. iOS Safari shrinks only the visual
+ * viewport when the keyboard opens; a dialog pinned to the bottom of the layout viewport
+ * stays behind the keyboard. The gap is written to --kb (bottom offset) and --vvh (visible
+ * height) on the dialog, and the focused field is scrolled back into view.
+ */
+function followKeyboard(d: HTMLDialogElement) {
+  const vv = window.visualViewport;
+  if (!vv) return () => {};
+  const fit = () => {
+    const kb = Math.max(0, Math.round(window.innerHeight - vv.height - vv.offsetTop));
+    d.style.setProperty("--kb", `${kb}px`);
+    d.style.setProperty("--vvh", `${Math.round(vv.height)}px`);
+    d.classList.toggle("kb-open", kb > 0);
+    const field = document.activeElement;
+    if (kb > 0 && field instanceof HTMLElement && field.matches("input, textarea") && d.contains(field)) {
+      field.scrollIntoView({ block: "nearest" });
+    }
+  };
+  fit();
+  vv.addEventListener("resize", fit);
+  vv.addEventListener("scroll", fit);
+  return () => {
+    vv.removeEventListener("resize", fit);
+    vv.removeEventListener("scroll", fit);
+    d.style.removeProperty("--kb");
+    d.style.removeProperty("--vvh");
+    d.classList.remove("kb-open");
+  };
 }
 
 /** Holds the page still behind a sheet. iOS Safari ignores overflow: hidden on the body, so the body is fixed in place at its scroll position. */
@@ -61,7 +94,9 @@ export function Sheet({ open, viaKeyboard, keyboardFocus, title, subtitle, class
     }
     if (!open && d.open) d.close();
     if (!open) return;
-    return lockPage();
+    const unlock = lockPage();
+    const unfollow = followKeyboard(d);
+    return () => { unfollow(); unlock(); };
   }, [open]); // eslint-disable-line react-hooks/exhaustive-deps
 
   function setOffset(dy: number, animate: boolean) {
