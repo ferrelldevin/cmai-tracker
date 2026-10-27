@@ -8,7 +8,7 @@
 import { useEffect, useRef, useState } from "react";
 import type { StoredObservation } from "../data/db";
 import { DELETE_REASONS } from "../data/logs";
-import { DAY_MS } from "../scoring/engine";
+import { addDays } from "../scoring/engine";
 import { ITEMS } from "../scoring/items";
 import { dayAndTime } from "./format";
 import { Icon } from "./Icon";
@@ -27,7 +27,8 @@ export function fromClock(value: string, loggedAt: number) {
   const [h, m] = value.split(":").map(Number);
   const d = new Date(loggedAt);
   d.setHours(h, m, 0, 0);
-  return d.getTime() > loggedAt ? d.getTime() - DAY_MS : d.getTime();
+  // The calendar day before, not 24 hours before, so the time stays right on the day clocks change.
+  return d.getTime() > loggedAt ? addDays(d.getTime(), -1) : d.getTime();
 }
 
 interface Props {
