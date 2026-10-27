@@ -53,7 +53,7 @@ async function scan(page, name, results) {
     await scan(page, "Patient switcher (sheet open)", results);
     await page.keyboard.press("Escape");
     await page.getByRole("button", { name: "Scores" }).click();
-    await page.getByText("Each behavior, period by period").waitFor();
+    await page.getByRole("heading", { name: "Behavior scores", exact: true }).waitFor();
     await scan(page, "Scores", results);
     await page.getByRole("button", { name: "Show all 29 behaviors" }).click();
     await scan(page, "Scores (all 29 behaviors)", results);

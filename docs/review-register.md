@@ -62,6 +62,7 @@ Each check is done by someone or something other than the author.
 | V-07 | Other platform builds pass the same `docs/test-cases.json` | Same ratings on every case | `docs/test-cases.json` | Other candidates' apps | G1 | Open |
 | V-08 | Literature recall against a published review | Misses reported | Möhler 2023 Cochrane: 0 of 11 caught (map was scoped to the app's questions) | Published review | G1 | Done (a gap, reported) |
 | V-09 | Five-person usability test with SUS | SUS 68+ (industry average) | `docs/usability/` | Caregivers or nurses | G1 | Deferred (P-06) |
+| V-12 | Scores by period: 5-second test and first-click test with a nurse or caregiver. Show a finished period for 5 seconds, then ask "What is the total, and which behavior got worse?" First-click tasks: find Kicking's rating and count; open another period; open History | Correct answer after 5 seconds; first click right on each task | Script in `docs/design/scores-period-verification.md`; no session run yet | A nurse or caregiver | G0 | Open |
 | V-11 | Back-swipe on a real iPhone Home Screen app: from a Data page (such as Display), swipe back | Returns to the Data hub, and a second swipe does not reopen the page | `e2e/navigation.cjs` passes in Chromium. Devin, 2026-10-23, on his iPhone: "When swiping page navigates to the previous page". Returning to the previous page is confirmed; that a second swipe does not reopen the Data page was not itemized (covered in Chromium only) | Devin | G0 | Passed (2026-10-23) |
 | V-10 | End-to-end check of the production build in headless Chromium at phone size: load demo data, log, undo, Scores, Day-14 review, export, reload, then reload offline | Every step works and the console has no errors | Run on 2026-10-23 | Script | G0 | Done |
 
@@ -89,9 +90,18 @@ Each one waits on a lab decision or on V-01. Severity comes from the heuristic r
 | F-16 | Sheets hold the page still and close with a swipe down; "Other" takes a short note (saved, exported); time field shown as a tappable pill | Devin's iPhone test, 2026-10-24: page scrolled behind the sheet, no swipe to close, no way to describe Other, time looked like plain text | none | Built (2026-10-24) |
 | F-17 | Patients card: labeled code field with an "e.g." example and a clear empty-field message; delete confirm moves to the shared bottom sheet (Cancel, then Delete); teal focus style on text fields; old messages clear | Devin's iPhone screenshots, 2026-10-24: placeholder looked typed in, yellow ring stuck on Cancel and the field, cramped inline confirm, "Deleted" message stayed (design note 004) | none | Verified on iPhone (2026-10-26) |
 | F-18 | App-wide sweep: Review rows with rating colors and a rating sheet instead of 29 native menus; period chips on Review; chart axes show every tick on round numbers; patient rows on a fixed grid; backup page in two labeled groups; Data page messages clear on leaving | Devin, 2026-10-25: find and fix other cases like F-17; screenshot tour of every screen (design note 005) | none | Verified on iPhone (2026-10-26) |
-| F-19 | Sheets sit above the on-screen keyboard and keep the focused field in view | Devin's iPhone test, 2026-10-26: choosing Other opened the keyboard but the note field was hidden behind it (note 003 follow-up) | none | Built (2026-10-26) |
+| F-19 | Sheets sit above the on-screen keyboard and keep the focused field in view | Devin's iPhone test, 2026-10-26: choosing Other opened the keyboard but the note field was hidden behind it (note 003 follow-up) | none | Verified on iPhone (2026-10-26) |
 
 ## Decision log
+
+### Scores period revision · F-20 · 2026-10-26
+
+Implemented on a review branch: one selected period scopes totals, behaviors, status, group values, coverage and hourly counts; totals and behavior scores appear near the top. History is explicitly opened and compares finished periods only. No scoring rule or storage schema changed. [Design note](design/notes/006-scores-by-period.md), [verification](design/scores-period-verification.md). Operator review and merge pending; representative-caregiver usability remains unverified (V-09). A fresh full-app axe run found existing label/name mismatches outside Scores; the same findings were reproduced on baseline. Scores has zero violations in all four modes.
+
+| Date | Change | By | Approved by |
+|---|---|---|---|
+| 2026-10-26 | F-20 additions after comparing two builds (note 006): change since last period on each behavior row (D-10 rule), period in the URL `#/scores/p<n>`, arrow buttons so period chips fit, in-progress hint on earlier periods, History follows "show all". Claude build PR #15 closed in favour of this layout | Devin (chose the layout) | n/a (no scoring change) |
+| 2026-10-26 | Period-specific Scores overview (F-20): total and behavior scores first, counts and review sources visible, supporting data scoped to the same range, finished history disclosed separately | Codex, at operator request | Pending operator review; no scoring change |
 
 Newest first. Every rule change and every sign-off goes here, with who and when.
 

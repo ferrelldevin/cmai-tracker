@@ -40,6 +40,10 @@ A caregiver or nurse on a phone, often rushed, often mid-shift, sometimes at nig
 - **High contrast (round 6):** a Display setting on the Data screen with three choices: Match phone (the default, which follows iOS "Increase Contrast" and the Android and Windows equivalents through `prefers-contrast: more`), Standard and High. High swaps in a second token set: black or white text, every text pair at 7:1 or better (WCAG AAA), 2px outlines on cards, rows and controls, no decorative shadows or tints, and a rating ramp that keeps its number on every cell. Dark mode has its own high-contrast set. Windows forced-colors mode keeps the cues that were drawn with background color only (selected tab, chosen chip, rating cells).
 - **Motion:** a 0.9s row flash on log, and smooth scrolling for the jump chips. Both are turned off under "reduce motion".
 
+## Scores period overview (2026-10-26)
+
+The total and behavior ratings now appear first for one selected period, following the operator's request. The total remains secondary in size and interpretation. Status, group values, counts, coverage and time of day follow the same period; finished-period history is a separate disclosure. Existing tokens and navigation components are reused. Rationale and options: [design note 006](notes/006-scores-by-period.md). Executed checks and remaining human validation: [verification record](scores-period-verification.md).
+
 ## Checked
 
 - axe-core WCAG 2.2 AA: 0 violations on 10 screens in each of four modes: light, dark, and both with high contrast (`docs/audits/axe-wcag22aa.json`).

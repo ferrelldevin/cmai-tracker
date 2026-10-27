@@ -1,0 +1,47 @@
+{
+  "tool": "axe-core 4.14.0",
+  "baseline": "87d9ad2",
+  "newFindings": [],
+  "scores": {
+    "light": [
+      {
+        "screen": "Scores",
+        "violations": 0
+      },
+      {
+        "screen": "Scores (all 29 behaviors)",
+        "violations": 0
+      }
+    ],
+    "dark": [
+      {
+        "screen": "Scores",
+        "violations": 0
+      },
+      {
+        "screen": "Scores (all 29 behaviors)",
+        "violations": 0
+      }
+    ],
+    "light, high contrast": [
+      {
+        "screen": "Scores",
+        "violations": 0
+      },
+      {
+        "screen": "Scores (all 29 behaviors)",
+        "violations": 0
+      }
+    ],
+    "dark, high contrast": [
+      {
+        "screen": "Scores",
+        "violations": 0
+      },
+      {
+        "screen": "Scores (all 29 behaviors)",
+        "violations": 0
+      }
+    ]
+  }
+}

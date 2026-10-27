@@ -34,7 +34,11 @@ export default function App() {
   const [patientId, setPatientId] = useState<string | null>(readSaved);
   const { route, go, back } = useRoute(() => ({ tab: readSaved() ? "log" : "data", page: null }));
   const tab = route.tab;
-  const setTab = (t: Tab) => go({ tab: t, page: null });
+  // The Scores period chosen for each patient, so leaving Scores and coming back keeps it.
+  const scoresPeriod = useRef<Record<string, number>>({});
+  if (route.tab === "scores" && route.period && patientId) scoresPeriod.current[patientId] = route.period;
+  const scoresRoute = (id: string | null) => ({ tab: "scores" as const, page: null, period: id ? scoresPeriod.current[id] : undefined });
+  const setTab = (t: Tab) => go(t === "scores" ? scoresRoute(patientId) : { tab: t, page: null });
   const { patients, observations, checkins, windows, refresh, loaded, everLoaded, error } = useCmaiData(patientId);
   const mainRef = useRef<HTMLElement>(null);
   const pinRef = useRef<HTMLDivElement>(null);
@@ -85,6 +89,8 @@ export default function App() {
     setChoosing(false);
     if (id === patientId) return;
     setPatientId(id);
+    // A period number belongs to one patient: Scores reopens on this patient's own choice.
+    if (route.tab === "scores") go(scoresRoute(id));
     setNotice(`Now on ${id}`);
     setSwitched(true);
   }
@@ -120,16 +126,19 @@ export default function App() {
           <button
             className={switched ? "pt-banner switched" : "pt-banner"}
             aria-haspopup="dialog"
-            aria-label={`Patient ${current.id}${current.demo ? " (demo)" : ""}, ${periodLine}. Choose patient`}
+            aria-label={tab === "scores"
+              ? undefined
+              : `Patient ${current.id}${current.demo ? " (demo)" : ""}, ${periodLine}. Choose patient`}
             onClick={(e) => { setChoosingByKey(e.detail === 0); setChoosing(true); }}
           >
             <PatientAvatar id={current.id} />
             <span className="pt-id">
               <b>{current.id}</b>
               {current.demo && <span className="tag">demo</span>}
-              <span className="pt-meta">{periodLine}</span>
+              <span className="pt-meta">{tab === "scores" ? "Current: " : ""}{periodLine}</span>
             </span>
             <span className="pt-switch-hint" aria-hidden>{patients.length > 1 ? "Switch" : "Patients"} <Icon name="chevron" size={18} /></span>
+            {tab === "scores" && <span className="sr">Choose patient</span>}
           </button>
           <p className={notice ? "switch-notice on" : "switch-notice"} role="status">
             {notice && <><Icon name="check" size={16} /> {notice}</>}
@@ -162,7 +171,8 @@ export default function App() {
         ) : shown === "log" ? (
           <LogScreen patientId={patientId!} observations={observations} checkins={checkins} onChange={refresh} />
         ) : shown === "scores" ? (
-          <ScoresScreen key={patientId} windows={windows} observations={observations} onLog={() => setTab("log")} />
+          loaded && !error ? <ScoresScreen key={patientId} patientId={patientId!} windows={windows} observations={observations} hasActivity={observations.length > 0 || checkins.length > 0} period={route.period} onPeriod={(n) => go({ tab: "scores", page: null, period: n })} onLog={() => setTab("log")} />
+            : <div className="loading" role="status">{error ? "Scores are unavailable while saved data cannot be read." : "Loading scores…"}</div>
         ) : (
           <ReviewScreen key={patientId} patientId={patientId!} windows={windows} onChange={refresh} />
         )}

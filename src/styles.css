@@ -448,3 +448,40 @@ button.text-quiet { background: transparent; color: var(--accent-ink); border: 0
   .heat td { border: 1px solid CanvasText; }
   .avatar { forced-color-adjust: none; }
 }
+
+/* Period-specific Scores: the total and behavior ratings precede supporting data. */
+.score-period-heading { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s2); margin-top: var(--s3); }
+.score-period-heading h2 { margin: 0; }
+.score-range { margin: var(--s1) 0; color: var(--text-muted); }
+.period-controls { display: flex; align-items: center; gap: var(--s2); margin-bottom: var(--s2); }
+.period-controls > button { flex-shrink: 0; }
+.period-controls .period-chips { min-width: 0; flex: 1; }
+.period-controls .chip { min-width: 48px; justify-content: center; }
+.score-total-line { display: flex; justify-content: space-between; align-items: center; gap: var(--s3); }
+.score-total-line h2, .score-total-line p { margin: 0; }
+.score-total-value { font-size: var(--fs-xl); font-variant-numeric: tabular-nums; }
+.period-scores { border-collapse: collapse; width: 100%; font-size: var(--fs-sm); margin: var(--s3) 0; }
+.period-scores th { text-align: left; }
+.period-scores thead th { color: var(--text-muted); font-size: var(--fs-xs); }
+.period-scores th, .period-scores td { padding: var(--s2) 4px; border-bottom: 1px solid var(--rule); }
+.period-scores tbody th { font-weight: 400; }
+.period-scores td { text-align: center; font-variant-numeric: tabular-nums; }
+.period-scores td:last-child { min-width: 42px; }
+.score-row-label, .score-row-source { display: block; margin-top: 2px; color: var(--text-muted); }
+.score-row-source { font-size: var(--fs-xs); }
+.rating-cell { display: inline-flex; justify-content: center; align-items: center; min-width: 40px; min-height: 40px; border-radius: 8px; font-weight: 700; border: 1px solid var(--rule); }
+.rating-cell.provisional { border: 2px dashed var(--rule-strong); }
+.score-explanation { margin-top: var(--s3); }
+.scores summary { min-height: 44px; padding: var(--s2) 0; cursor: pointer; font-weight: 600; color: var(--accent-ink); }
+.score-group-values { display: grid; gap: var(--s2); }
+.score-group-values > div { display: flex; justify-content: space-between; gap: var(--s3); padding-bottom: var(--s2); border-bottom: 1px solid var(--rule); }
+.score-group-values dd { margin: 0; font-weight: 700; font-variant-numeric: tabular-nums; }
+#sc-history .period-scores { font-size: var(--fs-xs); }
+#sc-history .period-scores th { overflow-wrap: anywhere; }
+[data-contrast="high"] .rating-cell { border: 2px solid var(--rule-strong); }
+@media (max-width: 380px) { .period-controls { gap: 4px; } .period-controls > button { padding-inline: 8px; } }
+.icon-btn { min-width: 44px; min-height: 44px; padding: 0; }
+.icon-btn:disabled { opacity: 0.4; }
+.score-row-change { display: block; margin-top: 2px; font-size: var(--fs-xs); font-weight: 600; color: var(--text-muted); }
+.score-row-change.up { color: var(--attn); }
+.score-row-change.down { color: var(--accent-ink); }
