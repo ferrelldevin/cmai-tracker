@@ -109,6 +109,7 @@ Newest first. Every rule change and every sign-off goes here, with who and when.
 
 | Date | Change | By | Approved by |
 |---|---|---|---|
+| 2026-10-27 | One-command browser checks: `npm run checks` builds, runs flows, navigation and scores-period against a local preview and writes one report; `checks:report` pushes only that report to the `checks-report` branch. CLAUDE.md tells Claude Code on the home desktop what "run the CMAI checks" means. No app change; nothing new deploys | Devin (no copy-paste prompts for machine work) | n/a (no scoring change) |
 | 2026-10-27 | Locked scores and soft delete (D-14, F-21, design note 007): the app's rating can't be changed by anyone; day-14 review screen removed; delete takes a reason and a confirm and keeps the log marked deleted; change history for edits, deletes and undos; `scores.csv` drops `final_rating` and `reviewed`, `observations.csv` adds `deleted_at`, `delete_reason`, `delete_note`. Count rule unchanged, so `RULE_VERSION` stays `cmai-count-rule-2` | Devin (rules set in meeting with Dr. Gupta) | Pending (D-14) |
 | 2026-10-26 | Sheets follow the keyboard (F-19): `visualViewport` sets the sheet's bottom offset and height while it is open | Devin | n/a (no scoring change) |
 | 2026-10-25 | App sweep (F-18, design note 005): Review ratings picked in a sheet instead of native selects (same review records, no scoring change); chart axis ticks fixed; patient rows, backup page and Data messages tidied | Devin | n/a (no scoring change) |

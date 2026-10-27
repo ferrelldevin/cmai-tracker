@@ -9,6 +9,8 @@
     "build": "tsc -b && vite build",
     "preview": "vite preview",
     "test": "vitest run",
+    "checks": "node scripts/run-checks.mjs",
+    "checks:report": "node scripts/run-checks.mjs --push",
     "gen:cases": "node scripts/make-test-cases.mjs"
   },
   "dependencies": {
