@@ -121,9 +121,6 @@ export default function App() {
           <button
             className={switched ? "pt-banner switched" : "pt-banner"}
             aria-haspopup="dialog"
-            aria-label={tab === "scores"
-              ? undefined
-              : `Patient ${current.id}${current.demo ? " (demo)" : ""}, ${periodLine}. Choose patient`}
             onClick={(e) => { setChoosingByKey(e.detail === 0); setChoosing(true); }}
           >
             <PatientAvatar id={current.id} />
@@ -133,7 +130,7 @@ export default function App() {
               <span className="pt-meta">{tab === "scores" ? "Current: " : ""}{periodLine}</span>
             </span>
             <span className="pt-switch-hint" aria-hidden>{patients.length > 1 ? "Switch" : "Patients"} <Icon name="chevron" size={18} /></span>
-            {tab === "scores" && <span className="sr">Choose patient</span>}
+            <span className="sr">Choose patient</span>
           </button>
           <p className={notice ? "switch-notice on" : "switch-notice"} role="status">
             {notice && <><Icon name="check" size={16} /> {notice}</>}

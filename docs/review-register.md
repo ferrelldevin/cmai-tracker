@@ -93,6 +93,7 @@ Each one waits on a lab decision or on V-01. Severity comes from the heuristic r
 | F-18 | App-wide sweep: Review rows with rating colors and a rating sheet instead of 29 native menus; period chips on Review; chart axes show every tick on round numbers; patient rows on a fixed grid; backup page in two labeled groups; Data page messages clear on leaving | Devin, 2026-10-25: find and fix other cases like F-17; screenshot tour of every screen (design note 005) | none | Verified on iPhone (2026-10-26) |
 | F-19 | Sheets sit above the on-screen keyboard and keep the focused field in view | Devin's iPhone test, 2026-10-26: choosing Other opened the keyboard but the note field was hidden behind it (note 003 follow-up) | none | Verified on iPhone (2026-10-26) |
 | F-21 | Delete a log with a reason and a confirm; the log is kept, marked deleted, and skipped in scoring; every edit, delete and undo goes in a change history | Devin, 2026-10-27: deletions must be accountable for the study | D-14 | Built on a draft PR (2026-10-27), design note 007 |
+| F-22 | Screen-reader names match the visible words: the patient banner says its own text plus "Choose patient" on every tab; the "At log" time button is named "At log, when I logged it" | Checks run on Devin's PC, 2026-10-27: axe 4.14 flagged `label-content-name-mismatch` on 48 screens (the banner) and on the log details sheet | none | Built on a draft PR (2026-10-27); axe 4.14: 0 violations in 72 scans |
 
 ## Decision log
 
@@ -102,6 +103,7 @@ Implemented on a review branch: one selected period scopes totals, behaviors, st
 
 | Date | Change | By | Approved by |
 |---|---|---|---|
+| 2026-10-27 | Accessible names match visible text (F-22): patient banner drops its custom label on every tab; "At log" button label starts with its visible words. No scoring change | Claude (cloud), from the PC check run | Pending (Devin) |
 | 2026-10-26 | F-20 additions after comparing two builds (note 006): change since last period on each behavior row (D-10 rule), period in the URL `#/scores/p<n>`, arrow buttons so period chips fit, in-progress hint on earlier periods, History follows "show all". Claude build PR #15 closed in favour of this layout | Devin (chose the layout) | n/a (no scoring change) |
 | 2026-10-26 | Period-specific Scores overview (F-20): total and behavior scores first, counts and review sources visible, supporting data scoped to the same range, finished history disclosed separately | Codex, at operator request | Pending operator review; no scoring change |
 
