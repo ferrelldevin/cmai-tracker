@@ -6,7 +6,7 @@ When asked to run the CMAI checks (or the browser checks), do exactly this and n
 
 1. Run `git status --porcelain`. If anything is listed, stop and say which files have uncommitted changes. Do not stash, reset or commit them.
 2. Run `git checkout main` and `git pull origin main`.
-3. Run `npm run checks:report`. It installs what it needs, builds the app, runs `e2e/flows.cjs`, `e2e/navigation.cjs` and `e2e/scores-period.cjs` against a local preview, writes `.checks/report.md` and pushes that one file to the `checks-report` branch, where the cloud session reads it.
+3. Run `npm run checks:report`. It installs what it needs, builds the app, runs every check in `e2e/` (flows, navigation, scores-period, theme, patient-switcher, sheet) and the accessibility audit (`docs/audits/axe-run.cjs`, 4 display modes) against a local preview, writes `.checks/report.md` and pushes that one file to the `checks-report` branch, where the cloud session reads it.
 4. Reply with the `RESULT:` line and every `FAIL` line from the report, exactly as printed.
 
 Rules for this task:
