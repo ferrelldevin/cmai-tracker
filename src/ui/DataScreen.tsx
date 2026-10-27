@@ -225,7 +225,7 @@ export function DataScreen({ patients, current, page, pageTitle, onPage, onBack,
         {page === "about" && (
           <section className="card" aria-label="How ratings are worked out">
             <p className="muted">
-              The app counts the logs for each behavior in a {WINDOW_DAYS}-day period and turns the count into a 1 to 7 rating. These are CMAI-based (app-derived) ratings, not a CMAI interview. You can correct any of them at the day-14 review.
+              The app counts the logs for each behavior in a {WINDOW_DAYS}-day period and turns the count into a 1 to 7 rating. These are CMAI-based (app-derived) ratings, not a CMAI interview. Nobody can change them by hand: the study checks them against caregivers' own ratings. Deleted logs do not count.
             </p>
             <table className="bands">
               <caption className="sr">Logs in 14 days and the rating they give</caption>
@@ -242,7 +242,7 @@ export function DataScreen({ patients, current, page, pageTitle, onPage, onBack,
             </table>
             <p className="muted">
               <b>Unlogged days</b> are days with no logs and no "Nothing to log today" tap. They count as unknown, not as zero, so a period with many of them may read low.
-              The day-14 review is also the only place to record <b>8</b> (would happen if not prevented) and <b>9</b> (not applicable).
+              The count rule cannot give <b>8</b> (would happen if not prevented) or <b>9</b> (not applicable); those are answers only a caregiver's own rating can give.
             </p>
             <p className="muted small-print">
               Version {__APP_VERSION__} · scoring rule {RULE_VERSION} · a prototype for Professor Gupta's Hands-On Lab, not a medical device. Full rules:{" "}

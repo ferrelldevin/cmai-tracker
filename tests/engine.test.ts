@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import cases from "../docs/test-cases.json";
-import { clusteredDays, DAY_MS, finalRatings, meaningfulChanges, ratingFromCount, scoreAllWindows, scoreWindow, summarize, unloggedDays, WINDOW_MS, type Observation } from "../src/scoring/engine";
+import { appRatings, clusteredDays, DAY_MS, meaningfulChanges, ratingFromCount, scoreAllWindows, scoreWindow, summarize, unloggedDays, WINDOW_MS, type Observation } from "../src/scoring/engine";
 import { ITEMS } from "../src/scoring/items";
 
 const windowStart = Date.parse(cases.windowStart);
@@ -59,10 +59,13 @@ describe("engine behavior", () => {
     expect(windows[3].provisional).toBe(true);
   });
 
-  it("a caregiver's review overrides the derived rating", () => {
+  it("the app's rating comes from the logs alone and takes no override (D-14)", () => {
     const score = scoreWindow(toObservations(1, [{ day: 0, times: ["09:00"] }]), windowStart, afterWindow);
-    expect(finalRatings(score)[1]).toBe(2);
-    expect(finalRatings(score, { 1: 9 })[1]).toBe(9);
+    const ratings = appRatings(score);
+    expect(ratings[1]).toBe(2);
+    expect(Object.keys(ratings)).toHaveLength(29);
+    // A second argument (the old review override) is not part of the function any more.
+    expect(appRatings.length).toBe(1);
   });
 
   it("a cluster that crosses midnight counts once, on the day it starts", () => {

@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { DataScreen } from "./ui/DataScreen";
 import { LogScreen } from "./ui/LogScreen";
-import { ReviewScreen } from "./ui/ReviewScreen";
 import { ScoresScreen } from "./ui/ScoresScreen";
 import { Icon, type IconName } from "./ui/Icon";
 import { PatientAvatar } from "./ui/PatientAvatar";
@@ -14,7 +13,6 @@ import { useRoute, type DataPage, type Tab } from "./ui/route";
 const TABS: { id: Tab; label: string; title: string; icon: IconName }[] = [
   { id: "log", label: "Log", title: "Log a behavior", icon: "plus" },
   { id: "scores", label: "Scores", title: "Scores", icon: "chart" },
-  { id: "review", label: "Review", title: "Day-14 review", icon: "review" },
   { id: "data", label: "Data", title: "Patients and data", icon: "data" },
 ];
 
@@ -105,9 +103,6 @@ export default function App() {
   const shown: Tab = hasPatient ? tab : "data";
   const current = patients.find((p) => p.id === patientId);
 
-  // Nudge on the Review tab when the latest finished period has no review yet.
-  const finished = windows.filter((w) => !w.score.provisional);
-  const reviewDue = finished.length > 0 && Object.keys(finished[finished.length - 1].review).length === 0;
   const pos = current ? patientPosition(current.anchor, Date.now()) : null;
   const periodLine = pos ? `Period ${pos.period} · day ${pos.day} of 14` : "";
 
@@ -170,11 +165,10 @@ export default function App() {
           />
         ) : shown === "log" ? (
           <LogScreen patientId={patientId!} observations={observations} checkins={checkins} onChange={refresh} />
-        ) : shown === "scores" ? (
-          loaded && !error ? <ScoresScreen key={patientId} patientId={patientId!} windows={windows} observations={observations} hasActivity={observations.length > 0 || checkins.length > 0} period={route.period} onPeriod={(n) => go({ tab: "scores", page: null, period: n })} onLog={() => setTab("log")} />
-            : <div className="loading" role="status">{error ? "Scores are unavailable while saved data cannot be read." : "Loading scores…"}</div>
+        ) : loaded && !error ? (
+          <ScoresScreen key={patientId} patientId={patientId!} windows={windows} observations={observations} hasActivity={observations.length > 0 || checkins.length > 0} period={route.period} onPeriod={(n) => go({ tab: "scores", page: null, period: n })} onLog={() => setTab("log")} />
         ) : (
-          <ReviewScreen key={patientId} patientId={patientId!} windows={windows} onChange={refresh} />
+          <div className="loading" role="status">{error ? "Scores are unavailable while saved data cannot be read." : "Loading scores…"}</div>
         )}
       </main>
 
@@ -195,14 +189,11 @@ export default function App() {
               key={id}
               className={shown === id ? "on" : ""}
               aria-current={shown === id ? "page" : undefined}
-              aria-label={id === "review" && reviewDue ? `${title}, review due` : title}
+              aria-label={title}
               onClick={() => onTab(id)}
               disabled={id !== "data" && !hasPatient}
             >
-              <span className="tab-icon" aria-hidden>
-                <Icon name={icon} size={22} />
-                {id === "review" && reviewDue && <span className="badge" />}
-              </span>
+              <span className="tab-icon" aria-hidden><Icon name={icon} size={22} /></span>
               <span>{label}</span>
             </button>
           ))}

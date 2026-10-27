@@ -1,15 +1,14 @@
 // Loads one patient's data from local storage and scores it.
-// `refresh()` re-reads after any change (log, undo, review, import).
+// `refresh()` re-reads after any change (log, undo, delete, import).
+// Deleted logs are left out here, so no screen counts them. Scores come from the logs only.
 
 import { useCallback, useEffect, useState } from "react";
-import { finalRatings, scoreAllWindows, summarize, unloggedDays, type Summary, type WindowScore } from "../scoring/engine";
-import { ITEMS } from "../scoring/items";
-import { db, reviewKey, type CheckIn, type Patient, type StoredObservation } from "../data/db";
+import { appRatings, scoreAllWindows, summarize, unloggedDays, type Summary, type WindowScore } from "../scoring/engine";
+import { db, isLive, type CheckIn, type Patient, type StoredObservation } from "../data/db";
 
 export interface ScoredWindow {
   score: WindowScore;
-  review: Record<number, number>; // caregiver choices for this window
-  finals: Record<number, number>;
+  ratings: Record<number, number>; // the app's rating per item; nothing overrides it
   summary: Summary;
   unlogged: number; // ended days with no log and no "nothing to log" check-in
   elapsed: number; // days of the window that have ended
@@ -31,21 +30,14 @@ export function useCmaiData(patientId: string | null) {
       try {
         const ps = await db.patients.toArray();
         const p = ps.find((x) => x.id === patientId);
-        const obs = p ? await db.observations.where("patientId").equals(p.id).sortBy("at") : [];
-        const reviews = p ? await db.reviews.where("patientId").equals(p.id).toArray() : [];
+        const obs = p ? (await db.observations.where("patientId").equals(p.id).sortBy("at")).filter(isLive) : [];
         const checks = p ? await db.checkins.where("patientId").equals(p.id).toArray() : [];
-        const byKey = new Map(reviews.map((r) => [r.key, r.choice]));
         const now = Date.now();
         const activity = [...obs.map((o) => o.at), ...checks.map((c) => c.at)];
         const scored = p
           ? scoreAllWindows(obs, p.anchor, now).map((score) => {
-              const review: Record<number, number> = {};
-              for (const i of ITEMS) {
-                const c = byKey.get(reviewKey(p.id, score.windowStart, i.id));
-                if (c !== undefined) review[i.id] = c;
-              }
-              const finals = finalRatings(score, review);
-              return { score, review, finals, summary: summarize(finals), ...unloggedDays(activity, score.windowStart, now) };
+              const ratings = appRatings(score);
+              return { score, ratings, summary: summarize(ratings), ...unloggedDays(activity, score.windowStart, now) };
             })
           : [];
         if (!cancelled) {

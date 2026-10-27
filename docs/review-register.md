@@ -27,7 +27,7 @@ Nothing at G1 or G2 blocks the interview demo. Until an item is signed off, the 
 | D-03 | Likely 7s: ask the caregiver at the day-14 review when 3 to 6 days have clusters | Not built. The rating falls back to the count bands. | Robustness rerun: rating 7 is lost in 38% of runs at 10% missed logs | Lab | G1 | Open |
 | D-04 | Form version | 29-item long form, 1 to 7 | Manual p.22 | Lab | G1 | Default in build |
 | D-05 | 14-day periods fixed from the first log, or rolling | Fixed | `scoring-spec.md` §1 | Lab | G1 | Default in build |
-| D-06 | Code 8 (prevented): a separate code, or an estimate of the unprevented frequency (p.5 allows either) | Separate code, entered at day-14 review | Manual p.3, p.5 | Lab | G1 | Default in build |
+| D-06 | Code 8 (prevented): a separate code, or an estimate of the unprevented frequency (p.5 allows either) | Separate code. Not recordable since D-14 (the day-14 review is gone); belongs in a caregiver's own rating | Manual p.3, p.5 | Lab | G1 | Open |
 | D-07 | Partial prevention: tell reviewers to estimate "how frequently it would happen if not prevented" (p.24)? | No instruction shown | Robustness proposal 6 | Lab | G1 | Open |
 | D-08 | Lead with per-behavior ratings, with the total secondary | Per-behavior first; total labeled secondary | Manual p.5 ("not useful"); trials use the total (`research-notes.md`) | Lab | G1 | Default in build |
 | D-09 | Factor set: nursing home (p.7) or community (p.7 to 8) | Nursing home | Manual p.7 | Lab, once the care setting is known | G1 | Default in build |
@@ -35,6 +35,7 @@ Nothing at G1 or G2 blocks the interview demo. Until an item is signed off, the 
 | D-11 | Unlogged days: flag only, or also leave the period out of trend lines | Flag only | Robustness proposal 4 | Lab | G1 | Default in build |
 | D-12 | Never scale counts up to make up for missed logs | Not scaled | Robustness proposal 5 | Lab | G1 | Default in build |
 | D-13 | Back-dated logs (approximate times) in rating-7 clusters: count them, or count only exact times | Counted like any other log | F-03; spec section 3 | Lab | G1 | Default in build |
+| D-14 | Can a person change the app's rating? | No. Ratings come from live logs only; the day-14 review screen is removed; old review records are kept but never read for scores. A blind caregiver CMAI at day 14 is designed (spec §5), not built | Devin, meeting with Dr. Gupta 2026-10-27; design note 007 | Lab (Dr. Gupta) | G1 | Pending |
 
 ## P. Permissions and compliance
 
@@ -91,6 +92,7 @@ Each one waits on a lab decision or on V-01. Severity comes from the heuristic r
 | F-17 | Patients card: labeled code field with an "e.g." example and a clear empty-field message; delete confirm moves to the shared bottom sheet (Cancel, then Delete); teal focus style on text fields; old messages clear | Devin's iPhone screenshots, 2026-10-24: placeholder looked typed in, yellow ring stuck on Cancel and the field, cramped inline confirm, "Deleted" message stayed (design note 004) | none | Verified on iPhone (2026-10-26) |
 | F-18 | App-wide sweep: Review rows with rating colors and a rating sheet instead of 29 native menus; period chips on Review; chart axes show every tick on round numbers; patient rows on a fixed grid; backup page in two labeled groups; Data page messages clear on leaving | Devin, 2026-10-25: find and fix other cases like F-17; screenshot tour of every screen (design note 005) | none | Verified on iPhone (2026-10-26) |
 | F-19 | Sheets sit above the on-screen keyboard and keep the focused field in view | Devin's iPhone test, 2026-10-26: choosing Other opened the keyboard but the note field was hidden behind it (note 003 follow-up) | none | Verified on iPhone (2026-10-26) |
+| F-21 | Delete a log with a reason and a confirm; the log is kept, marked deleted, and skipped in scoring; every edit, delete and undo goes in a change history | Devin, 2026-10-27: deletions must be accountable for the study | D-14 | Built on a draft PR (2026-10-27), design note 007 |
 
 ## Decision log
 
@@ -107,6 +109,7 @@ Newest first. Every rule change and every sign-off goes here, with who and when.
 
 | Date | Change | By | Approved by |
 |---|---|---|---|
+| 2026-10-27 | Locked scores and soft delete (D-14, F-21, design note 007): the app's rating can't be changed by anyone; day-14 review screen removed; delete takes a reason and a confirm and keeps the log marked deleted; change history for edits, deletes and undos; `scores.csv` drops `final_rating` and `reviewed`, `observations.csv` adds `deleted_at`, `delete_reason`, `delete_note`. Count rule unchanged, so `RULE_VERSION` stays `cmai-count-rule-2` | Devin (rules set in meeting with Dr. Gupta) | Pending (D-14) |
 | 2026-10-26 | Sheets follow the keyboard (F-19): `visualViewport` sets the sheet's bottom offset and height while it is open | Devin | n/a (no scoring change) |
 | 2026-10-25 | App sweep (F-18, design note 005): Review ratings picked in a sheet instead of native selects (same review records, no scoring change); chart axis ticks fixed; patient rows, backup page and Data messages tidied | Devin | n/a (no scoring change) |
 | 2026-10-25 | Patients card (F-17, design note 004): delete confirmation uses the shared Sheet; text-field focus becomes a teal outline and halo outside high contrast; empty Add gets its own message | Devin | n/a (no scoring change) |

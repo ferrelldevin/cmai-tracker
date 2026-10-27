@@ -1,16 +1,16 @@
 import { describe, expect, it } from "vitest";
-import { finalRatings, scoreWindow, summarize, unloggedDays, DAY_MS, WINDOW_MS } from "../src/scoring/engine";
+import { appRatings, scoreWindow, summarize, unloggedDays, DAY_MS, WINDOW_MS } from "../src/scoring/engine";
 import { changeSince, periodBehaviors, selectedPeriod } from "../src/ui/scoreView";
 import type { ScoredWindow } from "../src/ui/useCmaiData";
 
 const start = Date.UTC(2026, 0, 1);
-function fixture(index: number, review: Record<number, number> = {}): ScoredWindow {
+function fixture(index: number): ScoredWindow {
   const windowStart = start + index * WINDOW_MS;
   const logs = [{ itemId: index === 0 ? 7 : 8, at: windowStart + 1 }];
   const now = start + 2 * WINDOW_MS + DAY_MS;
   const score = scoreWindow(logs, windowStart, now);
-  const finals = finalRatings(score, review);
-  return { score, finals, review, summary: summarize(finals), ...unloggedDays(logs.map((l) => l.at), windowStart, now) };
+  const ratings = appRatings(score);
+  return { score, ratings, summary: summarize(ratings), ...unloggedDays(logs.map((l) => l.at), windowStart, now) };
 }
 
 describe("period-specific score view", () => {
@@ -18,12 +18,12 @@ describe("period-specific score view", () => {
     expect(periodBehaviors(fixture(0), false).map((i) => i.id)).toEqual([7]);
     expect(periodBehaviors(fixture(1), false).map((i) => i.id)).toEqual([8]);
   });
-  it("keeps logged behaviors visible when reviewed down to 1, and keeps special codes", () => {
-    const w = fixture(0, { 7: 1, 8: 8, 9: 9 });
-    expect(periodBehaviors(w, false).map((i) => i.id)).toEqual([7, 8, 9]);
-    expect(w.summary.total).toBe(27);
-    expect(w.summary.itemsInTotal).toBe(27);
-    expect(w.score.items[6].count).toBe(1);
+  it("shows the app's own rating for each logged behavior, and all 29 on request", () => {
+    const w = fixture(0);
+    expect(w.ratings[7]).toBe(w.score.items[6].rating);
+    expect(w.ratings[7]).toBe(2);
+    expect(w.summary.total).toBe(30);
+    expect(w.summary.itemsInTotal).toBe(29);
     expect(periodBehaviors(w, true)).toHaveLength(29);
   });
   it("takes the period from the URL, defaults to latest finished, and handles one open period", () => {
@@ -38,13 +38,14 @@ describe("period-specific score view", () => {
 });
 
 // Change since last period, in words, with the engine's rule (2+ points, or 1 point the same way twice).
-function withRatings(ratings: number[], openLast = false): ScoredWindow[] {
-  return ratings.map((r, i) => {
+// Ratings are set directly on item 1 to test the wording; codes 8 and 9 stand for a future caregiver rating.
+function withRatings(series: number[], openLast = false): ScoredWindow[] {
+  return series.map((r, i) => {
     const windowStart = start + i * WINDOW_MS;
-    const now = openLast && i === ratings.length - 1 ? windowStart + DAY_MS : start + ratings.length * WINDOW_MS + DAY_MS;
+    const now = openLast && i === series.length - 1 ? windowStart + DAY_MS : start + series.length * WINDOW_MS + DAY_MS;
     const score = scoreWindow([], windowStart, now);
-    const finals = finalRatings(score, { 1: r });
-    return { score, finals, review: { 1: r }, summary: summarize(finals), ...unloggedDays([], windowStart, now) };
+    const ratings = { ...appRatings(score), 1: r };
+    return { score, ratings, summary: summarize(ratings), ...unloggedDays([], windowStart, now) };
   });
 }
 

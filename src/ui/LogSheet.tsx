@@ -2,9 +2,12 @@
 // confirmation's Edit and from Recent logs. Changes save as they are made, so Done only
 // closes and closing the sheet any way (Esc, backdrop) loses nothing. Grouped form rows,
 // then one action row at the bottom: Delete on the left, Done on the right (Devin, 2026-10-24). Design note: docs/design/notes/003-log-confirmation.md.
+// Delete is two steps: pick a reason, then confirm. The log is kept, marked deleted with the
+// reason (D-14, design note 007).
 
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { StoredObservation } from "../data/db";
+import { DELETE_REASONS } from "../data/logs";
 import { DAY_MS } from "../scoring/engine";
 import { ITEMS } from "../scoring/items";
 import { dayAndTime } from "./format";
@@ -31,7 +34,7 @@ interface Props {
   obs: (StoredObservation & { id: number }) | null;
   viaKeyboard: boolean;
   onPatch: (change: Partial<StoredObservation>) => void;
-  onDelete: () => void;
+  onDelete: (reason: string, note?: string) => void;
   onClose: () => void;
 }
 
@@ -39,6 +42,22 @@ export function LogSheet({ obs, viaKeyboard, onPatch, onDelete, onClose }: Props
   const item = obs ? ITEMS[obs.itemId - 1] : null;
   const minutesBefore = obs ? Math.round((obs.loggedAt - obs.at) / 60_000) : 0;
   const noteWanted = useRef(false); // set by tapping Other, so reopening a log does not jump to the note
+  const [deleting, setDeleting] = useState(false); // the reason-and-confirm step
+  const [reason, setReason] = useState<string | null>(null);
+  const [reasonNote, setReasonNote] = useState("");
+  const reasons = useRef<HTMLDivElement>(null);
+  const deleteByKey = useRef(false);
+  // Another log, or the sheet closing, always starts back at the details.
+  useEffect(() => { setDeleting(false); setReason(null); setReasonNote(""); }, [obs?.id]);
+  // The button pressed is gone once the step changes, so focus moves into the new step: the
+  // first reason from the keyboard, else the dialog itself (no stray focus ring on a tap, F-14).
+  const sheetRoot = useRef<HTMLElement | null>(null);
+  useEffect(() => {
+    if (deleting) sheetRoot.current = reasons.current?.closest("dialog") ?? null;
+    const target = deleting && deleteByKey.current ? reasons.current?.querySelector<HTMLElement>(".choice") : sheetRoot.current;
+    target?.focus({ preventScroll: true });
+  }, [deleting]);
+  const canDelete = reason !== null && (reason !== "Other" || reasonNote.trim() !== "");
 
   return (
     <Sheet
@@ -46,16 +65,57 @@ export function LogSheet({ obs, viaKeyboard, onPatch, onDelete, onClose }: Props
       viaKeyboard={viaKeyboard}
       keyboardFocus=".log-sheet input[type='time']"
       className="log-sheet"
-      title={item?.name ?? ""}
-      subtitle={obs && <>{obs.patientId} · logged {dayAndTime(obs.loggedAt)}</>}
+      title={deleting ? "Delete this log?" : item?.name ?? ""}
+      subtitle={obs && <>{deleting ? `${item?.name} · ` : ""}{obs.patientId} · logged {dayAndTime(obs.loggedAt)}</>}
       headerClose={false}
-      footer={obs && <>
-        <button className="text-danger" onClick={onDelete}><Icon name="trash" size={18} /> Delete log</button>
+      footer={obs && (deleting ? <>
+        <button className="ghost" onClick={() => setDeleting(false)}>Keep log</button>
+        <button className="danger" disabled={!canDelete} onClick={() => reason && onDelete(reason, reason === "Other" ? reasonNote : undefined)}>Delete log</button>
+      </> : <>
+        <button className="text-danger" onClick={(e) => { deleteByKey.current = e.detail === 0; setDeleting(true); }}><Icon name="trash" size={18} /> Delete log</button>
         <button className="sheet-done" onClick={onClose}>Done</button>
-      </>}
+      </>)}
       onClose={onClose}
     >
-      {obs && (
+      {obs && deleting && (
+        <div className="sheet-scroll">
+          <section className="form-group" aria-labelledby="ls-why">
+            <h3 className="form-label" id="ls-why">Why are you deleting it?</h3>
+            <div className="choice-grid" ref={reasons}>
+              {DELETE_REASONS.map((r) => (
+                <button key={r} className="choice" aria-pressed={reason === r} onClick={() => { noteWanted.current = r === "Other"; setReason(r); }}>
+                  <span>{r}</span>
+                  {reason === r && <Icon name="check" size={18} />}
+                </button>
+              ))}
+            </div>
+            {reason === "Other" && (
+              <label className="other-note">
+                <span>What was wrong with it?</span>
+                <input
+                  type="text"
+                  ref={(el) => {
+                    if (el && noteWanted.current) {
+                      noteWanted.current = false;
+                      el.focus({ preventScroll: true });
+                      el.scrollIntoView({ block: "nearest" });
+                    }
+                  }}
+                  value={reasonNote}
+                  maxLength={120}
+                  placeholder="A few words, no names"
+                  autoComplete="off"
+                  enterKeyHint="done"
+                  onChange={(e) => setReasonNote(e.target.value)}
+                  onKeyDown={(e) => { if (e.key === "Enter") (e.target as HTMLInputElement).blur(); }}
+                />
+              </label>
+            )}
+          </section>
+          <p className="muted">The log stops counting toward scores. It is kept with your reason, so the research team can see every change.</p>
+        </div>
+      )}
+      {obs && !deleting && (
         <div className="sheet-scroll">
           <section className="form-group" aria-labelledby="ls-when">
             <h3 className="form-label" id="ls-when">When it happened</h3>

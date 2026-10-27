@@ -1,4 +1,4 @@
-// End-to-end flow on the production build: logging, details, recent logs, Data pages, backup and restore, review, offline reload. usage: node e2e/flows.cjs URL OUTDIR
+// End-to-end flow on the production build: logging, details, recent logs, Data pages, backup and restore, delete with a reason, offline reload. usage: node e2e/flows.cjs URL OUTDIR
 const { chromium } = require("playwright");
 const fs = require("fs");
 const [URL, OUT] = process.argv.slice(2);
@@ -27,8 +27,6 @@ const ok = (c, m) => { if (!c) throw new Error("FAIL: " + m); console.log("  ok"
   await p.locator("nav.tabs button", { hasText: "Scores" }).click();
   await p.getByText("No logs yet for this patient.").waitFor(); ok(true, "Scores empty state");
   await p.screenshot({ path: `${OUT}/flow-01-scores-empty.png` });
-  await p.locator("nav.tabs button", { hasText: "Review" }).click();
-  await p.getByText("Nothing to review yet.").waitFor(); ok(true, "Review empty state with open date");
   await p.locator("nav.tabs button", { hasText: "Log" }).click();
   // log, double tap guard
   const hit = p.getByRole("button", { name: /^7 Hitting/ });
@@ -68,6 +66,17 @@ const ok = (c, m) => { if (!c) throw new Error("FAIL: " + m); console.log("  ok"
   await sheet.getByRole("button", { name: "Mealtime" }).click();
   await p.screenshot({ path: `${OUT}/flow-04-recent-edit.png` });
   await sheet.getByRole("button", { name: "Delete log" }).click();
+  const del = p.getByRole("dialog", { name: "Delete this log?" });
+  await del.waitFor(); ok(true, "Delete asks for a reason first");
+  ok(await del.getByRole("button", { name: "Delete log" }).isDisabled(), "Delete stays off until a reason is picked");
+  await del.getByRole("button", { name: "Other" }).click();
+  ok(await del.getByRole("button", { name: "Delete log" }).isDisabled(), "Other needs a note");
+  await del.getByRole("button", { name: "Keep log" }).click();
+  await sheet.waitFor(); ok(await sheet.getByLabel("Time is approximate").isVisible(), "Keep log goes back to the details");
+  await sheet.getByRole("button", { name: "Delete log" }).click();
+  await del.getByRole("button", { name: "Tapped by mistake" }).click();
+  await p.screenshot({ path: `${OUT}/flow-04b-delete-reason.png` });
+  await del.getByRole("button", { name: "Delete log" }).click();
   await p.locator(".snackbar", { hasText: "Deleted" }).waitFor();
   ok((await p.locator(".recent-list li").count()) === 0, "delete removes the log");
   ok((await p.locator(".snackbar").getByRole("button").count()) === 1, "deleted confirmation offers Undo only");
@@ -86,7 +95,6 @@ const ok = (c, m) => { if (!c) throw new Error("FAIL: " + m); console.log("  ok"
   await p.getByRole("link", { name: /^Demo data/ }).click();
   await p.getByRole("button", { name: "Load demo data" }).click();
   await p.getByRole("heading", { name: /^Log a behavior/ }).waitFor();
-  await p.locator('nav.tabs button[aria-label="Day-14 review, review due"]').waitFor({ timeout: 3000 }); ok(true, "review-due badge");
   await p.locator("nav.tabs button", { hasText: "Data" }).click();
   await p.getByRole("link", { name: /^Backup and export/ }).click();
   const dl = p.waitForEvent("download");
@@ -129,18 +137,11 @@ const ok = (c, m) => { if (!c) throw new Error("FAIL: " + m); console.log("  ok"
   await p.getByRole("dialog", { name: "Choose patient" }).getByRole("button", { name: /^P-07/ }).click();
   await p.locator("nav.tabs button", { hasText: "Log" }).click();
   ok((await p.locator(".recent-list li").first().textContent()).includes("Mealtime"), "restored P-07 log keeps details");
-  // review
-  await p.getByRole("button", { name: /Choose patient$/ }).click();
-  await p.getByRole("dialog", { name: "Choose patient" }).getByRole("button", { name: /^P-DEMO-A/ }).click();
-  await p.locator("nav.tabs button", { hasText: "Review" }).click();
-  await p.getByRole("button", { name: /Confirm the other 29/ }).click();
-  await p.getByText("✓ All 29 reviewed").waitFor(); ok(true, "confirm all reviews");
-  await p.locator('nav.tabs button[aria-label="Day-14 review"]').waitFor({ timeout: 3000 }); ok(true, "badge clears after review");
-  await p.screenshot({ path: `${OUT}/flow-06-review-done.png` });
   // offline reload
+  await p.locator("nav.tabs button", { hasText: "Scores" }).click();
   await p.reload(); await p.waitForTimeout(1500);
-  await ctx.setOffline(true); await p.reload(); await p.getByRole("heading", { name: /^Day-14 review/ }).waitFor({ timeout: 8000 });
-  ok(true, "reload offline works, and stays on Review");
+  await ctx.setOffline(true); await p.reload(); await p.getByRole("heading", { name: /^Period \d+ scores/ }).waitFor({ timeout: 8000 });
+  ok(true, "reload offline works, and stays on Scores");
   await ctx.setOffline(false);
   ok(errs.length === 0, "no console errors " + JSON.stringify(errs));
   await b.close();

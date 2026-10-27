@@ -1,4 +1,4 @@
-// Hand-expected, fictional records: period isolation, review sources, coverage and navigation.
+// Hand-expected, fictional records: period isolation, locked app ratings, coverage and navigation.
 const { chromium } = require('playwright');
 const fs = require('fs');
 const path = require('path');
@@ -26,6 +26,7 @@ const ok = (condition, label) => { if (!condition) throw Error('FAIL: ' + label)
       for (const [itemId, offset] of [[8,window],[9,2*window],[9,2*window+60000]]) tx.objectStore('observations').add({patientId:'P-TEST-A',itemId,at:anchor+offset,loggedAt:anchor+offset});
       tx.objectStore('observations').add({patientId:'P-TEST-B',itemId:1,at:anchor+2*window,loggedAt:anchor+2*window});
       for (const id of ['P-TEST-A','P-QUIET']) tx.objectStore('checkins').put({key:id+'|'+(anchor+day),patientId:id,day:anchor+day,at:anchor+day});
+      // Old day-14 reviews on file (from before D-14). The app's ratings must ignore them.
       for (const [itemId,choice,derived] of [[3,9,1],[7,8,1],[8,4,2]]) tx.objectStore('reviews').put({key:`P-TEST-A|${anchor+window}|${itemId}`,patientId:'P-TEST-A',windowStart:anchor+window,itemId,choice,derived,reviewedAt:anchor+2*window});
       tx.oncomplete=resolve; tx.onerror=()=>reject(tx.error);
     }); db.close(); localStorage.setItem('cmai-patient','P-TEST-A');
@@ -33,14 +34,15 @@ const ok = (condition, label) => { if (!condition) throw Error('FAIL: ' + label)
   await page.reload(); await page.getByRole('button', { name:'Scores', exact:true }).click();
   await page.getByRole('heading', { name:'Period 2 scores',exact:true }).waitFor();
   const total = page.locator('.score-total-value');
-  ok(await total.textContent() === '30', 'P2 total is hand-expected 30, excluding codes 8 and 9');
-  ok(await page.locator('.period-scores').first().locator('tbody tr').count() === 3, 'P2 shows only its three reviewed behaviors');
+  ok(await total.textContent() === '30', 'P2 total is hand-expected 30 from logs alone, all 29 items');
+  ok((await page.locator('#sc-total').textContent()).includes('29 of 29 ratings'), 'old review codes 8 and 9 do not drop items from the total');
+  ok(await page.locator('.period-scores').first().locator('tbody tr').count() === 1, 'P2 shows only its one logged behavior');
   const kicking = page.locator('#sc-behaviors tr[data-behavior="8"]');
-  ok((await kicking.textContent()).includes('Caregiver reviewed · app suggested 2'), 'review override and original derived rating remain distinct');
-  ok(await kicking.locator('td').first().textContent() === '4' && await kicking.locator('td').last().textContent() === '1', 'P2 kicking: reviewed 4 from one log');
-  ok((await kicking.locator('th').textContent()).includes('Up from 1'), 'P2 kicking says how it moved since P1 (1 to 4)');
+  ok((await kicking.textContent()).includes('App-derived from logs'), 'rating source is the app');
+  ok(await kicking.locator('td').first().textContent() === '2' && await kicking.locator('td').last().textContent() === '1', 'P2 kicking: app rating 2 from one log; the old review of 4 is ignored');
+  ok((await kicking.locator('th').textContent()).includes('About the same (was 1)'), 'P2 kicking says how it moved since P1 (1 to 2)');
   ok((await page.locator('#sc-total').textContent()).includes('13 unlogged days'), 'P2 coverage stays scoped');
-  ok((await page.locator('.score-group-values').textContent()).includes('1.43'), 'P2 aggressive mean excludes special codes');
+  ok((await page.locator('.score-group-values').textContent()).includes('1.11'), 'P2 aggressive mean uses app ratings only');
   ok(!(await page.locator('#sc-history table').count()), 'history data is absent until explicitly opened');
   await page.screenshot({path:path.join(OUT,'scores-period-layout-check.png')});
   const totalBox = await total.boundingBox(), firstBox = await page.locator('#sc-behaviors tbody tr').first().boundingBox();
@@ -78,13 +80,13 @@ const ok = (condition, label) => { if (!condition) throw Error('FAIL: ' + label)
   await page.getByRole('button',{name:/Choose patient$/}).click();
   await page.getByRole('dialog',{name:'Choose patient',exact:true}).getByRole('button',{name:/^P-QUIET/}).click();
   await page.getByRole('heading',{name:'Period 2 scores',exact:true}).waitFor();
-  ok(await total.textContent()==='29' && (await page.locator('#sc-behaviors').textContent()).includes('No behaviors logged or reviewed'), 'quiet-only patient can view scores with coverage caveat');
+  ok(await total.textContent()==='29' && (await page.locator('#sc-behaviors').textContent()).includes('No behaviors logged'), 'quiet-only patient can view scores with coverage caveat');
   await page.getByRole('button',{name:/Choose patient$/}).click();
   await page.getByRole('dialog',{name:'Choose patient',exact:true}).getByRole('button',{name:/^P-TEST-A/}).click();
   await page.getByRole('heading',{name:'Period 2 scores',exact:true}).waitFor();
   await page.getByRole('button',{name:'Show all 29 behaviors'}).click();
   ok(await page.locator('#sc-behaviors tbody tr').count()===29, 'all 29 behavior ratings remain reachable');
-  await page.getByRole('button',{name:'Show logged or reviewed behaviors'}).click();
+  await page.getByRole('button',{name:'Show logged behaviors'}).click();
   const axe = fs.readFileSync(require.resolve('axe-core/axe.min.js'),'utf8');
   const audits = [];
   for (const [name,theme,contrast] of [['light','light','standard'],['dark','dark','standard'],['light-high','light','high'],['dark-high','dark','high']]) {
