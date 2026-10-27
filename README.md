@@ -77,7 +77,7 @@ Checks by someone or something other than the author (full list: register sectio
 | Every citation resolves and none is retracted | 31 of 40 sources Crossref-verified; none retracted. The other 9 are web pages, a protocol, or one paper whose DOI did not resolve (marked unverified) |
 | Lighthouse and axe (WCAG 2.2 AA) | Done: Lighthouse accessibility 100, axe 0 violations after fixes (`docs/audits/`) |
 | End-to-end check of the production build, including offline reload (headless Chromium) | Done 2026-10-23 (V-10) |
-| Offline test on a real iPhone | Open (V-03) |
+| Offline test on a real iPhone | Passed 2026-10-23 (V-03): logging and saved data held in airplane mode. Scores and export offline not yet itemized |
 | Written permission from the CMAI author | Deferred until lab adoption (P-01) |
 
 ## Proposed, not built
