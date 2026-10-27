@@ -1,4 +1,4 @@
-// Runs the three browser checks against a fresh production build and writes one report.
+// Runs the browser checks and the accessibility audit against a fresh production build and writes one report.
 // usage: npm run checks            (report in .checks/report.md)
 //        npm run checks:report     (same, then pushes the report alone to the checks-report branch)
 // Works in Windows PowerShell, macOS and Linux. It changes no tracked file; the push writes only the report.
@@ -11,7 +11,13 @@ import { fileURLToPath } from "node:url";
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const PORT = 4173;
 const URL = `http://localhost:${PORT}/`;
-const CHECKS = ["flows", "navigation", "scores-period"];
+// file is the script; out, when set, is the file it writes instead of a screenshot folder.
+const CHECKS = [
+  { name: "flows", file: "e2e/flows.cjs" },
+  { name: "navigation", file: "e2e/navigation.cjs" },
+  { name: "scores-period", file: "e2e/scores-period.cjs" },
+  { name: "accessibility", file: "docs/audits/axe-run.cjs", out: "axe-wcag22aa.json" },
+];
 const REPORT_BRANCH = "checks-report";
 const push = process.argv.includes("--push");
 const OUT = path.join(os.tmpdir(), "cmai-e2e");
@@ -60,17 +66,19 @@ async function startServer() {
   throw new Error(`The preview server did not answer on port ${PORT} within 30 seconds:\n${tail(log)}`);
 }
 
-function runCheck(name) {
+function runCheck({ name, file, out: outFile }) {
   say(`Running ${name}`);
-  const out = path.join(OUT, name);
-  fs.mkdirSync(out, { recursive: true });
-  const r = spawnSync(process.execPath, [path.join(ROOT, "e2e", `${name}.cjs`), URL, out], {
+  const dir = path.join(OUT, name);
+  fs.mkdirSync(dir, { recursive: true });
+  const out = outFile ? path.join(dir, outFile) : dir;
+  const r = spawnSync(process.execPath, [path.join(ROOT, file), URL, out], {
     cwd: ROOT,
     encoding: "utf8",
     timeout: 10 * 60_000,
   });
   const lines = `${r.stdout}\n${r.stderr}`.split(/\r?\n/);
-  const passed = lines.filter((l) => /^\s*ok\b/.test(l)).length;
+  // The e2e scripts print "ok" per check; the audit prints "0 violation rules" per clean screen.
+  const passed = lines.filter((l) => /^\s*ok\b/.test(l) || /: 0 violation rules/.test(l)).length;
   if (r.status === 0) return { name, ok: true, passed };
   // The scripts stop at the first failure and print it as "FAIL: ...". Keep that line exactly.
   // Anything else (a crash, a timeout) gets the head of the error, which names the cause.
@@ -123,7 +131,7 @@ if (!setupError) {
   let server;
   try {
     server = await startServer();
-    for (const name of CHECKS) results.push(runCheck(name));
+    for (const check of CHECKS) results.push(runCheck(check));
   } catch (e) {
     setupError = e.message;
   } finally {

@@ -17,7 +17,7 @@ async function scan(page, name, results) {
 }
 
 (async () => {
-  const browser = await chromium.launch({ executablePath: process.env.CHROME || "/opt/pw-browsers/chromium-1243/chrome-linux64/chrome" });
+  const browser = await chromium.launch({ executablePath: process.env.CHROME || undefined });
   const all = { tool: `axe-core ${axeVersion}`, tags: TAGS, runAt: new Date().toISOString(), schemes: {} };
   // Each color scheme, standard and with the high-contrast Display setting on.
   for (const [scheme, colorScheme, high] of [["light", "light", false], ["dark", "dark", false], ["light, high contrast", "light", true], ["dark, high contrast", "dark", true]]) {
@@ -81,4 +81,7 @@ async function scan(page, name, results) {
   }
   await browser.close();
   if (OUT) fs.writeFileSync(OUT, JSON.stringify(all, null, 2) + "\n");
+  // Any violation fails the run, named by mode and screen, so a check run can report it.
+  const failing = Object.entries(all.schemes).flatMap(([scheme, rs]) => rs.filter((r) => r.violations.length).map((r) => `${r.screen} (${scheme})`));
+  if (failing.length) { console.error(`FAIL: axe violations on ${failing.length} screens: ${failing.join("; ")}`); process.exit(1); }
 })().catch((e) => { console.error(e); process.exit(1); });
