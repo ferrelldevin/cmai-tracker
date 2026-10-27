@@ -33,6 +33,7 @@ Before building, list what the change looks like in each of these. The PR checkl
 ## 5. Verify
 - `npm test` and `npm run build` pass.
 - The browser checks in `e2e/` pass against the production build: the end-to-end flow (including the offline reload), navigation and theme. A new feature adds its own checks there.
+- `npm run checks` runs flows, navigation and scores-period in one go and writes one report; `npm run checks:report` also pushes it to the `checks-report` branch so a cloud session can read it.
 - axe-core WCAG 2.2 AA shows 0 violations in all four modes (`docs/audits/axe-run.cjs`).
 - Before and after screenshots, on a phone size, in light and dark.
 - A real phone check when the change touches install, offline, storage, gestures or the keyboard.
