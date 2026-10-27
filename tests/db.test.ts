@@ -2,10 +2,10 @@
 import "fake-indexeddb/auto";
 import Dexie from "dexie";
 import { describe, expect, it } from "vitest";
-import { checkInKey, db } from "../src/data/db";
+import { checkInKey, db, isLive } from "../src/data/db";
 
 describe("database upgrade from version 1", () => {
-  it("keeps version 1 data and adds an empty check-in table", async () => {
+  it("keeps version 1 data and adds empty check-in and change-history tables", async () => {
     db.close();
     await Dexie.delete("cmai-tracker");
     const v1 = new Dexie("cmai-tracker");
@@ -16,11 +16,14 @@ describe("database upgrade from version 1", () => {
     v1.close();
 
     await db.open();
-    expect(db.verno).toBe(2);
+    expect(db.verno).toBe(3);
     expect(await db.patients.toArray()).toEqual([{ id: "P-01", anchor: 0 }]);
     expect(await db.observations.count()).toBe(1);
     expect((await db.reviews.get("P-01|0|7"))?.choice).toBe(3);
     expect(await db.checkins.count()).toBe(0);
+    expect(await db.changes.count()).toBe(0);
+    // Logs from before soft delete have no deletedAt, so they all still count.
+    expect((await db.observations.toArray()).every(isLive)).toBe(true);
 
     await db.checkins.put({ key: checkInKey("P-01", 0), patientId: "P-01", day: 0, at: 5000 });
     await db.checkins.put({ key: checkInKey("P-01", 0), patientId: "P-01", day: 0, at: 6000 });

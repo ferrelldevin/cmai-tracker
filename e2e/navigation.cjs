@@ -42,23 +42,10 @@ const ok = (c, m) => { if (!c) throw new Error("FAIL: " + m); console.log("  ok"
   await shot("05-scores-total");
   await p.reload(); await p.waitForTimeout(800);
   ok(p.url().endsWith("#/scores") && (await p.locator("nav.tabs button.on").textContent()).includes("Scores"), "reload stays on Scores");
-  // Review
-  await tab(/review/i); await p.waitForTimeout(600);
-  const before = await p.locator('nav[aria-label="Jump to a group"] a').allTextContents();
-  ok(before.join("|") === "Aggressive0/9|Physical0/9|Verbal0/6|Other0/5" || before.every((t) => /\d+\/\d+/.test(t)), "Review chips show progress: " + before.join(", "));
-  await shot("06-review-top");
-  await p.locator('nav[aria-label="Jump to a group"] a', { hasText: "Verbal" }).click(); await p.waitForTimeout(900);
-  ok(await active("Jump to a group") === "Verbal" + before[2].replace(/^Verbal/, ""), "Review: jump to Verbal");
-  await p.getByRole("button", { name: /^5\. Constant unwarranted/ }).click();
-  const rs = p.getByRole("dialog", { name: /^5\. Constant unwarranted/ });
-  await rs.waitFor(); ok(await p.evaluate(() => document.activeElement?.tagName === "DIALOG"), "rating sheet opened by tap: no focus ring");
-  await rs.getByRole("button", { name: /^Once or twice a week/ }).click();
-  await rs.waitFor({ state: "hidden" }); ok(true, "choosing a rating saves and closes the sheet");
-  // The row re-renders after the save lands, so wait for it rather than reading at once.
-  await p.getByRole("button", { name: /^5\. Constant unwarranted.*You changed it to 3/ }).waitFor({ timeout: 3000 }); ok(true, "row shows the changed rating");
-  await p.waitForTimeout(300);
-  ok((await p.locator('nav[aria-label="Jump to a group"] a', { hasText: "Verbal" }).textContent()).includes("1/5"), "reviewing one verbal item updates the chip to 1/5");
-  await shot("07-review-verbal");
+  // The day-14 review screen is gone (D-14): no tab, and its old address lands on the start screen.
+  ok(!(await p.locator("nav.tabs button", { hasText: "Review" }).count()), "no Review tab");
+  await p.goto(p.url().replace(/#.*$/, "#/review")); await p.reload(); await p.waitForTimeout(800);
+  ok((await p.locator("nav.tabs button.on").textContent()).includes("Log"), "old #/review address opens Log");
   // Data hub and pages
   await tab(/data/i); await p.waitForTimeout(500);
   ok(p.url().endsWith("#/data"), "Data hub in URL");

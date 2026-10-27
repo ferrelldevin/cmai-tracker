@@ -103,13 +103,12 @@ input[type="checkbox"] { width: 22px; height: 22px; min-height: 0; accent-color:
 .pt-switch-hint { display: inline-flex; align-items: center; gap: 2px; color: var(--accent-ink); font-size: var(--fs-sm); font-weight: 700; }
 
 .tabs { position: fixed; left: 0; right: 0; bottom: 0; z-index: 4; background: var(--surface); border-top: 1px solid var(--rule); padding: var(--s1) var(--s2) calc(var(--s1) + env(safe-area-inset-bottom)); }
-.tabs-inner { max-width: 760px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); }
+.tabs-inner { max-width: 760px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); }
 .tabs button { background: transparent; color: var(--text-muted); font-size: var(--fs-xs); font-weight: 600; padding: 6px 2px; min-height: 60px; flex-direction: column; gap: 4px; border-radius: 0; border: 0; }
 .tabs button:hover { background: transparent; color: var(--text); }
 .tab-icon { position: relative; display: inline-flex; align-items: center; justify-content: center; width: 60px; height: 30px; border-radius: 999px; transition: background-color .15s; }
 .tabs button.on { color: var(--accent-ink); }
 .tabs button.on .tab-icon { background: var(--accent-soft); }
-.badge { position: absolute; top: 2px; right: 14px; width: 10px; height: 10px; border-radius: 50%; background: var(--attn); border: 2px solid var(--surface); }
 
 /* Shared blocks */
 .card { background: var(--surface); border: 1px solid var(--rule); border-radius: var(--radius); padding: var(--s4) var(--s4); margin: var(--s4) 0; box-shadow: var(--shadow-1); }
@@ -327,25 +326,7 @@ button.text-danger { background: transparent; color: var(--danger); border: 0; m
 .chart { width: 100%; margin-top: var(--s2); }
 .recharts-text, .recharts-legend-item-text { font-family: inherit; font-size: 13px; }
 
-/* Review */
-.progress-line { display: flex; align-items: center; gap: var(--s3); margin: 0 0 var(--s3); font-size: var(--fs-sm); color: var(--text-muted); }
-.progress-line progress { flex: 1; height: 8px; accent-color: var(--accent); }
-/* Review rows: the rating in Scores colors, then the behavior and whether it was checked (F-18). */
-.review-list { margin-bottom: var(--s4); }
-.review-btn { width: 100%; align-items: center; }
-.rv-cell { flex: none; width: 40px; height: 40px; border-radius: var(--radius-sm); display: inline-flex; align-items: center; justify-content: center; font-weight: 700; font-size: var(--fs-md); font-variant-numeric: tabular-nums; }
-.rv-cell.small { width: 32px; height: 32px; font-size: var(--fs-sm); }
-.rv-cell.unchecked { outline: 2px dashed var(--rule-strong); outline-offset: -2px; }
-.rv-state { font-size: var(--fs-xs); font-weight: 700; color: var(--text-muted); display: inline-flex; align-items: center; gap: 4px; }
-.rv-state.done { color: var(--accent-ink); }
-.rv-state.changed { color: var(--attn); }
 .fwd-icon { flex: none; transform: rotate(-90deg); color: var(--text-muted); }
-.rating-opts { display: grid; gap: var(--s2); }
-.rating-opt { justify-content: flex-start; gap: var(--s3); }
-.rating-opt .rating-label { flex: 1; }
-.rating-opt[aria-pressed="true"] .rv-cell { box-shadow: 0 0 0 2px var(--accent); }
-button.text-quiet { background: transparent; color: var(--accent-ink); border: 0; min-height: 44px; }
-@media (hover: hover) { button.text-quiet:hover { background: var(--hover); } }
 
 /* Data */
 .welcome { text-align: left; padding: var(--s5) var(--s4); background: linear-gradient(180deg, var(--accent-soft), var(--surface) 60%); }
@@ -444,7 +425,6 @@ button.text-quiet { background: transparent; color: var(--accent-ink); border: 0
    background color only. */
 @media (forced-colors: active) {
   .tabs button.on .tab-icon, .chip.on, .segmented label:has(input:checked) { outline: 2px solid Highlight; }
-  .badge { background: Highlight; border-color: Canvas; forced-color-adjust: none; }
   .heat td { border: 1px solid CanvasText; }
   .avatar { forced-color-adjust: none; }
 }

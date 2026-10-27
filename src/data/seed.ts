@@ -59,9 +59,10 @@ export async function loadDemoData(now = Date.now()) {
       }
     }
   }
-  await db.transaction("rw", [db.patients, db.observations, db.reviews, db.checkins], async () => {
+  await db.transaction("rw", [db.patients, db.observations, db.reviews, db.checkins, db.changes], async () => {
     for (const id of Object.keys(PLANS)) {
       await db.observations.where("patientId").equals(id).delete();
+      await db.changes.where("patientId").equals(id).delete();
       await db.reviews.where("patientId").equals(id).delete();
       await db.checkins.where("patientId").equals(id).delete();
       await db.patients.put({ id, anchor, demo: true });

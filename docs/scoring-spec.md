@@ -46,14 +46,17 @@ A plain count can't show "several times an hour", so rating 7 uses timing:
 - **Complex behaviors**: the manual says to split them into the simple behaviors they contain and log each (p.4, instruction 14).
 - Each button shows a short description in our own words and the manual page with the full definition (p.12 to 13). "Does not count" shows the manual's exclusions, also reworded. Example: spitting into a tissue is not #3. The manual's own wording is not reproduced in the app (see NOTICE).
 
-## 5. Day-14 review, and codes 8 and 9
+## 5. The app's rating is locked, and codes 8 and 9
 
-When a period ends, the caregiver sees the app's rating for each behavior and can confirm or change it. This keeps the look-back judgment the CMAI was built on, and it is the only place to record:
+**Nobody can change the app's rating** (D-14, 2026-10-27). The study checks whether the app's rating matches, or beats, a caregiver's own CMAI rating. A caregiver who could change the app's rating would be grading the app with its own answer, so the comparison would mean nothing.
 
-- **8, would occur if not prevented** (for example, would pace if not restrained) (p.3, p.5, p.24).
-- **9, not applicable** (for example, cannot walk, so cannot pace) (p.3, p.24).
+- Every rating the app shows or exports is computed from the live logs at that moment, with this rule version. No rating is stored where it could be edited.
+- **Deleted logs do not count.** Deleting a log takes a reason and a confirmation. The log is kept, marked with when and why, and stays in the backup and in `observations.csv` (`deleted_at`, `delete_reason`, `delete_note`). Every edit, delete and undo is in a change history, also in the backup. See design note 007.
+- Builds before 2026-10-27 had a day-14 review where the caregiver could confirm or change each rating. That screen is gone. Any review records already on a phone are kept in the backup but never change a score.
 
-The app stores both the derived rating and the caregiver's choice, so the lab can see how often caregivers disagree with the counts. Codes 8 and 9 are reported separately and left out of every sum (the manual says to analyze them separately, p.5).
+**Codes 8 and 9** (would occur if not prevented; not applicable, p.3, p.5, p.24) are a caregiver's judgment, so the count rule can't give them. They belong in a caregiver's own CMAI rating, kept apart from the app's.
+
+**Proposed, not built: a blind caregiver rating at day 14.** If the lab wants it (pending Dr. Gupta), the caregiver fills in a full CMAI for the period on a separate screen, without seeing the app's ratings or counts first, so their answer isn't anchored on the app's. It is stored on its own and never changes the app's rating; codes 8 and 9 would be recorded there. The comparison of the two belongs in the export, not on the caregiver's screen.
 
 ## 6. What the app reports, in order
 

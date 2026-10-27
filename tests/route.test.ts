@@ -4,7 +4,11 @@ import { parseRoute, routeHash } from "../src/ui/route";
 
 describe("routes", () => {
   it("reads each tab", () => {
-    for (const tab of ["log", "scores", "review", "data"] as const) expect(parseRoute(`#/${tab}`)).toEqual({ tab, page: null });
+    for (const tab of ["log", "scores", "data"] as const) expect(parseRoute(`#/${tab}`)).toEqual({ tab, page: null });
+  });
+
+  it("treats the removed #/review screen as unknown, so it lands on the start screen", () => {
+    expect(parseRoute("#/review")).toBeNull();
   });
 
   it("reads a Data page, and only under Data", () => {

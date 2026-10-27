@@ -24,7 +24,7 @@ Read each task aloud and hand over the phone. Do not show where to tap. Note tim
 | 4 | "It's the end of your shift with P-DEMO-B and nothing happened today. Tell the app." | Finds "Nothing to log today" at the bottom of the Log screen | 1 min |
 | 5 | "Is P-DEMO-A's screaming getting better or worse? How sure are you?" | Scores screen; reads row 13 and its arrow; mentions the change rule or unlogged days | 1.5 min |
 | 6 | "The total went down. Does that mean his treatment is working?" | Reads the note that totals fall without treatment changes; names the behaviors that changed | 1 min |
-| 7 | "Check the app's ratings for the last two weeks and change one you disagree with." | Day-14 review; changes one rating | 0.5 min |
+| 7 | "One of today's logs was tapped by mistake. Remove it." | Recent logs, Edit, Delete log; picks a reason and confirms (note whether the reason step reads as clear or as a hurdle) | 1 min |
 
 Neutral prompts only: "What are you thinking?", "What did you expect to happen?", "Keep talking, please." If stuck past the limit: "Thanks, let's move on." Never say whether they got it right.
 

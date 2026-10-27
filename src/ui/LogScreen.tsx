@@ -2,12 +2,14 @@
 // the caregiver picks the right item, with the manual page for the full
 // definition (p.12-13). A short confirmation offers Edit and Undo for 8 seconds; the timer
 // stops while the caregiver is using it (WCAG 2.2.1). Edit, here and in Recent logs, opens
-// the one log details sheet (design note 003).
+// the one log details sheet (design note 003). Deleting asks for a reason; every edit, delete
+// and undo goes through data/logs.ts so it lands in the change history (design note 007).
 
 import { useEffect, useRef, useState, type MouseEvent } from "react";
 import { GROUP_LABELS, ITEMS, type FactorGroup } from "../scoring/items";
 import { DAY_MS } from "../scoring/engine";
 import { checkInKey, db, localMidnight, type CheckIn, type StoredObservation } from "../data/db";
+import { deleteLog, editLog, restoreLog, UNDO_REASON } from "../data/logs";
 import { dayAndTime, timeOfDay } from "./format";
 import { Icon } from "./Icon";
 import { LogSheet } from "./LogSheet";
@@ -84,8 +86,9 @@ export function LogScreen({ patientId, observations, checkins, onChange }: Props
 
   async function undo() {
     if (!toast) return;
-    if (toast.kind === "logged") await db.observations.delete(toast.obs.id);
-    else await db.observations.put(toast.obs);
+    // Undo of a log just made is a delete like any other, with its own reason.
+    if (toast.kind === "logged") await deleteLog(toast.obs, UNDO_REASON);
+    else await restoreLog(toast.obs);
     setToast(null);
     setHeld(false);
     onChange();
@@ -101,12 +104,12 @@ export function LogScreen({ patientId, observations, checkins, onChange }: Props
     if (!editing) return;
     // Show the change at once; the save follows.
     setEditing({ ...editing, obs: { ...editing.obs, ...change } });
-    await db.observations.update(editing.obs.id, change);
+    await editLog(editing.obs, change);
     onChange();
   }
 
-  async function remove(o: SavedObs) {
-    await db.observations.delete(o.id);
+  async function remove(o: SavedObs, reason: string, note?: string) {
+    await deleteLog(o, reason, note);
     setEditing(null);
     setToast({ kind: "deleted", obs: o });
     onChange();
@@ -162,7 +165,7 @@ export function LogScreen({ patientId, observations, checkins, onChange }: Props
           <p className="muted">Logs from the last 24 hours show here, so you can fix a time or remove a mistake.</p>
         ) : (
           <>
-            <p className="muted">Last 24 hours, newest first. Fix the time or remove a log tapped by mistake.</p>
+            <p className="muted">Last 24 hours, newest first. Fix the time, or delete a log tapped by mistake. Deleting asks why.</p>
             <ul className="recent-list">
               {recent.slice(0, showAllRecent ? undefined : RECENT_SHOWN).map((o) => (
                 <li key={o.id}>
@@ -222,7 +225,7 @@ export function LogScreen({ patientId, observations, checkins, onChange }: Props
         obs={editing?.obs ?? null}
         viaKeyboard={editing?.viaKeyboard ?? false}
         onPatch={patch}
-        onDelete={() => editing && remove(editing.obs)}
+        onDelete={(reason, note) => editing && remove(editing.obs, reason, note)}
         onClose={() => setEditing(null)}
       />
     </div>

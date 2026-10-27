@@ -134,15 +134,15 @@ export function meaningfulChanges(series: number[]): Change[] {
   });
 }
 
-// ---------- Day-14 review (spec section 5) ----------
+// ---------- The app's ratings (spec section 5) ----------
 
-/** What the caregiver chose for one item at review: a 1-7 rating, or code 8 / 9. */
-export type ReviewChoice = number;
-
-/** Final value per item: the caregiver's review choice if any, else the derived rating. */
-export function finalRatings(score: WindowScore, review: Record<number, ReviewChoice> = {}): Record<number, number> {
+/**
+ * The rating per item, from the logs alone. Nothing a person enters can change it: the
+ * study compares this rating with the caregiver's own, so an override would defeat it (D-14).
+ */
+export function appRatings(score: WindowScore): Record<number, number> {
   const out: Record<number, number> = {};
-  for (const s of score.items) out[s.itemId] = review[s.itemId] ?? s.rating;
+  for (const s of score.items) out[s.itemId] = s.rating;
   return out;
 }
 
@@ -171,23 +171,24 @@ const CRITERIA: Record<Exclude<FactorGroup, "other">, [number, number][]> = {
   verbal: [[5, 1], [4, 2], [3, 3], [2, 4]],
 };
 
-export function summarize(finals: Record<number, number>): Summary {
+/** `ratings` is 1-7 or code 8 / 9 per item. Codes only come from a caregiver's own rating, never the count rule. */
+export function summarize(ratings: Record<number, number>): Summary {
   const groups = ["aggressive", "physical", "verbal"] as const;
   const factors = {} as Summary["factors"];
   const agitated = {} as Summary["agitated"];
   for (const g of groups) {
-    const ratings = ITEMS.filter((i) => i.group === g).map((i) => finals[i.id]).filter(isScale);
-    const sum = ratings.reduce((a, b) => a + b, 0);
-    factors[g] = { sum, n: ratings.length, mean: ratings.length ? sum / ratings.length : 0 };
-    agitated[g] = meets(ratings, CRITERIA[g]);
+    const inGroup = ITEMS.filter((i) => i.group === g).map((i) => ratings[i.id]).filter(isScale);
+    const sum = inGroup.reduce((a, b) => a + b, 0);
+    factors[g] = { sum, n: inGroup.length, mean: inGroup.length ? sum / inGroup.length : 0 };
+    agitated[g] = meets(inGroup, CRITERIA[g]);
   }
-  const scale = ITEMS.map((i) => finals[i.id]).filter(isScale);
+  const scale = ITEMS.map((i) => ratings[i.id]).filter(isScale);
   return {
     total: scale.reduce((a, b) => a + b, 0),
     itemsInTotal: scale.length,
     factors,
     agitated,
     agitatedAny: groups.some((g) => agitated[g]),
-    specialCodes: ITEMS.filter((i) => !isScale(finals[i.id])).map((i) => ({ itemId: i.id, code: finals[i.id] })),
+    specialCodes: ITEMS.filter((i) => !isScale(ratings[i.id])).map((i) => ({ itemId: i.id, code: ratings[i.id] })),
   };
 }

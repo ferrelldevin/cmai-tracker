@@ -1,8 +1,9 @@
 // Patient and backup management: restore an export, delete a patient, clear demo data.
 // Restoring merges into what is already on the phone. Nothing is overwritten except a
-// day-14 review or check-in with the same key, where the backup's copy wins.
+// day-14 review or check-in with the same key, where the backup's copy wins. Deleted logs
+// come back deleted, with their reason, and the change history comes back with them.
 
-import { db, type CheckIn, type Patient, type Review, type StoredObservation } from "./db";
+import { db, type CheckIn, type LogChange, type Patient, type Review, type StoredObservation } from "./db";
 
 export interface RestoreResult {
   patients: number; // new patients added
@@ -32,27 +33,40 @@ export function parseBackup(text: string) {
   );
   const reviews = (Array.isArray(data.reviews) ? data.reviews : []).filter((r): r is Review => isObj(r) && str(r.key) && str(r.patientId) && num(r.choice));
   const checkins = (Array.isArray(data.checkins) ? data.checkins : []).filter((c): c is CheckIn => isObj(c) && str(c.key) && str(c.patientId) && num(c.day));
-  return { patients, observations, reviews, checkins };
+  const changes = (Array.isArray(data.changes) ? data.changes : []).filter(
+    (c): c is LogChange => isObj(c) && num(c.observationId) && str(c.patientId) && num(c.at) && ["edit", "delete", "restore"].includes(c.action as string),
+  );
+  return { patients, observations, reviews, checkins, changes };
 }
 
 export async function restoreBackup(text: string): Promise<RestoreResult> {
   const b = parseBackup(text);
   const result: RestoreResult = { patients: 0, observations: 0, reviews: b.reviews.length, checkins: b.checkins.length };
-  await db.transaction("rw", [db.patients, db.observations, db.reviews, db.checkins], async () => {
+  await db.transaction("rw", [db.patients, db.observations, db.reviews, db.checkins, db.changes], async () => {
     for (const p of b.patients) {
       if (!(await db.patients.get(p.id))) {
         await db.patients.add({ id: p.id, anchor: p.anchor, ...(p.demo ? { demo: true } : {}) });
         result.patients++;
       }
     }
-    const seen = new Set((await db.observations.toArray()).map((o) => `${o.patientId}|${o.itemId}|${o.at}|${o.loggedAt}`));
+    // A restored log gets a new id on this phone, so its history is re-pointed to that id.
+    const key = (o: StoredObservation) => `${o.patientId}|${o.itemId}|${o.at}|${o.loggedAt}`;
+    const seen = new Set((await db.observations.toArray()).map(key));
+    const newId = new Map<number, number>();
     for (const o of b.observations) {
-      const k = `${o.patientId}|${o.itemId}|${o.at}|${o.loggedAt}`;
+      const k = key(o);
       if (seen.has(k)) continue;
       seen.add(k);
-      const { id: _drop, ...rest } = o;
-      await db.observations.add(rest);
+      const { id: oldId, ...rest } = o;
+      const id = await db.observations.add(rest);
+      if (num(oldId)) newId.set(oldId as number, id);
       result.observations++;
+    }
+    for (const c of b.changes) {
+      const id = newId.get(c.observationId);
+      if (id === undefined) continue; // its log was already on this phone, with its own history
+      const { id: _drop, ...rest } = c;
+      await db.changes.add({ ...rest, observationId: id });
     }
     await db.reviews.bulkPut(b.reviews);
     await db.checkins.bulkPut(b.checkins);
@@ -61,8 +75,9 @@ export async function restoreBackup(text: string): Promise<RestoreResult> {
 }
 
 export async function deletePatient(id: string) {
-  await db.transaction("rw", [db.patients, db.observations, db.reviews, db.checkins], async () => {
+  await db.transaction("rw", [db.patients, db.observations, db.reviews, db.checkins, db.changes], async () => {
     await db.observations.where("patientId").equals(id).delete();
+    await db.changes.where("patientId").equals(id).delete();
     await db.reviews.where("patientId").equals(id).delete();
     await db.checkins.where("patientId").equals(id).delete();
     await db.patients.delete(id);

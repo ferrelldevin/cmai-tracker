@@ -62,7 +62,7 @@ export function ScoresScreen({ patientId, windows, observations, hasActivity, pe
   const rows = periodBehaviors(sel, showAll);
   const inPeriod = observations.filter((o) => o.patientId === patientId && o.at >= sel.score.windowStart && o.at < sel.score.windowEnd);
   const finished = windows.filter((w) => !w.score.provisional);
-  const changes = new Map(ITEMS.map((i) => [i.id, meaningfulChanges(finished.map((w) => w.finals[i.id]))]));
+  const changes = new Map(ITEMS.map((i) => [i.id, meaningfulChanges(finished.map((w) => w.ratings[i.id]))]));
   const hours = Array.from({ length: 24 }, (_, hour) => ({ label: `${hour % 12 || 12}${hour < 12 ? "a" : "p"}`, count: 0 }));
   inPeriod.forEach((o) => hours[new Date(o.at).getHours()].count++);
   const trend = finished.map((w, i) => ({ name: `P${i + 1}`, total: w.summary.total,
@@ -106,31 +106,30 @@ export function ScoresScreen({ patientId, windows, observations, hasActivity, pe
     <section className="card" id="sc-behaviors" aria-labelledby="score-behaviors-title">
       <h2 id="score-behaviors-title">Behavior scores</h2>
       <p className="muted">Period {selected + 1} only · 1 = never, 7 = several times an hour.</p>
-      {rows.length === 0 ? <p>No behaviors logged or reviewed in this period. Check the coverage above before interpreting the ratings.</p> :
+      {rows.length === 0 ? <p>No behaviors logged in this period. Check the coverage above before interpreting the ratings.</p> :
         <table className="period-scores">
           <caption className="sr">Behavior ratings and logged occurrences for period {selected + 1}</caption>
           <thead><tr><th scope="col">Behavior</th><th scope="col">Rating</th><th scope="col">Logs</th></tr></thead>
           <tbody>{rows.map((item) => {
-            const rating = sel.finals[item.id];
+            const rating = sel.ratings[item.id];
             const derived = sel.score.items[item.id - 1];
-            const reviewed = item.id in sel.review;
             const moved = changeSince(windows, selected, item.id);
             return <tr key={item.id} data-behavior={item.id}>
               <th scope="row"><b>{item.id}. {item.name}</b><span className="score-row-label">{RATING_LABELS[rating]}</span>
                 <span className={moved.change ? `score-row-change ${moved.change}` : "score-row-change"}>
                   {moved.text}{moved.change && <span aria-hidden> {moved.change === "up" ? "↑" : "↓"}</span>}
                 </span>
-                <span className="score-row-source">{reviewed ? `Caregiver reviewed · app suggested ${derived.rating}` : "App-derived · not reviewed"}</span></th>
+                <span className="score-row-source">App-derived from logs</span></th>
               <td><span className={`rating-cell r${rating}${sel.score.provisional ? " provisional" : ""}`}>{rating}</span></td>
               <td>{derived.count}</td>
             </tr>;
           })}</tbody>
         </table>}
-      <button className="ghost" aria-expanded={showAll} onClick={() => setShowAll(!showAll)}>{showAll ? "Show logged or reviewed behaviors" : "Show all 29 behaviors"}</button>
+      <button className="ghost" aria-expanded={showAll} onClick={() => setShowAll(!showAll)}>{showAll ? "Show logged behaviors" : "Show all 29 behaviors"}</button>
       <details className="score-explanation"><summary>How to read these scores</summary>
         <p>Recorded days have a behavior log or a quiet-day check-in. Unlogged days are unknown, not zero. Today is not counted until it ends.</p>
         {sel.summary.specialCodes.length > 0 && <p>Excluded from total and group averages: {sel.summary.specialCodes.map((c) => `#${c.itemId}: ${RATING_LABELS[c.code]}`).join("; ")}.</p>}
-        <p>These CMAI-based (app-derived) ratings come from the count rule or the caregiver's day-14 review, not a CMAI interview. Counts are logged occurrences in this period. A reviewed rating can differ from the logged count. Codes 8 and 9 are separate answers, not higher frequency ratings.</p>
+        <p>These CMAI-based (app-derived) ratings come from the count rule alone, not a CMAI interview. Counts are logged occurrences in this period; deleted logs are not counted. Nobody can change a rating by hand, so it can be compared fairly with a caregiver's own rating.</p>
         <p>The total is secondary: the manual (p.5) advises reading individual behaviors. A lower total does not by itself show an effect of treatment.</p>
       </details>
     </section>
@@ -173,10 +172,10 @@ export function ScoresScreen({ patientId, windows, observations, hasActivity, pe
             <caption>Behavior ratings across finished periods</caption>
             <thead><tr><th scope="col">Behavior</th>{finished.map((w, i) => <th key={w.score.windowStart} scope="col">P{i + 1}<span className="sub">{shortDate(w.score.windowStart)}</span></th>)}</tr></thead>
             <tbody><tr className="unlogged-row"><th scope="row">Unlogged days</th>{finished.map((w) => <td key={w.score.windowStart}>{w.unlogged}</td>)}</tr>
-              {ITEMS.filter((item) => showAll || finished.some((w) => w.finals[item.id] > 1)).map((item) => <tr key={item.id}><th scope="row">{item.id}. {item.name}</th>{finished.map((w, i) => {
+              {ITEMS.filter((item) => showAll || finished.some((w) => w.ratings[item.id] > 1)).map((item) => <tr key={item.id}><th scope="row">{item.id}. {item.name}</th>{finished.map((w, i) => {
                 const change = changes.get(item.id)?.[i];
-                return <td key={w.score.windowStart} className={`r${w.finals[item.id]}`}>
-                  {w.finals[item.id]}{change && <span className="chg" aria-label={change === "up" ? "changed, more often" : "changed, less often"}>{change === "up" ? "↑" : "↓"}</span>}
+                return <td key={w.score.windowStart} className={`r${w.ratings[item.id]}`}>
+                  {w.ratings[item.id]}{change && <span className="chg" aria-label={change === "up" ? "changed, more often" : "changed, less often"}>{change === "up" ? "↑" : "↓"}</span>}
                 </td>;
               })}</tr>)}</tbody>
           </table></div>
