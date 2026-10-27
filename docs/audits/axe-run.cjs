@@ -41,6 +41,13 @@ async function scan(page, name, results) {
     await page.getByRole("dialog").getByRole("button", { name: "Other" }).click();
     await scan(page, "Log details sheet (Other chosen: note field)", results);
     await page.getByRole("button", { name: "Delete log" }).click();
+    // Delete asks for a reason first (D-14), so scan that step and finish it.
+    const del = page.getByRole("dialog", { name: "Delete this log?" });
+    await del.waitFor();
+    await scan(page, "Delete a log (reason step)", results);
+    await del.getByRole("button", { name: "Tapped by mistake" }).click();
+    await del.getByRole("button", { name: "Delete log" }).click();
+    await del.waitFor({ state: "hidden" });
     await page.getByRole("button", { name: "Nothing to log today" }).click();
     await scan(page, "Log (checked in: nothing to log today)", results);
     await page.getByRole("button", { name: /^7 Hitting/ }).click(); // makes sure there is a recent log to edit
@@ -57,12 +64,7 @@ async function scan(page, name, results) {
     await scan(page, "Scores", results);
     await page.getByRole("button", { name: "Show all 29 behaviors" }).click();
     await scan(page, "Scores (all 29 behaviors)", results);
-    await page.getByRole("button", { name: /^Day-14 review/ }).click();
-    await scan(page, "Day-14 review", results);
-    await page.getByRole("button", { name: /^3\. Spitting/ }).click();
-    await page.getByRole("dialog", { name: /^3\. Spitting/ }).waitFor();
-    await scan(page, "Day-14 review (rating sheet)", results);
-    await page.getByRole("dialog").getByRole("button", { name: "Cancel" }).click();
+    // The Day-14 review screen was removed when ratings were locked (D-14, PR #17).
     await page.getByRole("button", { name: "Patients and data" }).click();
     await scan(page, "Patients & data (with patients)", results);
     await page.getByRole("button", { name: "Delete P-DEMO-B" }).click();
