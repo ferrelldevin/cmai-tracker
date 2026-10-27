@@ -4,28 +4,19 @@ RESULT: FAIL
 
 - Commit: f62fbdc Merge pull request #20 from ferrelldevin/claude/checks-add-axe
 - Branch: main
-- Ran at: 2026-10-27T18:23:54.361Z
+- Ran at: 2026-10-27T18:29:16.146Z
 - Node v24.19.0 on win32
 
-## Setup
+## flows: PASS (44 ok)
+
+## navigation: PASS (20 ok)
+
+## scores-period: PASS (42 ok)
+
+## accessibility: FAIL (24 ok)
 
 ```
-Install dependencies failed:
-npm error syscall unlink
-npm error path C:\Users\Devin\gh-cmai-tracker\node_modules\@esbuild\win32-x64\esbuild.exe
-npm error errno -4048
-npm error [Error: EPERM: operation not permitted, unlink 'C:\Users\Devin\gh-cmai-tracker\node_modules\@esbuild\win32-x64\esbuild.exe'] {
-npm error   errno: -4048,
-npm error   code: 'EPERM',
-npm error   syscall: 'unlink',
-npm error   path: 'C:\\Users\\Devin\\gh-cmai-tracker\\node_modules\\@esbuild\\win32-x64\\esbuild.exe'
-npm error }
-npm error
-npm error The operation was rejected by your operating system.
-npm error It's possible that the file was already in use (by a text editor or antivirus), or that you lack permissions to access it.
-npm error
-npm error If you believe this might be a permissions issue, please double-check the permissions of the file and its containing directories, or try running the command again as root/Administrator.
-npm error A complete log of this run can be found in: C:\Users\Devin\AppData\Local\npm-cache\_logs\2026-10-27T18_23_51_932Z-debug-0.log
+FAIL: axe violations on 48 screens: Log (light); Log (after a tap: confirmation, exclusion open) (light); Log details sheet (from the confirmation) (light); Log details sheet (Other chosen: note field) (light); Log (checked in: nothing to log today) (light); Log details sheet (from Recent logs) (light); Patients & data (with patients) (light); Data: Backup and export (light); Data: Display (light); Data: Keep data safe (light); Data: Demo data (light); Data: How ratings are worked out (light); Log (dark); Log (after a tap: confirmation, exclusion open) (dark); Log details sheet (from the confirmation) (dark); Log details sheet (Other chosen: note field) (dark); Log (checked in: nothing to log today) (dark); Log details sheet (from Recent logs) (dark); Patients & data (with patients) (dark); Data: Backup and export (dark); Data: Display (dark); Data: Keep data safe (dark); Data: Demo data (dark); Data: How ratings are worked out (dark); Log (light, high contrast); Log (after a tap: confirmation, exclusion open) (light, high contrast); Log details sheet (from the confirmation) (light, high contrast); Log details sheet (Other chosen: note field) (light, high contrast); Log (checked in: nothing to log today) (light, high contrast); Log details sheet (from Recent logs) (light, high contrast); Patients & data (with patients) (light, high contrast); Data: Backup and export (light, high contrast); Data: Display (light, high contrast); Data: Keep data safe (light, high contrast); Data: Demo data (light, high contrast); Data: How ratings are worked out (light, high contrast); Log (dark, high contrast); Log (after a tap: confirmation, exclusion open) (dark, high contrast); Log details sheet (from the confirmation) (dark, high contrast); Log details sheet (Other chosen: note field) (dark, high contrast); Log (checked in: nothing to log today) (dark, high contrast); Log details sheet (from Recent logs) (dark, high contrast); Patients & data (with patients) (dark, high contrast); Data: Backup and export (dark, high contrast); Data: Display (dark, high contrast); Data: Keep data safe (dark, high contrast); Data: Demo data (dark, high contrast); Data: How ratings are worked out (dark, high contrast)
 ```
 
 Written by scripts/run-checks.mjs. Screenshots stay on the machine that ran it.
