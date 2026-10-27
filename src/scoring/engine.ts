@@ -11,6 +11,35 @@ export const WINDOW_DAYS = 14;
 export const WINDOW_MS = WINDOW_DAYS * DAY_MS;
 const HOUR_MS = 60 * 60 * 1000;
 
+// ---------- Calendar days ----------
+// Days and periods are counted on the calendar, not in 24-hour blocks. The day the clocks
+// change is 23 or 25 hours long, so adding 24 hours at a time would move every later day
+// and period line an hour off local midnight (spec section 7). WINDOW_MS is only the
+// nominal length; window lines come from addDays.
+
+/** Local midnight at the start of the day `t` falls on. */
+export function localMidnight(t: number): number {
+  const d = new Date(t);
+  d.setHours(0, 0, 0, 0);
+  return d.getTime();
+}
+
+/** `days` calendar days after `t`, at the same clock time. */
+export function addDays(t: number, days: number): number {
+  const d = new Date(t);
+  d.setDate(d.getDate() + days);
+  return d.getTime();
+}
+
+/** Which day `t` falls on, counted from the day that begins at `start` (0 is that day, negative is before it). */
+export function dayIndex(t: number, start: number): number {
+  let k = Math.floor((t - start) / DAY_MS);
+  // The 24-hour estimate is off by at most one day near a clock change.
+  while (addDays(start, k + 1) <= t) k++;
+  while (addDays(start, k) > t) k--;
+  return k;
+}
+
 export interface Observation {
   itemId: number;
   at: number; // epoch ms
@@ -52,7 +81,7 @@ export function clusteredDays(times: number[], windowStart: number): number {
   const sorted = [...times].sort((a, b) => a - b);
   const days = new Set<number>();
   for (let i = 0; i + 2 < sorted.length; i++) {
-    if (sorted[i + 2] - sorted[i] < HOUR_MS) days.add(Math.floor((sorted[i] - windowStart) / DAY_MS));
+    if (sorted[i + 2] - sorted[i] < HOUR_MS) days.add(dayIndex(sorted[i], windowStart));
   }
   return days.size;
 }
@@ -77,7 +106,7 @@ export interface WindowScore {
  * `now` decides whether the window is still open (provisional).
  */
 export function scoreWindow(observations: Observation[], windowStart: number, now: number): WindowScore {
-  const windowEnd = windowStart + WINDOW_MS;
+  const windowEnd = addDays(windowStart, WINDOW_DAYS);
   const inWindow = observations.filter((o) => o.at >= windowStart && o.at < windowEnd);
   const items = ITEMS.map((item) => {
     const times = inWindow.filter((o) => o.itemId === item.id).map((o) => o.at);
@@ -92,7 +121,7 @@ export function scoreWindow(observations: Observation[], windowStart: number, no
 /** All windows from the anchor (patient's first day) up to and including the one containing `now`. */
 export function scoreAllWindows(observations: Observation[], anchor: number, now: number): WindowScore[] {
   const windows: WindowScore[] = [];
-  for (let start = anchor; start <= now; start += WINDOW_MS) {
+  for (let start = anchor; start <= now; start = addDays(start, WINDOW_DAYS)) {
     windows.push(scoreWindow(observations, start, now));
   }
   return windows;
@@ -104,10 +133,10 @@ export function scoreAllWindows(observations: Observation[], anchor: number, now
  * ended count, so today is never called unlogged while it is still going.
  */
 export function unloggedDays(times: number[], windowStart: number, now: number): { unlogged: number; elapsed: number } {
-  const elapsed = Math.max(0, Math.min(WINDOW_DAYS, Math.floor((now - windowStart) / DAY_MS)));
+  const elapsed = Math.max(0, Math.min(WINDOW_DAYS, dayIndex(now, windowStart)));
   const covered = new Set<number>();
   for (const t of times) {
-    const day = Math.floor((t - windowStart) / DAY_MS);
+    const day = dayIndex(t, windowStart);
     if (day >= 0 && day < elapsed) covered.add(day);
   }
   return { unlogged: elapsed - covered.size, elapsed };

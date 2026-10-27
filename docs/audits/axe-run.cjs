@@ -85,4 +85,7 @@ async function scan(page, name, results) {
   }
   await browser.close();
   if (OUT) fs.writeFileSync(OUT, JSON.stringify(all, null, 2) + "\n");
+  // Any violation fails the run, named by mode and screen, so a check run can report it.
+  const failing = Object.entries(all.schemes).flatMap(([scheme, rs]) => rs.filter((r) => r.violations.length).map((r) => `${r.screen} (${scheme})`));
+  if (failing.length) { console.error(`FAIL: axe violations on ${failing.length} screens: ${failing.join("; ")}`); process.exit(1); }
 })().catch((e) => { console.error(e); process.exit(1); });

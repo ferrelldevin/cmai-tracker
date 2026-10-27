@@ -2,17 +2,16 @@
 // periods and when they were last logged. Uses the same windows as the scoring engine.
 
 import Dexie from "dexie";
-import { DAY_MS, WINDOW_DAYS, WINDOW_MS } from "../scoring/engine";
+import { dayIndex, WINDOW_DAYS } from "../scoring/engine";
 import { db, type Patient } from "./db";
 
 export interface Position { period: number; day: number }
 
 /** Period (1-based) and day of that period (1 to 14) for a patient whose day 1 began at `anchor`. */
 export function patientPosition(anchor: number, now: number): Position {
-  const since = Math.max(0, now - anchor);
-  const period = Math.floor(since / WINDOW_MS) + 1;
-  const day = Math.min(WINDOW_DAYS, Math.floor((since % WINDOW_MS) / DAY_MS) + 1);
-  return { period, day };
+  // Calendar days, so the day and period stay right across clock changes.
+  const days = Math.max(0, dayIndex(now, anchor));
+  return { period: Math.floor(days / WINDOW_DAYS) + 1, day: (days % WINDOW_DAYS) + 1 };
 }
 
 export interface PatientSummary extends Patient, Position {

@@ -90,11 +90,8 @@ class CmaiDb extends Dexie {
 
 export const db = new CmaiDb();
 
-export const localMidnight = (t: number) => {
-  const d = new Date(t);
-  d.setHours(0, 0, 0, 0);
-  return d.getTime();
-};
+// Kept here so existing imports still work; the engine owns calendar-day math.
+export { localMidnight } from "../scoring/engine";
 
 export const reviewKey = (patientId: string, windowStart: number, itemId: number) =>
   `${patientId}|${windowStart}|${itemId}`;

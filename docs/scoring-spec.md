@@ -78,6 +78,7 @@ The app labels every rating it shows **CMAI-based (app-derived)**. They come fro
 ## 7. Periods
 
 - Period 1 starts at local midnight on the patient's first day in the app. Each period is 14 days. Periods are fixed, not rolling.
+- **Days are calendar days.** The day the clocks change is 23 or 25 hours long, and day and period lines stay at local midnight on both sides of it. A log at 11:30 pm counts for that day, whatever the clocks did earlier in the period.
 - A period that hasn't ended is **in progress**. It shows "so far" numbers and is left out of trend lines, because fewer days always looks like improvement.
 - **Unlogged days.** A day with no logs looks the same as a quiet day unless the caregiver says so. The Log screen has a once-a-day **"Nothing to log today"** check-in (one per patient per day; tapping again takes it back). A finished day with neither a log nor a check-in is **unlogged**. The Scores screen shows the number of unlogged days for each period and warns when the selected period has any. Unlogged days are reported as unknown, not as zeros; the count rule itself is unchanged, so ratings in a period with unlogged days may read low. Today is never counted, because it has not ended.
 

@@ -2,7 +2,7 @@
 // P-DEMO-A improves (as if a non-drug approach is working); P-DEMO-B gets worse.
 // Behaviors cluster in the late afternoon for A, to show the time-of-day chart.
 
-import { DAY_MS } from "../scoring/engine";
+import { addDays } from "../scoring/engine";
 import { checkInKey, db, localMidnight, type CheckIn, type StoredObservation } from "./db";
 
 // Small seeded random generator so the demo is the same every time.
@@ -33,13 +33,21 @@ const PLANS: Record<string, Plan> = {
   ],
 };
 
+/** Clock time on a day (hour may have a fraction), so demo times stay put on the day clocks change. */
+const atHour = (dayStart: number, hour: number) => {
+  const d = new Date(dayStart);
+  d.setHours(0, 0, 0, hour * 3_600_000);
+  return d.getTime();
+};
+
 export async function loadDemoData(now = Date.now()) {
-  const anchor = localMidnight(now) - 42 * DAY_MS;
+  const anchor = addDays(localMidnight(now), -42);
   const rand = rng(42);
   const observations: StoredObservation[] = [];
   const checkins: CheckIn[] = [];
   for (const [patientId, plan] of Object.entries(PLANS)) {
     for (let day = 0; day < 42; day++) {
+      const dayStart = addDays(anchor, day);
       const before = observations.length;
       const progress = day / 41;
       for (const [itemId, start, end, peak] of plan) {
@@ -48,14 +56,13 @@ export async function loadDemoData(now = Date.now()) {
         const n = Math.floor(perDay) + (rand() < perDay % 1 ? 1 : 0);
         for (let k = 0; k < n; k++) {
           const hour = Math.min(22, Math.max(7, peak + (rand() - 0.5) * 6));
-          const at = anchor + day * DAY_MS + hour * 3_600_000;
+          const at = atHour(dayStart, hour);
           observations.push({ patientId, itemId, at, loggedAt: at + 60_000 });
         }
       }
       // A quiet day gets an end-of-shift check-in, as a careful caregiver would do.
       if (observations.length === before) {
-        const dayStart = anchor + day * DAY_MS;
-        checkins.push({ key: checkInKey(patientId, dayStart), patientId, day: dayStart, at: dayStart + 22 * 3_600_000 });
+        checkins.push({ key: checkInKey(patientId, dayStart), patientId, day: dayStart, at: atHour(dayStart, 22) });
       }
     }
   }
