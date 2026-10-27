@@ -39,7 +39,7 @@ const ok = (c, m) => { if (!c) throw new Error("FAIL: " + m); console.log("  ok"
   ok(!(await sheet().isVisible()), "tapping the backdrop closes the sheet");
   await banner().click(); await sheet().getByRole("button", { name: /^P-DEMO-B/ }).click();
   await p.getByRole("status").filter({ hasText: "Now on P-DEMO-B" }).waitFor();
-  ok((await banner().getAttribute("aria-label")).startsWith("Patient P-DEMO-B"), "switch takes effect, banner says P-DEMO-B");
+  ok((await banner().locator(".pt-id b").textContent()) === "P-DEMO-B", "switch takes effect, banner says P-DEMO-B");
   await shot("sw-03-switched");
   ok(await p.evaluate(() => !document.querySelector(".pt-banner").matches(":focus-visible")), "no keyboard focus ring left after a tap");
   await p.waitForTimeout(4300);

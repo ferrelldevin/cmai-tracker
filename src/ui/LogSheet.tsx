@@ -136,7 +136,7 @@ export function LogSheet({ obs, viaKeyboard, onPatch, onDelete, onClose }: Props
                       key={m}
                       className={minutesBefore === m ? "on" : undefined}
                       aria-pressed={minutesBefore === m}
-                      aria-label={m === 0 ? "When I logged it" : `${m === 60 ? "1 hr" : `${m} min`} before logging`}
+                      aria-label={m === 0 ? "At log, when I logged it" : `${m === 60 ? "1 hr" : `${m} min`} before logging`}
                       onClick={() => onPatch({ at: obs.loggedAt - m * 60_000 })}
                     >
                       {m === 0 ? "At log" : m === 60 ? "1 hr" : `${m} min`}
