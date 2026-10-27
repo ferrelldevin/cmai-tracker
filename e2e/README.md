@@ -1,6 +1,6 @@
 # Browser checks
 
-To run flows, navigation, scores-period and the axe audit in one go and get a single report, run `npm run checks` (report in `.checks/report.md`) or `npm run checks:report`, which also pushes the report to the `checks-report` branch. On the home desktop, telling Claude Code "run the CMAI checks" does the second; see `CLAUDE.md`.
+To run every check here plus the accessibility audit in one go and get a single report, run `npm run checks` (report in `.checks/report.md`) or `npm run checks:report`, which also pushes the report to the `checks-report` branch. On the home desktop, telling Claude Code "run the CMAI checks" does the second; see `CLAUDE.md`.
 
 These scripts drive the production build in Chromium with Playwright. They are the "Verify" step in `docs/process/change-process.md`, along with `docs/audits/axe-run.cjs`.
 

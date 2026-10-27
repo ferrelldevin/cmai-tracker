@@ -1,4 +1,4 @@
-// Runs the browser checks and the accessibility audit against a fresh production build and writes one report.
+// Runs every browser check and the accessibility audit against a fresh production build and writes one report.
 // usage: npm run checks            (report in .checks/report.md)
 //        npm run checks:report     (same, then pushes the report alone to the checks-report branch)
 // Works in Windows PowerShell, macOS and Linux. It changes no tracked file; the push writes only the report.
@@ -16,6 +16,9 @@ const CHECKS = [
   { name: "flows", file: "e2e/flows.cjs" },
   { name: "navigation", file: "e2e/navigation.cjs" },
   { name: "scores-period", file: "e2e/scores-period.cjs" },
+  { name: "theme", file: "e2e/theme.cjs" },
+  { name: "patient-switcher", file: "e2e/patient-switcher.cjs" },
+  { name: "sheet", file: "e2e/sheet.cjs" },
   { name: "accessibility", file: "docs/audits/axe-run.cjs", out: "axe-wcag22aa.json" },
 ];
 const REPORT_BRANCH = "checks-report";

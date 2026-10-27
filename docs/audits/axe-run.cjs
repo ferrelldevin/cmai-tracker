@@ -49,6 +49,10 @@ async function scan(page, name, results) {
     await del.getByRole("button", { name: "Delete log" }).click();
     await del.waitFor({ state: "hidden" });
     await page.getByRole("button", { name: "Nothing to log today" }).click();
+    // The click leaves the page scrolled wherever the button was, and whichever behavior row the
+    // fixed tab bar happens to cut there can fail target-size by a fraction of a pixel. Scan from the
+    // top so the result does not depend on scroll position.
+    await page.evaluate(() => window.scrollTo(0, 0));
     await scan(page, "Log (checked in: nothing to log today)", results);
     await page.getByRole("button", { name: /^7 Hitting/ }).click(); // makes sure there is a recent log to edit
     await page.getByRole("button", { name: /^Edit / }).first().click();

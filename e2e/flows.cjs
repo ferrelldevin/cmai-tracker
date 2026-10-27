@@ -78,6 +78,8 @@ const ok = (c, m) => { if (!c) throw new Error("FAIL: " + m); console.log("  ok"
   await p.screenshot({ path: `${OUT}/flow-04b-delete-reason.png` });
   await del.getByRole("button", { name: "Delete log" }).click();
   await p.locator(".snackbar", { hasText: "Deleted" }).waitFor();
+  // The snackbar can show a frame before the list re-renders from the database; give it a moment.
+  await p.waitForFunction(() => document.querySelectorAll(".recent-list li").length === 0, null, { timeout: 3000 }).catch(() => {});
   ok((await p.locator(".recent-list li").count()) === 0, "delete removes the log");
   ok((await p.locator(".snackbar").getByRole("button").count()) === 1, "deleted confirmation offers Undo only");
   await p.getByRole("button", { name: "Undo" }).click();
