@@ -2,9 +2,9 @@
 
 RESULT: FAIL
 
-- Commit: f62fbdc Merge pull request #20 from ferrelldevin/claude/checks-add-axe
+- Commit: 58484e4 Merge pull request #23 from ferrelldevin/claude/dst-calendar-days
 - Branch: main
-- Ran at: 2026-10-27T18:29:16.146Z
+- Ran at: 2026-10-27T18:51:01.182Z
 - Node v24.19.0 on win32
 
 ## flows: PASS (44 ok)
