@@ -1,0 +1,10 @@
+# Changes here ask for Devin's review automatically. The scoring rule, its answer key and the
+# register of open decisions are what the lab signs off on, so none of them changes unseen.
+# GitHub does not let an author approve their own pull request, so the main ruleset does not
+# require code-owner approval; this file requests the review, and Devin merges.
+/src/scoring/            @ferrelldevin
+/docs/scoring-spec.md    @ferrelldevin
+/docs/test-cases.json    @ferrelldevin
+/docs/review-register.md @ferrelldevin
+/scripts/make-test-cases.mjs @ferrelldevin
+/.github/                @ferrelldevin

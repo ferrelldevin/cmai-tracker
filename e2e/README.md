@@ -12,8 +12,11 @@ node e2e/navigation.cjs http://localhost:4173/ /tmp/out   # section bars, Data p
 node e2e/theme.cjs http://localhost:4173/ /tmp/out        # light/dark/high contrast settings
 node e2e/patient-switcher.cjs http://localhost:4173/ /tmp/out  # switcher sheet, Esc, backdrop, confirmation, search
 node e2e/sheet.cjs http://localhost:4173/ /tmp/out       # page held still, swipe to close, Other note, time pill
+node e2e/screenshots.cjs http://localhost:4173/ /tmp/out  # Log, Scores, Data, Display vs baselines (Linux only)
 node docs/audits/axe-run.cjs http://localhost:4173/ docs/audits/axe-wcag22aa.json
 ```
+
+**Screenshot baselines** live in `e2e/screenshots/`. They are drawn on Linux, as in CI; on Windows and macOS the comparison is skipped with an `ok ... skipped` line, because text is drawn slightly differently there. When a PR changes how a screen looks on purpose, run `UPDATE_SCREENSHOTS=1 node e2e/screenshots.cjs http://localhost:4173/ /tmp/out` on Linux (or ask the cloud session to) and commit the new images, so the reviewer sees the before and after in the diff. A failed CI run uploads the actual and diff images as the `screenshot-diffs` artifact.
 
 Set `CHROME` to a Chromium binary if Playwright's own browser is not installed. Each script prints one `ok` line per check, saves screenshots to the output folder, and exits non-zero on the first failure.
 

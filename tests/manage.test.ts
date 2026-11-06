@@ -7,14 +7,25 @@ import { buildExport } from "../src/data/exporter";
 import { deletePatient, parseBackup, removeDemoData, restoreBackup } from "../src/data/manage";
 
 async function seed() {
-  await db.patients.bulkAdd([{ id: "P-01", anchor: 0 }, { id: "P-DEMO-A", anchor: 0, demo: true }]);
+  await db.patients.bulkAdd([
+    { id: "P-01", anchor: 0 },
+    { id: "P-DEMO-A", anchor: 0, demo: true },
+  ]);
   await db.observations.bulkAdd([
     { patientId: "P-01", itemId: 7, at: 1000, loggedAt: 1000 },
     { patientId: "P-01", itemId: 13, at: 2000, loggedAt: 2100, approx: true, before: "Mealtime" },
     { patientId: "P-DEMO-A", itemId: 1, at: 3000, loggedAt: 3000 },
     { patientId: "P-01", itemId: 16, at: 4000, loggedAt: 4000, before: "Other", beforeNote: "fire alarm test" },
   ]);
-  await db.reviews.put({ key: reviewKey("P-01", 0, 7), patientId: "P-01", windowStart: 0, itemId: 7, choice: 8, derived: 2, reviewedAt: 5000 });
+  await db.reviews.put({
+    key: reviewKey("P-01", 0, 7),
+    patientId: "P-01",
+    windowStart: 0,
+    itemId: 7,
+    choice: 8,
+    derived: 2,
+    reviewedAt: 5000,
+  });
   await db.checkins.put({ key: checkInKey("P-01", 86_400_000), patientId: "P-01", day: 86_400_000, at: 90_000_000 });
 }
 
@@ -40,6 +51,13 @@ describe("restore from backup", () => {
     expect(await db.checkins.count()).toBe(1);
   });
 
+  it("names the app version, build commit and scoring rule that made it", async () => {
+    const data = JSON.parse((await buildExport(100_000)).json);
+    expect(data.appVersion).toMatch(/^\d+\.\d+\.\d+$/);
+    expect(data.build).toMatch(/^([0-9a-f]{7}|unknown)$/);
+    expect(data.ruleVersion).toBe("cmai-count-rule-2");
+  });
+
   it("restoring the same file twice adds nothing the second time", async () => {
     await seed();
     const { json } = await buildExport(100_000);
@@ -63,7 +81,15 @@ describe("restore from backup", () => {
   });
 
   it("skips malformed rows instead of failing the whole file", () => {
-    const b = parseBackup(JSON.stringify({ patients: [{ id: "P-01", anchor: 0 }, { id: "" }], observations: [{ patientId: "P-01", itemId: 99, at: 1, loggedAt: 1 }, { patientId: "P-01", itemId: 3, at: 1, loggedAt: 1 }] }));
+    const b = parseBackup(
+      JSON.stringify({
+        patients: [{ id: "P-01", anchor: 0 }, { id: "" }],
+        observations: [
+          { patientId: "P-01", itemId: 99, at: 1, loggedAt: 1 },
+          { patientId: "P-01", itemId: 3, at: 1, loggedAt: 1 },
+        ],
+      }),
+    );
     expect(b.patients).toHaveLength(1);
     expect(b.observations).toHaveLength(1);
   });

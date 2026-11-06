@@ -63,7 +63,7 @@ A plain count can't show "several times an hour", so rating 7 uses timing:
 The app labels every rating it shows **CMAI-based (app-derived)**. They come from event logs, not from the CMAI interview the manual describes (p.2), and are not comparable to a trial's CMAI total until an agreement study shows the two match. The Scores screen also notes that totals often fall without any change in treatment, so a drop should be read through the behaviors that drove it.
 
 1. **Each behavior, period by period.** The manual recommends looking at specific behaviors (p.5; the summary table says the same).
-   - **Change marks.** Comparing finished periods only, a behavior is marked as changed (up or down) when its rating moves **2 or more points** from the period before, or **1 point in the same direction in two consecutive periods** (marked on the second). A single 1-point move is not marked: the manual counts raters within 1 point of each other as agreeing (p.7), so 1 point can be rater noise. Moves to or from codes 8 and 9 are never marked. The Total card lists the marked behaviors for the selected period, so a change in the total can be traced to the behaviors behind it.
+   - **Change marks.** Comparing finished periods only, a behavior is marked as changed (up or down) when its rating moves **2 or more points** from the period before, or **1 point in the same direction in two consecutive periods** (marked on the second). A single 1-point move is not marked: the manual counts raters within 1 point of each other as agreeing (p.7), so 1 point can be rater noise. Moves to or from codes 8 and 9 are never marked. Each behavior row on Scores says how that behavior moved since the period before ("Up from 3", "About the same (was 2)"), so a change in the total can be traced to the behaviors behind it.
 2. **Agitated / not agitated** for three groups, using the manual's own thresholds (p.5 to 6). "At a frequency of k" is read as "rated k or higher".
    - Aggressive: one at 4, or two at 3, or three at 2.
    - Physically nonaggressive: one at 5, or two at 4, or three at 3, or four at 2.
@@ -101,3 +101,26 @@ Tracked with IDs, evidence and sign-off in [review-register.md](review-register.
 
 - `docs/test-cases.json` holds 19 cases a person can score by hand from this page, without reading code.
 - `tests/engine.test.ts` runs the engine against every case. The expected answers were written by hand, never computed by the engine.
+- Each rule on this page is tested by a named check, listed below. `npm run check:docs` (run in CI) fails if a listed check is renamed or removed, so a rule cannot lose its test without this table changing in the same pull request. A new rule, or a change to one, updates this table and its check together.
+
+| Rule | Checked by (file: test name) |
+|---|---|
+| §2 Count to rating | `tests/engine.test.ts`: hand-scored rating cases (docs/test-cases.json) |
+| §2 Ratings rise with the count | `tests/engine.test.ts`: rating never goes down as the count goes up |
+| §3 Rating 7, cluster across midnight | `tests/engine.test.ts`: a cluster that crosses midnight counts once, on the day it starts |
+| §3 Rating 7, 60-minute limit | `tests/engine.test.ts`: logs 60+ minutes apart across midnight are not a cluster |
+| §5 Ratings come from the logs alone | `tests/engine.test.ts`: the app's rating comes from the logs alone and takes no override (D-14) |
+| §5 Old reviews never change a rating | `e2e/scores-period.cjs`: the old review of 4 is ignored |
+| §5 Deleted logs do not count | `tests/logs.test.ts`: a deleted log does not count, and the export keeps it with its reason |
+| §5 Deletes keep a reason and history | `tests/logs.test.ts`: records the delete in the change history, and an undo restores it with a second entry |
+| §6.1 Change marks | `tests/engine.test.ts`: a move of 2 or more points is marked at once |
+| §6.1 One 1-point move is not marked | `tests/engine.test.ts`: a single 1-point move is not marked: it is inside rater agreement |
+| §6.1 Codes 8 and 9 never marked | `tests/engine.test.ts`: never marks a move to or from code 8 or 9 |
+| §6.1 Each behavior row says how it moved | `e2e/scores-period.cjs`: says how it moved since P1 |
+| §6.2 to §6.4 Agitated status, group averages, total | `tests/engine.test.ts`: hand-scored summary cases (docs/test-cases.json) |
+| §6.4 Total shown, from logs alone | `e2e/scores-period.cjs`: P2 total is hand-expected 30 from logs alone |
+| §7 Fixed 14-day periods | `tests/engine.test.ts`: splits six weeks of logs into three windows, plus the open one |
+| §7 Calendar days across clock changes | `tests/dst.test.ts`: period lines stay at local midnight after a clock change |
+| §7 Unlogged days are unknown, not zero | `tests/engine.test.ts`: a finished window with no logs and no check-ins is 14 unlogged days, not 14 zeros |
+| §7 Today is never unlogged | `tests/engine.test.ts`: an open window counts only days that have ended, so today is never unlogged |
+| §7 In-progress periods left out of trends | `tests/scoreView.test.ts`: does not compare a period still in progress, or codes 8 and 9 |

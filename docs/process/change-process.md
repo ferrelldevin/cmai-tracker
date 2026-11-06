@@ -38,10 +38,15 @@ Before building, list what the change looks like in each of these. The PR checkl
 - axe-core WCAG 2.2 AA shows 0 violations in all four modes (`docs/audits/axe-run.cjs`).
 - Before and after screenshots, on a phone size, in light and dark.
 - A real phone check when the change touches install, offline, storage, gestures or the keyboard.
+- `npm run check:docs` passes: every rule in the scoring spec still names a check that exists, and every relative link, `file:line` reference and register ID resolves.
+- The screenshot comparison passes, or its baselines in `e2e/screenshots/` are updated on purpose in the same PR (see `e2e/README.md`).
 
 ## 6. Record
 - A decision-log row in `docs/review-register.md`. Anything that needs the lab's approval is added there as an open item, and it does not block the demo.
 - Update `docs/design/design-brief.md` if the design system changed, and `README.md` if what a user sees changed.
+- A change to a scoring rule, or to what a screen says about one, updates `docs/scoring-spec.md` in the same PR, with its row in the spec's "Checked by" table and the check behind it.
+- The repo is the only source for its docs. A copy kept anywhere else (such as the project folder) says which commit it was copied from, and the repo wins when they differ.
+- A release bumps `version` in `package.json` and adds its CHANGELOG section in the same PR; the merge tags it `v<version>`.
 
 ## 7. Ship
 - A draft PR using the template, with the screenshots attached. CI must be green.

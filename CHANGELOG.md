@@ -16,6 +16,13 @@ A scoring change is always called out here with its new `RULE_VERSION`. Day-by-d
 - Content-Security-Policy meta tag in the built app: scripts only from the app's own files plus the inline theme script, allowed by a hash worked out at build time.
 - Dependabot: one grouped update PR a month for npm and for GitHub Actions.
 - Playwright 1.63.0 and axe-core 4.14.0 pinned as dev dependencies, so the browser checks run the same versions everywhere.
+- `npm run check:docs`, run in CI: every rule in the scoring spec names the check that tests it, and the run fails if that check is renamed or removed; relative links, `file:line` references and register IDs must all resolve.
+- Screenshot comparison (`e2e/screenshots.cjs`): Log, Scores, Data and Display at phone size, light and dark, compared with saved baselines; differences fail the check and save a diff image.
+- Database upgrade test from version 2, and a test that fails when a new schema version has no upgrade test.
+- Test that a phone restored from a backup shows the same ratings as the phone that made it.
+- Backups name the app version and build commit next to the rule version; the "How ratings are worked out" page shows the build too.
+- A version bump in `package.json` merged to main is tagged `v<version>` automatically.
+- `CODEOWNERS` requests Devin's review on the scoring rule, its test cases, the spec, the register and CI.
 
 ### Security
 - Only the deploy job can publish the site. Before, the `pages: write` and `id-token: write` permissions applied to the build job too, including on pull requests.
@@ -24,6 +31,7 @@ A scoring change is always called out here with its new `RULE_VERSION`. Day-by-d
 - `itemById` in `src/scoring/items.ts`: nothing called it and it had no tests.
 
 ### Fixed
+- The scoring spec said the Total card lists the behaviors marked as changed; since F-20 each behavior row says how it moved instead. The spec now says so, and F-20 has its own register row.
 - A sheet reopened straight after Cancel could close itself: the browser's late "close" event from the first closing shut the new one. Found as an intermittent CI timeout in the `flows` check.
 - `NOTICE` said "[requested on DATE / granted on DATE]"; it now says permission has not been requested yet (register P-01).
 

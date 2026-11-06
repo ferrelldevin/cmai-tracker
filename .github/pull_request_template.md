@@ -24,5 +24,8 @@
 
 ## Recorded
 - [ ] Decision log in `docs/review-register.md`
+- [ ] Docs match the code: spec, register row, design note and README say what this PR does, or "not needed, because..."
+- [ ] A changed spec rule changes its row in the spec's "Checked by" table and its check together
+- [ ] Screenshot baselines updated on purpose (`UPDATE_SCREENSHOTS=1`), if the PR changes how a screen looks
 - [ ] Design brief and README, if affected
 - [ ] Scoring rule unchanged, or a new `RULE_VERSION` with updated test cases

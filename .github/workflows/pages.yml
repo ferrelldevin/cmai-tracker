@@ -28,6 +28,8 @@ jobs:
       - run: npm ci
       - run: npm run lint
       - run: npm run typecheck
+      - name: Docs match the code (spec checks, links, file:line references, register IDs)
+        run: npm run check:docs
       - name: Unit tests, the hand-scored cases and coverage floors
         run: npm run test:coverage
       - name: Known vulnerabilities in the app's own dependencies
@@ -55,6 +57,13 @@ jobs:
       - name: Report on the run page
         if: always()
         run: cat .checks/report.md >> "$GITHUB_STEP_SUMMARY"
+      - name: Screens that changed (actual and diff images)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshot-diffs
+          path: /tmp/cmai-e2e/screenshots/
+          if-no-files-found: ignore
 
   deploy:
     if: github.event_name != 'pull_request'

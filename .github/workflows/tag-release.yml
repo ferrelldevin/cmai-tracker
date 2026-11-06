@@ -1,0 +1,33 @@
+name: Tag release
+
+# When a merge to main changes the version in package.json, tag that commit v<version>, so a backup
+# or report that names its version (and build commit) can be traced to the exact code.
+# Bump the version and add its CHANGELOG section in the same pull request.
+on:
+  push:
+    branches: [main]
+    paths: [package.json]
+
+permissions:
+  contents: read
+
+jobs:
+  tag:
+    name: Tag the new version
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # create the tag, nothing else
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Tag v<version> if it is new
+        run: |
+          version="v$(node -p "require('./package.json').version")"
+          if git rev-parse -q --verify "refs/tags/$version" >/dev/null; then
+            echo "$version is already tagged; nothing to do"
+          else
+            git tag "$version" "$GITHUB_SHA"
+            git push origin "refs/tags/$version"
+            echo "Tagged $GITHUB_SHA as $version"
+          fi

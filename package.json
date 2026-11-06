@@ -17,6 +17,7 @@
     "checks:report": "node scripts/run-checks.mjs --push",
     "gen:cases": "node scripts/make-test-cases.mjs",
     "lint": "eslint .",
+    "check:docs": "node scripts/check-docs.mjs",
     "typecheck": "tsc -b",
     "prepare": "lefthook install"
   },
