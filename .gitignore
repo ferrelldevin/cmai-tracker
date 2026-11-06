@@ -5,3 +5,4 @@ references/
 *.pdf
 .checks/
 coverage/
+storybook-static

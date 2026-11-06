@@ -1,0 +1,1435 @@
+/* Mockup styles. Built only from the app's tokens in src/styles.css, so a token changed there
+   changes the mockup too. Every class starts with mk- to stay apart from the app's classes. */
+
+.mk-phone {
+  width: 390px;
+  height: 844px;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--rule-strong);
+  border-radius: 36px;
+  overflow: hidden;
+  box-shadow: var(--shadow-2);
+  font-size: var(--fs-md);
+}
+:root[data-mk-text="large"] .mk-phone {
+  font-size: 20px;
+  --fs-xs: 15px;
+  --fs-sm: 17px;
+  --fs-md: 20px;
+  --fs-lg: 22px;
+  --fs-xl: 26px;
+}
+:root[data-mk-text="large"] .mk-phone .mk-h1 {
+  font-size: 24px;
+}
+.mk-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--s3) var(--s4) var(--s4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s3);
+  position: relative;
+}
+.mk-body > * {
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.mk-banner {
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+  padding: 14px var(--s4) 10px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--rule);
+}
+.mk-banner-who {
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+  min-width: 0;
+}
+.mk-banner-chev,
+.mk-banner-switch,
+.mk-pid {
+  display: none;
+}
+/* Healthcare apps show two identifiers for the patient (here the code and the room). */
+:root[data-mk-top="pill"] .mk-pid {
+  display: inline;
+}
+.mk-code,
+.mk-av-num {
+  display: none;
+}
+/* Compact styles lead with the resident code, the way the real app names residents. */
+:root[data-mk-top^="compact"] .mk-name,
+:root[data-mk-top^="compact"] .mk-av-letter {
+  display: none;
+}
+:root[data-mk-top^="compact"] .mk-code,
+:root[data-mk-top^="compact"] .mk-av-num {
+  display: inline;
+}
+:root[data-mk-top="compact-plain"] .mk-avatar {
+  display: none;
+}
+/* Top bar styles, picked from the Top switch in Storybook's toolbar. The resident's name
+   stays on every screen in all of them: logging for the wrong resident is the costliest
+   mistake on this app. */
+/* "compact": a slim patient banner (name over code and room) with a clear Switch button. */
+:root[data-mk-top^="compact"] .mk-banner {
+  justify-content: space-between;
+  padding: 8px var(--s4);
+}
+:root[data-mk-top^="compact"] .mk-sw-word,
+:root[data-mk-top="pill"] .mk-sw-word {
+  display: none;
+}
+/* The Switch button reads as a button: tinted fill, brand outline, an arrows icon, and a
+   44 px tall tap target. */
+:root[data-mk-top^="compact"] .mk-banner-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1.5px solid var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent-ink);
+  font: inherit;
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  cursor: pointer;
+  flex: none;
+}
+:root[data-mk-top^="compact"] .mk-banner-switch:active {
+  background: var(--press);
+}
+/* "compact" badge: each resident has a color, so a switch changes the whole bar at a glance.
+   The code number is still the identifier; color only backs it up. */
+/* Resident colors: Paul Tol's "muted" palette (personal.sron.nl/~pault), built to stay
+   apart for color-blind readers. Teal, rose and sand are left out because the app already
+   uses teal (brand, ratings), red (danger) and amber/yellow (attention, focus). Ordered so
+   neighbors differ most; a sixth resident reuses the first color, and the number tells them
+   apart. Dark mode uses lighter tints with dark text. */
+[data-res="0"] {
+  --res-text: #332288;
+  --res: #332288;
+  --res-ink: #ffffff;
+}
+[data-res="1"] {
+  --res-text: #676b32;
+  --res: #999933;
+  --res-ink: #1b2630;
+}
+[data-res="2"] {
+  --res-text: #882255;
+  --res: #882255;
+  --res-ink: #ffffff;
+}
+[data-res="3"] {
+  --res-text: #47687c;
+  --res: #88ccee;
+  --res-ink: #1b2630;
+}
+[data-res="4"] {
+  --res-text: #9c418e;
+  --res: #aa4499;
+  --res-ink: #ffffff;
+}
+:root[data-theme="dark"] [data-res="0"] {
+  --res: #8f7fe8;
+}
+:root[data-theme="dark"] [data-res="1"] {
+  --res: #c2c46a;
+}
+:root[data-theme="dark"] [data-res="2"] {
+  --res: #d9709f;
+}
+:root[data-theme="dark"] [data-res="4"] {
+  --res: #c77ec0;
+}
+:root[data-theme="dark"] [data-res] {
+  --res-ink: #0e1417;
+  --res-text: var(--res);
+}
+:root[data-theme="dark"] [data-res="0"] {
+  --res-text: #988ae9;
+}
+:root[data-mk-top="compact"] .mk-banner {
+  background: color-mix(in srgb, var(--surface) 90%, var(--res));
+  border-bottom: 2px solid var(--res);
+}
+:root[data-mk-top="compact"] .mk-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--res);
+  color: var(--res-ink);
+  font-size: var(--fs-sm);
+}
+/* Switch matches the resident bar: a white (dark-mode: surface) pill with the resident's
+   color as its outline, and a text shade of that color checked for 4.5:1 contrast. */
+:root[data-mk-top="compact"] .mk-banner-switch {
+  background: var(--surface);
+  border-color: var(--res);
+  color: var(--res-text);
+}
+/* "pill": no bar at all; the resident is a tappable chip on the page, with a dropdown arrow. */
+:root[data-mk-top="pill"] .mk-banner {
+  background: transparent;
+  border-bottom: 0;
+  padding: 12px var(--s4) 0;
+}
+:root[data-mk-top="pill"] .mk-banner-who {
+  gap: var(--s2);
+  padding: 4px 10px 4px 4px;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  background: var(--surface);
+  box-shadow: var(--shadow-1);
+}
+:root[data-mk-top="pill"] .mk-banner-chev {
+  display: inline-flex;
+  color: var(--text-muted);
+}
+.mk-banner-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+.mk-banner-text span {
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+}
+.mk-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  color: var(--accent-ink);
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+
+.mk-tabs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  background: var(--surface);
+  border-top: 1px solid var(--rule);
+  padding: var(--s1) var(--s2) var(--s5);
+}
+.mk-tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  color: var(--text-muted);
+  padding: 6px 0;
+}
+.mk-tab-icon {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 30px;
+  border-radius: 999px;
+}
+.mk-tab.on {
+  color: var(--accent-ink);
+}
+.mk-tab.on .mk-tab-icon {
+  background: var(--accent-soft);
+}
+/* Bottom bar styles, picked from the Nav switch in Storybook's toolbar.
+   "soft": the usual app pattern (Material 3, iOS). No hard line on top; a faint shadow and a
+   light brand tint lift it off the page, the corners round into the phone, and a home bar
+   marks the gesture area. */
+:root[data-mk-nav="soft"] .mk-tabs {
+  border-top: 0;
+  background: color-mix(in srgb, var(--surface) 96%, var(--accent));
+  box-shadow: 0 -6px 18px rgba(27, 38, 48, 0.07);
+  border-radius: 22px 22px 0 0;
+  padding: var(--s2) var(--s3) 26px;
+  position: relative;
+}
+/* "floating": a rounded bar that hovers above the bottom edge, like a dock; the list
+   scrolls underneath it. */
+:root[data-mk-nav="floating"] .mk-tabs {
+  position: absolute;
+  left: var(--s3);
+  right: var(--s3);
+  bottom: 26px;
+  border: 1px solid var(--rule);
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 24px rgba(27, 38, 48, 0.14);
+  border-radius: 28px;
+  padding: var(--s2);
+}
+:root[data-mk-nav="floating"] .mk-body {
+  padding-bottom: 116px;
+}
+:root[data-mk-nav="soft"] .mk-tabs::after,
+:root[data-mk-nav="floating"] .mk-phone::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 8px;
+  width: 120px;
+  height: 5px;
+  margin-left: -60px;
+  border-radius: 999px;
+  background: var(--text);
+  opacity: 0.25;
+}
+:root[data-mk-nav="floating"] .mk-phone {
+  position: relative;
+}
+
+.mk-h1 {
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  line-height: 1.2;
+}
+.mk-h2 {
+  font-size: var(--fs-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  font-weight: 700;
+  margin-top: var(--s2) !important;
+}
+.mk-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--s2);
+  flex-wrap: wrap;
+}
+/* The figure next to a page title ("5 today") reads as a small chip, not a second heading. */
+.mk-head > .mk-muted {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: var(--surface-2);
+}
+/* The first section label follows the title directly. */
+.mk-head + .mk-h2 {
+  margin-top: 0 !important;
+}
+/* A section label sits closer to the tiles it names. */
+.mk-body > .mk-h2 {
+  margin-bottom: -4px;
+}
+.mk-muted {
+  color: var(--text-muted);
+}
+.mk-small {
+  font-size: var(--fs-sm);
+}
+.mk-center {
+  text-align: center;
+}
+.mk-hint {
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+}
+.mk-note {
+  font-size: var(--fs-sm);
+  background: var(--surface-2);
+  border-radius: var(--radius-sm);
+  padding: var(--s2) var(--s3);
+}
+/* Open questions from the review register, shown on the screen they affect. */
+.mk-open {
+  font-size: var(--fs-xs);
+  color: var(--attn);
+  background: var(--attn-soft);
+  border-radius: var(--radius-sm);
+  padding: var(--s2) var(--s3);
+}
+
+.mk-list {
+  list-style: none;
+  padding: 0;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-1);
+}
+.mk-list > li + li {
+  border-top: 1px solid var(--rule);
+}
+.mk-row-btn {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto auto;
+  text-align: left;
+  background: transparent;
+  border: 0;
+  padding: 14px var(--s4);
+  min-height: 56px;
+  color: var(--text);
+  cursor: pointer;
+}
+.mk-row-btn span {
+  grid-column: 1;
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+}
+.mk-row-btn .mk-chev {
+  grid-column: 2;
+  grid-row: 1 / 3;
+  align-self: center;
+  transform: rotate(-90deg);
+  color: var(--text-muted);
+}
+
+/* Login */
+.mk-login-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--s1);
+  margin: var(--s6) 0 var(--s4) !important;
+  text-align: center;
+}
+.mk-logo {
+  width: 64px;
+  height: 64px;
+  border-radius: 20px;
+  background: var(--accent);
+  color: var(--accent-text);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.mk-pin-dots {
+  display: flex;
+  justify-content: center;
+  gap: var(--s4);
+}
+.mk-pin-dots span {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid var(--rule-strong);
+}
+.mk-pin-dots span.on {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+.mk-keypad {
+  display: grid;
+  grid-template-columns: repeat(3, 72px);
+  justify-content: center;
+  gap: var(--s3) var(--s5);
+  margin: var(--s3) 0 !important;
+}
+.mk-keypad button {
+  height: 72px;
+  border-radius: 50%;
+  border: 1px solid var(--rule);
+  background: var(--surface);
+  color: var(--text);
+  font-size: var(--fs-xl);
+  font-weight: 600;
+  cursor: pointer;
+}
+.mk-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s3);
+}
+.mk-form label {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s1);
+  font-weight: 600;
+  font-size: var(--fs-sm);
+}
+.mk-form input {
+  min-height: 48px;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-sm);
+  padding: 0 var(--s3);
+  background: var(--surface);
+}
+.mk-primary,
+.mk-secondary {
+  min-height: 52px;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s2);
+  cursor: pointer;
+}
+.mk-primary {
+  background: var(--accent);
+  color: var(--accent-text);
+  border: 0;
+}
+.mk-secondary {
+  background: var(--surface);
+  color: var(--accent-ink);
+  border: 1px solid var(--rule-strong);
+}
+
+/* Log: tiles fit all 29 behaviors on far fewer screens than today's list. */
+.mk-seg {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  background: var(--surface-2);
+  border-radius: 999px;
+  padding: 3px;
+}
+.mk-seg button {
+  min-width: 0;
+  padding: 0 4px;
+  border: 0;
+  background: transparent;
+  border-radius: 999px;
+  min-height: 40px;
+  font-weight: 600;
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+  cursor: pointer;
+}
+/* Large text: four group tabs no longer fit one row on a phone, so they go two by two
+   rather than running off the edge (found by npm run mockup:align). */
+:root[data-mk-text="large"] .mk-seg:has(> :nth-child(3)) {
+  grid-auto-flow: row;
+  grid-template-columns: 1fr 1fr;
+  border-radius: 22px;
+}
+.mk-seg button.on {
+  background: var(--surface);
+  color: var(--accent-ink);
+  box-shadow: var(--shadow-1);
+}
+.mk-grid {
+  display: grid;
+  gap: var(--s2);
+}
+.mk-tile {
+  position: relative;
+  min-height: var(--mk-tile-h, 76px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--s1);
+  padding: var(--mk-tile-py, 8px) var(--mk-tile-px, 12px);
+  text-align: left;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-1);
+  cursor: pointer;
+  font-weight: 700;
+  line-height: 1.2;
+}
+/* Icon beside the name, count at the far right. */
+.mk-tile.place-beside {
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--s2);
+}
+.mk-tile.place-beside .mk-badge {
+  margin-left: auto;
+}
+/* Icon centered above the name, count pinned to the top right corner. */
+.mk-tile.place-centered {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.mk-tile.place-centered .mk-badge {
+  position: absolute;
+  top: var(--mk-tile-py, 8px);
+  right: var(--mk-tile-px, 12px);
+}
+.mk-tile:active,
+.mk-line:active {
+  background: var(--press);
+}
+.mk-lines {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.mk-line {
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+  min-height: 48px;
+  padding: 0 var(--s3);
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+}
+.mk-line + .mk-line {
+  border-top: 1px solid var(--rule);
+}
+.mk-line .mk-badge {
+  margin-left: auto;
+}
+.mk-tile-name {
+  font-size: var(--fs-sm);
+}
+.mk-badge {
+  min-width: 24px;
+  height: 24px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--accent-text);
+  font-size: var(--fs-xs);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.mk-tile-top {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+/* Behavior icons: brand teal, so they read as a finding aid, not as a status. */
+.mk-bicon {
+  color: var(--accent-ink);
+  flex: none;
+}
+.mk-toast {
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--inverse-surface);
+  color: var(--inverse-text);
+  border-radius: var(--radius-sm);
+  padding: var(--s2) var(--s2) var(--s2) var(--s4);
+  box-shadow: var(--shadow-2);
+}
+.mk-toast button {
+  border: 0;
+  background: transparent;
+  color: var(--inverse-accent);
+  font-weight: 700;
+  min-height: 40px;
+  padding: 0 var(--s3);
+  cursor: pointer;
+}
+
+/* Score: the total and the behaviors look different on purpose (Devin, 2026-11-04).
+   The total is one big number on a tinted panel; behaviors are rows with a 1-7 rating square. */
+.mk-total {
+  background: var(--accent-soft);
+  border: 2px solid var(--accent);
+  border-radius: var(--radius);
+  padding: var(--s4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s2);
+}
+.mk-total > * {
+  margin: 0;
+}
+.mk-total-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.mk-total h2 {
+  font-size: var(--fs-md);
+  margin: 0;
+  color: var(--accent-ink);
+}
+.mk-chip {
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  border: 1px solid var(--accent-ink);
+  color: var(--accent-ink);
+  border-radius: 999px;
+  padding: 1px 8px;
+}
+.mk-total-num {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s2);
+}
+.mk-total-num b {
+  font-size: 48px;
+  line-height: 1;
+  color: var(--accent-ink);
+  font-variant-numeric: tabular-nums;
+}
+.mk-section-h {
+  font-size: var(--fs-lg);
+  margin: 0 0 var(--s2);
+  display: flex;
+  gap: var(--s2);
+  align-items: baseline;
+}
+.mk-section-h span {
+  font-size: var(--fs-sm);
+  font-weight: 400;
+}
+.mk-beh {
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+  padding: 10px var(--s3);
+}
+.mk-beh-text {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  line-height: 1.3;
+}
+.mk-beh-text span {
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+}
+.mk-quiet {
+  margin-top: var(--s2) !important;
+}
+.mk-more {
+  font-size: var(--fs-sm);
+  color: var(--accent-ink);
+  font-weight: 600;
+  padding: var(--s2) var(--s1);
+}
+.mk-rating {
+  flex: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: var(--r-ink);
+  font-variant-numeric: tabular-nums;
+}
+.mk-rating.r1 {
+  background: var(--r1);
+}
+.mk-rating.r2 {
+  background: var(--r2);
+}
+.mk-rating.r3 {
+  background: var(--r3);
+}
+.mk-rating.r4 {
+  background: var(--r4);
+}
+.mk-rating.r5 {
+  background: var(--r5);
+}
+.mk-rating.r6 {
+  background: var(--r6);
+  color: var(--r-light);
+}
+.mk-rating.r7 {
+  background: var(--r7);
+  color: var(--r-light);
+}
+.mk-move {
+  font-size: var(--fs-sm);
+  font-weight: 700;
+}
+.mk-move.down {
+  color: var(--ok);
+}
+.mk-move.up {
+  color: var(--attn);
+}
+
+/* Report */
+.mk-time {
+  flex: none;
+  width: 72px;
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+.mk-bars {
+  display: grid;
+  grid-template-columns: repeat(14, 1fr);
+  gap: 4px;
+  height: 120px;
+  align-items: end;
+}
+.mk-bar {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  height: 100%;
+  gap: 2px;
+}
+.mk-bar i {
+  width: 100%;
+  background: var(--accent);
+  border-radius: 4px 4px 0 0;
+  flex: none;
+}
+.mk-bar small {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+.mk-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--surface);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.mk-table th {
+  text-align: left;
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+  padding: var(--s2) var(--s3);
+}
+.mk-table td {
+  padding: 6px var(--s3);
+  border-top: 1px solid var(--rule);
+  font-size: var(--fs-sm);
+}
+.mk-table .mk-rating {
+  width: 28px;
+  height: 28px;
+}
+
+.mk-profile {
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+}
+
+/* The flow overview: all five screens in a row. */
+.mk-flow {
+  display: flex;
+  gap: var(--s6);
+  align-items: flex-start;
+  padding: var(--s5);
+}
+.mk-flow figure {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s2);
+}
+.mk-flow figcaption {
+  font-weight: 700;
+  color: var(--text);
+}
+/* The name or code line keeps the bold title style (not the small grey second line). */
+.mk-banner-text b span {
+  font-size: inherit;
+  color: inherit;
+}
+
+/* Score: one tight row per behavior --------------------------------------- */
+.mk-move.same {
+  color: var(--text-muted);
+}
+.mk-srow {
+  display: grid;
+  grid-template-columns: 32px 1fr 44px 48px;
+  align-items: center;
+  gap: var(--s2);
+  min-height: 48px;
+  padding: 0 var(--s3);
+}
+.mk-srow + .mk-srow {
+  border-top: 1px solid var(--rule);
+}
+.mk-srow > :nth-child(3) {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.mk-srow > :nth-child(4) {
+  text-align: right;
+}
+.mk-cols {
+  display: grid;
+  grid-template-columns: 32px 1fr 44px 48px;
+  gap: var(--s2);
+  padding: 0 var(--s3);
+  margin-bottom: -6px;
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+}
+.mk-cols > :nth-child(1) {
+  grid-column: 1 / 3;
+}
+.mk-cols > :nth-child(2),
+.mk-cols > :nth-child(3) {
+  text-align: right;
+}
+.mk-total-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--s2);
+  flex-wrap: wrap;
+  padding: var(--s2) var(--s3);
+  background: var(--surface-2);
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-sm);
+}
+.mk-total-line b {
+  font-size: var(--fs-lg);
+}
+
+/* Report: shared pieces ---------------------------------------------------- */
+.mk-period {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--s2);
+  flex-wrap: wrap;
+}
+.mk-period .mk-muted {
+  font-size: var(--fs-xs);
+}
+.mk-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s2);
+}
+.mk-stats > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--s2) var(--s3);
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sm);
+}
+.mk-stats small {
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+  font-weight: 600;
+}
+.mk-stats b {
+  font-size: var(--fs-xl);
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+}
+.mk-stats b.mk-stat-time {
+  font-size: var(--fs-md);
+  line-height: 1.6;
+}
+.mk-stats .mk-muted {
+  font-size: var(--fs-xs);
+  line-height: 1.3;
+}
+.mk-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s2);
+  padding: var(--s3);
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+}
+.mk-card > * {
+  margin: 0;
+}
+.mk-card-h {
+  font-size: var(--fs-sm);
+  font-weight: 700;
+}
+.mk-card-sub {
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+}
+
+/* Logs per day: 14 thin bars, dated */
+.mk-daybars {
+  display: grid;
+  grid-template-columns: repeat(14, 1fr);
+  gap: 3px;
+  align-items: end;
+}
+.mk-daybar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  font-variant-numeric: tabular-nums;
+}
+.mk-daybar i {
+  width: 100%;
+  max-width: 16px;
+  border-radius: 4px 4px 0 0;
+  background: var(--r5);
+}
+.mk-daybar i.future {
+  background: var(--grid);
+}
+.mk-daybar.now i {
+  background: var(--accent-ink);
+}
+.mk-daybar-n {
+  font-size: calc(var(--fs-xs) - 1px);
+  color: var(--text-muted);
+  min-height: 14px;
+}
+.mk-daybar small {
+  font-size: calc(var(--fs-xs) - 2px);
+  line-height: 1.2;
+  color: var(--text-muted);
+}
+.mk-daybar.now small {
+  color: var(--text);
+  font-weight: 700;
+}
+
+/* Time of day: 6 blocks x 14 days */
+.mk-heat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.mk-heat-row {
+  display: grid;
+  grid-template-columns: 58px repeat(14, 1fr);
+  gap: 2px;
+  align-items: center;
+}
+.mk-heat-row small {
+  font-size: calc(var(--fs-xs) - 2px);
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+.mk-heat-axis small {
+  text-align: center;
+}
+.mk-heat-cell {
+  height: 16px;
+  border-radius: 3px;
+}
+.mk-heat-cell.future {
+  background: transparent;
+  outline: 1px dashed var(--grid);
+  outline-offset: -1px;
+}
+
+/* Average rating by group: bar on a 1-7 track, last period as a thin mark */
+.mk-gbars {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s2);
+}
+.mk-gbars li {
+  display: grid;
+  grid-template-columns: 112px 1fr 32px;
+  align-items: center;
+  gap: var(--s2);
+  font-size: var(--fs-sm);
+}
+.mk-gbars b {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.mk-gbars-track {
+  position: relative;
+  height: 12px;
+  border-radius: 6px;
+  background: var(--grid);
+}
+.mk-gbars-track i {
+  position: absolute;
+  inset: 0 auto 0 0;
+  min-width: 4px;
+  border-radius: 6px;
+  background: var(--r5);
+}
+.mk-gbars-track em {
+  position: absolute;
+  top: -3px;
+  width: 2px;
+  height: 18px;
+  margin-left: -1px;
+  background: var(--text);
+}
+
+/* Behavior table */
+.mk-rtable td,
+.mk-rtable th {
+  padding: 6px;
+}
+.mk-rtable td:nth-child(n + 2),
+.mk-rtable th:nth-child(n + 2) {
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+.mk-patterns {
+  margin: 0;
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: var(--fs-sm);
+}
+
+/* Today: timeline strip and grouped list -------------------------------- */
+.mk-timeline {
+  position: relative;
+  height: 28px;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sm);
+  margin-bottom: -8px;
+}
+.mk-timeline i {
+  position: absolute;
+  top: 6px;
+  width: 3px;
+  height: 16px;
+  margin-left: -1.5px;
+  border-radius: 2px;
+  background: var(--accent);
+}
+.mk-timeline-now {
+  position: absolute;
+  top: -3px;
+  bottom: -3px;
+  width: 2px;
+  background: var(--attn);
+}
+.mk-timeline-axis {
+  display: flex;
+  justify-content: space-between;
+  font-size: calc(var(--fs-xs) - 2px);
+  color: var(--text-muted);
+}
+.mk-acc > li + li {
+  border-top: 1px solid var(--rule);
+}
+.mk-acc-head {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 22px 1fr auto auto 16px;
+  align-items: center;
+  gap: var(--s2);
+  min-height: 52px;
+  padding: 0 var(--s3);
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+}
+.mk-acc-chev {
+  display: inline-flex;
+  color: var(--text-muted);
+  transition: transform 0.15s;
+}
+.mk-acc-chev.open {
+  transform: rotate(180deg);
+}
+.mk-acc-body {
+  list-style: none;
+  margin: 0;
+  padding: 0 var(--s3) var(--s2) calc(var(--s3) + 22px + var(--s2));
+  display: flex;
+  flex-direction: column;
+}
+.mk-acc-body li {
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+  min-height: 36px;
+  border-top: 1px dashed var(--rule);
+}
+.mk-link {
+  margin-left: auto;
+  border: 0;
+  background: none;
+  padding: 4px 0;
+  color: var(--accent-ink);
+  font: inherit;
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  cursor: pointer;
+}
+.mk-heat-key {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-size: calc(var(--fs-xs) - 2px);
+  color: var(--text-muted);
+}
+.mk-heat-key span {
+  width: 14px;
+  height: 10px;
+  border-radius: 2px;
+}
+.mk-heat-key small:first-child {
+  margin-right: 3px;
+}
+.mk-heat-key small:last-child {
+  margin-left: 3px;
+}
+
+/* Round 2 ---------------------------------------------------------------- */
+.mk-stat-live {
+  border-style: dashed !important;
+}
+.mk-finding {
+  font-size: var(--fs-sm);
+}
+.mk-axis-title {
+  font-weight: 700;
+  color: var(--text) !important;
+}
+.mk-heat-axis .mk-axis-x {
+  grid-column: 2 / -1;
+  text-align: left !important;
+}
+.mk-heat-axis small.now {
+  color: var(--text);
+  font-weight: 700;
+}
+.mk-key {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 12px;
+  font-size: var(--fs-xs);
+  color: var(--text);
+}
+.mk-key-title {
+  font-weight: 700;
+}
+.mk-key-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-variant-numeric: tabular-nums;
+}
+.mk-key-item span {
+  width: 16px;
+  height: 16px;
+  border-radius: 3px;
+  border: 1px solid var(--rule);
+}
+/* Behavior groups: one shared two-column grid. The left column (name, squares, logs) starts at
+   the same x in every row; the right column is a fixed width, right-aligned, tabular figures,
+   so every average sits in the same place. Checked by scripts/mockup-align-check.mjs. */
+.mk-groups-cols,
+.mk-groups li {
+  display: grid;
+  /* One width for the header and every row, from a size token so large text widens it too. */
+  grid-template-columns: minmax(0, 1fr) calc(var(--fs-xs) * 4.5);
+  column-gap: var(--s3);
+}
+.mk-groups-cols {
+  font-size: calc(var(--fs-xs) - 1px);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--rule);
+}
+.mk-groups-cols span:last-child {
+  text-align: right;
+}
+.mk-groups {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.mk-groups li {
+  grid-template-rows: auto auto auto;
+  row-gap: 4px;
+  padding: var(--s2) 0;
+  border-bottom: 1px solid var(--rule);
+}
+.mk-groups li:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+.mk-groups-name {
+  grid-column: 1;
+  font-size: var(--fs-sm);
+}
+.mk-groups-squares {
+  grid-column: 1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+}
+.mk-groups-logs {
+  grid-column: 1;
+  font-size: var(--fs-xs);
+  font-variant-numeric: tabular-nums;
+}
+.mk-groups-avg {
+  grid-column: 2;
+  grid-row: 1 / span 3;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.mk-groups-avg b {
+  font-size: var(--fs-xl);
+  line-height: 1.1;
+}
+.mk-groups-avg span {
+  font-size: calc(var(--fs-xs) - 1px);
+  white-space: nowrap;
+}
+.mk-rating.mini {
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  font-size: var(--fs-xs);
+  border-radius: 5px;
+}
+.mk-rtable .mk-th-group {
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 2px;
+}
+.mk-rtable .mk-th-sub {
+  font-size: calc(var(--fs-xs) - 1px);
+  padding-top: 2px;
+}
+.mk-rtable .mk-td-now {
+  font-weight: 700;
+}
+.mk-rtable .mk-td-last {
+  color: var(--text-muted);
+}
+.mk-hours {
+  display: grid;
+  grid-template-columns: repeat(24, 1fr);
+  gap: 2px;
+  align-items: end;
+  height: 76px;
+}
+.mk-hour {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 2px;
+  height: 100%;
+}
+.mk-hour small {
+  font-size: calc(var(--fs-xs) - 3px);
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+.mk-hour i {
+  width: 100%;
+  border-radius: 3px 3px 0 0;
+  background: var(--r5);
+}
+.mk-hour.now i {
+  background: var(--accent-ink);
+}
+.mk-hour.future i {
+  background: var(--grid);
+}
+.mk-hours-axis {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr) 0;
+  font-size: calc(var(--fs-xs) - 2px);
+  color: var(--text-muted);
+  border-top: 1px solid var(--rule);
+  padding-top: 2px;
+}
+.mk-hours-axis small:last-child {
+  text-align: right;
+  width: 0;
+  direction: rtl;
+}
+
+/* Read by screen readers, not shown. */
+.mk-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Resident badge outside the top bar (Choose resident list): same color and number as the
+   bar, so the resident looks the same everywhere. */
+.mk-res-badge {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--res);
+  color: var(--res-ink);
+  font-weight: 700;
+  font-size: var(--fs-sm);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-variant-numeric: tabular-nums;
+}
+.mk-row-btn.mk-res-row {
+  grid-template-columns: auto 1fr auto;
+  column-gap: var(--s3);
+}
+.mk-res-row .mk-res-badge {
+  color: var(--res-ink);
+  font-size: var(--fs-sm);
+  grid-column: 1;
+  grid-row: 1 / 3;
+  align-self: center;
+}
+.mk-res-row b,
+.mk-res-row span:not(.mk-res-badge) {
+  grid-column: 2;
+}
+.mk-res-row .mk-chev {
+  grid-column: 3;
+}

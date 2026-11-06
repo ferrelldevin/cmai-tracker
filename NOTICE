@@ -16,3 +16,17 @@ Permission to adapt and display these definitions in this app: not yet requested
 
 Citation: Cohen-Mansfield, J. (1991). Instruction Manual for the Cohen-Mansfield
 Agitation Inventory (CMAI). Research Institute of the Hebrew Home of Greater Washington.
+
+Behavior icons (design mockup only)
+The behavior icons in src/mockup/behavior-icons.tsx are shown only in Storybook, not in
+the app. They come from Lucide (https://lucide.dev), ISC License, (c) Lucide
+Contributors, and Tabler Icons (https://tabler.io/icons), MIT License, (c) Paweł Kuna.
+Icons picked from Iconify (src/mockup/iconify-icons.tsx): Microsoft Fluent Emoji high
+contrast (MIT, (c) Microsoft Corporation), Remix Icon (Apache 2.0, Remix Design),
+Material Design Icons (Apache 2.0, Pictogrammers), Material Symbols (Apache 2.0, Google), Phosphor Icons (MIT), IconaMoon (CC BY 4.0, Dariush
+Habibpour) and Hugeicons (MIT). The Scratching and Trying to leave icons are drawn in
+this repository; Restlessness adds motion lines to the Tabler armchair.
+
+Resident colors (design mockup only)
+The resident badge colors in src/mockup/mockup.css are from Paul Tol's "muted" qualitative
+palette (https://personal.sron.nl/~pault/), chosen for color-blind readers.

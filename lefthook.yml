@@ -20,11 +20,5 @@ pre-commit:
       run: npx eslint --no-warn-ignored {staged_files}
 
     - name: secrets
-      # gitleaks is optional on a laptop (Windows: winget install Gitleaks.Gitleaks).
-      # GitHub push protection checks every push either way.
-      run: |
-        if command -v gitleaks >/dev/null 2>&1; then
-          gitleaks git --pre-commit --staged --redact --no-banner
-        else
-          echo "gitleaks not installed: skipped the local secret scan"
-        fi
+      # The script explains itself; gitleaks is optional on a laptop.
+      run: sh scripts/hooks/secret-scan.sh

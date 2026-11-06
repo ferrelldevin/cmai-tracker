@@ -18,7 +18,10 @@
     "gen:cases": "node scripts/make-test-cases.mjs",
     "lint": "eslint .",
     "typecheck": "tsc -b",
-    "prepare": "lefthook install"
+    "prepare": "lefthook install",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build -o storybook-static",
+    "mockup:align": "node scripts/mockup-align-check.mjs"
   },
   "dependencies": {
     "@fontsource/atkinson-hyperlegible-next": "^5.3.0",
@@ -29,6 +32,8 @@
   },
   "devDependencies": {
     "@eslint/js": "10.0.1",
+    "@storybook/react-vite": "10.6.5",
+    "@tabler/icons-react": "3.49.0",
     "@types/react": "18.3.23",
     "@types/react-dom": "18.3.7",
     "@vitejs/plugin-react": "4.5.2",
@@ -39,8 +44,10 @@
     "fake-indexeddb": "6.0.1",
     "globals": "17.13.0",
     "lefthook": "2.2.2",
+    "lucide-react": "1.59.0",
     "playwright": "1.63.0",
     "prettier": "3.9.10",
+    "storybook": "10.6.5",
     "typescript": "5.8.3",
     "typescript-eslint": "8.72.0",
     "vite": "6.3.5",

@@ -30,6 +30,7 @@ npm run typecheck # TypeScript
 npm run dev       # http://localhost:5173
 npm run build     # production build in dist/, with service worker
 npm run preview   # serve the build at http://localhost:4173
+npm run storybook # design mockup of the five-step flow at http://localhost:6006
 ```
 
 The pre-commit hook formats (Prettier) and lints the files you stage, and scans them for secrets if [gitleaks](https://github.com/gitleaks/gitleaks) is installed. Existing files are formatted when they are next edited, not all at once.
@@ -43,6 +44,7 @@ Checks and deploy (`.github/workflows/pages.yml`): every pull request runs lint,
 | `src/scoring/` | The CMAI items and the scoring engine. Pure functions, no screens or storage, so they can be tested and reused on other platforms. |
 | `src/data/` | Local storage (IndexedDB through Dexie), demo data, export, restore and delete. |
 | `src/ui/` | The four screens. |
+| `src/mockup/` | A design mockup of the five-step flow (Login, Log, Score, Report, Settings) for Storybook. Made-up data; not part of the app build. |
 | `docs/` | Scoring spec, hand-scorable test cases, research notes, agreement study materials (`agreement/`), audit reports (`audits/`), usability materials (`usability/`). |
 | `tests/` | Runs the engine against every case in `docs/test-cases.json`. |
 
@@ -99,6 +101,8 @@ Each waits on a lab decision or the agreement study (register section F).
 ## Design
 
 Every change follows [`docs/process/change-process.md`](docs/process/change-process.md): problem and evidence, shaped options, every state designed, verified in every mode, recorded. Design decisions that change navigation, data or scoring get a note in [`docs/design/notes/`](docs/design/notes/).
+
+Layouts are tried first in the mockup: `npm run storybook`, then change a screen's Controls panel (layout, columns, score order) or the Theme and Text switches in the toolbar. Saving `src/mockup/Screens.tsx` or `mockup.css` reloads the page. The mockup uses the app's tokens and scoring rule, so what works there carries over, but it is not the app: real screens change only through the review and one pull request per requirement.
 
 
 Visual design follows public health design systems (NHS, USWDS), Apple and Material patterns, and research on older users and patient identification. Light and dark mode switch from the sun/moon button at the top, or under Data, Display, where "Match phone" (the default) follows the phone's Dark Mode. High contrast is there too, and turns on by itself when the phone's Increase Contrast setting is on. Palette, type and the reasons for each are in [`docs/design/design-brief.md`](docs/design/design-brief.md).

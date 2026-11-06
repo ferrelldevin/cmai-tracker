@@ -58,7 +58,12 @@ const ok = (c, m) => { if (!c) throw new Error("FAIL: " + m); console.log("  ok"
   const search = sheet().getByRole("searchbox", { name: "Find a patient by code" });
   ok(await search.isVisible(), "search shows with 8 patients");
   await search.fill("03");
-  ok(await sheet().getByRole("button", { name: /^P-/ }).count() === 1, "search filters to P-03");
+  // The list re-renders after the keystroke; counting at once can catch the unfiltered list.
+  const found = sheet().getByRole("button", { name: /^P-/ });
+  for (let t = 0; t < 30 && (await found.count()) !== 1; t++) await p.waitForTimeout(100);
+  // On failure, say what the sheet showed, so a CI-only failure can be traced (failed twice on PR #37).
+  const seen = `${await found.count()} rows [${(await found.allTextContents()).map((t) => t.slice(0, 12)).join(", ")}], search box "${await search.inputValue()}"`;
+  ok(await found.count() === 1, "search filters to P-03 (saw " + seen + ")");
   await shot("sw-04-search");
   await search.fill("zz");
   ok(await sheet().getByText('No patient code contains "zz".').isVisible(), "empty search result explains itself");

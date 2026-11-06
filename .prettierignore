@@ -3,3 +3,4 @@ docs/audits
 docs/agreement/robustness-output
 package-lock.json
 e2e
+storybook-static
